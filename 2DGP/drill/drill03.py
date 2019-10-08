@@ -2,7 +2,7 @@ from pico2d import *;
 import math;
 import os;
 
-os.chdir("C:\\_Git\\2dgp\\2DGP\\assets");
+os.chdir("D:\\_Git\\2dgp\\2DGP\\assets");
 
 open_canvas();
 
@@ -17,8 +17,8 @@ r = 150;
 while(True):
     for angle in range(-180, 180+1):
         clear_canvas_now();
-        y = math.cos(angle/ (180 )* -math.pi ) * r;
-        x = math.sin(angle/ (180 )* -math.pi ) * r;
+        y = math.cos(angle/ (180)* -math.pi ) * r;
+        x = math.sin(angle/ (180)* -math.pi ) * r;
         grass.draw_now(400, 30);
         character.draw_now(( x + 400 ), y + (grass_height + 150 ));
         delay(0.01);

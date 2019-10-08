@@ -5,8 +5,7 @@
     <ProjectGuid>2a51586f-7735-4317-894d-21267dcd5f8c</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>
-    </StartupFile>
+    <StartupFile>Lecture04\test05.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -23,7 +22,46 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="drill\drill03.py" />
+    <Compile Include="Lecture04\test04.py" />
+    <Compile Include="Lecture04\test05.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="for test\size.py" />
+    <Compile Include="Lecture03\D4.py" />
+    <Compile Include="Lecture03\draw_circle.py" />
+    <Compile Include="Lecture03\draw_circle2.py" />
+    <Compile Include="Lecture03\drunken_turtle.py" />
+    <Compile Include="Lecture03\fucntion.py" />
+    <Compile Include="Lecture03\name.py" />
+    <Compile Include="Lecture03\omok_board.py" />
+    <Compile Include="Lecture03\test_swap.py" />
+    <Compile Include="Lecture03\turtle_game.py" />
+    <Compile Include="Lecture04\character_grass.py" />
+    <Compile Include="Lecture04\character_moves.py" />
+    <Compile Include="Lecture04\character_runs.py" />
+    <Compile Include="Lecture04\doule_buffering.py" />
+    <Compile Include="Lecture04\L5_input_handling.py" />
+    <Compile Include="Lecture04\MyTimer.py" />
     <Compile Include="_2DGP.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="assets\" />
+    <Folder Include="drill\" />
+    <Folder Include="for test\" />
+    <Folder Include="Lecture03\" />
+    <Folder Include="Lecture04\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\animation_sheet.png" />
+    <Content Include="assets\character.png" />
+    <Content Include="assets\grass.png" />
+    <Content Include="assets\player.bmp" />
+    <Content Include="assets\player.png" />
+    <Content Include="assets\player.psd" />
+    <Content Include="assets\run_animation.png" />
+    <Content Include="Lecture04\character.png" />
+    <Content Include="Lecture04\grass.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

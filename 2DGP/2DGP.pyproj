@@ -61,6 +61,9 @@
     <Compile Include="Lecture04\L5_input_handling.py" />
     <Compile Include="Lecture04\MyTimer.py" />
     <Compile Include="Lecture07_Linear_Movement\line.py" />
+    <Compile Include="Lecture08_Curve_Movement\curve.py" />
+    <Compile Include="termp\Graphic.py" />
+    <Compile Include="termp\Transform.py" />
     <Compile Include="_2DGP.py" />
   </ItemGroup>
   <ItemGroup>
@@ -77,6 +80,8 @@
     <Folder Include="Lecture04\" />
     <Folder Include="io\" />
     <Folder Include="Lecture07_Linear_Movement\" />
+    <Folder Include="Lecture08_Curve_Movement\" />
+    <Folder Include="termp\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\animation_sheet.png" />
@@ -132,6 +137,10 @@
     <Content Include="Lecture07_Linear_Movement\animation_sheet.png" />
     <Content Include="Lecture07_Linear_Movement\hand_arrow.png" />
     <Content Include="Lecture07_Linear_Movement\KPU_GROUND.png" />
+    <Content Include="Lecture08_Curve_Movement\.gitattributes" />
+    <Content Include="Lecture08_Curve_Movement\.gitignore" />
+    <Content Include="Lecture08_Curve_Movement\animation_sheet.png" />
+    <Content Include="Lecture08_Curve_Movement\KPU_GROUND.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

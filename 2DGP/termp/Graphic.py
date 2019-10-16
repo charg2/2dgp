@@ -1,13 +1,14 @@
 from pico2d import *
+import Const;
 
 import os;
 
 class GraphicLib:
     Font = None;
     def init():
-        os.chdir("assets");
+        os.chdir("assets"); # asset folder
 
-        pico2d.open_canvas(Const.WIN_WIDTH,Const.WIN_HEIGHT,True);
+        pico2d.open_canvas(Const.WIN_WIDTH, Const.WIN_HEIGHT, True);
         pico2d.hide_lattice();
         pico2d.hide_cursor();
 

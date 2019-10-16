@@ -5,7 +5,7 @@
     <ProjectGuid>2a51586f-7735-4317-894d-21267dcd5f8c</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>termp\KeyIO.py</StartupFile>
+    <StartupFile>termp\main.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -32,11 +32,17 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="for test\size.py" />
+    <Compile Include="termp\Const.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="termp\FrameWork.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="termp\Graphic.py" />
     <Compile Include="termp\KeyIO.py" />
+    <Compile Include="termp\main.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="termp\Transform.py" />
     <Compile Include="_2DGP.py" />
   </ItemGroup>

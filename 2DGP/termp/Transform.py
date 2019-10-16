@@ -7,31 +7,31 @@ class Transform:
         self.degree = angle;
         return;
 
-    def ReturnScale(self):
+    def get_scale(self):
         return self.sx, self.sy;
 
-    def ReturnPosition(self):
+    def get_position(self):
         return self.tx, self.ty;
-
-    def ReturnDegree(self):
+    
+    def get_degree(self):
         return self.degree;
 
 
-    def SetDegree(self,angle):
+    def set_degree(self,angle):
         self.degree = self.degree+ angle;
         return;
 
-    def SetPosition(self,dx,dy):
+    def set_position(self,dx,dy):
         self.tx = self.tx + dx;
         self.ty = self.ty + dy;
         return;
 
-    def SetScale(self, dx, dy):
+    def set_scale(self, dx, dy):
         self.sx = self.sx +dx;
         self.sy = self.sy +dy;
         return;
 
-    def TransformPos(self, dx, dy):
+    def trasnform_position(self, dx, dy):
         self.tx =dx;
         self.ty =dy;
         return;
@@ -41,10 +41,10 @@ if(__name__ == "__main__"):
     test =  Transform( 1,2,3,4,5);
 
     x =();
-    x = test.ReturnScale();
+    x = test.get_scale();
     print("scale = {0}".format(x));
-    x = test.ReturnPosition();
+    x = test.get_position();
     print("Pos = {0}".format(x));
-    t = test.ReturnDegree();
+    t = test.get_degree();
     print("degree = {0}".format(t));
   

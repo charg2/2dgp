@@ -5,7 +5,7 @@
     <ProjectGuid>2a51586f-7735-4317-894d-21267dcd5f8c</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>Drill-05\drill05.py</StartupFile>
+    <StartupFile>termp\KeyIO.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -23,64 +23,29 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Drill-04-1\drill4-1.py" />
-    <Compile Include="Drill-04-2\drill4-2.py" />
     <Compile Include="Drill-05\drill05.py" />
     <Compile Include="drill\drill03.py" />
-    <Compile Include="io\character_runs_esc.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="drill\drill4-1.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="drill\drill4-2.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="io\move_character_with_mouse.py" />
-    <Compile Include="Lecture04\test.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Lecture04\test04.py" />
-    <Compile Include="Lecture04\test05.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="for test\size.py" />
-    <Compile Include="Lecture03\D4.py" />
-    <Compile Include="Lecture03\draw_circle.py" />
-    <Compile Include="Lecture03\draw_circle2.py" />
-    <Compile Include="Lecture03\drunken_turtle.py" />
-    <Compile Include="Lecture03\fucntion.py" />
-    <Compile Include="Lecture03\name.py" />
-    <Compile Include="Lecture03\omok_board.py" />
-    <Compile Include="Lecture03\test_swap.py" />
-    <Compile Include="Lecture03\turtle_game.py" />
-    <Compile Include="Lecture04\character_grass.py" />
-    <Compile Include="Lecture04\character_moves.py" />
-    <Compile Include="Lecture04\character_runs.py" />
-    <Compile Include="Lecture04\doule_buffering.py" />
-    <Compile Include="Lecture04\L5_input_handling.py" />
-    <Compile Include="Lecture04\MyTimer.py" />
-    <Compile Include="Lecture07_Linear_Movement\line.py" />
-    <Compile Include="Lecture08_Curve_Movement\curve.py" />
+    <Compile Include="termp\FrameWork.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="termp\Graphic.py" />
+    <Compile Include="termp\KeyIO.py" />
     <Compile Include="termp\Transform.py" />
     <Compile Include="_2DGP.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\" />
-    <Folder Include="Drill-04-1\" />
-    <Folder Include="Drill-04-1\assets\" />
-    <Folder Include="Drill-04-2\" />
-    <Folder Include="Drill-04-2\assets\" />
     <Folder Include="Drill-05\" />
     <Folder Include="Drill-05\assets\" />
     <Folder Include="drill\" />
     <Folder Include="for test\" />
-    <Folder Include="Lecture03\" />
-    <Folder Include="Lecture04\" />
-    <Folder Include="io\" />
-    <Folder Include="Lecture07_Linear_Movement\" />
-    <Folder Include="Lecture08_Curve_Movement\" />
     <Folder Include="termp\" />
   </ItemGroup>
   <ItemGroup>
@@ -91,32 +56,6 @@
     <Content Include="assets\player.png" />
     <Content Include="assets\player.psd" />
     <Content Include="assets\run_animation.png" />
-    <Content Include="Drill-04-1\.gitattributes" />
-    <Content Include="Drill-04-1\.gitignore" />
-    <Content Include="Drill-04-1\assets\animation_sheet.png" />
-    <Content Include="Drill-04-1\assets\character.png" />
-    <Content Include="Drill-04-1\assets\grass.png" />
-    <Content Include="Drill-04-1\assets\hand_arrow.png" />
-    <Content Include="Drill-04-1\assets\KPU_GROUND.png" />
-    <Content Include="Drill-04-1\assets\KPU_GROUND_FULL.png" />
-    <Content Include="Drill-04-1\assets\player.bmp" />
-    <Content Include="Drill-04-1\assets\player.png" />
-    <Content Include="Drill-04-1\assets\player.psd" />
-    <Content Include="Drill-04-1\assets\run_animation.png" />
-    <Content Include="Drill-04-1\ConsolaMalgun.ttf" />
-    <Content Include="Drill-04-2\.gitattributes" />
-    <Content Include="Drill-04-2\.gitignore" />
-    <Content Include="Drill-04-2\assets\animation_sheet.png" />
-    <Content Include="Drill-04-2\assets\character.png" />
-    <Content Include="Drill-04-2\assets\grass.png" />
-    <Content Include="Drill-04-2\assets\hand_arrow.png" />
-    <Content Include="Drill-04-2\assets\KPU_GROUND.png" />
-    <Content Include="Drill-04-2\assets\KPU_GROUND_FULL.png" />
-    <Content Include="Drill-04-2\assets\player.bmp" />
-    <Content Include="Drill-04-2\assets\player.png" />
-    <Content Include="Drill-04-2\assets\player.psd" />
-    <Content Include="Drill-04-2\assets\run_animation.png" />
-    <Content Include="Drill-04-2\ConsolaMalgun.ttf" />
     <Content Include="Drill-05\.gitattributes" />
     <Content Include="Drill-05\.gitignore" />
     <Content Include="Drill-05\assets\animation_sheet.png" />
@@ -130,17 +69,6 @@
     <Content Include="Drill-05\assets\player.psd" />
     <Content Include="Drill-05\assets\run_animation.png" />
     <Content Include="Drill-05\ConsolaMalgun.ttf" />
-    <Content Include="Lecture04\character.png" />
-    <Content Include="Lecture04\grass.png" />
-    <Content Include="Lecture07_Linear_Movement\.gitattributes" />
-    <Content Include="Lecture07_Linear_Movement\.gitignore" />
-    <Content Include="Lecture07_Linear_Movement\animation_sheet.png" />
-    <Content Include="Lecture07_Linear_Movement\hand_arrow.png" />
-    <Content Include="Lecture07_Linear_Movement\KPU_GROUND.png" />
-    <Content Include="Lecture08_Curve_Movement\.gitattributes" />
-    <Content Include="Lecture08_Curve_Movement\.gitignore" />
-    <Content Include="Lecture08_Curve_Movement\animation_sheet.png" />
-    <Content Include="Lecture08_Curve_Movement\KPU_GROUND.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

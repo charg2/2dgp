@@ -96,7 +96,7 @@ class KeyInput:
 
         return;        
     def display():
-        print("g_right_arrow = {0} mx = {1} my = {2}" , KeyInput.g_right_arrow, KeyInput.m_x, KeyInput.m_y);
+        print("g_right_arrow = {0} mx = {1} my = {2}".format(KeyInput.g_right_arrow, KeyInput.m_x, KeyInput.m_y));
 
     Initialize = staticmethod(init);
     Update = staticmethod(update);

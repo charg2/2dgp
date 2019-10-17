@@ -5,8 +5,7 @@ from KeyIO import *;
 FrameWork.Initialize();
 KeyInput.Initialize();
 
-while( FrameWork.GameState ):
-    
+while FrameWork.GameState :
     FrameWork.Update();
     KeyInput.Update();
     

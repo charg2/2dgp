@@ -1,1 +1,2 @@
-WIN_WIDTH, WIN_HEIGHT = 900, 800;
+class Const:
+    WIN_WIDTH, WIN_HEIGHT = 900, 800;

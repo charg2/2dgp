@@ -38,9 +38,15 @@
     <Compile Include="termp\FrameWork.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="termp\GameObject.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="termp\Graphic.py" />
     <Compile Include="termp\KeyIO.py" />
     <Compile Include="termp\main.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="termp\Player.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="termp\Transform.py" />

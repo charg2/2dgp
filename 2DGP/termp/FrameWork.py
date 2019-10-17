@@ -13,13 +13,11 @@ class FrameWork:
     def update():
         GraphicLib.ClearBuf();
 
+        GraphicLib.Present();
+
     def input():
         KeyIO.Update();
         pass;
-
-    def render():
-        for obj in object_list:
-            obj.render();
 
     def finalize():
         pass;

@@ -6,7 +6,7 @@ from pico2d import *;
 
 
 class GameObject:
-    def __init__(self,x,y,angle,sx,sy,state):
+    def __init__(self ,x , y, angle, sx, sy, state):
         self.name = "default";
         self.transform = Transform(x, y, angle, sx, sy);
         self.previous_transform = Transform(0,0,0,0,0);
@@ -19,7 +19,7 @@ class GameObject:
 
         self.tag = 0;
 
-    def update(self,Time):
+    def update(self, Time):
         pass;
     def render(self):
         pass;

@@ -1,5 +1,5 @@
 class Transform:
-    def __init__ (self, x:float, y:float, angle:float, scx:float, scy:float):
+    def __init__(self, x:float, y:float, angle:float, scx:float, scy:float):
         self.tx     = x;
         self.ty     = y;
         self.sx     = scx;

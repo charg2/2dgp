@@ -12,10 +12,12 @@ class Grass:
         self.image.draw(400, 30);
 
 class Boy:
+    image = None;
     def __init__(self):
         self.x, self.y = random.randint(100, 700), 90;
         self.frame = random.randint(0, 7);
-        self.image = load_image('run_animation.png');
+        if Boy.image == None :
+            Boy.image = load_image('run_animation.png');
     def update(self):
         self.frame = (self.frame + 1) % 8;
         self.x += 5;
@@ -71,7 +73,7 @@ def initialize():
     global team, balls, grass, running;
     os.chdir("assets");
     open_canvas();
-    team = [Boy() for x in range(11)];
+    team = [Boy() for x in range(1000)];
     grass = Grass();
     balls = [Ball() for x in range(20)];
     running = True;

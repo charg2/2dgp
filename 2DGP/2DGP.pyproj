@@ -5,7 +5,7 @@
     <ProjectGuid>2a51586f-7735-4317-894d-21267dcd5f8c</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>Drill-7\Drill07.py</StartupFile>
+    <StartupFile>Lecture10_Game_Framework\game_framework.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -37,6 +37,19 @@
     </Compile>
     <Compile Include="for test\size.py" />
     <Compile Include="Lecture09_Game_Obejects\boy_grass_object.py" />
+    <Compile Include="Lecture10_Game_Framework\game_framework.py" />
+    <Compile Include="Lecture10_Game_Framework\main_state.py" />
+    <Compile Include="Lecture10_Game_Framework\mygame.py" />
+    <Compile Include="Lecture10_Game_Framework\show_files.py" />
+    <Compile Include="Lecture10_Game_Framework\simple_module.py" />
+    <Compile Include="Lecture10_Game_Framework\start_state.py" />
+    <Compile Include="Lecture10_Game_Framework\title_state.py" />
+    <Compile Include="Lecture11_Character_Controller\boy.py" />
+    <Compile Include="Lecture11_Character_Controller\boys_team_1000.py" />
+    <Compile Include="Lecture11_Character_Controller\game_framework.py" />
+    <Compile Include="Lecture11_Character_Controller\grass.py" />
+    <Compile Include="Lecture11_Character_Controller\main_state.py" />
+    <Compile Include="Lecture11_Character_Controller\mygame.py" />
     <Compile Include="termp\Const.py">
       <SubType>Code</SubType>
     </Compile>
@@ -66,6 +79,8 @@
     <Folder Include="drill\" />
     <Folder Include="for test\" />
     <Folder Include="Lecture09_Game_Obejects\" />
+    <Folder Include="Lecture10_Game_Framework\" />
+    <Folder Include="Lecture11_Character_Controller\" />
     <Folder Include="termp\" />
   </ItemGroup>
   <ItemGroup>
@@ -103,6 +118,18 @@
     <Content Include="Lecture09_Game_Obejects\character.png" />
     <Content Include="Lecture09_Game_Obejects\grass.png" />
     <Content Include="Lecture09_Game_Obejects\run_animation.png" />
+    <Content Include="Lecture10_Game_Framework\.gitattributes" />
+    <Content Include="Lecture10_Game_Framework\.gitignore" />
+    <Content Include="Lecture10_Game_Framework\grass.png" />
+    <Content Include="Lecture10_Game_Framework\kpu_credit.png" />
+    <Content Include="Lecture10_Game_Framework\pause.png" />
+    <Content Include="Lecture10_Game_Framework\run_animation.png" />
+    <Content Include="Lecture10_Game_Framework\title.png" />
+    <Content Include="Lecture11_Character_Controller\.gitattributes" />
+    <Content Include="Lecture11_Character_Controller\.gitignore" />
+    <Content Include="Lecture11_Character_Controller\animation_sheet.png" />
+    <Content Include="Lecture11_Character_Controller\grass.png" />
+    <Content Include="Lecture11_Character_Controller\run_animation.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

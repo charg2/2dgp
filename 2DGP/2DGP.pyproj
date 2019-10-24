@@ -5,7 +5,7 @@
     <ProjectGuid>2a51586f-7735-4317-894d-21267dcd5f8c</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>Lecture10_Game_Framework\game_framework.py</StartupFile>
+    <StartupFile>termp\ConfigParser.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -50,6 +50,9 @@
     <Compile Include="Lecture11_Character_Controller\grass.py" />
     <Compile Include="Lecture11_Character_Controller\main_state.py" />
     <Compile Include="Lecture11_Character_Controller\mygame.py" />
+    <Compile Include="termp\ConfigParser.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="termp\Const.py">
       <SubType>Code</SubType>
     </Compile>

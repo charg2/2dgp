@@ -1,3 +1,4 @@
+import Const;
 
 class ConfigParser:
     map = {};

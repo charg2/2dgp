@@ -23,18 +23,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Drill-05\module1.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Drill-7\Drill07.py" />
-    <Compile Include="drill\drill05.py" />
-    <Compile Include="drill\drill03.py" />
-    <Compile Include="drill\drill4-1.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="drill\drill4-2.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="for test\size.py" />
     <Compile Include="Lecture09_Game_Obejects\boy_grass_object.py" />
     <Compile Include="Lecture10_Game_Framework\game_framework.py" />
@@ -75,11 +64,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\" />
-    <Folder Include="Drill-05\" />
-    <Folder Include="Drill-05\assets\" />
     <Folder Include="Drill-7\" />
     <Folder Include="Drill-7\assets\" />
-    <Folder Include="drill\" />
     <Folder Include="for test\" />
     <Folder Include="Lecture09_Game_Obejects\" />
     <Folder Include="Lecture10_Game_Framework\" />
@@ -94,19 +80,6 @@
     <Content Include="assets\player.png" />
     <Content Include="assets\player.psd" />
     <Content Include="assets\run_animation.png" />
-    <Content Include="Drill-05\.gitattributes" />
-    <Content Include="Drill-05\.gitignore" />
-    <Content Include="Drill-05\assets\animation_sheet.png" />
-    <Content Include="Drill-05\assets\character.png" />
-    <Content Include="Drill-05\assets\grass.png" />
-    <Content Include="Drill-05\assets\hand_arrow.png" />
-    <Content Include="Drill-05\assets\KPU_GROUND.png" />
-    <Content Include="Drill-05\assets\KPU_GROUND_FULL.png" />
-    <Content Include="Drill-05\assets\player.bmp" />
-    <Content Include="Drill-05\assets\player.png" />
-    <Content Include="Drill-05\assets\player.psd" />
-    <Content Include="Drill-05\assets\run_animation.png" />
-    <Content Include="Drill-05\ConsolaMalgun.ttf" />
     <Content Include="Drill-7\assets\animation_sheet.png" />
     <Content Include="Drill-7\assets\character.png" />
     <Content Include="Drill-7\assets\hand_arrow.png" />

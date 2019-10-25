@@ -87,15 +87,16 @@ def update():
         boy.update();
     for ball in balls:
         ball.update();
-
 def draw():
     global team, balls;
+    global i;
     clear_canvas();
     grass.draw();
     for boy in team:
         boy.draw();
     for ball in balls:
         ball.draw();
+    #i = 0;
     update_canvas();
 
 

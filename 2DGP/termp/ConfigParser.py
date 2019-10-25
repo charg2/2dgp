@@ -30,11 +30,19 @@ class ConfigParser:
     def get_bool(self, value_name:str):
         return ConfigParser.map.get(value_name) == "true" or ConfigParser.map.get(value_name) == "True";
 
+    ##Parse = staticmethod(parse);
+    #GetInt = staticmethod(get_int);
+    #GetBool = staticmethod(get_bool);
+    #GetFloat = staticmethod(get_float);
+    #GetString = staticmethod(get_string);
+
 if __name__ == "__main__":
     parser = ConfigParser();
     #parser.print();
     parser.parse("config.ini");
     
+    #ConfigParser.Parse(self,"config.ini");
+
     print(parser.get_int("speed"));
     print(parser.get_int("x"));
     print(parser.get_int("y"));

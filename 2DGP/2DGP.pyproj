@@ -5,7 +5,7 @@
     <ProjectGuid>2a51586f-7735-4317-894d-21267dcd5f8c</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>Drill-7\Drill07.py</StartupFile>
+    <StartupFile>termp\main.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -39,6 +39,9 @@
     <Compile Include="Lecture11_Character_Controller\grass.py" />
     <Compile Include="Lecture11_Character_Controller\main_state.py" />
     <Compile Include="Lecture11_Character_Controller\mygame.py" />
+    <Compile Include="termp\Camera.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="termp\ConfigParser.py">
       <SubType>Code</SubType>
     </Compile>
@@ -56,7 +59,16 @@
     <Compile Include="termp\main.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="termp\TitleScene.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="termp\MyTimer.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="termp\Player.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="termp\Scene.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="termp\Transform.py" />

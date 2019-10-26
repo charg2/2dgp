@@ -1,19 +1,37 @@
-from pico2d import *;
 from Graphic import *;
+from MyTimer import Timer;
+from pico2d import *;
 from KeyIO import *;
+from Scene import Scene as Scene;
+from TitleScene import *;
+
 
 class FrameWork:
-    object_list = [];
+    SceneList = [];
 
     def init():
-      GraphicLib.Initialize();
+        GraphicLib.Initialize();
       
-      FrameWork.GameState = True;
-    
+        FrameWork.GameState = True;
+        
+        FrameWork.SceneList.append(TitleScene()); #타이틀 신 추가.
+
+        FrameWork.CurScene = FrameWork.SceneList[0];
+
     def update():
+        Timer.Update();
+        
         GraphicLib.ClearBuf();
 
+        FrameWork.changeScene(); # 씬 변경을 체크
+        FrameWork.CurScene.Update();
+        FrameWork.CurScene.Collide();
+        FrameWork.CurScene.Render();
+
         GraphicLib.Present();
+
+    def changeScene():
+        pass;
 
     def input():
         KeyIO.Update();
@@ -23,8 +41,9 @@ class FrameWork:
         pass;
 
     def exit():
-        Graphiclib.Exit();
+        GraphicLib.Exit();
         return;
+
 
     Initialize = staticmethod(init);
     Update = staticmethod(update);

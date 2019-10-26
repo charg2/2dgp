@@ -6,12 +6,15 @@ import os;
 class GraphicLib:
     Font = None;
     def init():
-        os.chdir("assets"); # asset folder
+        #os.chdir("assets"); # asset folder
 
         pico2d.open_canvas(Const.WIN_WIDTH, Const.WIN_HEIGHT, True);
         pico2d.hide_lattice();
         pico2d.hide_cursor();
 
+        if GraphicLib.Font is None :
+            #print(os.listdir());
+            GraphicLib.Font= pico2d.load_font('assets/font.TTF', 60);
         return;
 
     def present():
@@ -26,7 +29,6 @@ class GraphicLib:
     def clearbuf():
         pico2d.clear_canvas();
         return;
-
 
     Initialize  = staticmethod(init);
     Present     = staticmethod(present);

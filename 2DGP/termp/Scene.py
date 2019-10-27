@@ -63,27 +63,29 @@ class Scene:
 
     def Render(self):
         for terrain in self.game_object_list_terrain:
-            if(terrain.has_image == True and terrain.ReturnState()):               
+            if(terrain.has_image == True and terrain.state):               
                 terrain.Render();
 
         for gobj in self.game_object_list_ally:
-            if(gobj.has_image == True and gobj.ReturnState()):               
+            if(gobj.has_image == True and gobj.state):               
                 gobj.Render();
 
         for obstacle in self.game_object_list_obstacle:
-            if(obstacle.has_image == True and obstacle.ReturnState()):               
+            if(obstacle.has_image == True and obstacle.state):               
                 obstacle.Render();
 
         for gui in self.game_ui_list:
-            if(gui.has_image == True and gui.ReturnState()):               
+            if(gui.has_image == True and gui.GetState()):               
                 gui.Render();
 
     def ExitScene(self):
         pass;
 
     def GameControl(self):
-        if(Scene.Pause == True) : Scene.Time = 0;
-        else : Scene.Time = Timer.ReturnElapsedTime();
+        if(Scene.Pause == True) : 
+            Scene.Time = 0;
+        else : 
+            Scene.Time = Timer.GetElapsedTime();
         return;
 
     def AddAllyObject(self, obj):
@@ -121,6 +123,5 @@ if __name__ == "__main__":
     test.AddAllyObject(GameObject(10,10,10,10,10,True));
 
     while True:
-        
         test.update();
         test.Render();

@@ -59,6 +59,12 @@
     <Compile Include="termp\main.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="termp\Mouse.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="termp\TitleBG.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="termp\TitleScene.py">
       <SubType>Code</SubType>
     </Compile>

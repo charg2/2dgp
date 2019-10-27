@@ -23,19 +23,16 @@ class FrameWork:
         
         GraphicLib.ClearBuf();
 
-        FrameWork.changeScene(); # 씬 변경을 체크
-        FrameWork.CurScene.Update();
-        FrameWork.CurScene.Collide();
-        FrameWork.CurScene.Render();
+        FrameWork.changeScene();        # 씬 변경을 체크
+        FrameWork.CurScene.Update();    # logic update
+        FrameWork.CurScene.Collide();   # collide
+        FrameWork.CurScene.Render();    # render
 
         GraphicLib.Present();
 
     def changeScene():
         pass;
 
-    def input():
-        KeyIO.Update();
-        pass;
 
     def finalize():
         pass;

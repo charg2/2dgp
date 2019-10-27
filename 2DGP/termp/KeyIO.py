@@ -8,13 +8,21 @@ class KeyInput:
     g_down_arrow = False;
     g_up_arrow = False;
     g_space = False;
+    
     g_p = False;
+    
+    g_q = False;
+    g_w = False;
+    g_e = False;
+    g_r = False;
+
 
     g_mouse_rdown = False;
     g_mouse_ldown = False;
     
     m_x = 0;
     m_y = 0;
+
     def init():
         KeyInput.g_right_arrow = False;
         KeyInput.g_left_arrow = False;
@@ -23,7 +31,11 @@ class KeyInput:
 
         KeyInput.g_p = False;
         KeyInput.g_s = False;
-
+        
+        KeyInput.g_q = False;
+        KeyInput.g_w = False;
+        KeyInput.g_e = False;
+        KeyInput.g_r = False;
 
         KeyInput.g_mouse_rdown = False;
         KeyInput.g_mouse_ldown = False;    
@@ -48,17 +60,26 @@ class KeyInput:
                     #	SDLK_SPACE
                     if event.key  == SDLK_SPACE:
                         KeyInput.g_space = True; 
+
                     if event.key  == SDLK_p:
                         KeyInput.g_p = True; 
 
+                    if event.key  == SDLK_q:
+                        KeyInput.g_q = True;
+                    if event.key  == SDLK_w:
+                        KeyInput.g_w = True;
+                    if event.key  == SDLK_e:
+                        KeyInput.g_e = True;
+                    if event.key  == SDLK_r:
+                        KeyInput.g_r = True;
 
                     if event.key  == SDLK_s:
                         KeyInput.g_s = True; 
                         
 
                     if event.key  == SDLK_ESCAPE:
-                        from FrameWork import FrameWork
-                        FrameWork.SetGameLoopFalse();
+                        from FrameWork import FrameWork;
+                        FrameWork.GameState = False;
                         
                 if event.type == SDL_MOUSEBUTTONDOWN:#Mouse input
                     if event.button == SDL_BUTTON_RIGHT: #sdl_event.button.button -> 마우스의 이벤트는 이 항목을 통해 전달 된다.

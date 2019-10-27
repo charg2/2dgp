@@ -26,14 +26,14 @@ class GraphicLib:
         pico2d.close_canvas();
         return;
         
-    def clearbuf():
+    def clear_buf():
         pico2d.clear_canvas();
         return;
 
     Initialize  = staticmethod(init);
     Present     = staticmethod(present);
     Exit        = staticmethod(exit);
-    ClearBuf    = staticmethod(clearbuf);
+    ClearBuf    = staticmethod(clear_buf);
 
     #os.chdir("assets");
     #GraphicLib.Initialize()

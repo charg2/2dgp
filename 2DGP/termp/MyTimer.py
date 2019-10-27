@@ -36,7 +36,7 @@ class Timer:
 #if __name__ == "__main__":
 #    Timer.Initialize();
 #    fTimer = 0.0;
-#    while(True):
+#    while True :
 #        Timer.Update();
 #        fTimer += Timer.GetElapsedTime();
 #        if fTimer > 1.0:

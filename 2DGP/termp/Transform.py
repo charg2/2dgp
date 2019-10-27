@@ -16,7 +16,6 @@ class Transform:
     def get_degree(self):
         return self.degree;
 
-
     def set_degree(self,angle):
         self.degree = self.degree+ angle;
         return;

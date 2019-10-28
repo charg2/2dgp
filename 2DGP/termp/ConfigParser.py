@@ -13,13 +13,20 @@ class ConfigParser:
         buffer = string.splitlines();
         # 공백 라인 처리는 안했다.
         for line in buffer: 
-            test = line.split();
-            if test[0][0] == '#' : #주석 처리만 일단.
+            str_list = line.split();
+            print(str_list);
+            if not str_list : # 공백인지 체크.
+                print(str_list)
+                continue;
+            if str_list[0][0] == '#' : #주석 처리만 일단.
                 continue;
             else:
-                ConfigParser.Dict[ test[0] ] = test[2]; #
+                if str_list[-1][-1] == ';': # ; 제거.
+                    str_list[-1] = str_list[-1].replace(';', "");
+                ConfigParser.Dict[ str_list[0] ] = str_list[2]; #
 
     def get_int(self, value_name:str):
+        #print(ConfigParser.Dict.get(value_name));
         return int(ConfigParser.Dict.get(value_name));
 
     def get_float(self, value_name:str):

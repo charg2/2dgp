@@ -2,8 +2,8 @@ from MyTimer import*
 from GameObject import *
 from Graphic import *
 from math import*
+from Const import Const as const;
 import pico2d;
-import Const;
 import KeyIO;
 import Scene;
 
@@ -18,7 +18,7 @@ class TitleBG(GameObject):
     
     def Render(self):
         #left x 최소 bottom y 최소
-        self.IMG.draw_to_origin( 0, 0, Const.WIN_WIDTH, Const.WIN_HEIGHT)
+        self.IMG.draw_to_origin( 0, 0, const.WIN_WIDTH, const.WIN_HEIGHT)
         return;
 
     #def RenderForMinimap(self):

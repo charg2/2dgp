@@ -1,5 +1,5 @@
 from pico2d import *
-import Const;
+from Const import Const as const;
 
 import os;
 
@@ -8,7 +8,7 @@ class GraphicLib:
     def init():
         #os.chdir("assets"); # asset folder
 
-        pico2d.open_canvas(Const.WIN_WIDTH, Const.WIN_HEIGHT, True);
+        pico2d.open_canvas(const.WIN_WIDTH, const.WIN_HEIGHT, True);
         pico2d.hide_lattice();
         pico2d.hide_cursor();
 

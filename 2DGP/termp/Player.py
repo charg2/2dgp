@@ -11,6 +11,8 @@ IdleR, IdleL = range(2);
 class Player(GameObject):
     IMGSForIdleL = [];
     IMGSForIdleR = [];
+    IMGSForRunL = [];
+    IMGSForRunR = [];
 
     def __init__(self, x, y, angle, sx, sy, state):
         super(Player, self).__init__(x, y, angle, sx, sy, state);
@@ -26,7 +28,9 @@ class Player(GameObject):
             Player.IMGSForIdleR.append(pico2d.load_image('assets/Player/Idle/R4.png'));
 
             Player.LOAD = True;
-        self.dir = 0; 
+        self.dir = IdleR; 
+        self.animation_numb = 0;
+        self.tag = 1;
 
     def render(self): 
         self.current_state.render();

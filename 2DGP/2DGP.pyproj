@@ -23,7 +23,6 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Drill-7\Drill07.py" />
     <Compile Include="for test\size.py" />
     <Compile Include="Lecture09_Game_Obejects\boy_grass_object.py" />
     <Compile Include="Lecture10_Game_Framework\game_framework.py" />
@@ -97,6 +96,7 @@
     <Folder Include="Lecture09_Game_Obejects\" />
     <Folder Include="Lecture10_Game_Framework\" />
     <Folder Include="Lecture11_Character_Controller\" />
+    <Folder Include="TexturePacker\" />
     <Folder Include="termp\" />
   </ItemGroup>
   <ItemGroup>

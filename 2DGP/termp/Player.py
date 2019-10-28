@@ -18,14 +18,15 @@ class Player(GameObject):
         super(Player, self).__init__(x, y, angle, sx, sy, state);
         self.has_image = True;
         if Player.LOAD == False:
-            Player.IMGSForIdleL.append(pico2d.load_image('assets/Player/Idle/L1.png'));
-            Player.IMGSForIdleL.append(pico2d.load_image('assets/Player/Idle/L2.png'));
-            Player.IMGSForIdleL.append(pico2d.load_image('assets/Player/Idle/L3.png'));
-            Player.IMGSForIdleL.append(pico2d.load_image('assets/Player/Idle/L4.png'));
-            Player.IMGSForIdleR.append(pico2d.load_image('assets/Player/Idle/R1.png'));
-            Player.IMGSForIdleR.append(pico2d.load_image('assets/Player/Idle/R2.png'));
-            Player.IMGSForIdleR.append(pico2d.load_image('assets/Player/Idle/R3.png'));
-            Player.IMGSForIdleR.append(pico2d.load_image('assets/Player/Idle/R4.png'));
+            #Player.IMGSForIdleL.append(pico2d.load_image('assets/Player/Idle/L1.png'));
+            #Player.IMGSForIdleL.append(pico2d.load_image('assets/Player/Idle/L2.png'));
+            #Player.IMGSForIdleL.append(pico2d.load_image('assets/Player/Idle/L3.png'));
+            #Player.IMGSForIdleL.append(pico2d.load_image('assets/Player/Idle/L4.png'));
+            Player.IMGSForIdleR.append(pico2d.load_image('assets/Player/Idle/R (1).png'));
+            Player.IMGSForIdleR.append(pico2d.load_image('assets/Player/Idle/R (2).png'));
+            Player.IMGSForIdleR.append(pico2d.load_image('assets/Player/Idle/R (3).png'));
+            Player.IMGSForIdleR.append(pico2d.load_image('assets/Player/Idle/R (4).png'));
+            Player.IMGSForIdleR.append(pico2d.load_image('assets/Player/Idle/R (5).png'));
 
             Player.LOAD = True;
         self.dir = IdleR; 

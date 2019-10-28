@@ -16,12 +16,11 @@ class KeyInput:
     g_e = False;
     g_r = False;
 
-
     g_mouse_rdown = False;
     g_mouse_ldown = False;
     
-    m_x = 0;
-    m_y = 0;
+    g_mouse_x = 0;
+    g_mouse_y = 0;
 
     def init():
         KeyInput.g_right_arrow = False;
@@ -38,7 +37,9 @@ class KeyInput:
         KeyInput.g_r = False;
 
         KeyInput.g_mouse_rdown = False;
-        KeyInput.g_mouse_ldown = False;    
+        KeyInput.g_mouse_ldown = False;
+        KeyInput.g_mouse_x = False;
+        KeyInput.g_mouse_y = False;   
         return;
 
     def update():
@@ -78,7 +79,7 @@ class KeyInput:
                         
 
                     if event.key  == SDLK_ESCAPE:
-                        from FrameWork import FrameWork;
+                        from FrameWork import FrameWork; # referecne FrameWork
                         FrameWork.GameState = False;
                         
                 if event.type == SDL_MOUSEBUTTONDOWN:#Mouse input
@@ -113,11 +114,11 @@ class KeyInput:
                         KeyInput.g_mouse_ldown = False;
 
                 elif event.type == SDL_MOUSEMOTION:
-                    KeyInput.m_x, KeyInput.m_y = event.x, event.y
+                    KeyInput.g_mouse_x, KeyInput.g_mouse_y = event.x, event.y;
 
         return;        
     def display():
-        print("g_right_arrow = {0} mx = {1} my = {2}".format(KeyInput.g_right_arrow, KeyInput.m_x, KeyInput.m_y));
+        print("g_right_arrow = {0} mx = {1} my = {2}".format(KeyInput.g_right_arrow, KeyInput.g_mouse_x, KeyInput.g_mouse_y));
 
     Initialize = staticmethod(init);
     Update = staticmethod(update);

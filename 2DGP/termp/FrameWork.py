@@ -5,6 +5,7 @@ from KeyIO import *;
 from Scene import Scene as Scene;
 from TitleScene import *;
 from GameScene import *;
+from Mouse import *;
 
 
 class FrameWork:

@@ -6,10 +6,8 @@ class Const:
     WIN_WIDTH, WIN_HEIGHT = parser.get_int('WIN_WIDTH'), parser.get_int('WIN_HEIGHT');
     frameForPlayer = parser.get_int('frameForPlayer');
     
-
-
+    title, game, start, ending, pause  = range(5);
     #enum
-    title, pause, start, ending = range(4);
 
     del parser;
 

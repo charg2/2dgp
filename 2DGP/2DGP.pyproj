@@ -5,7 +5,7 @@
     <ProjectGuid>2a51586f-7735-4317-894d-21267dcd5f8c</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>termp\main.py</StartupFile>
+    <StartupFile>termp\TexturePacker.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -54,9 +54,18 @@
     <Compile Include="termp\GameObject.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="termp\GameScene.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="termp\Graphic.py" />
+    <Compile Include="termp\TexturePacker.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="termp\KeyIO.py" />
     <Compile Include="termp\main.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="termp\GameBG.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="termp\Mouse.py">

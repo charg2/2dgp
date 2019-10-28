@@ -10,4 +10,9 @@ class Mouse(GameObject):
     IMGSForAttack   = [];
     IMGSForDash     = [];
 
-    pass;
+    def update():
+        pass;
+    
+    def render():
+        pass;
+

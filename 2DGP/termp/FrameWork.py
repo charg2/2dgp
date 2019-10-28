@@ -4,6 +4,7 @@ from pico2d import *;
 from KeyIO import *;
 from Scene import Scene as Scene;
 from TitleScene import *;
+from GameScene import *;
 
 
 class FrameWork:
@@ -15,6 +16,7 @@ class FrameWork:
         FrameWork.GameState = True;
         
         FrameWork.SceneList.append(TitleScene()); #타이틀 신 추가.
+        FrameWork.SceneList.append(GameScene());
 
         FrameWork.CurScene = FrameWork.SceneList[0];
 

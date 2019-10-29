@@ -37,6 +37,6 @@ class Player(GameObject):
         self.current_state.render();
         return;
 
-    def update(slef, time):
+    def update(self, time):
         pass;
 

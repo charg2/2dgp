@@ -8,8 +8,8 @@ class TexturePacker:
     pass;
 
 
-def crop(infile, height, width):
-    im = Image.open(infile)
+def crop(file_path:str, height:int, width:int):
+    im = Image.open(file_path);
     imgwidth, imgheight = im.size
     for i in range(imgheight//height):
         for j in range(imgwidth//width):
@@ -25,16 +25,20 @@ def resize_multiple(img:Image, multiple:int, save_name:str, in_quality = 100):
 
 if __name__=='__main__':
     #print("test");
-    img = Image.open('assets/tt.png');
+    #tt = Image.open('assets/tiles.png');
     #print("test");
-    #img.show();
+    #tt.show();
     #height = 90;
-    #width = 80;
-    #for k, piece in enumerate(crop('assets/player.png', height, width), 0):
+    #width = 90;
+    #for k, piece in enumerate(crop('assets/tiles.png', height, width), 0):
     #    print("frist");        
     #    img=Image.new('RGBA', (height,width), 255)
     #    img.paste(piece)
     #    path = os.path.join('',"IMG-%s.png" % k);
     #    img.save(path)
     #    print("done");
-    resize_multiple(img, 5, "fdfd.png");
+
+    img = Image.open('logo (2).png');
+    resize_multiple(img, 5, "logo.png");
+
+    #crop(img,90, 90 );

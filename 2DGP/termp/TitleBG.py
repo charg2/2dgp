@@ -11,16 +11,16 @@ import Scene;
 class TitleBG(GameObject):
     def __init__(self, x ,y, angle, sx, sy, state):
         super(TitleBG, self).__init__(x,y,angle,sx,sy,state);
+        self.IMG = pico2d.load_image('assets/TitleScene/Town00.png');
         self.has_image = True;
-        self.IMG = pico2d.load_image('assets/DUNGREED_TITLE.png');
         self.timer_for_changing = 0.0;
-    def Render(self):
+    def render(self):
         #left x 최소 bottom y 최소
         self.IMG.draw_to_origin( 0, 0, const.WIN_WIDTH, const.WIN_HEIGHT);
         return;
 
 
-    def Update(self,Time):
+    def update(self, Time):
         if(True == KeyInput.g_space):
             import FrameWork;
             FrameWork.FrameWork.CurScene = FrameWork.FrameWork.SceneList[1];

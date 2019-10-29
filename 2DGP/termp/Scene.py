@@ -25,16 +25,16 @@ class Scene:
         
         #update
         for gobj in self.game_object_list_ally:
-            gobj.Update(Scene.Time);
+            gobj.update(Scene.Time);
 
         for terrain in self.game_object_list_terrain:
-            terrain.Update(Scene.Time); 
+            terrain.update(Scene.Time); 
             
         for obs in self.game_object_list_obstacle:
-            obs.Update(Scene.Time);    
+            obs.update(Scene.Time);    
 
         for ui in self.game_ui_list:
-            ui.Update(Scene.Time);
+            ui.update(Scene.Time);
 
 
         #remove
@@ -64,19 +64,20 @@ class Scene:
     def Render(self):
         for terrain in self.game_object_list_terrain:
             if(terrain.has_image == True and terrain.state):               
-                terrain.Render();
+                terrain.render();
 
         for gobj in self.game_object_list_ally:
             if(gobj.has_image == True and gobj.state):               
-                gobj.Render();
+                gobj.render();
 
         for obstacle in self.game_object_list_obstacle:
             if(obstacle.has_image == True and obstacle.state):               
-                obstacle.Render();
+                obstacle.render();
 
         for gui in self.game_ui_list:
-            if(gui.has_image == True and gui.GetState()):               
-                gui.Render();
+            if(gui.has_image == True and gui.state):               
+                gui.render();
+    
 
     def ExitScene(self):
         pass;

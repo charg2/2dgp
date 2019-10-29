@@ -23,6 +23,7 @@ class Mouse(GameObject):
         #pass;
 
 
+
     def update(self, time):
         #print(type(self.Idle));
         self.x, self.y = KeyInput.g_mouse_x , Const.WIN_WIDTH - KeyInput.g_mouse_y - 1 ;

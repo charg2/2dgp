@@ -130,7 +130,6 @@
     <Content Include="Lecture09_Game_Obejects\character.png" />
     <Content Include="Lecture09_Game_Obejects\grass.png" />
     <Content Include="Lecture09_Game_Obejects\run_animation.png" />
-    <Content Include="Lecture10_Game_Framework\.gitignore" />
     <Content Include="Lecture10_Game_Framework\grass.png" />
     <Content Include="Lecture10_Game_Framework\kpu_credit.png" />
     <Content Include="Lecture10_Game_Framework\pause.png" />

@@ -47,8 +47,14 @@ def handle_events():
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-                game_framework.quit()
+            game_framework.quit();
+        #elif event.type == SDL_KEYDOWN and event.key == SDLK_LSHIFT:
+        #    Boy.dash_state = True;
+        #elif event.type == SDL_KEYUP and event.key == SDLK_LSHIFT:
+        #    Boy.dash_state = False;
+
         else:
+            print(event);
             boy.handle_event(event)
 
 

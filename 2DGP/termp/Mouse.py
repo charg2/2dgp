@@ -32,6 +32,7 @@ class Mouse(GameObject):
     def render(self):
         #print( type(Mouse.Target));
         #Mouse.Idle.draw_to_origin(100, 100, 90, 90);
+        #self.Idle1.opacify(0.5);
         self.Idle1.draw_to_origin(self.x , self.y, self.Idle1.w, self.Idle1.h);
         pass;
 

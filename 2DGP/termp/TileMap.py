@@ -4,3 +4,6 @@ class TileMap:
 
     def __init__(self):
         pass;
+
+    def Render():
+        pass;

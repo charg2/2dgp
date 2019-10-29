@@ -21,4 +21,8 @@ class Tile:
 
     def set_tyle(self, type):
         self.type = type;
+
+    def Render(self):
+        pass;
+
     pass;

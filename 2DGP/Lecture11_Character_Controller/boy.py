@@ -13,10 +13,6 @@ key_event_table = {
     (SDL_KEYUP, SDLK_LSHIFT) : LEFT_SHIFT_UP
 }
 
-
-
-
-
 # Boy States
 
 class IdleState:

@@ -5,7 +5,7 @@
     <ProjectGuid>2a51586f-7735-4317-894d-21267dcd5f8c</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>termp\TileMapLoader.py</StartupFile>
+    <StartupFile>main.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -23,15 +23,15 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="for test\size.py" />
-    <Compile Include="Lecture09_Game_Obejects\boy_grass_object.py" />
-    <Compile Include="Lecture10_Game_Framework\game_framework.py" />
-    <Compile Include="Lecture10_Game_Framework\main_state.py" />
-    <Compile Include="Lecture10_Game_Framework\mygame.py" />
-    <Compile Include="Lecture10_Game_Framework\show_files.py" />
-    <Compile Include="Lecture10_Game_Framework\simple_module.py" />
-    <Compile Include="Lecture10_Game_Framework\start_state.py" />
-    <Compile Include="Lecture10_Game_Framework\title_state.py" />
+    <Compile Include="Camera.py" />
+    <Compile Include="ConfigParser.py" />
+    <Compile Include="Const.py" />
+    <Compile Include="FrameWork.py" />
+    <Compile Include="GameBG.py" />
+    <Compile Include="GameObject.py" />
+    <Compile Include="GameScene.py" />
+    <Compile Include="Graphic.py" />
+    <Compile Include="KeyIO.py" />
     <Compile Include="Lecture11_Character_Controller\boy.py" />
     <Compile Include="Lecture11_Character_Controller\boys_team_1000.py" />
     <Compile Include="Lecture11_Character_Controller\game_framework.py" />
@@ -41,111 +41,56 @@
     <Compile Include="Lecture11_Character_Controller\SleepState.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="termp\Camera.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="termp\ConfigParser.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="termp\Const.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="termp\FrameWork.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="termp\GameObject.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="termp\GameScene.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="termp\Graphic.py" />
-    <Compile Include="termp\TexturePacker.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="termp\KeyIO.py" />
-    <Compile Include="termp\main.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="termp\GameBG.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="termp\Mouse.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="termp\Tile.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="termp\TileMap.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="termp\TileMapLoader.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="termp\TitleBG.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="termp\TitleLogo.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="termp\TitleScene.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="termp\MyTimer.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="termp\Player.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="termp\Scene.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="termp\Transform.py" />
-    <Compile Include="_2DGP.py" />
+    <Compile Include="main.py" />
+    <Compile Include="Mouse.py" />
+    <Compile Include="MyTimer.py" />
+    <Compile Include="Player.py" />
+    <Compile Include="Scene.py" />
+    <Compile Include="TexturePacker.py" />
+    <Compile Include="Tile.py" />
+    <Compile Include="TileMap.py" />
+    <Compile Include="TileMapLoader.py" />
+    <Compile Include="TitleBG.py" />
+    <Compile Include="TitleLogo.py" />
+    <Compile Include="TitleScene.py" />
+    <Compile Include="Transform.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\" />
-    <Folder Include="Drill-7\" />
-    <Folder Include="Drill-7\assets\" />
-    <Folder Include="for test\" />
-    <Folder Include="Lecture09_Game_Obejects\" />
-    <Folder Include="Lecture10_Game_Framework\" />
     <Folder Include="Lecture11_Character_Controller\" />
     <Folder Include="TexturePacker\" />
-    <Folder Include="termp\" />
+    <Folder Include="__pycache__\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="assets\animation_sheet.png" />
-    <Content Include="assets\character.png" />
-    <Content Include="assets\grass.png" />
-    <Content Include="assets\player.bmp" />
+    <Content Include="1config.ini" />
     <Content Include="assets\player.png" />
     <Content Include="assets\player.psd" />
     <Content Include="assets\run_animation.png" />
-    <Content Include="Drill-7\assets\animation_sheet.png" />
-    <Content Include="Drill-7\assets\character.png" />
-    <Content Include="Drill-7\assets\hand_arrow.png" />
-    <Content Include="Drill-7\assets\KPU_GROUND.png" />
-    <Content Include="Drill-7\assets\KPU_GROUND_FULL.png" />
-    <Content Include="Drill-7\assets\run_animation.png" />
-    <Content Include="Lecture09_Game_Obejects\.gitattributes" />
-    <Content Include="Lecture09_Game_Obejects\.gitignore" />
-    <Content Include="Lecture09_Game_Obejects\animation_sheet.png" />
-    <Content Include="Lecture09_Game_Obejects\ball21x21.png" />
-    <Content Include="Lecture09_Game_Obejects\ball41x41.png" />
-    <Content Include="Lecture09_Game_Obejects\character.png" />
-    <Content Include="Lecture09_Game_Obejects\grass.png" />
-    <Content Include="Lecture09_Game_Obejects\run_animation.png" />
-    <Content Include="Lecture10_Game_Framework\grass.png" />
-    <Content Include="Lecture10_Game_Framework\kpu_credit.png" />
-    <Content Include="Lecture10_Game_Framework\pause.png" />
-    <Content Include="Lecture10_Game_Framework\run_animation.png" />
-    <Content Include="Lecture10_Game_Framework\title.png" />
     <Content Include="Lecture11_Character_Controller\.gitattributes" />
     <Content Include="Lecture11_Character_Controller\.gitignore" />
     <Content Include="Lecture11_Character_Controller\animation_sheet.png" />
     <Content Include="Lecture11_Character_Controller\grass.png" />
     <Content Include="Lecture11_Character_Controller\run_animation.png" />
+    <Content Include="room1.map" />
+    <Content Include="__pycache__\Camera.cpython-37.pyc" />
+    <Content Include="__pycache__\ConfigParser.cpython-37.pyc" />
+    <Content Include="__pycache__\Const.cpython-37.pyc" />
+    <Content Include="__pycache__\FrameWork.cpython-37.pyc" />
+    <Content Include="__pycache__\GameBG.cpython-37.pyc" />
+    <Content Include="__pycache__\GameObject.cpython-37.pyc" />
+    <Content Include="__pycache__\GameScene.cpython-37.pyc" />
+    <Content Include="__pycache__\Graphic.cpython-37.pyc" />
+    <Content Include="__pycache__\KeyIO.cpython-37.pyc" />
+    <Content Include="__pycache__\Mouse.cpython-37.pyc" />
+    <Content Include="__pycache__\MyTimer.cpython-37.pyc" />
+    <Content Include="__pycache__\Scene.cpython-37.pyc" />
+    <Content Include="__pycache__\Tile.cpython-37.pyc" />
+    <Content Include="__pycache__\TileMap.cpython-37.pyc" />
+    <Content Include="__pycache__\TileMapLoader.cpython-37.pyc" />
+    <Content Include="__pycache__\TitleBG.cpython-37.pyc" />
+    <Content Include="__pycache__\TitleLogo.cpython-37.pyc" />
+    <Content Include="__pycache__\TitleScene.cpython-37.pyc" />
+    <Content Include="__pycache__\Transform.cpython-37.pyc" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

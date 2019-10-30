@@ -19,5 +19,11 @@ class TileMap:
         pass;
 
     def render(self):
-        for y in self.y:
+        a, b = 0, 0;
+        for x in self.tiles:
+            a = 0;
+            for y in x:
+                y.get_tile().draw_to_origin(a, b);
+                a += 90;
+            b += 90;
         pass;

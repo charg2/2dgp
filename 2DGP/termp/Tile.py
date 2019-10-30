@@ -22,12 +22,16 @@ class Tile:
             Tile.IMGSForTILE.append(pico2d.load_image('assets/Tile/tile (7).png'));
             Tile.IMGSForTILE.append(pico2d.load_image('assets/Tile/tile (8).png'));
             Tile.IMGSForTILE.append(pico2d.load_image('assets/Tile/tile (9).png'));
-            #Tile.IMGSForTILE.append(pico2d.load_image('assets/Tile/tile (10).png'));
+            Tile.IMGSForTILE.append(pico2d.load_image('assets/Tile/tile (10).png'));
+            Tile.IMGSForTILE.append(pico2d.load_image('assets/Tile/tile (11).png'));
 
             Tile.LOAD = True;
 
     def set_tile(self, type):
         self.type = type;
+
+    def get_tile(self):
+        return Tile.IMGSForTILE[self.tile_type];
 
     def render(self):
         pass;

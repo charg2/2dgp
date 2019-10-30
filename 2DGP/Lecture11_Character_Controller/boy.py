@@ -1,7 +1,7 @@
 from pico2d import *
 
 # Boy Event
-RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP,  LEFT_SHIFT_DOWN , LEFT_SHIFT_UP, SLEEP_TIMER,= range(7);
+RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP,  LEFT_SHIFT_DOWN , LEFT_SHIFT_UP, SLEEP_TIMER, RUN_TIMER = range(8);
 
 # fill here
 key_event_table = {
@@ -98,6 +98,8 @@ class DashState:
 
         boy.dir = boy.velocity;
         boy.velocity *= 2;
+        boy.timer = 100;
+
 
     @staticmethod
     def exit(boy, event):
@@ -109,9 +111,12 @@ class DashState:
     @staticmethod
     def do(boy):
         boy.frame = (boy.frame + 1) % 8
-        boy.timer -= 1
+        boy.timer -= 1;
         boy.x += boy.velocity;
         boy.x = clamp(25, boy.x, 800 -25 );
+        if boy.timer == 0:
+            print("대시 지속시간 끝.");
+            boy.add_event(RUN_TIMER);
 
     @staticmethod
     def draw(boy):
@@ -146,7 +151,6 @@ class SleepState:
 
 
 #폴링이니깐 값을 계속 받아 옴.
-# 1회 짜리 단발성이 아님.
 next_state_table = {
     IdleState: {RIGHT_UP: RunState, LEFT_UP: RunState,
     RIGHT_DOWN: RunState, LEFT_DOWN: RunState,
@@ -165,7 +169,8 @@ next_state_table = {
 
     DashState: {RIGHT_UP: IdleState, LEFT_UP: IdleState,
     LEFT_DOWN: RunState, RIGHT_DOWN: RunState,
-    LEFT_SHIFT_DOWN : DashState, LEFT_SHIFT_UP : RunState
+    LEFT_SHIFT_DOWN : DashState, LEFT_SHIFT_UP : RunState,
+    RUN_TIMER : RunState
     },
 }
 

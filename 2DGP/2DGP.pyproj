@@ -5,7 +5,7 @@
     <ProjectGuid>2a51586f-7735-4317-894d-21267dcd5f8c</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>termp\main.py</StartupFile>
+    <StartupFile>Lecture11_Character_Controller\mygame.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -79,7 +79,13 @@
     <Compile Include="termp\TileMap.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="termp\TileMapLoader.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="termp\TitleBG.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="termp\TitleLogo.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="termp\TitleScene.py">

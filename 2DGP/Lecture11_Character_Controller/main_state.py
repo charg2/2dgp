@@ -54,7 +54,7 @@ def handle_events():
         #    Boy.dash_state = False;
 
         else:
-            print(event);
+            #print(event);
             boy.handle_event(event)
 
 

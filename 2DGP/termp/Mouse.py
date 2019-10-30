@@ -9,7 +9,7 @@ class Mouse(GameObject):
     #Target:pico2d.Image = pico2d.Image;
 
     def __init__(self):
-        super(Mouse, self).__init__(KeyInput.g_mouse_x , KeyInput.g_mouse_y, 1, 40, 40, True);
+        super(Mouse, self).__init__(KeyInput.g_mouse_x , KeyInput.g_mouse_y, 0, 1, 1, True);
         self.name = "Mouse";
         self.state = True;
         self.has_image = True;

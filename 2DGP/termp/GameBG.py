@@ -7,7 +7,7 @@ import pico2d;
 import KeyIO;
 import Scene;
 
-
+#타일 맵.
 class GameBG(GameObject):
     def __init__(self, x ,y, angle, sx, sy, state):
         super(GameBG, self).__init__(x,y,angle,sx,sy,state);

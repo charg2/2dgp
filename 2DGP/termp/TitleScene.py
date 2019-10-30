@@ -1,5 +1,6 @@
 from Scene import *;
 from TitleBG import TitleBG as BG;
+from TitleLogo import TitleLogo as LOGO;
 from Const import Const as const;
 from Mouse import Mouse;
 
@@ -11,8 +12,11 @@ class TitleScene(Scene):
         
         
         # 마지막 보여줄 마우스 마지막 배치
-        mouse = Mouse();
-        self.AddUi(mouse);
+        #mouse = Mouse();
+
+
+        self.AddUi(LOGO(300, 300, 0, 1, 1, True));
+        self.AddUi(Mouse());
         return;
 
     def Initialize(self):

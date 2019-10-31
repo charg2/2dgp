@@ -14,7 +14,7 @@ class GraphicLib:
 
         if GraphicLib.Font is None :
             #print(os.listdir());
-            GraphicLib.Font= pico2d.load_font('assets/font.TTF', 60);
+            GraphicLib.Font= pico2d.load_font('assets/Font/font.TTF', 60);
         return;
 
     def present():

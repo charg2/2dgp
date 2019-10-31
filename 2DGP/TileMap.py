@@ -39,6 +39,9 @@ class TileMap:
         min_width, max_width    = ( left // 90 ) -1 , ( right // 90 ) ;
         min_height, max_height  = ( top // 90 ) -1 , ( bottom // 90 ) ;
 
+        # offset 계산
+        if bottom % 90 > 0:
+            max_height += 1;
 
 
         for y in range(min_height, max_height ):

@@ -29,7 +29,7 @@ class GameBG(GameObject):
 
         #self.map.render();
         
-        self.map.clip_render_to_origin(100, 100, 500, 500);
+        self.map.clip_render_to_origin(0, Const.WIN_HEIGHT, Const.WIN_WIDTH, Const.WIN_HEIGHT);
 
         #left x 최소 bottom y 최소
         #self.IMG.draw_to_origin( 0, 0, const.WIN_WIDTH, const.WIN_HEIGHT);

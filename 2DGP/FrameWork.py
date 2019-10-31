@@ -22,6 +22,7 @@ class FrameWork:
         FrameWork.CurScene = FrameWork.SceneList[0];
 
     def update():
+        delay(0.016);
         Timer.Update();
         
         GraphicLib.ClearBuf();

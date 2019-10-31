@@ -1,18 +1,19 @@
 from Scene import Scene;
-from GameBG import GameBG as BG;
+from GameBG import GameBG;
 from Const import Const as const;
-from Mouse import *;
+from Mouse import Mouse;
 from Player import *;
 
-#StartX,StartY = 110,160;
 
+START_X,START_Y = 100,250;
 class GameScene(Scene):
     def __init__(self):       
         super(GameScene,self).__init__();
-        self.BG = (BG(const.WIN_WIDTH//2, const.WIN_HEIGHT//2, 0,1,1,True));
-        self.AddAllyObject(BG(const.WIN_WIDTH//2, const.WIN_HEIGHT//2, 0,1,1,True));
-        #self.AddAllyObject(Player(StartX,StartY,0,1,1,True));    
+        self.bg = (GameBG(const.WIN_WIDTH//2, const.WIN_HEIGHT//2, 0,1,1,True));
         
+        self.AddAllyObject(self.bg);
+        self.AddAllyObject(Player(START_X, START_Y+200,0,1,1,True));          
+
         self.AddUi(Mouse());
 
         return;

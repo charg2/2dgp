@@ -42,7 +42,16 @@ class Player(GameObject):
         self.dir = IDLE_R; 
         self.animation_numb = 0;
         self.tag = 1;
-        
+        self.force_x =2600; #cm/s
+        self.force_y =2350;
+        GameObject.Cam.transform = self.transform;
+        self.jump_trigger = False;
+        self.jump_timer = 0;
+        self.key_timer = 0.5;
+        #self.current_state = IdleStateForPlayer(self);
+
+
+
         # ability
         self.hp = 0;
         self.dash = 0;
@@ -58,10 +67,12 @@ class Player(GameObject):
         #self.tag = Const.Const.tag_player;
 
     def render(self): 
-        self.current_state.render();
+        #self.current_state.render();
+        Player.IMGSForIdleR[self.animation_numb].draw(self.transform.tx, self.transform.ty);
         return;
 
     def update(self, time):
+        self.animation_numb = (self.animation_numb + 1) % 5;
         pass;
 
     def on_collision(self, obj):

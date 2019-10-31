@@ -7,6 +7,11 @@ class Const:
     frameForPlayer = parser.get_int('frameForPlayer');
     
     title, game, start, ending, pause  = range(5);
+
+    direction_L,direction_R = range(2);
+
+    SWORD, BOW, GUN = range(3);
+    RUN_L, RUN_R, IDLE_R, IDLE_L = range(4);
     #enum
     del parser;
 

@@ -14,14 +14,17 @@ class Mouse(GameObject):
         self.state = True;
         self.has_image = True;
         self.x, self.y = 0, 0;
-        self.Idle1 = pico2d.load_image("assets/Mouse/Cursor00.png");
-        self.Target1 = pico2d.load_image("assets/Mouse/Cursor01.png");
+        self.Arrow = pico2d.load_image("assets/Mouse/Cursor00.png");
+        self.Target = pico2d.load_image("assets/Mouse/Cursor01.png");
+        self.IMG = self.Arrow;
         #if Mouse.LOAD == False:
             #Mouse.Idle2 = pico2d.load_image("assets/Mouse/Cursor00.png");
             #Mouse.Target = pico2d.load_image("assets/Mouse/Cursor01.png");
             #LOAD = True;
         #pass;
-
+    def set_cursor(self, type):
+        if type == 0: self.IMG = self.Arrow;
+        else : self.IMG = self.Target;
 
 
     def update(self, time):
@@ -31,10 +34,16 @@ class Mouse(GameObject):
         pass;
     
     def render(self):
-        #print( type(Mouse.Target));
         #Mouse.Idle.draw_to_origin(100, 100, 90, 90);
         #self.Idle1.opacify(0.5);
-        self.Idle1.draw_to_origin(self.x , self.y, self.Idle1.w, self.Idle1.h);
+        self.IMG.draw_to_origin(self.x , self.y, self.IMG.w, self.IMG.h);
+        pass;
+
+    #충동한 객체의 태그 or name을 얻어서 어떤객체인지 파악.
+    def on_collision(self, obj):
+        obj.tag;
+
+
         pass;
 
 

@@ -11,10 +11,10 @@ class KeyInput:
     
     g_p = False;
     
-    g_q = False;
+    g_a = False;
     g_w = False;
-    g_e = False;
-    g_r = False;
+    g_s = False;
+    g_d = False;
 
     g_mouse_rdown = False;
     g_mouse_ldown = False;
@@ -31,15 +31,19 @@ class KeyInput:
         KeyInput.g_p = False;
         KeyInput.g_s = False;
         
-        KeyInput.g_q = False;
+        KeyInput.g_a = False;
         KeyInput.g_w = False;
-        KeyInput.g_e = False;
-        KeyInput.g_r = False;
+        KeyInput.g_s = False;
+        KeyInput.g_d = False;
 
         KeyInput.g_mouse_rdown = False;
         KeyInput.g_mouse_ldown = False;
-        KeyInput.g_mouse_x = False;
-        KeyInput.g_mouse_y = False;   
+        
+        KeyInput.g_mouse_x = 0;
+        KeyInput.g_mouse_y = 0;   
+        
+        KeyInput.g_previous_mouse_x = 0;
+        KeyInput.g_previous_mouse_y = 0;   
         return;
 
     def update():
@@ -65,17 +69,15 @@ class KeyInput:
                     if event.key  == SDLK_p:
                         KeyInput.g_p = True; 
 
-                    if event.key  == SDLK_q:
-                        KeyInput.g_q = True;
+                    if event.key  == SDLK_a:
+                        KeyInput.g_a = True;
                     if event.key  == SDLK_w:
                         KeyInput.g_w = True;
-                    if event.key  == SDLK_e:
-                        KeyInput.g_e = True;
-                    if event.key  == SDLK_r:
-                        KeyInput.g_r = True;
-
                     if event.key  == SDLK_s:
-                        KeyInput.g_s = True; 
+                        KeyInput.g_s = True;
+                    if event.key  == SDLK_d:
+                        KeyInput.g_d = True;
+
                         
 
                     if event.key  == SDLK_ESCAPE:
@@ -106,6 +108,12 @@ class KeyInput:
                         KeyInput.g_p = False; 
                     if event.key  == SDLK_s:
                         KeyInput.g_s = False; 
+                    if event.key  == SDLK_a:
+                        KeyInput.g_a = False;
+                    if event.key  == SDLK_w:
+                        KeyInput.g_w = False;
+                    if event.key  == SDLK_d:
+                        KeyInput.g_d = False;
 
                 if event.type == SDL_MOUSEBUTTONUP:
                     if event.button == SDL_BUTTON_RIGHT:
@@ -114,6 +122,7 @@ class KeyInput:
                         KeyInput.g_mouse_ldown = False;
 
                 elif event.type == SDL_MOUSEMOTION:
+                    #KeyInput.g_previous_mouse_x, KeyInput.g_previous_mouse_y = KeyInput.g_mouse_x, KeyInput.g_mouse_y;
                     KeyInput.g_mouse_x, KeyInput.g_mouse_y = event.x, event.y;
 
         return;        

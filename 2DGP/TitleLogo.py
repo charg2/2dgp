@@ -1,4 +1,5 @@
 from GameObject import *;
+from Const import *;
 
 class TitleLogo(GameObject):
     def __init__(self, x, y, angle, sx, sy, state):
@@ -14,5 +15,5 @@ class TitleLogo(GameObject):
 
     def render(self):
         #self.logo.draw_to_origin(self.transform.tx , self.transform.ty, self.logo.w, self.logo.h);
-        self.logo.draw_to_origin(self.transform.tx , self.transform.ty + 100, 400, 200);
+        self.logo.draw_to_origin( Const.WIN_WIDTH //3 , Const.WIN_HEIGHT //3 , self.transform.tx * self.transform.sx, self.transform.ty * self.transform.sy);
         pass;

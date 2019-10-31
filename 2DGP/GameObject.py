@@ -16,13 +16,17 @@ class GameObject:
 
         self.state = state;
         self.has_image = False;
+        self.basictimer =0.0;
 
+        self.state_queue:list = [];
         self.tag = 0;
+
         if GameObject.Font == None :
             GameObject.Font= pico2d.load_font('assets/font.TTF', 16);
     
-    def addQueue(self, State):
+    def add_queue(self, State):
         self.state_queue.insert(0, State); # 맨처음 위치에 추가.
+        #print(self.state_queue);
         return;
 
     def update(self, Time):

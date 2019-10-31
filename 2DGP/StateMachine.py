@@ -1,6 +1,7 @@
-from MyTimer import *
-from KeyIO import *
-from GameObject import*
+from MyTimer import *;
+from KeyIO import *;
+from GameObject import*;
+
 class StateMachine:
     def __init__(self,gobj):
         self.obj = gobj;

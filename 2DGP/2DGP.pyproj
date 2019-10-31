@@ -23,14 +23,26 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Banshee.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Camera.py" />
     <Compile Include="ConfigParser.py" />
     <Compile Include="Const.py" />
+    <Compile Include="DashState.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="FrameWork.py" />
     <Compile Include="GameBG.py" />
     <Compile Include="GameObject.py" />
     <Compile Include="GameScene.py" />
     <Compile Include="Graphic.py" />
+    <Compile Include="IdleState.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IdleStateForBanshee.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="KeyIO.py" />
     <Compile Include="Lecture11_Character_Controller\boy.py" />
     <Compile Include="Lecture11_Character_Controller\boys_team_1000.py" />
@@ -45,7 +57,13 @@
     <Compile Include="Mouse.py" />
     <Compile Include="MyTimer.py" />
     <Compile Include="Player.py" />
+    <Compile Include="RunState.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Scene.py" />
+    <Compile Include="StateMachine.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="TexturePacker.py" />
     <Compile Include="Tile.py" />
     <Compile Include="TileMap.py" />
@@ -54,6 +72,9 @@
     <Compile Include="TitleLogo.py" />
     <Compile Include="TitleScene.py" />
     <Compile Include="Transform.py" />
+    <Compile Include="Sword.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\" />

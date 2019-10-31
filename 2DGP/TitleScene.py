@@ -15,7 +15,7 @@ class TitleScene(Scene):
         #mouse = Mouse();
 
 
-        self.AddUi(LOGO(300, 300, 0, 1, 1, True));
+        self.AddUi(LOGO(300, 300, 0, 1.5, 1.5, True));
         self.AddUi(Mouse());
         return;
 

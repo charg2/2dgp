@@ -7,7 +7,7 @@ class TileMapLoader:
         
         string = mapfile.read();
         tile_lists = string.splitlines();
-        tile_lists.reverse();
+        #tile_lists.reverse(); #for window coordinate
 
         self.x, self.y = 0, 0
         for tile_list in tile_lists : 

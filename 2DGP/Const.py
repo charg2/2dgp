@@ -18,7 +18,8 @@ class Const:
 
     def clamp(minimum, x, maximum) : 
         return max(minimum, min(x, maximum));
-
+    def cordinate_window_position(pico2d_height) -> int :
+        return poco2d_height + 1;
 
 if __name__ == "__main__":
     print("const 실행되나");

@@ -40,6 +40,7 @@ class RunStateForPlayer(StateMachine):
             del temp;
         
         self.obj.transform.tx += self.Fx;
+        self.obj.transform.tx += self.Fx;
         return;
     
     def render(self):

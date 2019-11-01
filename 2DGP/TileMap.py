@@ -1,5 +1,6 @@
 
 from Tile import Tile;
+from Const import *;
 from TileMapLoader import TileMapLoader as Loader;
 
 #타일맵 설정값을 읽어서 불러옴..
@@ -25,33 +26,42 @@ class TileMap:
             for x in range(len(self.tiles[y])):
                 #print("x:{0} y:{1}".format(x, y));
                 self.tiles[y][x].get_tile().draw_to_origin( x * 90, y * 90);
-
+    
+                
+    # 좌표계는 윈도우를 따름.
     # IO 연산을 줄이기 위해 최소 그려야 하는 타일만 그림.
-    def clip_render_to_origin(self, left:int, bottom:int, in_width:int, in_height:int):
-        
+    def clip_render_to_origin(self, left:int, bottom:int, window_width:int, window_height:int):
+        from GameObject import GameObject;
         # 최소 그려야 하는 타일 계산.
         # LT/RB를 구해서
-        top = bottom - in_height;
-        right = left + in_width;
+        cam_top = bottom + GameObject.Cam.camera_offset_y ;
+        cam_bottom = cam_top + window_height;
+        cam_right = left + window_width;
+        print("lt:{0},{1} rb:{2},{3}".format(left, cam_top, cam_right, cam_bottom));
+        #print("{0}- {1}- {2}".format(self.height, GameObject.Cam.camera_offset_y, window_height));
 
         # 인덱스 범위 구해서
         # 인덱스 범위 구해서
-        min_width, max_width    = ( left // 90 ) , ( right // 90 ) ;
-        min_height, max_height  = ( top // 90 ) , ( bottom // 90 ) ;
-
+        min_width, max_width    = ( left // 90 ) , ( cam_right // 90 ) ;
+        min_height, max_height  = ( cam_top // 90 ) , ( cam_bottom // 90 ) ;
         #print("{0}- {1} - {2} - {3}".format(min_width, max_width, min_height, max_height ) )
-
         # offset 계산
-        if bottom % 90 > 0:
-            max_height += 1;
 
+        if cam_top % 90 > 0:
+            min_height += 1;
 
+        max_width += 1;
 
-        for y in range(min_height, max_height ):
-            for x in range( min_width, max_width) :
-                #print("x:{0} y:{1}".format(x, y));
-                self.tiles[y][x].get_tile().draw_to_origin( x * 90, y * 90, 100, 100);
-    # for test
+        offset_x, offset_y = GameObject.Cam.camera_offset_x % 90,GameObject.Cam.camera_offset_y % 90;
+        map_x ,map_y = 0, 0;
+        for y in range( min_height, max_height ):
+            map_x = 0;
+            for x in range( min_width, max_width ) :
+                self.tiles[y][x].get_tile().draw_to_origin( map_x - offset_x, map_y - offset_y, 90, 90);
+                map_x += 90;
+            map_y += 90;
+            print("TileMap.py y:{0}".format(y));
+    ## for test
     #def render_map(self):
     #    import pico2d;
 

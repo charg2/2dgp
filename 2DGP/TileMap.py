@@ -40,7 +40,7 @@ class TileMap:
         print("lt:{0},{1} rb:{2},{3}".format(left, cam_top, cam_right, cam_bottom));
         #print("{0}- {1}- {2}".format(self.height, GameObject.Cam.camera_offset_y, window_height));
 
-        # 인덱스 범위 구해서
+        # 인덱스 범위 구해서ddddddddddddddddd
         # 인덱스 범위 구해서
         min_width, max_width    = ( left // 90 ) , ( cam_right // 90 ) ;
         min_height, max_height  = ( cam_top // 90 ) , ( cam_bottom // 90 ) ;

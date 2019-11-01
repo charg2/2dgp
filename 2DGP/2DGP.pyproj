@@ -5,7 +5,7 @@
     <ProjectGuid>2a51586f-7735-4317-894d-21267dcd5f8c</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>main.py</StartupFile>
+    <StartupFile>MapTool\FramwWork.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -54,6 +54,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="main.py" />
+    <Compile Include="MapTool\FramwWork.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MapTool\MapToolScene.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Mouse.py" />
     <Compile Include="MyTimer.py" />
     <Compile Include="Physx.py">
@@ -82,6 +88,7 @@
   <ItemGroup>
     <Folder Include="assets\" />
     <Folder Include="Lecture11_Character_Controller\" />
+    <Folder Include="MapTool\" />
     <Folder Include="TexturePacker\" />
     <Folder Include="__pycache__\" />
   </ItemGroup>

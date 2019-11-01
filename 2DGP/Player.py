@@ -4,7 +4,7 @@ from math import*;
 from FrameWork import *;
 from KeyIO import *;
 from Const import *;
-from Sword import *;
+from Katana import *;
 
 from IdleState import IdleStateForPlayer;
 from RunState import RunStateForPlayer;
@@ -106,7 +106,7 @@ class Player(GameObject):
 
         # equipment
         self.weapons = [];
-        self.current_weapon:Sword = Sword( 30, 30, 0.7, 1, 1, True, self );
+        self.current_weapon:Katana = Katana( 30, 30, 0.7, 1, 1, True, self );
 
 
     def render(self): 
@@ -120,8 +120,9 @@ class Player(GameObject):
         self.current_weapon.render();
 
     def update_basicComponent(self):
+        self.previous_transform = self.transform;
+
         GameObject.Cam.transform = self.previous_transform;
-        
         return;
 
     def update_timer(self,time):
@@ -171,36 +172,34 @@ class Player(GameObject):
         pass;
 
     def clampingInWindow(self):
-        self.transform.tx = Const.clamp(0, self.transform.tx, GameObject.Cam.map_width-self.IMG.w//16)  
-        self.transform.ty = Const.clamp(0, self.transform.ty, GameObject.Cam.map_height-self.IMG.h//8)
+        self.transform.tx = Const.clamp(0, self.transform.tx, GameObject.Cam.map_width-self.IMG.w//16);  
+        self.transform.ty = Const.clamp(0, self.transform.ty, GameObject.Cam.map_height-self.IMG.h//8);
         return;
 
     def on_collision(self, obj):
+        tag = obj.tag;
         pass;
     
     def handle_keyIO(self):
-        if KeyInput.g_mouse_x > self.transform.tx: #right
+        if KeyInput.g_mouse_x > ( self.transform.tx - GameObject.Cam.camera_offset_x) : #right
             self.m_dir = Const.direction_R;
-
-        if KeyInput.g_mouse_x < self.transform.tx: #left
+        if KeyInput.g_mouse_x < (self.transform.tx - GameObject.Cam.camera_offset_x): #left
             self.m_dir = Const.direction_L;
+
 
         if KeyInput.g_d or KeyInput.g_a :
             self.add_queue(RunStateForPlayer(self));
+
 
         if self.jump_key_timer >0.8 and ( KeyInput.g_space or KeyInput.g_w ) :
             self.jump_trigger = True;
             self.jump_key_timer =0;
             self.IMG = Player.IMGSForJump[self.m_dir];
 
-
         if KeyInput.g_mouse_ldown: #attack
             if  ( self.attack_key_timer > self.attack_speed ) :  #attack
                 self.attack_trigger = True;
                 self.attack_key_timer = 0.0;
-        #else :
-        #    pass;
-
 
         if KeyInput.g_mouse_rdown : #dash
             pass;

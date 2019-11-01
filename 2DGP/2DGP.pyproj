@@ -56,6 +56,9 @@
     <Compile Include="main.py" />
     <Compile Include="Mouse.py" />
     <Compile Include="MyTimer.py" />
+    <Compile Include="Physx.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Player.py" />
     <Compile Include="RunState.py">
       <SubType>Code</SubType>
@@ -72,7 +75,7 @@
     <Compile Include="TitleLogo.py" />
     <Compile Include="TitleScene.py" />
     <Compile Include="Transform.py" />
-    <Compile Include="Sword.py">
+    <Compile Include="Katana.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

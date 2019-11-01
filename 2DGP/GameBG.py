@@ -25,12 +25,11 @@ class GameBG(GameObject):
     def render(self):
         vx = Const.clamp(0, int(self.cam_x) - Const.WIN_WIDTH//2,  self.map.width - Const.WIN_WIDTH);
         vy = Const.clamp(0, int(self.cam_y) - Const.WIN_HEIGHT//2, self.map.height - Const.WIN_HEIGHT);
+
         GameObject.Cam.SetCamOffset(vx,vy);
 
-        #self.map.render();
-        
-        self.map.clip_render_to_origin(0, Const.WIN_HEIGHT, Const.WIN_WIDTH, Const.WIN_HEIGHT);
-
+        self.map.clip_render_to_origin(vx, vy, Const.WIN_WIDTH, Const.WIN_HEIGHT);
+        print("{0} - {1}".format(vx, vy))
         #left x 최소 bottom y 최소
         #self.IMG.draw_to_origin( 0, 0, const.WIN_WIDTH, const.WIN_HEIGHT);
         return;

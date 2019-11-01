@@ -36,18 +36,21 @@ class TileMap:
 
         # 인덱스 범위 구해서
         # 인덱스 범위 구해서
-        min_width, max_width    = ( left // 90 ) -1 , ( right // 90 ) ;
-        min_height, max_height  = ( top // 90 ) -1 , ( bottom // 90 ) ;
+        min_width, max_width    = ( left // 90 ) , ( right // 90 ) ;
+        min_height, max_height  = ( top // 90 ) , ( bottom // 90 ) ;
+
+        #print("{0}- {1} - {2} - {3}".format(min_width, max_width, min_height, max_height ) )
 
         # offset 계산
         if bottom % 90 > 0:
             max_height += 1;
 
 
+
         for y in range(min_height, max_height ):
             for x in range( min_width, max_width) :
                 #print("x:{0} y:{1}".format(x, y));
-                self.tiles[y][x].get_tile().draw_to_origin( x * 90, y * 90);
+                self.tiles[y][x].get_tile().draw_to_origin( x * 90, y * 90, 100, 100);
     # for test
     #def render_map(self):
     #    import pico2d;

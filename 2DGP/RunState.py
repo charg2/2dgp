@@ -11,20 +11,22 @@ class RunStateForPlayer(StateMachine):
     def __init__(self,gobj):
         self.obj = gobj;
         self.Fx = 0;
+        #self.Fy = self.obj.physx.force_y;
 
-        if(KeyInput.g_d):
+        if(KeyInput.g_d): #r
             self.obj.last_dir = Const.direction_R;
             self.obj.dir = Const.direction_R;
             from Player import Player;
             self.obj.IMG = Player.IMGSForIdleR[0];
-            self.Fx = self.obj.force_x;
+            self.Fx = 0.38*self.obj.force_x; # when player up in the air,  air offset is applied.
 
-        if(KeyInput.g_a):
+
+        if(KeyInput.g_a):#l
             self.obj.last_dir = Const.direction_L;
             self.obj.dir = Const.direction_L;
             from Player import Player
             self.obj.IMG = Player.IMGSForIdleL[0];
-            self.Fx = -self.obj.force_x;
+            self.Fx = -0.38*self.obj.force_x; # when player up in the air,  air offset is applied.
         return;
 
     def update(self):

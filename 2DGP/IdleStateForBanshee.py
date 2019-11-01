@@ -31,7 +31,6 @@ class IdleStateForBanshee(StateMachine):
             if self.turn_timer > 3.0:
                 self.turn_timer = 0;
                 self.banshee.m_dir = Const.direction_L;
-        
         else :
             self.banshee.transform.tx -= 2;
 

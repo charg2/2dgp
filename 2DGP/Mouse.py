@@ -4,9 +4,6 @@ from Const import *;
 from KeyIO      import KeyInput;
 
 class Mouse(GameObject):
-    #LOAD = None;
-    #Idle2:pico2d.Image = pico2d.Image;
-    #Target:pico2d.Image = pico2d.Image;
 
     def __init__(self):
         super(Mouse, self).__init__(KeyInput.g_mouse_x , KeyInput.g_mouse_y, 0, 1, 1, True);
@@ -17,11 +14,7 @@ class Mouse(GameObject):
         self.Arrow = pico2d.load_image("assets/Mouse/Cursor00.png");
         self.Target = pico2d.load_image("assets/Mouse/Cursor01.png");
         self.IMG = self.Arrow;
-        #if Mouse.LOAD == False:
-            #Mouse.Idle2 = pico2d.load_image("assets/Mouse/Cursor00.png");
-            #Mouse.Target = pico2d.load_image("assets/Mouse/Cursor01.png");
-            #LOAD = True;
-        #pass;
+ 
     def set_cursor(self, type):
         if type == 0: self.IMG = self.Arrow;
         else : self.IMG = self.Target;
@@ -41,7 +34,7 @@ class Mouse(GameObject):
 
     #충동한 객체의 태그 or name을 얻어서 어떤객체인지 파악.
     def on_collision(self, obj):
-        obj.tag;
+        tag = obj.tag;
 
 
         pass;

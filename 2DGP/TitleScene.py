@@ -10,7 +10,6 @@ class TitleScene(Scene):
         super(TitleScene, self).__init__();
         self.AddAllyObject(BG(const.WIN_WIDTH//2, const.WIN_HEIGHT//2, 0,1,1,True));
         
-        
         # 마지막 보여줄 마우스 마지막 배치
         #mouse = Mouse();
 

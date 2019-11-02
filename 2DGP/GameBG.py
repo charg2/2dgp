@@ -19,6 +19,7 @@ class GameBG(GameObject):
         self.cam_x = 0;
         self.cam_y = 0;
         self.cam:GameObject = None;
+        self.name = "GameBG";
 
         GameObject.Cam.SetMapSize(self.map.width, self.map.height);
 

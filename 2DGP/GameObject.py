@@ -1,31 +1,38 @@
 from Transform import Transform;
 from Camera import *;
-import Graphic;
+from Collision import *;
+
 from Const import *;
 from pico2d import *;
 
+from physx import Physx;
 
 
 class GameObject:
     Font = None;
     Cam = Camera(0, 0, 0, 0, 0, True);
     def __init__(self ,x , y, angle, sx, sy, state):
-        self.name = "default";
-        self.transform = Transform(x, y, angle, sx, sy);
-        self.previous_transform = Transform(0,0,0,0,0);
+        self.name:str = "default";
+        self.transform:Transform = Transform(x, y, angle, sx, sy);
+        self.previous_transform:Transform = Transform(0,0,0,0,0);
 
-        self.state = state;
-        self.has_image = False;
-        self.basictimer =0.0;
+        self.physx = Physx();
+
+        self.state:bool = state;
+        self.has_image:bool = False;
+        self.basictimer:float =0.0;
 
         self.state_queue:list = [];
-        self.tag = 0;
+        self.tag:int = 0;
+
+        self.collider:Collision = None;        
+        self.colliderForObstacle:Collision = None;
 
         if GameObject.Font == None :
             GameObject.Font= pico2d.load_font('assets/Font/font.TTF', 16);
     
     def add_queue(self, State):
-        self.state_queue.insert(0, State); # 맨처음 위치에 추가.
+        self.state_queue.insert(0, State); 
         #print(self.state_queue);
         return;
 
@@ -33,6 +40,9 @@ class GameObject:
         pass;
 
     def render(self):
+        pass;
+
+    def render_debug(self):
         pass;
 
     def set_state(self,state):

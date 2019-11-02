@@ -7,13 +7,17 @@ class Scene:
     CurSceneNumber = 0;
     Pause = False;
     Time = 0;
+    RenderDebug = False;
 
     def __init__(self):
         self.bg = None;
         self.game_object_list_ally = [];
         self.game_object_list_terrain = [];
         self.game_object_list_obstacle = [];
+        self.game_object_list_monster = [];
         self.game_ui_list = [];
+
+        self.render_debug:bool = False;
 
         self.start_x, self.start_y = 0, 0;
 
@@ -26,12 +30,15 @@ class Scene:
         #update
         for gobj in self.game_object_list_ally:
             gobj.update(Scene.Time);
+    
+        for gobj in self.game_object_list_monster:
+                gobj.update(Scene.Time);
 
         for terrain in self.game_object_list_terrain:
             terrain.update(Scene.Time); 
-            
-        for obs in self.game_object_list_obstacle:
-            obs.update(Scene.Time);    
+        
+        for obstacle in self.game_object_list_obstacle:
+            obstacle.update(Scene.Time);    
 
         for ui in self.game_ui_list:
             ui.update(Scene.Time);
@@ -48,18 +55,50 @@ class Scene:
                 self.game_object_list_terrain.remove(terrain);
                 del terrain;
 
-        for obs in self.game_object_list_obstacle:
-            if obs.state == False:
-                self.game_object_list_obstacle.remove(obs);   
-                del obs;
+        for obstacle in self.game_object_list_obstacle:
+            if obstacle.state == False:
+                self.game_object_list_obstacle.remove(obstacle);   
+                del obstacle;
                 
         for gui in self.game_ui_list:
             if gui.state == False:
                 self.game_ui_list.remove(gui);
                 del gui;
+        
+
 
     def Collide(self):
-        pass;
+        #obj 끼리의 충돌 검사.
+        for obj in self.game_object_list_ally:
+            if None != obj.collider:
+                if Const.COLLISION_RECT == obj.collider.get_collision_type() :
+                    for mob in self.game_object_list_monster :
+                        if None != mob.collider:
+                            if Const.COLLISION_RECT == mob.collider.get_collision_type() :
+                                aleft,abottom,aright,atop = mob.collider.get_area();
+                                bleft,bbottom,bright,btop = obj.collider.get_area();
+                                #print("Scene.py {0} - {1} - {2} - {3} - {4}".format(obj.name, bleft,bbottom,bright,btop));
+                                #print("Scene.py {0} - {1} - {2} - {3} - {4}".format(mob.name, aleft,abottom,aright,atop));
+
+                                if(True == Const.Is_collided(aleft,abottom,aright,atop,bleft,bbottom,bright,btop)):
+                                    obj.on_collision(mob);
+                                    mob.on_collision(obj);
+
+        for obj in self.game_object_list_ally:
+            if None != obj.collider:
+                if Const.COLLISION_RECT == obj.collider.get_collision_type() :
+                    for ter in self.game_object_list_terrain :
+                        if None != ter.collider:
+                            if Const.COLLISION_RECT == ter.collider.get_collision_type() :
+                                aleft,abottom,aright,atop = ter.collider.get_area();
+                                bleft,bbottom,bright,btop = obj.collider.get_area();
+                                #print("Scene.py {0} - {1} - {2} - {3} - {4}".format(obj.name, bleft,bbottom,bright,btop));
+                                #print("Scene.py {0} - {1} - {2} - {3} - {4}".format(mob.name, aleft,abottom,aright,atop));
+
+                                if(True == Const.Is_collided(aleft,abottom,aright,atop,bleft,bbottom,bright,btop)):
+                                    obj.on_collision(ter);
+                                    ter.on_collision(obj);
+
 
     def Render(self):
         for terrain in self.game_object_list_terrain:
@@ -70,6 +109,11 @@ class Scene:
             if(gobj.has_image == True and gobj.state):               
                 gobj.render();
 
+        # 몹끼리의 충돌은 없고 p vs m
+        for gobj in self.game_object_list_monster:
+            if(gobj.has_image == True and gobj.state):               
+                gobj.render();
+
         for obstacle in self.game_object_list_obstacle:
             if(obstacle.has_image == True and obstacle.state):               
                 obstacle.render();
@@ -77,7 +121,25 @@ class Scene:
         for gui in self.game_ui_list:
             if(gui.has_image == True and gui.state):               
                 gui.render();
+
+        from Graphic import GraphicLib;
+        if True == GraphicLib.get_debug_mode() :
+            #print("");
+            for terrain in self.game_object_list_terrain:
+                if(terrain.has_image == True and terrain.state): 
+                    terrain.render_debug();
+
+            for gobj in self.game_object_list_ally:
+                if(gobj.has_image == True and gobj.state):               
+                    gobj.render_debug();
+
+            # 몹끼리의 충돌은 없고 p vs m
+            for gobj in self.game_object_list_monster:
+                if(gobj.has_image == True and gobj.state):               
+                    gobj.render_debug();
+
     
+
 
     def ExitScene(self):
         pass;
@@ -91,6 +153,10 @@ class Scene:
 
     def AddAllyObject(self, obj):
         self.game_object_list_ally.append(obj);
+        return;
+    
+    def AddMonsterObject(self, mob ):
+        self.game_object_list_monster.append(mob);
         return;
 
     def AddTerrainObject(self, obj):

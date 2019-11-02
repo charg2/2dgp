@@ -27,6 +27,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Camera.py" />
+    <Compile Include="Collision.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CollisionRect.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ConfigParser.py" />
     <Compile Include="Const.py" />
     <Compile Include="DashState.py">
@@ -41,6 +47,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IdleStateForBanshee.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="JumpState.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="KeyIO.py" />
@@ -65,6 +74,9 @@
     </Compile>
     <Compile Include="Scene.py" />
     <Compile Include="StateMachine.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Terrain.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="TexturePacker.py" />

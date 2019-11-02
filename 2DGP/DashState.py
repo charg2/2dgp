@@ -8,19 +8,18 @@ from Player import *;
 class DashStateForPlayer(StateMachine):
     animation_state =0;
     timer = 0;
-    animation_reverse = False;
 
     def __init__(self,gobj):
         self.obj = gobj;
 
-        if(KeyInput.g_d):
+        if  Const.direction_R == self.obj.m_dir :
             self.obj.last_dir = Const.direction_R;
             self.obj.dir = Const.direction_R;
             from Player import Player;
             self.obj.IMG = Player.IMGSForJumpR[0];
             self.Fx = self.obj.force_x;
 
-        if(KeyInput.g_a):
+        if Const.direction_L == self.obj.m_dir :
             self.obj.last_dir = Const.direction_L;
             self.obj.dir = Const.direction_L;
             from Player import Player;
@@ -28,7 +27,7 @@ class DashStateForPlayer(StateMachine):
             self.Fx = -self.obj.force_x;
         return;
 
-    # 충돌시 속도 0으로 바귐.
+
     def update(self):
         self.setAnimation();
         
@@ -44,7 +43,7 @@ class DashStateForPlayer(StateMachine):
         return;
     
     def render(self):
-        if(self.obj.last_dir == Const.direction_R):self.renderForRight()
+        if(self.obj.m_dir == Const.direction_R):self.renderForRight()
         else:self.renderForLeft();
         return;
 

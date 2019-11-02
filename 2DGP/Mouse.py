@@ -2,6 +2,7 @@
 from GameObject import *;
 from Const import *;
 from KeyIO      import KeyInput;
+from CollisionRect import*;
 
 class Mouse(GameObject):
 
@@ -14,28 +15,45 @@ class Mouse(GameObject):
         self.Arrow = pico2d.load_image("assets/Mouse/Cursor00.png");
         self.Target = pico2d.load_image("assets/Mouse/Cursor01.png");
         self.IMG = self.Arrow;
- 
+        self.collider:Collision = CollisionRect(self.x,self.y, self.IMG.w // 2, self.IMG.h // 2);
+
     def set_cursor(self, type):
         if type == 0: self.IMG = self.Arrow;
         else : self.IMG = self.Target;
 
-
     def update(self, time):
-        #print("{0},{1}".format(Const.WIN_WIDTH , KeyInput.g_mouse_y ));
-        self.x, self.y = KeyInput.g_mouse_x , Const.WIN_HEIGHT - KeyInput.g_mouse_y - 1 ;
+        self.update_component();
 
+        self.x, self.y = KeyInput.g_mouse_x , Const.WIN_HEIGHT - KeyInput.g_mouse_y - 1 ;
         pass;
     
     def render(self):
-        #Mouse.Idle.draw_to_origin(100, 100, 90, 90);
-        #self.Idle1.opacify(0.5);
-        self.IMG.draw_to_origin(self.x , self.y, self.IMG.w, self.IMG.h);
+        self.IMG.draw(self.transform.tx , self.transform.ty , self.IMG.w, self.IMG.h);
         pass;
 
     #충동한 객체의 태그 or name을 얻어서 어떤객체인지 파악.
     def on_collision(self, obj):
-        tag = obj.tag;
+        #tag = obj.tag;
+        print("Mouse.py - {0} ".format(obj.name));
+        pass;
 
+    # 마우스의 경우 호명상의 렌더링 위치는 화면을 벗어 나면 안되기에 
+    def update_component(self):
+        self.previous_transform = self.transform;
+        self.transform.tx = KeyInput.g_mouse_x;
+        self.transform.ty = Const.WIN_HEIGHT - KeyInput.g_mouse_y - 1;
+
+        self.collider.cx, self.collider.cy = self.transform.tx + GameObject.Cam.camera_offset_x, self.transform.ty + GameObject.Cam.camera_offset_y;
+        return;
+
+    def render_debug(self): 
+        if self.collider :
+            from Graphic import GraphicLib;
+            GraphicLib.DebugImg1.draw(self.collider.cx - GameObject.Cam.camera_offset_x, self.collider.cy - GameObject.Cam.camera_offset_y, self.IMG.w, self.IMG.h);
+            #GraphicLib.DebugImg1.draw(self.x - GameObject.Cam.camera_offset_x, self.y- GameObject.Cam.camera_offset_y);    
+            #GraphicLib.DebugImg1.draw(self.transform.tx, self.transform.ty);    
+
+        return;
 
         pass;
 

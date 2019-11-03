@@ -11,20 +11,25 @@ class DashStateForPlayer(StateMachine):
 
     def __init__(self,gobj):
         self.obj = gobj;
+        self.fx = 0;
+        self.fy = 0;
+        self.is_dash = True;
 
         if  Const.direction_R == self.obj.m_dir :
             self.obj.last_dir = Const.direction_R;
             self.obj.dir = Const.direction_R;
             from Player import Player;
-            self.obj.IMG = Player.IMGSForJumpR[0];
-            self.Fx = self.obj.force_x;
+            self.obj.IMG = Player.IMGSForJump[0];
+            self.fx = self.obj.force_x;
+            self.fy = self.obj.force_x;
 
         if Const.direction_L == self.obj.m_dir :
             self.obj.last_dir = Const.direction_L;
             self.obj.dir = Const.direction_L;
             from Player import Player;
-            self.obj.IMG = Player.IMGSForJumpL[0];
-            self.Fx = -self.obj.force_x;
+            self.obj.IMG = Player.IMGSForJump[0];
+            self.fx = -self.obj.force_x;
+            self.fy = -self.obj.force_x;
         return;
 
 
@@ -43,37 +48,14 @@ class DashStateForPlayer(StateMachine):
         return;
     
     def render(self):
-        if(self.obj.m_dir == Const.direction_R):self.renderForRight()
-        else:self.renderForLeft();
-        return;
-
-    def renderForRight(self):
-        from Player import Player;
-        Player.IMGSForRunR[RunStateForPlayer.animation_state].clip_composite_draw(0,0,
-                           Player.IMGSForRunR[RunStateForPlayer.animation_state].w,
-                           Player.IMGSForRunR[RunStateForPlayer.animation_state].h,
-                           0,'',
-                           self.obj.transform.tx-GameObject.Cam.camera_offset_x,
-                           self.obj.transform.ty-GameObject.Cam.camera_offset_y,
-                           );
-    
-
-    def renderForLeft(self):
-        from Player import Player
-        Player.IMGSForRunL[self.animation_state].clip_composite_draw(0,0,
-                           Player.IMGSForRunR[RunStateForPlayer.animation_state].w,
-                           Player.IMGSForRunR[RunStateForPlayer.animation_state].h,
-                           0,'',
+        self.obj.IMGSForJump[self.obj.m_dir].clip_composite_draw(0,0,
+                           self.obj.IMG.w,self.obj.IMG.h,0,'',
                            self.obj.transform.tx-GameObject.Cam.camera_offset_x,
                            self.obj.transform.ty-GameObject.Cam.camera_offset_y,
                            );
 
-
+    # 대시하면서 생기는 이펙트..
     def setAnimation(self):
-        RunStateForPlayer.timer += Timer.get_elapsed_time();     
-        if RunStateForPlayer.timer > 0.25:
-            RunStateForPlayer.animation_state = (RunStateForPlayer.animation_state+1) % 4;
-            RunStateForPlayer.timer=0;
         return;
 
     def exit(self):

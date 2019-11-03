@@ -6,28 +6,33 @@ from Graphic import *;
 
 class IdleStateForPlayer(StateMachine):
     def __init__(self, player):
+        print("idle");
         self.player = player;
         self.player.animation_state = self.player.dir+ 2;
         self.Fx ,self.Fy = 0,0;
         self.timer = 0;
 
         self.animation_state = 0;
+
+        self.player.set_velocity(self.Fx, self.Fy);
         return;
 
     def update(self):
-        self.timer += Timer.get_elapsed_time();   
+        self.timer += Timer.get_elapsed_time();
+        self.player.physx.set_force(0,0);
+        #self.player.physx.set_velocity(0,0);
         if self.timer>0.225:
             self.animation_state= (self.animation_state+1)%4;
             self.timer=0;
+        
+                
+        # 공중에 있는 상태이면 
         return;
     
     def render(self):
         from Const import Const;
-        #if(self.player.last_dir == Const.direction_R) :
-        if(self.player.m_dir == Const.direction_R) :
-            self.renderForRight();
-        else:
-            self.renderForLeft();
+        if(self.player.m_dir == Const.direction_R) : self.renderForRight();
+        else: self.renderForLeft();
 
         return;
     def renderForRight(self):
@@ -50,6 +55,7 @@ class IdleStateForPlayer(StateMachine):
                            self.player.transform.ty-GameObject.Cam.camera_offset_y,
                            );
     def exit(self):
+        
         pass;
 
 

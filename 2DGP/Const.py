@@ -16,6 +16,8 @@ class Const:
     COLLISION_RECT , COLLISION_CIRCLE, COLLISION_POINT, COLLISION_LINE = range(4); 
     TAG_DEFAULT,TAG_TERRAIN, TAG_PLAYER, TAG_MONSTER = range(4);
     CURSOR_ARROW, CURSOR_TARGET = range(2);
+    DASH, JUMP, RUN, IDLE = range(4);
+
     #enum
     del parser;
 

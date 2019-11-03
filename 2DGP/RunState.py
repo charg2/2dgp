@@ -1,9 +1,11 @@
 
 from StateMachine import *;
-from IdleState import*;
-from JumpState import *;
 from Const import *;
 from Player import *;
+
+from IdleState import*;
+from JumpState import *;
+
 class RunStateForPlayer(StateMachine):
     animation_state =0;
     timer = 0;
@@ -11,27 +13,39 @@ class RunStateForPlayer(StateMachine):
     def __init__(self,gobj):
         self.obj = gobj;
         self.Fx = 0;
-        #self.Fy = self.obj.physx.force_dddy;
-
+        self.Fy = self.obj.physx.force_y;
+        self.obj.is_run = True;
 
         if(KeyInput.g_d): #r
             self.obj.last_dir = Const.direction_R;
             self.obj.dir = Const.direction_R;
             from Player import Player;
             self.obj.IMG = Player.IMGSForIdleR[0];
-            self.Fx = self.obj.force_x; # when player up in the air,  air offset is applied.
-
-
+            self.Fx= self.obj.force_x;
+            
         if(KeyInput.g_a):#l
             self.obj.last_dir = Const.direction_L;
             self.obj.dir = Const.direction_L;
             from Player import Player
             self.obj.IMG = Player.IMGSForIdleL[0];
-            self.Fx = -self.obj.force_x; # when player up in the air,  air offset is applied.
+            self.Fx = -self.obj.force_x;
+
+        self.obj.set_velocity(self.Fx, self.Fy);
+        print("RunState {0}".format(self.Fx))
         return;
 
     def update(self):
         self.setAnimation();
+        
+        self.obj.physx.set_force(self.Fx, self.obj.physx.force_y); 
+
+        if (KeyInput.g_w) :
+            self.obj.add_queue(JumpStateForPlayer(self.obj));
+            temp = self.obj.current_state;
+            self.obj.current_state.exit();
+            self.obj.current_state = self.obj.state_queue.pop();
+            del temp;
+            return;
 
         if(not KeyInput.g_d and not KeyInput.g_a):
             self.obj.add_queue(IdleStateForPlayer(self.obj));
@@ -39,18 +53,10 @@ class RunStateForPlayer(StateMachine):
             self.obj.current_state.exit();
             self.obj.current_state = self.obj.state_queue.pop();
             del temp;
-        
-        #if KeyInput.g_w or KeyInput.g_space:
-        #    self.obj.add_queue(JumpStateForPlayer(self.obj));
-        #    temp = self.obj.current_state;
-        #    self.obj.current_state.exit();
-        #    self.obj.current_state = self.obj.state_queue.pop();
-        #    del temp;
-
-        self.obj.transform.tx += self.Fx;
-        self.obj.transform.tx += self.Fx;
-        return;
+            return;
     
+
+
     def render(self):
         if(self.obj.m_dir == Const.direction_R):self.renderForRight()
         else:self.renderForLeft();
@@ -87,6 +93,7 @@ class RunStateForPlayer(StateMachine):
         return;
 
     def exit(self):
+        self.obj.is_run = False;
         return;
 
 

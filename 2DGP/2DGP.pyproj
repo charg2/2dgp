@@ -102,6 +102,7 @@
     <Content Include="assets\player.png" />
     <Content Include="assets\player.psd" />
     <Content Include="assets\run_animation.png" />
+    <Content Include="config.ini" />
     <Content Include="Lecture11_Character_Controller\.gitattributes" />
     <Content Include="Lecture11_Character_Controller\.gitignore" />
     <Content Include="Lecture11_Character_Controller\animation_sheet.png" />

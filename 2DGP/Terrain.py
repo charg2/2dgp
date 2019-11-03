@@ -21,9 +21,8 @@ class Terrain(GameObject):
     def render_debug(self): 
         if self.collider :
             from Graphic import GraphicLib;
-            GraphicLib.DebugImg1.draw(self.collider.cx -GameObject.Cam.camera_offset_x , self.collider.cy - GameObject.Cam.camera_offset_y, self.collider.right ,self.collider.top);    
-            #GraphicLib.DebugImg.clip_draw(self.previous_transform.tx , self.previous_transform.ty - GameObject.Cam.camera_offset_y, 5000, 100,);    
-            #GraphicLib.DebugImg1.draw(self.transform.tx, self.transform.ty);    
+            #GraphicLib.DebugImg1.draw_to_origin(self.collider.cx , self.collider.cy , self.collider.right ,self.collider.top);    
+            GraphicLib.DebugImg1.clip_draw(self.collider.left , self.collider.bottom , self.collider.right ,self.collider.top, self.transform.tx, self.transform.ty);    
         return;
     def renderForMinimap(self):
         return;    
@@ -36,5 +35,10 @@ class Terrain(GameObject):
         return;
 
     def on_collision(self, obj):
+        if Const.TAG_PLAYER == obj.tag :
+            if True == obj.physx.has_grivity :
+                #obj.physx.is_ground = True;
+                #pass;
+                obj.transform.ty += obj.physx.acceleration_of_gravity;
         #print("Terrain.py collision {0} {1}".format(obj.name, obj.transform.tx));
         return;

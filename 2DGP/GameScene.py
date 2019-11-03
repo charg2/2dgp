@@ -27,8 +27,10 @@ class GameScene(Scene):
         self.AddMonsterObject(Banshee(START_X + 1300, START_Y ,0,1,1,True));          
         self.AddMonsterObject(Banshee(START_X + 1500, START_Y + 100 ,0,1,1,True));          
         self.AddMonsterObject(Banshee(START_X + 1300, START_Y + 100 ,0,1,1,True));      
-        self.AddMonsterObject(Banshee(START_X + 1500, START_Y + 200 ,0,1,1, True));         
+        self.AddMonsterObject(Banshee(START_X + 1500, START_Y + 200 ,0,1,1, True));        
+        
         self.AddTerrainObject(terrain(self.bg.map.width //2, 45, self.bg.map.width //2, 45 ));
+        self.AddTerrainObject(terrain(100, 100, 50, 45));
 
         mouse:Mouse = Mouse();
         mouse.set_cursor(Const.CURSOR_TARGET);
@@ -36,8 +38,3 @@ class GameScene(Scene):
         self.AddUi(mouse);
         self.AddAllyObject(mouse);          
         return;
-
-    def Initialize(self): 
-        player = Player(0,90,0,1,1,True);
-        self.AddAllyObject(BG(const.WIN_WIDTH//2, const.WIN_HEIGHT//2, 0,1,1,True));
-        pass;

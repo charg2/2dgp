@@ -76,10 +76,10 @@ class Physx:
     #    return;  
 
 
-if "__main__" == __name__ :
-    p:Physx = Physx();
-    print(p.get_can_jump());
-    print(p.set_velocity(1, 2));
-    print(p.get_velocities());
-    #print(type(Physx.calc_length_from_origin(2.3, 3.1)));
-    print(Physx.calc_length_from_origin(2.3, 3.1));
+#if "__main__" == __name__ :
+#    p:Physx = Physx();
+#    print(p.get_can_jump());
+#    print(p.set_velocity(1, 2));
+#    print(p.get_velocities());
+#    #print(type(Physx.calc_length_from_origin(2.3, 3.1)));
+#    print(Physx.calc_length_from_origin(2.3, 3.1));

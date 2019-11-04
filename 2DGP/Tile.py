@@ -1,13 +1,14 @@
 from Const import *;
 from ConfigParser import ConfigParser as Parser;
 import pico2d;
+from typing import List;
 
 
 class Tile:
-    IMGSForTILE = [];
-    WIDTH = 0;
-    HEIGHT = 0;
-    LOAD = False;
+    IMGSForTILE:List[pico2d.Image] = [];
+    WIDTH:int = 0;
+    HEIGHT:int = 0;
+    LOAD:bool = False;
 
     def __init__(self, type, x:int, y:int):
         self.tile_type = type;

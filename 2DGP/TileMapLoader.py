@@ -1,8 +1,9 @@
 from Tile import *;
+from typing import List;
 
 class TileMapLoader:
     def __init__(self, map_file_name:str):
-        self.tiles = [];
+        self.tiles:List[Tile] = [];
         mapfile = open(map_file_name, "r", encoding = "UTF8");
         
         string = mapfile.read();

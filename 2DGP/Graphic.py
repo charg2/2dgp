@@ -4,10 +4,10 @@ from Const import Const as const;
 import os;
 
 class GraphicLib:
-    LOAD = False;
-    Font = None;
-    DebugImg:pico2d.Image; 
-    DebugImg1:pico2d.Image;
+    LOAD:bool = False;
+    Font:Font = None;
+    DebugImg:Image; 
+    DebugImg1:Image;
     DebugMode:bool = True;
 
     def init():
@@ -60,6 +60,6 @@ if '__main__' == __name__:
        GraphicLib.DebugImg.draw_to_origin(200, 0, 1000, 100); 
        x = x + 2 
        GraphicLib.Present() 
-       delay(0.01) 
+       #delay(0.01) 
        #get_events()
     GraphicLib.Exit()

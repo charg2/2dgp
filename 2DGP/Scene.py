@@ -1,6 +1,8 @@
-from GameObject import *
-from pico2d import *
-from MyTimer import *
+from GameObject import *;
+from pico2d import *;
+from MyTimer import *;
+
+from typing import List;
 
 class Scene:
     SceneNumber = 0;
@@ -11,11 +13,11 @@ class Scene:
 
     def __init__(self):
         self.bg = None;
-        self.game_object_list_ally = [];
-        self.game_object_list_terrain = [];
-        self.game_object_list_obstacle = [];
-        self.game_object_list_monster = [];
-        self.game_ui_list = [];
+        self.game_object_list_ally:List[GameObject] = [];
+        self.game_object_list_terrain:List[GameObject] = [];
+        self.game_object_list_obstacle:List[GameObject] = [];
+        self.game_object_list_monster:List[GameObject] = [];
+        self.game_ui_list:List[GameObject] = [];
 
         self.render_debug:bool = False;
 
@@ -184,11 +186,11 @@ class Scene:
                 #lowx lowy   maxx maxy
 
 
-if __name__ == "__main__":
-    test = Scene();
+#if __name__ == "__main__":
+#    test = Scene();
 
-    test.AddAllyObject(GameObject(10,10,10,10,10,True));
+#    test.AddAllyObject(GameObject(10,10,10,10,10,True));
 
-    while True:
-        test.update();
-        test.Render();
+#    while True:
+#        test.update();
+#        test.Render();

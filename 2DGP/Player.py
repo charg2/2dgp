@@ -12,20 +12,22 @@ from RunState import RunStateForPlayer;
 from JumpState import JumpStateForPlayer;
 from DashState import DashStateForPlayer;
 
+from typing import List;
+
 
 RUN_L, RUN_R, IDLE_R, IDLE_L = range(4);
 class Player(GameObject):
-    LOAD = False;
+    LOAD:bool = False;
 
-    IMGSForIdleL = [];
-    IMGSForIdleR = [];
-    IMGSForRunL = [];
-    IMGSForRunR = [];
+    IMGSForIdleL:List[Image] = [];
+    IMGSForIdleR:List[Image] = [];
+    IMGSForRunL:List[Image] = [];
+    IMGSForRunR:List[Image] = [];
 
-    IMGSForJump = []; # dash랑 공유
+    IMGSForJump:List[Image] = []; # dash랑 공유
 
-    IMGSForDeathL = [];
-    IMGSForDeathR = [];
+    IMGSForDeathL:List[Image] = [];
+    IMGSForDeathR:List[Image] = [];
     DebugImg:pico2d.Image = None;
     DebugImg1:pico2d.Image = None;
 

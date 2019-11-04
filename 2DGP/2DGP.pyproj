@@ -54,7 +54,6 @@
     </Compile>
     <Compile Include="KeyIO.py" />
     <Compile Include="Lecture11_Character_Controller\boy.py" />
-    <Compile Include="Lecture11_Character_Controller\boys_team_1000.py" />
     <Compile Include="Lecture11_Character_Controller\game_framework.py" />
     <Compile Include="Lecture11_Character_Controller\grass.py" />
     <Compile Include="Lecture11_Character_Controller\main_state.py" />

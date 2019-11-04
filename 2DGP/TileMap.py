@@ -84,7 +84,7 @@ if __name__ == "__main__" :
     import pico2d;
     pico2d.open_canvas(1610, 1080);
     map = TileMap("room1.map");
-    map.render_map();
+    #map.render_map();
     
 
     #print("시작");

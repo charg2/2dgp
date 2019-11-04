@@ -9,12 +9,14 @@ from CollisionRect import*;
 
 from IdleStateForBanshee import *;
 
+from typing import List;
+
 RUN_L, RUN_R, IDLE_R, IDLE_L = range(4);
 class Banshee(GameObject):
-    LOAD = False;
+    LOAD:bool = False;
     UNIQUE_ID:int = 0;
-    IMGSForIdleL = [];
-    IMGSForIdleR = [];
+    IMGSForIdleL:List[Image] = [];
+    IMGSForIdleR:List[Image] = [];
 
     def __init__(self, x, y, angle, sx, sy, state):
         super(Banshee, self).__init__(x, y, angle, sx, sy, state);

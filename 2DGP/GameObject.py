@@ -58,8 +58,12 @@ class GameObject:
     def Physx(self,time):
         grivity_offset_y = 0; 
         if True == self.has_grivity() :
-            grivity_offset_y = self.physx.acceleration_of_gravity; 
+            #if True == self.physx.is_falling:
+            #    grivity_offset_y = self.physx.acceleration_of_gravity * 1.1; 
+            #else:
+                grivity_offset_y = self.physx.acceleration_of_gravity; 
             
+
         self.transform.set_position(self.physx.velocity_x, self.physx.velocity_y - grivity_offset_y);
 
         #if False == self.physx.is_ground:

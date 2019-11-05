@@ -220,7 +220,7 @@ class Player(GameObject):
 
     def clampingInWindow(self):
         self.transform.tx = Const.clamp(0, self.transform.tx, GameObject.Cam.map_width-self.IMG.w//16);  
-        self.transform.ty = Const.clamp(0, self.transform.ty, GameObject.Cam.map_height-self.IMG.h//22);
+        self.transform.ty = Const.clamp(0, self.transform.ty, GameObject.Cam.map_height-self.IMG.h // 10);
         return;
 
     
@@ -231,8 +231,7 @@ class Player(GameObject):
             self.m_dir = Const.direction_L;
         # 런. # 공격. # 스킬.
         self.check_action();
-        #self.check_jump();
-        #self.check_dash();
+
         
         return;
 

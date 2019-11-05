@@ -21,7 +21,7 @@ class GameBG(GameObject):
         self.cam:GameObject = None;
         self.name = "GameBG";
 
-        GameObject.Cam.SetMapSize(self.map.width, self.map.height);
+        GameObject.Cam.SetMapSize(self.map.width, self.map.height - 90);
 
     def render(self):
         vx = Const.clamp(0, int(self.cam_x) - Const.WIN_WIDTH//2,  self.map.width - Const.WIN_WIDTH);
@@ -29,11 +29,7 @@ class GameBG(GameObject):
 
         GameObject.Cam.SetCamOffset(vx, vy);
 
-        #self.map.render();
         self.map.clip_render_to_origin(vx, vy, Const.WIN_WIDTH, Const.WIN_HEIGHT);
-
-        #left x 최소 bottom y 최소
-        #self.IMG.draw_to_origin( 0, 0, const.WIN_WIDTH, const.WIN_HEIGHT);
         return;
 
 

@@ -4,6 +4,8 @@ from IdleState import*;
 from RunState import*;
 from Const import *;
 from Player import *;
+from KeyIO import *;
+
 
 class DashStateForPlayer(StateMachine):
     animation_state =0;
@@ -14,6 +16,11 @@ class DashStateForPlayer(StateMachine):
         self.fx = 0;
         self.fy = 0;
         self.is_dash = True;
+
+
+        self.target_x = KeyInput.g_mouse_x;
+        self.target_y = KeyInput.g_mouse_y;
+
 
         if  Const.direction_R == self.obj.m_dir :
             self.obj.last_dir = Const.direction_R;
@@ -36,14 +43,13 @@ class DashStateForPlayer(StateMachine):
     def update(self):
         self.setAnimation();
         
-        if Player.force_y == 0 :
-            self.obj.add_queue(IdleStateForPlayer(self.obj));
-            temp = self.obj.current_state;
-            self.obj.current_state.exit();
-            self.obj.current_state = self.obj.state_queue.pop();
-            del temp;
+        #if Player.force_y == 0 :
+        #    self.obj.add_queue(IdleStateForPlayer(self.obj));
+        #    temp = self.obj.current_state;
+        #    self.obj.current_state.exit();
+        #    self.obj.current_state = self.obj.state_queue.pop();
+        #    del temp;
         
-
         self.obj.transform.tx += self.Fx;
         return;
     

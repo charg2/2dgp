@@ -93,6 +93,8 @@ class JumpStateForPlayer(StateMachine):
     def exit(self):
         self.obj.jump_trigger = False;
         self.obj.is_jump = False;
+        self.obj.physx.is_falling = True;
+
         print("jump_exit");
         return;
 

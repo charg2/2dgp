@@ -93,9 +93,9 @@ class SkeletonArcher(GameObject):
 
         # 시야 범위 안에 드는지 체크.
         if SkeletonArcher.FieldOfView >= Const.distance(  self.transform.tx
-                                                 , self.transform.ty
-                                                 , Player.MyPlayer.transform.tx
-                                                 , Player.MyPlayer.transform.ty ) :
+                                                        , self.transform.ty
+                                                        , Player.MyPlayer.transform.tx
+                                                        , Player.MyPlayer.transform.ty ) :
             self.attack_trigger = True;
 
 

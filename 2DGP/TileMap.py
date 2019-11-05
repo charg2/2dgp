@@ -40,7 +40,7 @@ class TileMap:
 
         # tile_range index
         min_width, max_width    = ( left // Tile.WIDTH ) , ( cam_right // Tile.WIDTH ) +1;
-        min_height, max_height  = ( cam_top // Tile.HEIGHT ) , ( cam_bottom // Tile.HEIGHT ) +1;
+        min_height, max_height  = ( cam_top // Tile.HEIGHT ) , ( cam_bottom // Tile.HEIGHT ) + 1;
 
         #print("{0} - {1} - {2} - {3}".format(min_width, max_width, min_height, max_height ));
 

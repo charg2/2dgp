@@ -13,11 +13,11 @@ class Scene:
 
     def __init__(self):
         self.bg = None;
-        self.game_object_list_ally:List[GameObject] = [];
-        self.game_object_list_terrain:List[GameObject] = [];
-        self.game_object_list_obstacle:List[GameObject] = [];
-        self.game_object_list_monster:List[GameObject] = [];
-        self.game_ui_list:List[GameObject] = [];
+        self.game_object_list_ally      :List[GameObject] = [];
+        self.game_object_list_terrain   :List[GameObject] = [];
+        self.game_object_list_obstacle  :List[GameObject] = [];
+        self.game_object_list_monster   :List[GameObject] = [];
+        self.game_ui_list               :List[GameObject] = [];
 
         self.render_debug:bool = False;
 
@@ -68,7 +68,6 @@ class Scene:
                 del gui;
         
 
-
     def Collide(self):
         #obj 끼리의 충돌 검사.
         for obj in self.game_object_list_ally:
@@ -79,10 +78,8 @@ class Scene:
                             if Const.COLLISION_RECT == mob.collider.get_collision_type() :
                                 aleft,abottom,aright,atop = mob.collider.get_area();
                                 bleft,bbottom,bright,btop = obj.collider.get_area();
-                                #print("Scene.py {0} - {1} - {2} - {3} - {4}".format(obj.name, bleft,bbottom,bright,btop));
-                                #print("Scene.py {0} - {1} - {2} - {3} - {4}".format(mob.name, aleft,abottom,aright,atop));
 
-                                if(True == Const.Is_collided(aleft,abottom,aright,atop,bleft,bbottom,bright,btop)):
+                                if(True == Const.is_collided(aleft,abottom,aright,atop,bleft,bbottom,bright,btop)):
                                     obj.on_collision(mob);
                                     mob.on_collision(obj);
 
@@ -97,7 +94,7 @@ class Scene:
                                 #print("Scene.py {0} - {1} - {2} - {3} - {4}".format(obj.name, bleft,bbottom,bright,btop));
                                 #print("Scene.py {0} - {1} - {2} - {3} - {4}".format(mob.name, aleft,abottom,aright,atop));
 
-                                if(True == Const.Is_collided(aleft,abottom,aright,atop,bleft,bbottom,bright,btop)):
+                                if(True == Const.is_collided(aleft,abottom,aright,atop,bleft,bbottom,bright,btop)):
                                     obj.on_collision(ter);
                                     ter.on_collision(obj);
 

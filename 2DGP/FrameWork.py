@@ -6,11 +6,16 @@ from Scene import Scene as Scene;
 from TitleScene import *;
 from GameScene import *;
 from Mouse import *;
+from Player import *;
+
+
 from typing import List;
+
 
 
 class FrameWork:
     SceneList:List[Scene] = [];
+    #MyPlayer:Player = None;
 
     def init():
         GraphicLib.Initialize();

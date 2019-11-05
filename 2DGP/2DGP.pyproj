@@ -68,10 +68,16 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Player.py" />
+    <Compile Include="Portal.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="RunState.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Scene.py" />
+    <Compile Include="SkeletonArcher.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="StateMachine.py">
       <SubType>Code</SubType>
     </Compile>
@@ -97,7 +103,6 @@
     <Folder Include="__pycache__\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="1config.ini" />
     <Content Include="assets\player.png" />
     <Content Include="assets\player.psd" />
     <Content Include="assets\run_animation.png" />

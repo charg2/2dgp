@@ -3,6 +3,9 @@ from StateMachine import *;
 from Banshee import *;
 from Graphic import *;
 
+#from AttackStateForBanshee import *;
+
+
 LEFT, CENTER, RIGHT =range(-1,2);
 
 class IdleStateForBanshee(StateMachine):
@@ -11,7 +14,7 @@ class IdleStateForBanshee(StateMachine):
         
         self.banshee.animation_state = 0;
 
-        self.start_x, self.start_y = banshee.transform.tx, banshee.transform.ty;
+        #self.start_x, self.start_y = banshee.transform.tx, banshee.transform.ty;
         self.offset_x, self.offset_y = 100, 100;
         self.turn_timer:float = 0.0;
         
@@ -41,6 +44,8 @@ class IdleStateForBanshee(StateMachine):
         if self.timer>0.225:
             self.animation_state= (self.animation_state+1) % 2;
             self.timer=0;
+
+
         return;
     
 

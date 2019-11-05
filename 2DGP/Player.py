@@ -28,13 +28,16 @@ class Player(GameObject):
 
     IMGSForDeathL:List[Image] = [];
     IMGSForDeathR:List[Image] = [];
-    DebugImg:pico2d.Image = None;
-    DebugImg1:pico2d.Image = None;
+    DebugImg:Image = None;
+    DebugImg1:Image = None;
+
+    MyPlayer:GameObject = None;
 
     def __init__(self, x, y, angle, sx, sy, state):
         super(Player, self).__init__(x, y, angle, sx, sy, state);
-        self.has_image = True;
+        self.has_image:bool = True;
         if Player.LOAD == False:
+            import FrameWork;
             Player.IMGSForIdleR.append(pico2d.load_image('assets/Player/Idle/R (1).png'));
             Player.IMGSForIdleR.append(pico2d.load_image('assets/Player/Idle/R (2).png'));
             Player.IMGSForIdleR.append(pico2d.load_image('assets/Player/Idle/R (3).png'));
@@ -76,17 +79,18 @@ class Player(GameObject):
             Player.IMGSForDeathR.append(pico2d.load_image('assets/Player/Death/R (1).png'));
             Player.IMGSForDeathR.append(pico2d.load_image('assets/Player/Death/R (2).png'));
 
+            # singletone
+            Player.MyPlayer = self;
+
             Player.LOAD = True;
 
         #self.colliderForObstacle = CollisionRect(x,y+interpolation_collision_y,10,25);
-        self.name:str = "Hero";
-        self.IMG = Player.IMGSForIdleR[0];
-        #self.force_x:int = 2600; # cm / s
-        #self.force_y:int = 2350;
+        self.name   :str = "Hero";
+        self.IMG    :Image = Player.IMGSForIdleR[0];
 
-        self.force_x:int = 10;
-        self.move_velocity:int = 10;
-        self.force_y:int = 5;
+        self.move_velocity  :int = 10;
+        self.force_x        :int = 10;
+        self.force_y        :int = 5;
 
         self.collider:Collision = CollisionRect(x,y, self.IMG.w // 2, self.IMG.h // 2);
         GameObject.Cam.transform = self.transform;
@@ -100,18 +104,19 @@ class Player(GameObject):
         self.attack_timer:float = 0;
         self.attack_key_timer:float = 0.5;
         
-        self.skill_trigger:bool = False;
+        self.skill_trigger  :bool = False;
         self.skill_key_timer:float = 0;
-        self.skill_timer:float = 0;
+        self.skill_timer    :float = 0;
 
-        self.dash_trigger:bool = True;
-        self.dash_key_timer:float = 0;
-        self.dash_timer:float = 0;
-        self.dash_count = 2;
-        self.is_jump = False;
-        self.is_dash = False;
-        self.is_run = False;
-        self.is_down = False;
+        self.dash_key_timer :float = 0;
+        self.dash_charge_timer     :float = 0;
+        self.dash_count     :int = 2;
+        self.dash_trigger   :bool = True;
+
+        self.is_jump:bool = False;
+        self.is_dash:bool = False;
+        self.is_run :bool = False;
+        self.is_down:bool = False;
 
         ## ability
         #self.hp:int = 0;
@@ -122,11 +127,11 @@ class Player(GameObject):
         self.animation_timer:float = 0.0;
         self.animation_state:int = RUN_R;
 
-        self.m_dir:int = Const.direction_R;
-        self.dir:int = RUN_R; 
-        self.last_dir:int = RUN_R % 2;
+        self.m_dir          :int = Const.direction_R;
+        self.dir            :int = RUN_R; 
+        self.last_dir       :int = RUN_R % 2;
+        self.tag            :int = Const.TAG_PLAYER;
         self.current_state = IdleStateForPlayer(self);
-        self.tag:int = Const.TAG_PLAYER;
 
         # equipment
         self.weapons = [];
@@ -177,9 +182,11 @@ class Player(GameObject):
         self.skill_key_timer += time;
         #self.last_dir = (self.dir%2);
 
-##################
-#        if True == self.dash_trigger:
-#            self.dash_timer += time;
+        if self.dash_count < Const.MAX_DASH_COUNT :
+            self.dash_charge_timer += time;
+            if Const.DASH_CHARGE_TIME <= self.dash_charge_timer:
+                self.dash_count += 1;
+
             
 #        if(self.jump_timer > 0.19):
 #            self.jump_trigger = False;
@@ -251,8 +258,7 @@ class Player(GameObject):
                     #if  ( False == self.is_dash ) and ((True == self.dash_trigger) and 
                     print("Player.py DashState");
                     self.add_queue(DashStateForPlayer(self));
-                #self.dash_time = 0.1f;
-                #self.dash_count -= 1;
+
 
     
     

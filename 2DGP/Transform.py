@@ -1,10 +1,10 @@
 class Transform:
     def __init__(self, x:float, y:float, angle:float, scx:float, scy:float):
-        self.tx     = x;
-        self.ty     = y;
-        self.sx     = scx;
-        self.sy     = scy;
-        self.degree = angle;
+        self.tx:float     = x;
+        self.ty:float     = y;
+        self.sx:float     = scx;
+        self.sy:float     = scy;
+        self.degree:float = angle;
         return;
 
     def get_scale(self):

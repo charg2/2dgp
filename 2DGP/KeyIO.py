@@ -1,30 +1,30 @@
 from pico2d import *;
+import asyncio;
+
 
 class KeyInput:
-    inputs = None;
-
-    g_right_arrow = False;
-    g_left_arrow = False;
-    g_down_arrow = False;
-    g_up_arrow = False;
-    g_space = False;
+    g_right_arrow:bool = False;
+    g_left_arrow:bool = False;
+    g_down_arrow:bool = False;
+    g_up_arrow:bool = False;
+    g_space:bool = False;
     
-    g_p = False;
+    g_p:bool = False;
     
-    g_a = False;
-    g_w = False;
-    g_s = False;
-    g_d = False;
+    g_a:bool = False;
+    g_w:bool = False;
+    g_s:bool = False;
+    g_d:bool = False;
 
-    g_mouse_rdown = False;
-    g_mouse_ldown = False;
+    g_mouse_rdown:bool = False;
+    g_mouse_ldown:bool = False;
     
     g_mouse_x = 0;
     g_mouse_y = 0;
 
     def init():
         KeyInput.g_right_arrow = False;
-        KeyInput.g_left_arrow = False;
+        KeyInput.g_left_arrow  = False;
         KeyInput.g_down_arrow = False;
         KeyInput.g_up_arrow = False;
 

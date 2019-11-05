@@ -7,6 +7,7 @@ from KeyIO import *;
 from Const import *;
 from CollisionRect import*;
 
+from Player import Player;
 from IdleStateForBanshee import *;
 
 from typing import List;
@@ -17,6 +18,8 @@ class Banshee(GameObject):
     UNIQUE_ID:int = 0;
     IMGSForIdleL:List[Image] = [];
     IMGSForIdleR:List[Image] = [];
+    IMGSForBullet:List[Image] = [];
+    FieldOfView:float = 0.0;
 
     def __init__(self, x, y, angle, sx, sy, state):
         super(Banshee, self).__init__(x, y, angle, sx, sy, state);
@@ -26,9 +29,18 @@ class Banshee(GameObject):
             Banshee.IMGSForIdleR.append(pico2d.load_image('assets/Monster/Banshee/Idle/R (1).png'));
             Banshee.IMGSForIdleR.append(pico2d.load_image('assets/Monster/Banshee/Idle/R (2).png'));
 
+            # 
             Banshee.IMGSForIdleL.append(pico2d.load_image('assets/Monster/Banshee/Idle/L (1).png'));
             Banshee.IMGSForIdleL.append(pico2d.load_image('assets/Monster/Banshee/Idle/L (2).png'));
-      
+        
+            # bullet
+            Banshee.IMGSForBullet.append(pico2d.load_image('assets/Monster/Banshee/Bullet/banshee_bullet (1).png'));
+            Banshee.IMGSForBullet.append(pico2d.load_image('assets/Monster/Banshee/Bullet/banshee_bullet (2).png'));
+            Banshee.IMGSForBullet.append(pico2d.load_image('assets/Monster/Banshee/Bullet/banshee_bullet (3).png'));
+            Banshee.IMGSForBullet.append(pico2d.load_image('assets/Monster/Banshee/Bullet/banshee_bullet (4).png'));
+            
+            Banshee.FieldOfView = Const.BANSHEE_FIELD_OF_VIEW;
+
             Banshee.LOAD = True;
         
         self.name = "Banshee_" + str(Banshee.UNIQUE_ID);
@@ -40,9 +52,9 @@ class Banshee(GameObject):
         self.force_y =8;
         self.collider:Collision = CollisionRect(x,y, self.IMG.w // 2, self.IMG.h // 2);
 
-
-        self.attack_trigger = False;
-        self.attack_timer = 0;
+        # attack
+        self.attack_trigger:bool = False;
+        self.attack_timer:float = 0;
         self.attack_key_timer:float = 0.5;
 
         # animation
@@ -86,12 +98,20 @@ class Banshee(GameObject):
             self.animation_numb = self.animation_numb+1;
             self.animation_timer = 0;
 
-        if(True == self.attack_trigger):
+        # 시야 범위 안에 드는지 체크.
+        if Banshee.FieldOfView >= Const.distance(  self.transform.tx
+                                                 , self.transform.ty
+                                                 , Player.MyPlayer.transform.tx
+                                                 , Player.MyPlayer.transform.ty ) :
+            self.attack_trigger = True;
+
+
+        if True == self.attack_trigger :
             self.attack_timer += time;
-            
-        if(self.attack_timer > self.attack_speed):
-            self.attack_trigger = False;
-            self.attack_timer = 0;
+            if(self.attack_timer > self.attack_speed):
+                self.attack_timer = 0;
+        
+    
         return;
     
 
@@ -117,5 +137,7 @@ class Banshee(GameObject):
 
     def on_collision(self, obj):
         print("Banshee.py {0}-{1}".format(self.tag, obj.tag));
+        pass;
 
+    def fire():
         pass;

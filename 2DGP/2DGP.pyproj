@@ -5,7 +5,7 @@
     <ProjectGuid>2a51586f-7735-4317-894d-21267dcd5f8c</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>MapTool\FramwWork.py</StartupFile>
+    <StartupFile>Server\Session.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -62,12 +62,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="main.py" />
-
     <Compile Include="maptool.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MapTool\maptool_main.py">
-
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Mouse.py" />
@@ -83,6 +81,15 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Scene.py" />
+    <Compile Include="Server\Protocol.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Server\Server.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Server\Session.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="SkeletonArcher.py">
       <SubType>Code</SubType>
     </Compile>
@@ -108,6 +115,7 @@
     <Folder Include="assets\" />
     <Folder Include="Lecture11_Character_Controller\" />
     <Folder Include="MapTool\" />
+    <Folder Include="Server\" />
     <Folder Include="TexturePacker\" />
     <Folder Include="__pycache__\" />
   </ItemGroup>

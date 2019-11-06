@@ -130,7 +130,7 @@ class SkeletonArcher(GameObject):
     #    return;
 
     def on_collision(self, obj):
-        print("SkeletonArcher.py {0}-{1}".format(self.tag, obj.tag));
+        #print("SkeletonArcher.py {0}-{1}".format(self.tag, obj.tag));
         pass;
 
     def fire():

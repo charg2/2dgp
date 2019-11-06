@@ -138,6 +138,9 @@
     <Content Include="Lecture11_Character_Controller\animation_sheet.png" />
     <Content Include="Lecture11_Character_Controller\grass.png" />
     <Content Include="Lecture11_Character_Controller\run_animation.png" />
+    <Content Include="memo.txt">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="room1.map" />
     <Content Include="__pycache__\Camera.cpython-37.pyc" />
     <Content Include="__pycache__\ConfigParser.cpython-37.pyc" />

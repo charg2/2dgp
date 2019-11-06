@@ -8,45 +8,53 @@ from Const import *;
 from CollisionRect import*;
 
 from Player import Player;
-from IdleStateForBanshee import *;
+#from IdleStateForBelial import *;
 
 from typing import List;
 
 frame_time = 0.2;
-frame = 4;
-damage = 5;
-class BansheeBullet(GameObject):
+frame = 10;
+damage = 10;
+extinction_time = 3;
+
+class BelialBullet(GameObject):
     LOAD:bool = False;
     UNIQUE_ID:int = 0;
     IMGS:List[Image] = [];
 
 
     def __init__(self, owner, x, y, angle, sx, sy, state):
-        super(BansheeBullet, self).__init__(x, y, angle, sx, sy, state);
-        if BansheeBullet.LOAD == False:
-            BansheeBullet.IMGS.append(pico2d.load_image('assets/Monster/Banshee/Bullet/banshee_bullet (1).png'));
-            BansheeBullet.IMGS.append(pico2d.load_image('assets/Monster/Banshee/Bullet/banshee_bullet (2).png'));
-            BansheeBullet.IMGS.append(pico2d.load_image('assets/Monster/Banshee/Bullet/banshee_bullet (3).png'));
-            BansheeBullet.IMGS.append(pico2d.load_image('assets/Monster/Banshee/Bullet/banshee_bullet (4).png'));
+        super(BelialBullet, self).__init__(x, y, angle, sx, sy, state);
+        if BelialBullet.LOAD == False:
+            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/img (1).png'));
+            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/img (2).png'));
+            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/img (3).png'));
+            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/img (4).png'));
+            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/img (5).png'));
+            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/img (6).png'));
+            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/img (7).png'));
+            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/img (8).png'));
+            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/img (9).png'));
+            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/img (10).png'));
 
-            BansheeBullet.LOAD = True;
+            BelialBullet.LOAD = True;
 
-        self.name = "BansheeBullet_" + str(BansheeBullet.UNIQUE_ID);
+        self.name = "BelialBullet_" + str(BelialBullet.UNIQUE_ID);
 
         self.has_image = True;
         self.owner = None;
 
-        BansheeBullet.UNIQUE_ID += 1;
+        BelialBullet.UNIQUE_ID += 1;
         
         self.velocity = 10; 
         self.owner = owner;
         self.animation_timer = 0.0;
         self.animation_status = 0;
-        
+        self.extinction_time = 0.0;
+
         self.collider:Collision = CollisionRect(x,y, self.IMGS[0].w // 2, self.IMGS[0].h // 2);
 
-        #self.physx.angle_rate = 0.01;
-
+        self.physx.angle_rate = 0.02;
 
         pass;
 
@@ -73,7 +81,7 @@ class BansheeBullet(GameObject):
 
 
     def render(self):
-        BansheeBullet.IMGS[self.animation_status].draw(self.transform.tx - GameObject.Cam.camera_offset_x, self.transform.ty - GameObject.Cam.camera_offset_y);    
+        BelialBullet.IMGS[self.animation_status].draw(self.transform.tx - GameObject.Cam.camera_offset_x, self.transform.ty - GameObject.Cam.camera_offset_y);    
         pass;
 
     def render_debug(self): 
@@ -103,10 +111,15 @@ class BansheeBullet(GameObject):
 
     def update_timer(self,time):
         self.animation_timer += time;
+        self.extinction_time += time;
 
         if self.animation_timer > frame_time:
             self.animation_status = ( self.animation_status + 1 ) % frame;
             self.animation_timer = 0.0; 
+
+        # 시간 지나면 사라짐.
+        if extinction_timer > extinction_time:
+            self.owner.remove_projectile(self);
 
 
     def clampingInWindow(self):

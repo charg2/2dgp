@@ -8,50 +8,51 @@ from Const import *;
 from CollisionRect import*;
 
 from Player import Player;
-from IdleStateForBanshee import *;
 
-from BansheeBullet import *;
+from BelialBullet import *;
 
 from typing import List;
 
-# 플레이어에게 접근 하는 패턴만 추가하면 완성.
 
 attack_speed = 3;
 RUN_L, RUN_R, IDLE_R, IDLE_L = range(4);
-class Banshee(GameObject):
+class Belial(GameObject):
     LOAD:bool = False;
-    UNIQUE_ID:int = 0;
-    IMGSForIdleL:List[Image] = [];
-    IMGSForIdleR:List[Image] = [];
-    IMGSForBullet:List[Image] = [];
+    IMGSForIdle:List[Image] = [];
     FieldOfView:float = 0.0;
 
     def __init__(self, x, y, angle, sx, sy, state):
-        super(Banshee, self).__init__(x, y, angle, sx, sy, state);
+        super(Belial, self).__init__(x, y, angle, sx, sy, state);
         self.has_image = True;
-        if Banshee.LOAD == False:
+        if Belial.LOAD == False:
             
-            Banshee.IMGSForIdleR.append(pico2d.load_image('assets/Monster/Banshee/Idle/R (1).png'));
-            Banshee.IMGSForIdleR.append(pico2d.load_image('assets/Monster/Banshee/Idle/R (2).png'));
-
-            # 
-            Banshee.IMGSForIdleL.append(pico2d.load_image('assets/Monster/Banshee/Idle/L (1).png'));
-            Banshee.IMGSForIdleL.append(pico2d.load_image('assets/Monster/Banshee/Idle/L (2).png'));
+            Belial.IMGSForIdle.append(pico2d.load_image('assets/Monster/Belial/Idle/boss (1).png'));
+            Belial.IMGSForIdle.append(pico2d.load_image('assets/Monster/Belial/Idle/boss (2).png'));
+            Belial.IMGSForIdle.append(pico2d.load_image('assets/Monster/Belial/Idle/boss (3).png'));
+            Belial.IMGSForIdle.append(pico2d.load_image('assets/Monster/Belial/Idle/boss (4).png'));
+            Belial.IMGSForIdle.append(pico2d.load_image('assets/Monster/Belial/Idle/boss (5).png'));
+            Belial.IMGSForIdle.append(pico2d.load_image('assets/Monster/Belial/Idle/boss (6).png'));
+            Belial.IMGSForIdle.append(pico2d.load_image('assets/Monster/Belial/Idle/boss (7).png'));
+            Belial.IMGSForIdle.append(pico2d.load_image('assets/Monster/Belial/Idle/boss (8).png'));
+            Belial.IMGSForIdle.append(pico2d.load_image('assets/Monster/Belial/Idle/boss (9).png'));
+            Belial.IMGSForIdle.append(pico2d.load_image('assets/Monster/Belial/Idle/boss (10).png'));
     
-            Banshee.FieldOfView = Const.BANSHEE_FIELD_OF_VIEW;
+            Belial.FieldOfView = Const.BANSHEE_FIELD_OF_VIEW;
 
-            Banshee.LOAD = True;
+            Belial.LOAD = True;
         
-        self.name = "Banshee_" + str(Banshee.UNIQUE_ID);
-        Banshee.UNIQUE_ID += 1;
+        self.name = "Belial";
 
         self.m_dir = RUN_R;
-        self.IMG = Banshee.IMGSForIdleR[0];
+        self.IMG = Belial.IMGSForIdleR[0];
         self.force_x =6; 
         self.force_y =8;
         self.collider:Collision = CollisionRect(x,y, self.IMG.w // 2, self.IMG.h // 2);
 
         # attack
+        # bullet 공격의 경우 .1초 간격으로 4방향 30발 
+        # laser 공격의 경우 3번 연속 레이저
+        # 검 날리기 인데 이건 아직 고려 중.
         self.attack_trigger:bool = False;
         self.attack_timer:float = 0;
         self.attack_key_timer:float = 0.5;
@@ -63,10 +64,10 @@ class Banshee(GameObject):
 
         self.dir = Const.direction_L; 
         self.last_dir = RUN_L % 2;
-        self.current_state = IdleStateForBanshee(self);
+        self.current_state = IdleStateForBelial(self);
         self.tag = Const.TAG_MONSTER;
 
-        #self.bullets:List[BansheeBullet] = [];
+        #self.bullets:List[BelialBullet] = [];
 
     def render(self): 
         self.current_state.render();
@@ -100,7 +101,7 @@ class Banshee(GameObject):
             self.animation_timer = 0;
 
         # 시야 범위 안에 드는지 체크.
-        if Banshee.FieldOfView >= Const.distance(  self.transform.tx
+        if Belial.FieldOfView >= Const.distance(  self.transform.tx
                                                  , self.transform.ty
                                                  , Player.MyPlayer.transform.tx
                                                  , Player.MyPlayer.transform.ty ) :
@@ -143,31 +144,20 @@ class Banshee(GameObject):
         return;
 
     def on_collision(self, obj):
-        print("Banshee.py {0}-{1}".format(self.tag, obj.tag));
+        print("Belial.py {0}-{1}".format(self.tag, obj.tag));
         pass;
 
     def fire(self):
         tx = self.transform.tx;
         ty = self.transform.ty;
 
-        #self.bullets.append(BansheeBullet(self, tx, ty, 0,1,1, True)); 
-        #self.bullets.append(BansheeBullet(self, tx, ty, 0.25,1,1, True)); 
-        #self.bullets.append(BansheeBullet(self, tx, ty, 0.5,1,1, True)); 
-        #self.bullets.append(BansheeBullet(self, tx, ty, 0.75,1,1, True)); 
-        #self.bullets.append(BansheeBullet(self, tx, ty, 1,1,1, True)); 
-        #self.bullets.append(BansheeBullet(self, tx, ty, -0.25,1,1, True)); 
-        #self.bullets.append(BansheeBullet(self, tx, ty, -0.5,1,1, True)); 
-        #self.bullets.append(BansheeBullet(self, tx, ty, -0.75,1,1, True)); 
         from FrameWork import FrameWork;
 
-        FrameWork.CurScene.add_projectile(BansheeBullet(FrameWork.CurScene, tx, ty, 0,1,1, True)); 
-        FrameWork.CurScene.add_projectile(BansheeBullet(FrameWork.CurScene, tx, ty, 0.25,1,1, True)); 
-        FrameWork.CurScene.add_projectile(BansheeBullet(FrameWork.CurScene, tx, ty, 0.5,1,1, True)); 
-        FrameWork.CurScene.add_projectile(BansheeBullet(FrameWork.CurScene, tx, ty, 0.75,1,1, True)); 
-        FrameWork.CurScene.add_projectile(BansheeBullet(FrameWork.CurScene, tx, ty, 1,1,1, True)); 
-        FrameWork.CurScene.add_projectile(BansheeBullet(FrameWork.CurScene, tx, ty, -0.25,1,1, True)); 
-        FrameWork.CurScene.add_projectile(BansheeBullet(FrameWork.CurScene, tx, ty, -0.5,1,1, True)); 
-        FrameWork.CurScene.add_projectile(BansheeBullet(FrameWork.CurScene, tx, ty, -0.75,1,1, True)); 
+        FrameWork.CurScene.add_projectile(BelialBullet(FrameWork.CurScene, tx, ty, 0.25,1,1, True)); 
+        FrameWork.CurScene.add_projectile(BelialBullet(FrameWork.CurScene, tx, ty, 0.-25,1,1, True)); 
+        FrameWork.CurScene.add_projectile(BelialBullet(FrameWork.CurScene, tx, ty, 0.75,1,1, True)); 
+        FrameWork.CurScene.add_projectile(BelialBullet(FrameWork.CurScene, tx, ty, 0.-75,1,1, True)); 
+
 
         pass;
 

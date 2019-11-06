@@ -2,14 +2,15 @@ import Const;
 
 class Physx:
     def __init__(self):
-        self.mass = 1; # 1kg
-
+        #self.mass = 1; # 1kg
         self.velocity_x = 0;
         self.velocity_y = 0;
 
         self.force_x = 0;
         self.force_y = 0;
-               
+        
+        self.angle_rate = 0;
+
         self.is_ground:bool = True;
         self.epsilon_in_physx:float = 1.0;
         

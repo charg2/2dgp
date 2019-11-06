@@ -9,7 +9,6 @@ while FrameWork.GameState :
     FrameWork.Update();
     KeyInput.Update();
     
-    
 
 FrameWork.Exit()
 

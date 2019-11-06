@@ -17,10 +17,8 @@ class DashStateForPlayer(StateMachine):
         self.fy = 0;
         self.is_dash = True;
 
-
         self.target_x = KeyInput.g_mouse_x;
         self.target_y = KeyInput.g_mouse_y;
-
 
         if  Const.direction_R == self.obj.m_dir :
             self.obj.last_dir = Const.direction_R;
@@ -50,7 +48,7 @@ class DashStateForPlayer(StateMachine):
         #    self.obj.current_state = self.obj.state_queue.pop();
         #    del temp;
         
-        self.obj.transform.tx += self.Fx;
+        self.obj.transform.tx += self.fx;
         return;
     
     def render(self):

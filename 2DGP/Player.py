@@ -92,6 +92,7 @@ class Player(GameObject):
         self.force_x        :int = 10;
         self.force_y        :int = 5;
 
+
         self.collider:Collision = CollisionRect(x,y, self.IMG.w // 2, self.IMG.h // 2);
         GameObject.Cam.transform = self.transform;
        
@@ -112,6 +113,9 @@ class Player(GameObject):
         self.dash_charge_timer     :float = 0;
         self.dash_count     :int = 2;
         self.dash_trigger   :bool = True;
+
+        self.current_hp = 100;
+        self.max_hp = 100;
 
         self.is_jump:bool = False;
         self.is_dash:bool = False;

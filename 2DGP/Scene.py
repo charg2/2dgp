@@ -18,7 +18,7 @@ class Scene:
         self.game_object_list_obstacle  :List[GameObject] = [];
         self.game_object_list_monster   :List[GameObject] = [];
         self.game_ui_list               :List[GameObject] = [];
-
+        self.game_object_list_bullet    :List[GameObject] = [];
         self.render_debug:bool = False;
 
         self.start_x, self.start_y = 0, 0;
@@ -91,12 +91,36 @@ class Scene:
                             if Const.COLLISION_RECT == ter.collider.get_collision_type() :
                                 aleft,abottom,aright,atop = ter.collider.get_area();
                                 bleft,bbottom,bright,btop = obj.collider.get_area();
-                                #print("Scene.py {0} - {1} - {2} - {3} - {4}".format(obj.name, bleft,bbottom,bright,btop));
-                                #print("Scene.py {0} - {1} - {2} - {3} - {4}".format(mob.name, aleft,abottom,aright,atop));
 
                                 if(True == Const.is_collided(aleft,abottom,aright,atop,bleft,bbottom,bright,btop)):
                                     obj.on_collision(ter);
                                     ter.on_collision(obj);
+        
+        #monster 
+        for obj in self.game_object_list_monster:
+            if None != obj.collider:
+                if Const.COLLISION_RECT == obj.collider.get_collision_type() :
+                    for ter in self.game_object_list_terrain :
+                        if None != ter.collider:
+                            if Const.COLLISION_RECT == ter.collider.get_collision_type() :
+                                aleft,abottom,aright,atop = ter.collider.get_area();
+                                bleft,bbottom,bright,btop = obj.collider.get_area();
+
+                                if(True == Const.is_collided(aleft,abottom,aright,atop,bleft,bbottom,bright,btop)):
+                                    obj.on_collision(ter);
+                                    ter.on_collision(obj);
+
+    ## bullet check
+    #from Player import Player;
+    #player = Player.MyPlayer;
+    #for bullet in self.game_object_list_bullet :
+    #    aleft,abottom,aright,atop = bullet.collider.get_area();
+    #    bleft,bbottom,bright,btop = obj.collider.get_area();
+    #    if(True == Const.is_collided(aleft,abottom,aright,atop,bleft,bbottom,bright,btop)):
+    #        obj.on_collision(bullet);
+    #        ter.on_collision(obj);
+
+
 
 
     def Render(self):
@@ -182,7 +206,14 @@ class Scene:
         return self.start_x ,self.start_y;
                 #lowx lowy   maxx maxy
 
+    def remove_projectile(self, bullet):
+        from BansheeBullet import BansheeBullet;
+        self.game_object_list_monster.remove(bullet);
 
+    
+    def add_projectile(self, bullet):
+        self.game_object_list_monster.append(bullet);
+        return;
 #if __name__ == "__main__":
 #    test = Scene();
 

@@ -12,11 +12,13 @@ from Player import Player;
 
 from typing import List;
 
+attack_speed = 2;
 IDLE_L, IDLE_R = range(2);
 class SkeletonArcher(GameObject):
     LOAD:bool = False;
     UNIQUE_ID:int = 0;
-    IMGSForIdle:List[Image] = [];
+    IMGForL:Image = None;
+    IMGForR:Image = None;
     IMGSForBullet:List[Image] = [];
     FieldOfView:float = 0.0;
 
@@ -25,8 +27,8 @@ class SkeletonArcher(GameObject):
         self.has_image = True;
         if SkeletonArcher.LOAD == False:
             
-            SkeletonArcher.IMGSForIdle.append(pico2d.load_image('assets/Monster/SkeletonArcher/Idle/L.png'));
-            SkeletonArcher.IMGSForIdle.append(pico2d.load_image('assets/Monster/SkeletonArcher/Idle/R.png'));
+            SkeletonArcher.IMGForL = pico2d.load_image('assets/Monster/SkeletonArcher/Idle/L.png');
+            SkeletonArcher.IMGForR = pico2d.load_image('assets/Monster/SkeletonArcher/Idle/R.png');
         
             # bullet
             SkeletonArcher.IMGSForBullet.append(pico2d.load_image('assets/Monster/SkeletonArcher/Arrow/Arrow.png'));
@@ -38,7 +40,7 @@ class SkeletonArcher(GameObject):
         self.name = "SkeletonArcher_" + str(SkeletonArcher.UNIQUE_ID); # For Debug
         SkeletonArcher.UNIQUE_ID += 1;
 
-        self.IMG = SkeletonArcher.IMGSForIdle[IDLE_L];
+        self.IMG = SkeletonArcher.IMGForL;
         self.collider:Collision = CollisionRect(x,y, self.IMG.w // 2, self.IMG.h // 2);
 
         # attack
@@ -76,6 +78,7 @@ class SkeletonArcher(GameObject):
         #self.update_component();
         #self.forStateMachine();
         self.update_timer(time);
+        self.update_dir();
         #self.clampingInWindow();
         pass;
 
@@ -85,10 +88,6 @@ class SkeletonArcher(GameObject):
 
         # 방향 체크.
         # 무조건 플레이어를 바라 봄.
-        if ( self.transform.tx - Player.MyPlayer.transform.tx ) > 0 : # 내 오른쪽에 플레이어가;;
-            self.IMG = SkeletonArcher.IMGSForIdle[IDLE_L];
-        else:
-            self.IMG = SkeletonArcher.IMGSForIdle[IDLE_R];
 
 
         # 시야 범위 안에 드는지 체크.
@@ -101,13 +100,21 @@ class SkeletonArcher(GameObject):
 
         if True == self.attack_trigger :
             self.attack_timer += time;
-            if(self.attack_timer > self.attack_speed):
-                #fire
+            if(self.attack_timer > attack_speed):
+                self.fire();
                 self.attack_timer = 0;
         
     
         return;
     
+    def update_dir(self):
+        if ( self.transform.tx - Player.MyPlayer.transform.tx ) > 0 : # 내 오른쪽에 플레이어가;;
+            self.IMG = SkeletonArcher.IMGForL;
+            self.dir = Const.direction_L;
+        else:
+            self.IMG = SkeletonArcher.IMGForR;
+            self.dir = Const.direction_R;
+
 
     #def forStateMachine(self):
     #    #self.current_state.update();
@@ -133,7 +140,26 @@ class SkeletonArcher(GameObject):
         #print("SkeletonArcher.py {0}-{1}".format(self.tag, obj.tag));
         pass;
 
-    def fire():
+    def fire(self):
+        tx = self.transform.tx;
+        ty = self.transform.ty;
 
+        #self.bullets.append(BansheeBullet(self, tx, ty, 0,1,1, True)); 
+        #self.bullets.append(BansheeBullet(self, tx, ty, 0.25,1,1, True)); 
+        #self.bullets.append(BansheeBullet(self, tx, ty, 0.5,1,1, True)); 
+        #self.bullets.append(BansheeBullet(self, tx, ty, 0.75,1,1, True)); 
+        #self.bullets.append(BansheeBullet(self, tx, ty, 1,1,1, True)); 
+        #self.bullets.append(BansheeBullet(self, tx, ty, -0.25,1,1, True)); 
+        #self.bullets.append(BansheeBullet(self, tx, ty, -0.5,1,1, True)); 
+        #self.bullets.append(BansheeBullet(self, tx, ty, -0.75,1,1, True)); 
+        from FrameWork import FrameWork;
+        from SkeletonArcherArrow import SkeletonArcherArrow as arrow;
+
+        
+        if Const.direction_L== self.dir:
+            FrameWork.CurScene.add_projectile(arrow(FrameWork.CurScene, tx, ty, 1,1,1, True)); 
+        else :
+            FrameWork.CurScene.add_projectile(arrow(FrameWork.CurScene, tx, ty, 0,1,1, True)); 
+            
         pass;
 

@@ -10,8 +10,12 @@ from CollisionRect import*;
 from Player import Player;
 from IdleStateForBanshee import *;
 
+from BansheeBullet import *;
+
 from typing import List;
 
+
+attack_speed = 3;
 RUN_L, RUN_R, IDLE_R, IDLE_L = range(4);
 class Banshee(GameObject):
     LOAD:bool = False;
@@ -32,13 +36,7 @@ class Banshee(GameObject):
             # 
             Banshee.IMGSForIdleL.append(pico2d.load_image('assets/Monster/Banshee/Idle/L (1).png'));
             Banshee.IMGSForIdleL.append(pico2d.load_image('assets/Monster/Banshee/Idle/L (2).png'));
-        
-            # bullet
-            Banshee.IMGSForBullet.append(pico2d.load_image('assets/Monster/Banshee/Bullet/banshee_bullet (1).png'));
-            Banshee.IMGSForBullet.append(pico2d.load_image('assets/Monster/Banshee/Bullet/banshee_bullet (2).png'));
-            Banshee.IMGSForBullet.append(pico2d.load_image('assets/Monster/Banshee/Bullet/banshee_bullet (3).png'));
-            Banshee.IMGSForBullet.append(pico2d.load_image('assets/Monster/Banshee/Bullet/banshee_bullet (4).png'));
-            
+    
             Banshee.FieldOfView = Const.BANSHEE_FIELD_OF_VIEW;
 
             Banshee.LOAD = True;
@@ -62,21 +60,23 @@ class Banshee(GameObject):
         self.animation_timer = 0.0;
         self.animation_state = RUN_L;
 
-        self.attack_speed = 0.0;
         self.dir = Const.direction_L; 
         self.last_dir = RUN_L % 2;
         self.current_state = IdleStateForBanshee(self);
         self.tag = Const.TAG_MONSTER;
 
+        #self.bullets:List[BansheeBullet] = [];
+
     def render(self): 
         self.current_state.render();
-        return;
+        #for bullet in self.bullets:
+        #    bullet.render();
+        #return;
 
     def render_debug(self): 
         if self.collider :
             from Graphic import GraphicLib;
             GraphicLib.DebugImg1.draw(self.previous_transform.tx - GameObject.Cam.camera_offset_x, self.previous_transform.ty - GameObject.Cam.camera_offset_y);    
-            #GraphicLib.DebugImg1.draw(self.transform.tx, self.transform.ty);    
 
         return;
 
@@ -108,10 +108,15 @@ class Banshee(GameObject):
 
         if True == self.attack_trigger :
             self.attack_timer += time;
-            if(self.attack_timer > self.attack_speed):
+
+            if(self.attack_timer > attack_speed):
+                self.fire();
+
                 self.attack_timer = 0;
         
-    
+        #for bullet in self.bullets:
+        #    bullet.update(time);
+
         return;
     
 
@@ -124,10 +129,11 @@ class Banshee(GameObject):
             self.current_state = self.state_queue.pop();
             del temp;
 
-
     def update_component(self):
         self.previous_transform = self.transform;
         self.collider.cx, self.collider.cy = self.transform.tx, self.transform.ty;
+
+        
         return;
 
     def clampingInWindow(self):
@@ -139,5 +145,29 @@ class Banshee(GameObject):
         print("Banshee.py {0}-{1}".format(self.tag, obj.tag));
         pass;
 
-    def fire():
+    def fire(self):
+        tx = self.transform.tx;
+        ty = self.transform.ty;
+
+        #self.bullets.append(BansheeBullet(self, tx, ty, 0,1,1, True)); 
+        #self.bullets.append(BansheeBullet(self, tx, ty, 0.25,1,1, True)); 
+        #self.bullets.append(BansheeBullet(self, tx, ty, 0.5,1,1, True)); 
+        #self.bullets.append(BansheeBullet(self, tx, ty, 0.75,1,1, True)); 
+        #self.bullets.append(BansheeBullet(self, tx, ty, 1,1,1, True)); 
+        #self.bullets.append(BansheeBullet(self, tx, ty, -0.25,1,1, True)); 
+        #self.bullets.append(BansheeBullet(self, tx, ty, -0.5,1,1, True)); 
+        #self.bullets.append(BansheeBullet(self, tx, ty, -0.75,1,1, True)); 
+        from FrameWork import FrameWork;
+
+        FrameWork.CurScene.add_projectile(BansheeBullet(FrameWork.CurScene, tx, ty, 0,1,1, True)); 
+        FrameWork.CurScene.add_projectile(BansheeBullet(FrameWork.CurScene, tx, ty, 0.25,1,1, True)); 
+        FrameWork.CurScene.add_projectile(BansheeBullet(FrameWork.CurScene, tx, ty, 0.5,1,1, True)); 
+        FrameWork.CurScene.add_projectile(BansheeBullet(FrameWork.CurScene, tx, ty, 0.75,1,1, True)); 
+        FrameWork.CurScene.add_projectile(BansheeBullet(FrameWork.CurScene, tx, ty, 1,1,1, True)); 
+        FrameWork.CurScene.add_projectile(BansheeBullet(FrameWork.CurScene, tx, ty, -0.25,1,1, True)); 
+        FrameWork.CurScene.add_projectile(BansheeBullet(FrameWork.CurScene, tx, ty, -0.5,1,1, True)); 
+        FrameWork.CurScene.add_projectile(BansheeBullet(FrameWork.CurScene, tx, ty, -0.75,1,1, True)); 
+
         pass;
+
+

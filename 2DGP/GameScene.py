@@ -7,6 +7,7 @@ from Player import Player;
 from Banshee import *;
 from SkeletonArcher import *;
 
+from HPBar import *;
 from Terrain import Terrain as terrain;
 
 START_X,START_Y = 300, 120;
@@ -21,16 +22,20 @@ class GameScene(Scene):
         self.AddAllyObject(Player(START_X, START_Y,0,1,1,True));          
 
         self.AddMonsterObject(Banshee(START_X + 300, START_Y + 400 ,0,1,1,True));          
-        self.AddMonsterObject(Banshee(START_X + 300, START_Y ,0,1,1,True));          
-        self.AddMonsterObject(Banshee(START_X + 500, START_Y + 100 ,0,1,1,True));          
-        self.AddMonsterObject(Banshee(START_X + 1300, START_Y ,0,1,1,True));      
-        self.AddMonsterObject(Banshee(START_X + 1500, START_Y ,0,1,1, True));          
-        self.AddMonsterObject(Banshee(START_X + 1300, START_Y + 400 ,0,1,1,True));          
-        self.AddMonsterObject(Banshee(START_X + 1300, START_Y ,0,1,1,True));          
-        self.AddMonsterObject(Banshee(START_X + 1500, START_Y + 100 ,0,1,1,True));          
-        self.AddMonsterObject(Banshee(START_X + 1300, START_Y + 100 ,0,1,1,True));      
-        self.AddMonsterObject(Banshee(START_X + 1500, START_Y + 200 ,0,1,1, True)); 
+        #self.AddMonsterObject(Banshee(START_X + 300, START_Y ,0,1,1,True));          
+        #self.AddMonsterObject(Banshee(START_X + 500, START_Y + 100 ,0,1,1,True));          
+        #self.AddMonsterObject(Banshee(START_X + 1300, START_Y ,0,1,1,True));      
+        #self.AddMonsterObject(Banshee(START_X + 1500, START_Y ,0,1,1, True));          
+        #self.AddMonsterObject(Banshee(START_X + 1300, START_Y + 400 ,0,1,1,True));          
+        #self.AddMonsterObject(Banshee(START_X + 1300, START_Y ,0,1,1,True));          
+        #self.AddMonsterObject(Banshee(START_X + 1500, START_Y + 100 ,0,1,1,True));          
+        #self.AddMonsterObject(Banshee(START_X + 1300, START_Y + 100 ,0,1,1,True));      
+        #self.AddMonsterObject(Banshee(START_X + 1500, START_Y + 200 ,0,1,1, True));
+        #self.AddMonsterObject(Banshee(START_X + 1500, START_Y + 200 ,0,1,1, True)); 
         
+        self.AddUi(HPBar.get_instance());
+
+
         self.AddMonsterObject(SkeletonArcher(START_X + 100, START_Y + 100 ,0,1,1, True));        
         
         self.AddTerrainObject(terrain(self.bg.map.width //2, 45, self.bg.map.width //2, 45 ));

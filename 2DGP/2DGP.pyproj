@@ -5,7 +5,7 @@
     <ProjectGuid>2a51586f-7735-4317-894d-21267dcd5f8c</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>Server\Session.py</StartupFile>
+    <StartupFile>main.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -26,6 +26,9 @@
     <Compile Include="Banshee.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BansheeBullet.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Camera.py" />
     <Compile Include="Collision.py">
       <SubType>Code</SubType>
@@ -43,6 +46,9 @@
     <Compile Include="GameObject.py" />
     <Compile Include="GameScene.py" />
     <Compile Include="Graphic.py" />
+    <Compile Include="HPBar.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="IdleState.py">
       <SubType>Code</SubType>
     </Compile>
@@ -91,6 +97,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="SkeletonArcher.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SkeletonArcherArrow.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="StateMachine.py">

@@ -62,7 +62,9 @@ class GameObject:
             #    grivity_offset_y = self.physx.acceleration_of_gravity * 1.1; 
             #else:
                 grivity_offset_y = self.physx.acceleration_of_gravity; 
-            
+        
+        v_x = self.transform.tx;
+        v_y = self.transform.ty;
 
         self.transform.set_position(self.physx.velocity_x, self.physx.velocity_y - grivity_offset_y);
 

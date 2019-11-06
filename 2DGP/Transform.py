@@ -4,7 +4,7 @@ class Transform:
         self.ty:float     = y;
         self.sx:float     = scx;
         self.sy:float     = scy;
-        self.degree:float = angle;
+        self.angle:float = angle;
         return;
 
     def get_scale(self):
@@ -13,11 +13,11 @@ class Transform:
     def get_position(self):
         return self.tx, self.ty;
     
-    def get_degree(self):
-        return self.degree;
+    def get_angle(self):
+        return self.angle;
 
-    def set_degree(self,angle):
-        self.degree = self.degree+ angle;
+    def set_angle(self,angle):
+        self.angle = self.angle+ angle;
         return;
 
     def set_position(self,dx,dy):

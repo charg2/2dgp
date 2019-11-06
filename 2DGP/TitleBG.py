@@ -14,6 +14,10 @@ class TitleBG(GameObject):
         self.IMG = pico2d.load_image('assets/TitleScene/Town00.png');
         self.has_image = True;
         self.timer_for_changing = 0.0;
+        self.name = "TitleBG";
+        self.collider:Collision = None;        
+        self.colliderForObstacle:Collision = None;
+
     def render(self):
         #left x 최소 bottom y 최소
         self.IMG.draw_to_origin( 0, 0, const.WIN_WIDTH, const.WIN_HEIGHT);

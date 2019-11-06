@@ -12,8 +12,8 @@ class Katana(GameObject):
         super(Katana, self).__init__(x, y, angle, sx, sy, state);
         self.owner = owner;
         print(owner.tag);
-        img = pico2d.load_image("assets/Weapon/Katana.png") ;
         Katana.Imgs.append( pico2d.load_image("assets/Weapon/Katana.png") );
+        self.current_img = Katana.Imgs[0];
 
         LOAD = True;
 
@@ -22,12 +22,13 @@ class Katana(GameObject):
 
     def render(self):
         if self.owner.m_dir == Const.direction_R:
-            Katana.Imgs[0].rotate_draw(2, self.owner.transform.tx -10 - GameObject.Cam.camera_offset_x, self.owner.transform.ty - 20, 15, 80);
+            Katana.Imgs[0].composite_draw( 2, "",self.owner.transform.tx -10 - GameObject.Cam.camera_offset_x, self.owner.transform.ty - 20 - GameObject.Cam.camera_offset_y, 15, 80);
         if self.owner.m_dir == Const.direction_L:
-            Katana.Imgs[0].rotate_draw(-2, self.owner.transform.tx +10 - GameObject.Cam.camera_offset_x, self.owner.transform.ty - 20, 15, 80);
+            Katana.Imgs[0].composite_draw( -2, "", self.owner.transform.tx +10 - GameObject.Cam.camera_offset_x, self.owner.transform.ty - 20 - GameObject.Cam.camera_offset_y, 15, 80);
         pass;
 
     def update(self, time):
+        #self.transform.angle;
         pass;
 
 

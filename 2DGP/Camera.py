@@ -1,5 +1,6 @@
 from Transform import *
 
+#offset을 이용해 화면에 그려줄 위치를 보여줌.
 class Camera:
     def __init__(self, x, y, angle, sx, sy, state):
         self.transform = Transform(x,y,angle,sx,sy);

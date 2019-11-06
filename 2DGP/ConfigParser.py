@@ -25,17 +25,17 @@ class ConfigParser:
                     str_list[-1] = str_list[-1].replace(';', "");
                 ConfigParser.Dict[ str_list[0] ] = str_list[2]; #
 
-    def get_int(self, value_name:str):
+    def get_int(self, value_name:str) -> int:
         #print(ConfigParser.Dict.get(value_name));
         return int(ConfigParser.Dict.get(value_name));
 
-    def get_float(self, value_name:str):
+    def get_float(self, value_name:str) -> float:
         return float(ConfigParser.Dict.get(value_name));
 
-    def get_string(self, value_name:str):
+    def get_string(self, value_name:str) -> str:
         return ConfigParser.Dict.get(value_name);
 
-    def get_bool(self, value_name:str):
+    def get_bool(self, value_name:str) -> bool:
         return ConfigParser.Dict.get(value_name) == "true" or ConfigParser.Dict.get(value_name) == "True";
 
     ##Parse = staticmethod(parse);

@@ -27,6 +27,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Camera.py" />
+    <Compile Include="Collision.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CollisionRect.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ConfigParser.py" />
     <Compile Include="Const.py" />
     <Compile Include="DashState.py">
@@ -43,9 +49,11 @@
     <Compile Include="IdleStateForBanshee.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="JumpState.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="KeyIO.py" />
     <Compile Include="Lecture11_Character_Controller\boy.py" />
-    <Compile Include="Lecture11_Character_Controller\boys_team_1000.py" />
     <Compile Include="Lecture11_Character_Controller\game_framework.py" />
     <Compile Include="Lecture11_Character_Controller\grass.py" />
     <Compile Include="Lecture11_Character_Controller\main_state.py" />
@@ -54,10 +62,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="main.py" />
-    <Compile Include="MapTool\FramwWork.py">
+
+    <Compile Include="maptool.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MapTool\MapToolScene.py">
+    <Compile Include="MapTool\maptool_main.py">
+
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Mouse.py" />
@@ -66,11 +76,20 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Player.py" />
+    <Compile Include="Portal.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="RunState.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Scene.py" />
+    <Compile Include="SkeletonArcher.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="StateMachine.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Terrain.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="TexturePacker.py" />
@@ -93,10 +112,10 @@
     <Folder Include="__pycache__\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="1config.ini" />
     <Content Include="assets\player.png" />
     <Content Include="assets\player.psd" />
     <Content Include="assets\run_animation.png" />
+    <Content Include="config.ini" />
     <Content Include="Lecture11_Character_Controller\.gitattributes" />
     <Content Include="Lecture11_Character_Controller\.gitignore" />
     <Content Include="Lecture11_Character_Controller\animation_sheet.png" />

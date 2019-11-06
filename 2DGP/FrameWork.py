@@ -6,20 +6,26 @@ from Scene import Scene as Scene;
 from TitleScene import *;
 from GameScene import *;
 from Mouse import *;
+from Player import *;
+
+
+from typing import List;
+
 
 
 class FrameWork:
-    SceneList = [];
+    SceneList:List[Scene] = [];
+    #MyPlayer:Player = None;
 
     def init():
         GraphicLib.Initialize();
       
-        FrameWork.GameState = True;
+        FrameWork.GameState:bool = True;
         
         FrameWork.SceneList.append(TitleScene()); #타이틀 신 추가.
         FrameWork.SceneList.append(GameScene());
 
-        FrameWork.CurScene = FrameWork.SceneList[0];
+        FrameWork.CurScene:Scene = FrameWork.SceneList[1];
 
     def update():
         delay(0.016);

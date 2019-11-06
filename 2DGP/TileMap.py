@@ -1,4 +1,4 @@
-
+﻿
 from Tile import Tile;
 from Const import *;
 from TileMapLoader import TileMapLoader as Loader;
@@ -32,35 +32,39 @@ class TileMap:
     # IO 연산을 줄이기 위해 최소 그려야 하는 타일만 그림.
     def clip_render_to_origin(self, left:int, bottom:int, window_width:int, window_height:int):
         from GameObject import GameObject;
-        # 최소 그려야 하는 타일 계산.
+
         # LT/RB를 구해서
         cam_top = bottom + GameObject.Cam.camera_offset_y ;
         cam_bottom = cam_top + window_height;
         cam_right = left + window_width;
-        print("lt:{0},{1} rb:{2},{3}".format(left, cam_top, cam_right, cam_bottom));
-        #print("{0}- {1}- {2}".format(self.height, GameObject.Cam.camera_offset_y, window_height));
 
-        # 인덱스 범위 구해서ddddddddddddddddd
-        # 인덱스 범위 구해서
-        min_width, max_width    = ( left // 90 ) , ( cam_right // 90 ) ;
-        min_height, max_height  = ( cam_top // 90 ) , ( cam_bottom // 90 ) ;
-        #print("{0}- {1} - {2} - {3}".format(min_width, max_width, min_height, max_height ) )
-        # offset 계산
 
-        if cam_top % 90 > 0:
-            min_height += 1;
+        # tile_range index
+        min_width, max_width    = ( left // Tile.WIDTH ) , ( cam_right // Tile.WIDTH ) +1;
+        min_height, max_height  = ( cam_top // Tile.HEIGHT ) , ( cam_bottom // Tile.HEIGHT ) + 1;
 
-        max_width += 1;
+        #print("{0} - {1} - {2} - {3}".format(min_width, max_width, min_height, max_height ));
 
-        offset_x, offset_y = GameObject.Cam.camera_offset_x % 90,GameObject.Cam.camera_offset_y % 90;
-        map_x ,map_y = 0, 0;
+
+        if max_width > len(self.tiles[0]):
+            max_width = len(self.tiles[0]);
+
+        if max_height > len(self.tiles):
+            max_height = len(self.tiles);
+
+        offset_x:int = GameObject.Cam.camera_offset_x % Tile.WIDTH;
+        offset_y:int = GameObject.Cam.camera_offset_y % Tile.HEIGHT;
+        
+        map_x:int = 0;
+        map_y:int = 0;
         for y in range( min_height, max_height ):
             map_x = 0;
             for x in range( min_width, max_width ) :
-                self.tiles[y][x].get_tile().draw_to_origin( map_x - offset_x, map_y - offset_y, 90, 90);
-                map_x += 90;
-            map_y += 90;
-            print("TileMap.py y:{0}".format(y));
+                self.tiles[y][x].get_tile().draw_to_origin( map_x - offset_x, map_y - offset_y, Tile.WIDTH, Tile.WIDTH);
+                map_x += Tile.WIDTH;
+            map_y += Tile.WIDTH;
+
+
     ## for test
     #def render_map(self):
     #    import pico2d;
@@ -82,7 +86,7 @@ if __name__ == "__main__" :
     import pico2d;
     pico2d.open_canvas(1610, 1080);
     map = TileMap("room1.map");
-    map.render_map();
+    #map.render_map();
     
 
     #print("시작");

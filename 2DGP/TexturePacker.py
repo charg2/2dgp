@@ -28,17 +28,18 @@ if __name__=='__main__':
     #tt = Image.open('assets/tiles.png');
     #print("test");
     #tt.show();
-    #height = 90;
-    #width = 90;
-    #for k, piece in enumerate(crop('assets/tiles.png', height, width), 0):
-    #    print("frist");        
-    #    img=Image.new('RGBA', (height,width), 255)
-    #    img.paste(piece)
-    #    path = os.path.join('',"IMG-%s.png" % k);
-    #    img.save(path)
-    #    print("done");
 
-    img = Image.open('logo (2).png');
-    resize_multiple(img, 5, "logo.png");
+    height = 300;
+    width = 1550;
+    for k, piece in enumerate(crop('assets/Monster/Bo$$/bossRLaser(1550x2100,1x7).png', height, width), 0):
+        print("frist");        
+        img=Image.new('RGBA', (width, height), 255)
+        img.paste(piece)
+        path = os.path.join('',"IMG-%s.png" % k);
+        img.save(path)
+        print("done");
+
+    #img = Image.open('logo (2).png');
+    #resize_multiple(img, 5, "logo.png");
 
     #crop(img,90, 90 );

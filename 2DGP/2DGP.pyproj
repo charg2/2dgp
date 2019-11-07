@@ -35,6 +35,10 @@
     <Compile Include="BelialBullet.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BelialLaser.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BulletAttackStateForBelial.py" />
     <Compile Include="Camera.py" />
     <Compile Include="Collision.py">
       <SubType>Code</SubType>
@@ -45,6 +49,9 @@
     <Compile Include="ConfigParser.py" />
     <Compile Include="Const.py" />
     <Compile Include="DashState.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DeathState.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="FrameWork.py" />
@@ -61,10 +68,16 @@
     <Compile Include="IdleStateForBanshee.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="IdleStateForBelial.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="JumpState.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="KeyIO.py" />
+    <Compile Include="LaserAttackStateForBelial.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Lecture11_Character_Controller\boy.py" />
     <Compile Include="Lecture11_Character_Controller\game_framework.py" />
     <Compile Include="Lecture11_Character_Controller\grass.py" />

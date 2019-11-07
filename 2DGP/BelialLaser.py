@@ -13,38 +13,43 @@ from Player import Player;
 from typing import List;
 
 frame_time = 0.2;
-frame = 10;
+frame = 7;
 damage = 10;
 extinction_time = 3;
-
-class BelialBullet(GameObject):
-    LOAD:bool = False;
-    UNIQUE_ID:int = 0;
-    IMGS:List[Image] = [];
+class BelialLaser(GameObject):
+    LOAD            :bool = False;
+    UNIQUE_ID       :int         = 0;
+    IMGSForLaserL   :List[Image] = [];
+    IMGSForLaserR   :List[Image] = [];
 
 
     def __init__(self, owner, x, y, angle, sx, sy, state):
-        super(BelialBullet, self).__init__(x, y, angle, sx, sy, state);
-        if BelialBullet.LOAD == False:
-            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/IMG-0.png'));
-            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/IMG-1.png'));
-            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/IMG-2.png'));
-            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/IMG-3.png'));
-            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/IMG-4.png'));
-            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/IMG-5.png'));
-            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/IMG-6.png'));
-            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/IMG-7.png'));
-            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/IMG-8.png'));
-            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/IMG-9.png'));
+        super(BelialLaser, self).__init__(x, y, angle, sx, sy, state);
+        if BelialLaser.LOAD == False:
+            BelialLaser.IMGSForLaserL.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserL/IMG-0.png'));
+            BelialLaser.IMGSForLaserL.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserL/IMG-1.png'));
+            BelialLaser.IMGSForLaserL.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserL/IMG-2.png'));
+            BelialLaser.IMGSForLaserL.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserL/IMG-3.png'));
+            BelialLaser.IMGSForLaserL.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserL/IMG-4.png'));
+            BelialLaser.IMGSForLaserL.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserL/IMG-5.png'));
+            BelialLaser.IMGSForLaserL.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserL/IMG-6.png'));
 
-            BelialBullet.LOAD = True;
+            BelialLaser.IMGSForLaserR.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserR/IMG-0.png'));
+            BelialLaser.IMGSForLaserR.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserR/IMG-1.png'));
+            BelialLaser.IMGSForLaserR.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserR/IMG-2.png'));
+            BelialLaser.IMGSForLaserR.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserR/IMG-3.png'));
+            BelialLaser.IMGSForLaserR.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserR/IMG-4.png'));
+            BelialLaser.IMGSForLaserR.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserR/IMG-5.png'));
+            BelialLaser.IMGSForLaserR.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserR/IMG-6.png'));
+            
+            BelialLaser.LOAD = True;
 
-        self.name = "BelialBullet_" + str(BelialBullet.UNIQUE_ID);
+        self.name = "BelialLaser_" + str(BelialLaser.UNIQUE_ID);
 
         self.has_image = True;
         self.owner = None;
 
-        BelialBullet.UNIQUE_ID += 1;
+        BelialLaser.UNIQUE_ID += 1;
         
         self.velocity = 10; 
         self.owner = owner;
@@ -62,14 +67,14 @@ class BelialBullet(GameObject):
         self.update_component();
         self.update_timer(time);
         self.clampingInWindow();
-        self.Physx_bullet();
+        self.Physx_laser();
         pass;
 
     def update_component(self):
         self.previous_transform = self.transform;
         self.collider.cx, self.collider.cy = self.transform.tx, self.transform.ty;
 
-    def Physx_bullet(self):
+    def Physx_laser(self):
         radian = self.transform.angle * math.pi;
         
         self.physx.velocity_x = self.velocity * math.cos(radian);
@@ -81,7 +86,7 @@ class BelialBullet(GameObject):
 
 
     def render(self):
-        BelialBullet.IMGS[self.animation_status].draw(self.transform.tx - GameObject.Cam.camera_offset_x, self.transform.ty - GameObject.Cam.camera_offset_y);    
+        BelialLaser.IMGS[self.animation_status].draw(self.transform.tx - GameObject.Cam.camera_offset_x, self.transform.ty - GameObject.Cam.camera_offset_y);    
         pass;
 
     def render_debug(self): 

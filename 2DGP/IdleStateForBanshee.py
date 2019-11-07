@@ -25,8 +25,9 @@ class IdleStateForBanshee(StateMachine):
 
     def update(self):
         from Const import Const;
-        self.timer += Timer.get_elapsed_time();   
-        self.turn_timer += Timer.get_elapsed_time();   
+        time = Timer.get_elapsed_time();   
+        self.timer += time;   
+        self.turn_timer += time;
         
         if self.banshee.m_dir == Const.direction_R :
             self.banshee.transform.tx += 2;
@@ -78,6 +79,8 @@ class IdleStateForBanshee(StateMachine):
                            self.banshee.transform.tx-GameObject.Cam.camera_offset_x,
                            self.banshee.transform.ty-GameObject.Cam.camera_offset_y,
                            );
+
+
     def exit(self):
         pass;
 

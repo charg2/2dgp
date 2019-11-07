@@ -29,9 +29,9 @@ if __name__=='__main__':
     #print("test");
     #tt.show();
 
-    height = 300;
-    width = 1550;
-    for k, piece in enumerate(crop('assets/Monster/Bo$$/bossRLaser(1550x2100,1x7).png', height, width), 0):
+    height = 65;
+    width = 65;
+    for k, piece in enumerate(crop("assets/Monster/Belial/bossBullet(650x65,10x1).png", height, width), 0):
         print("frist");        
         img=Image.new('RGBA', (width, height), 255)
         img.paste(piece)

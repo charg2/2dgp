@@ -50,7 +50,7 @@ class BelialBullet(GameObject):
         self.owner = owner;
         self.animation_timer = 0.0;
         self.animation_status = 0;
-        self.extinction_time = 0.0;
+        self.extinction_timer = 0.0;
 
         self.collider:Collision = CollisionRect(x,y, self.IMGS[0].w // 2, self.IMGS[0].h // 2);
 
@@ -111,14 +111,14 @@ class BelialBullet(GameObject):
 
     def update_timer(self,time):
         self.animation_timer += time;
-        self.extinction_time += time;
+        self.extinction_timer += time;
 
         if self.animation_timer > frame_time:
             self.animation_status = ( self.animation_status + 1 ) % frame;
             self.animation_timer = 0.0; 
 
         # 시간 지나면 사라짐.
-        if extinction_timer > extinction_time:
+        if self.extinction_timer > extinction_time:
             self.owner.remove_projectile(self);
 
 

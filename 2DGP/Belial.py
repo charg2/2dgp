@@ -13,9 +13,14 @@ from BelialBullet import *;
 
 from typing import List;
 
+#2~3가지 패턴을 가지고 있음
+# 일정시간 마다 공격을 하며
+# 공격 상태에서 쿨ㅇ타임이 아닌 공격을 해야 하는데
+# 그렇게 쿨타임이 길어야 하는지 모르겟으니 그냥 쿨타임 없이 랜덤으로 패턴 공격.
 
 attack_speed = 3;
 RUN_L, RUN_R, IDLE_R, IDLE_L = range(4);
+frame = 9;
 class Belial(GameObject):
     LOAD:bool = False;
     IMGSForIdle:List[Image] = [];
@@ -43,8 +48,7 @@ class Belial(GameObject):
         
         self.name = "Belial";
 
-        self.m_dir = RUN_R;
-        self.IMG = Belial.IMGSForIdleR[0];
+        self.IMG = Belial.IMGSForIdle[0];
         self.force_x =6; 
         self.force_y =8;
         self.collider:Collision = CollisionRect(x,y, self.IMG.w // 2, self.IMG.h // 2);
@@ -64,16 +68,20 @@ class Belial(GameObject):
 
         self.dir = Const.direction_L; 
         self.last_dir = RUN_L % 2;
-        self.current_state = IdleStateForBelial(self);
+        #self.current_state = IdleStateForBelial(self);
         self.tag = Const.TAG_MONSTER;
 
         #self.bullets:List[BelialBullet] = [];
 
     def render(self): 
-        self.current_state.render();
-        #for bullet in self.bullets:
-        #    bullet.render();
-        #return;
+        #self.current_state.render();
+        Belial.IMGSForIdle[self.animation_numb].clip_composite_draw(0,0,
+                                                                       Belial.IMGSForIdle[self.animation_numb].w,
+                                                                       Belial.IMGSForIdle[self.animation_numb].h,
+                                                                       0,'', 
+                                                                       self.transform.tx-GameObject.Cam.camera_offset_x,
+                                                                       self.transform.ty-GameObject.Cam.camera_offset_y,
+                                                                       );
 
     def render_debug(self): 
         if self.collider :
@@ -85,7 +93,7 @@ class Belial(GameObject):
     def update(self, time):
         # 플레이어와의 거리 체크 해서 어느 근처 거리면 다가가기 시작.
         self.update_component();
-        self.forStateMachine();
+        #self.forStateMachine();
         self.update_timer(time);
         self.clampingInWindow();
         pass;
@@ -97,24 +105,18 @@ class Belial(GameObject):
         self.last_dir = (self.dir%2);
 
         if(self.animation_timer >0.1):
-            self.animation_numb = self.animation_numb+1;
+            self.animation_numb = (self.animation_numb+1 ) % frame;
             self.animation_timer = 0;
 
+        #if False == self.attack_trigger :
+        
         # 시야 범위 안에 드는지 체크.
-        if Belial.FieldOfView >= Const.distance(  self.transform.tx
-                                                 , self.transform.ty
-                                                 , Player.MyPlayer.transform.tx
-                                                 , Player.MyPlayer.transform.ty ) :
-            self.attack_trigger = True;
+        self.attack_timer += time;
 
+        if(self.attack_timer > attack_speed):
+            self.fire();
 
-        if True == self.attack_trigger :
-            self.attack_timer += time;
-
-            if(self.attack_timer > attack_speed):
-                self.fire();
-
-                self.attack_timer = 0;
+            self.attack_timer = 0;
         
         #for bullet in self.bullets:
         #    bullet.update(time);
@@ -154,9 +156,16 @@ class Belial(GameObject):
         from FrameWork import FrameWork;
 
         FrameWork.CurScene.add_projectile(BelialBullet(FrameWork.CurScene, tx, ty, 0.25,1,1, True)); 
-        FrameWork.CurScene.add_projectile(BelialBullet(FrameWork.CurScene, tx, ty, 0.-25,1,1, True)); 
+        FrameWork.CurScene.add_projectile(BelialBullet(FrameWork.CurScene, tx, ty, 0.5,1,1, True)); 
         FrameWork.CurScene.add_projectile(BelialBullet(FrameWork.CurScene, tx, ty, 0.75,1,1, True)); 
-        FrameWork.CurScene.add_projectile(BelialBullet(FrameWork.CurScene, tx, ty, 0.-75,1,1, True)); 
+        FrameWork.CurScene.add_projectile(BelialBullet(FrameWork.CurScene, tx, ty, 1,1,1, True)); 
+        FrameWork.CurScene.add_projectile(BelialBullet(FrameWork.CurScene, tx, ty, -0.25,1,1, True)); 
+        FrameWork.CurScene.add_projectile(BelialBullet(FrameWork.CurScene, tx, ty, -0.5,1,1, True)); 
+        FrameWork.CurScene.add_projectile(BelialBullet(FrameWork.CurScene, tx, ty, -0.75,1,1, True)); 
+        #FrameWork.CurScene.add_projectile(BelialBullet(FrameWork.CurScene, tx, ty, -1,1,1, True)); 
+        #FrameWork.CurScene.add_projectile(BelialBullet(FrameWork.CurScene, tx, ty, 0.-25,1,1, True)); 
+        #FrameWork.CurScene.add_projectile(BelialBullet(FrameWork.CurScene, tx, ty, 0.75,1,1, True)); 
+        #FrameWork.CurScene.add_projectile(BelialBullet(FrameWork.CurScene, tx, ty, 0.-75,1,1, True)); 
 
 
         pass;

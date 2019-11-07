@@ -4,6 +4,7 @@ from Const import Const as const;
 from Mouse import Mouse;
 from Player import Player;
 
+from Belial import *;
 from Banshee import *;
 from SkeletonArcher import *;
 
@@ -22,6 +23,7 @@ class GameScene(Scene):
         self.AddAllyObject(Player(START_X, START_Y,0,1,1,True));          
 
         self.AddMonsterObject(Banshee(START_X + 300, START_Y + 400 ,0,1,1,True));          
+        self.AddMonsterObject(Belial(START_X + 800, START_Y + 400 ,0,1,1,True));          
         #self.AddMonsterObject(Banshee(START_X + 300, START_Y ,0,1,1,True));          
         #self.AddMonsterObject(Banshee(START_X + 500, START_Y + 100 ,0,1,1,True));          
         #self.AddMonsterObject(Banshee(START_X + 1300, START_Y ,0,1,1,True));      

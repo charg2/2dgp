@@ -143,7 +143,7 @@ class Banshee(GameObject):
         return;
 
     def on_collision(self, obj):
-        print("Banshee.py {0}-{1}".format(self.tag, obj.tag));
+        #print("Banshee.py {0}-{1}".format(self.tag, obj.tag));
         pass;
 
     def fire(self):

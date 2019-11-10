@@ -92,7 +92,7 @@ class Player(GameObject):
         self.force_x        :int = 10;
         self.force_y        :int = 5;
 
-
+        self.transform.angle = 1;
         self.collider:Collision = CollisionRect(x,y, self.IMG.w // 2, self.IMG.h // 2);
         GameObject.Cam.transform = self.transform;
        
@@ -191,11 +191,6 @@ class Player(GameObject):
             if Const.DASH_CHARGE_TIME <= self.dash_charge_timer:
                 self.dash_count += 1;
 
-            
-#        if(self.jump_timer > 0.19):
-#            self.jump_trigger = False;
-#            self.jump_timer = 0;
-##################
 #        if self.attack_trigger :
 #            self.attack_timer += time;
             
@@ -215,7 +210,7 @@ class Player(GameObject):
             temp = self.current_state;
             self.current_state.exit();
             self.current_state = self.state_queue.pop();
-            print(type(self.current_state));
+            #print(type(self.current_state));
             del temp;
 
         #self.physx.set_force(self.physx.force_x, self.physx.force_y);
@@ -256,14 +251,37 @@ class Player(GameObject):
 
         # 대시. # 상태에서 다른 상태이동은 그상태에서 정의 현재 아이들 상태에서만 가능. 
             #if ( False == self.is_dash ) and ( False == self.is_jump ) and (False == self.is_run) :
-            if 0 < self.dash_count :
+            if 0 < self.dash_count and False == self.is_dash:
                 if True == KeyInput.g_mouse_rdown :
                     #if  ( False == self.is_dash ) and ((True == self.dash_trigger) and 
                     print("Player.py DashState");
                     self.add_queue(DashStateForPlayer(self));
 
 
-    
+    def Physx(self,time):
+        grivity_offset_y = 0; 
+        if True == self.has_grivity() :
+            #if True == self.physx.is_falling:
+            #    grivity_offset_y = self.physx.acceleration_of_gravity * 1.1; 
+            #else:
+                grivity_offset_y = self.physx.acceleration_of_gravity; 
+        
+        
+        #v_x = self.physx.velocity_x * self.transform.angle;
+        #v_y = self.physx.velocity_y * self.transform.angle;
+
+        #radian = self.transform.angle * math.pi;
+        
+        v_x = self.physx.velocity_x #* math.cos(self.transform.angle);
+        v_y = self.physx.velocity_y #* math.sin(self.transform.angle);
+
+        #self.transform.set_position(self.physx.velocity_x, self.physx.velocity_y - grivity_offset_y);
+        self.transform.set_position(v_x, v_y - grivity_offset_y);
+
+        #if False == self.physx.is_ground:
+            #grivity_offset_y = -5;
+        #self.transform.set_position(self.physx.velocity_x, self.physx.velocity_y + grivity_offset_y);       
+        return;
     
     def on_collision(self, obj):
         tag = obj.tag;

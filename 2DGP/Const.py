@@ -40,6 +40,17 @@ class Const:
         import math;
         return math.sqrt(((bx - ax)**2 + (by - ay)**2));
 
+    def calc_degree(from_tx, from_ty, to_tx, to_ty) -> float:
+        import math;
+        radian = math.atan2( to_tx - from_tx, to_ty - from_ty);
+        degree = (radian * 180) / math.pi;
+        return degree;
+    
+    def calc_radian(from_tx, from_ty, to_tx, to_ty) -> float:
+        import math;
+        radian = math.atan2( to_tx - from_tx, to_ty - from_ty);
+        return radian;
+
 
 
 if __name__ == "__main__":
@@ -47,3 +58,5 @@ if __name__ == "__main__":
 
     print(Const.distance(-2, -3, 4 ,5));
     print(Const.distance(1, 3, 4 ,5));
+    print(Const.calc_degree(0, 0, 1,1));
+

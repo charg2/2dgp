@@ -32,8 +32,8 @@ class Terrain(GameObject):
                                                       , self.collider.cy
                                                       , self.collider.right 
                                                       , self.collider.bottom );  
-            print(self.collider.cy )
-            print(self.collider.cx )
+            #print(self.collider.cy )
+            #print(self.collider.cx )
         return;
     def renderForMinimap(self):
         return;    

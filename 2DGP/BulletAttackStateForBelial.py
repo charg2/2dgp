@@ -26,6 +26,8 @@ class BulletAttackStateForBelial(StateMachine):
         self.attack_timer = 0;
         self.attack_count = 0;
 
+        self.shot_angle_offset = 0;
+
         if BulletAttackStateForBelial.LOAD == False:
             
             BulletAttackStateForBelial.IMGSForBulletAttack.append(pico2d.load_image('assets/Monster/Belial/Attack/boss (14).png'));
@@ -139,11 +141,12 @@ class BulletAttackStateForBelial(StateMachine):
         ty = self.belial.transform.ty;
 
         from FrameWork import FrameWork;
-
-        FrameWork.CurScene.add_projectile(BelialBullet(FrameWork.CurScene, tx , ty, 0.25,1,1, True)); 
-        FrameWork.CurScene.add_projectile(BelialBullet(FrameWork.CurScene, tx , ty, 0.75,1,1, True)); 
-        FrameWork.CurScene.add_projectile(BelialBullet(FrameWork.CurScene, tx , ty, -0.25,1,1, True)); 
-        FrameWork.CurScene.add_projectile(BelialBullet(FrameWork.CurScene, tx , ty, -0.75,1,1, True)); 
+        FrameWork.CurScene.add_projectile(BelialBullet(FrameWork.CurScene, tx , ty, 0.25 + self.shot_angle_offset,1,1, True)); 
+        FrameWork.CurScene.add_projectile(BelialBullet(FrameWork.CurScene, tx , ty, 0.75 + self.shot_angle_offset,1,1, True)); 
+        FrameWork.CurScene.add_projectile(BelialBullet(FrameWork.CurScene, tx , ty, -0.25+ self.shot_angle_offset,1,1, True)); 
+        FrameWork.CurScene.add_projectile(BelialBullet(FrameWork.CurScene, tx , ty, -0.75+ self.shot_angle_offset,1,1, True)); 
+        
+        self.shot_angle_offset += 0.04;
 
         pass;
 

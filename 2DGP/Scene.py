@@ -209,6 +209,7 @@ class Scene:
     def remove_projectile(self, bullet):
         from BansheeBullet import BansheeBullet;
         self.game_object_list_monster.remove(bullet);
+        del bullet;
 
     
     def add_projectile(self, bullet):

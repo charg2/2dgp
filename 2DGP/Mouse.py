@@ -5,7 +5,7 @@ from KeyIO      import KeyInput;
 from CollisionRect import*;
 
 class Mouse(GameObject):
-
+    Instance: GameObject= None;
     def __init__(self):
         super(Mouse, self).__init__(KeyInput.g_mouse_x , KeyInput.g_mouse_y, 0, 1, 1, True);
         self.name = "Mouse";
@@ -16,6 +16,7 @@ class Mouse(GameObject):
         self.Target = pico2d.load_image("assets/Mouse/Cursor01.png");
         self.IMG = self.Arrow;
         self.collider:Collision = CollisionRect(self.x,self.y, self.IMG.w // 2, self.IMG.h // 2);
+        Instance = self;
 
     def set_cursor(self, type):
         if type == 0: self.IMG = self.Arrow;
@@ -23,9 +24,14 @@ class Mouse(GameObject):
 
     def update(self, time):
         self.update_component();
-
         self.x, self.y = KeyInput.g_mouse_x , Const.WIN_HEIGHT - KeyInput.g_mouse_y - 1 ;
-        pass;
+        #from Player import Player;
+        #player = Player.MyPlayer;
+        
+        #t = Const.calc_degree(player.transform.tx - GameObject.Cam.camera_offset_x, player.transform.ty - GameObject.Cam.camera_offset_y, self.x, self.y);
+        #print("{0} - {1} - {2} - {3} = {4} ".format(player.transform.tx - GameObject.Cam.camera_offset_x, player.transform.ty - GameObject.Cam.camera_offset_y, self.x, self.y, t));
+      
+        pass
     
     def render(self):
         self.IMG.draw(self.transform.tx , self.transform.ty , self.IMG.w, self.IMG.h);
@@ -34,7 +40,7 @@ class Mouse(GameObject):
     #충동한 객체의 태그 or name을 얻어서 어떤객체인지 파악.
     def on_collision(self, obj):
         #tag = obj.tag;
-        print("Mouse.py - {0} ".format(obj.name));
+        #print("Mouse.py - {0} ".format(obj.name));
         pass;
 
     # 마우스의 경우 호명상의 렌더링 위치는 화면을 벗어 나면 안되기에 

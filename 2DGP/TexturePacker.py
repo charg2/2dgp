@@ -4,9 +4,12 @@ from PIL import Image
 import os;
 
 
-class TexturePacker:
-    pass;
-
+def crop_wrapper(file_path:str, width:int,height:int, save_path:str):
+    for k, piece in enumerate(crop(file_path, height, width), 0):
+        img=Image.new('RGBA', (width, height), 255)
+        img.paste(piece);
+        path = os.path.join(save_path,"IMG-%s.png" % k);
+        img.save(path);
 
 def crop(file_path:str, height:int, width:int):
     im = Image.open(file_path);
@@ -21,6 +24,12 @@ def resize_multiple(img:Image, multiple:int, save_name:str, in_quality = 100):
     #print("이미지 resize 한 후 : {0}x{1} - {2} ".format(width, height, test_img));
     resize_image.save(save_name, quality=in_quality);
 
+
+def bmp_to_png(file_path:str, width:int,height:int, save_path:str, file_type:str):
+    from PIL import Image;
+    img = Image.open(file_path);
+    new_img = img.resize( (img.width, img.height) );
+    new_img.save( save_path, file_type);
 
 
 if __name__=='__main__':

@@ -46,7 +46,7 @@ class Const:
         degree = (radian * 180) / math.pi;
         return degree;
     
-    def calc_radian(from_tx, from_ty, to_tx, to_ty) -> float:
+    def calc_radian(from_tx, from_ty, to_tx, to_ty) -> float: #45%
         import math;
         radian = math.atan2( to_tx - from_tx, to_ty - from_ty);
         return radian;
@@ -59,4 +59,10 @@ if __name__ == "__main__":
     print(Const.distance(-2, -3, 4 ,5));
     print(Const.distance(1, 3, 4 ,5));
     print(Const.calc_degree(0, 0, 1,1));
+
+    print(Const.calc_radian(0, 0, 1,1));
+    print(Const.calc_radian(1, 1, 0,0));
+    print(Const.calc_radian(0, 1, 0,-1));
+    print(Const.calc_radian(300, 120, 551,392));
+
 

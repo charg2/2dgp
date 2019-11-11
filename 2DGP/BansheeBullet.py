@@ -15,6 +15,7 @@ from typing import List;
 frame_time = 0.2;
 frame = 4;
 damage = 5;
+extinction_time = 2;
 class BansheeBullet(GameObject):
     LOAD:bool = False;
     UNIQUE_ID:int = 0;
@@ -42,7 +43,7 @@ class BansheeBullet(GameObject):
         self.owner = owner;
         self.animation_timer = 0.0;
         self.animation_status = 0;
-        
+        self.extinction_timer = 0.0;
         self.collider:Collision = CollisionRect(x,y, self.IMGS[0].w // 2, self.IMGS[0].h // 2);
 
         #self.physx.angle_rate = 0.01;
@@ -70,7 +71,6 @@ class BansheeBullet(GameObject):
         self.transform.angle += self.physx.angle_rate;
         
         self.transform.set_position(self.physx.velocity_x, self.physx.velocity_y);
-
 
     def render(self):
         BansheeBullet.IMGS[self.animation_status].draw(self.transform.tx - GameObject.Cam.camera_offset_x, self.transform.ty - GameObject.Cam.camera_offset_y);    
@@ -103,10 +103,15 @@ class BansheeBullet(GameObject):
 
     def update_timer(self,time):
         self.animation_timer += time;
+        self.extinction_timer += time;
 
         if self.animation_timer > frame_time:
             self.animation_status = ( self.animation_status + 1 ) % frame;
             self.animation_timer = 0.0; 
+        
+        # 시간 지나면 사라짐.
+        if self.extinction_timer > extinction_time:
+            self.owner.remove_projectile(self);
 
 
     def clampingInWindow(self):

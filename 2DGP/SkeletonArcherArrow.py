@@ -11,6 +11,8 @@ from typing import List;
 
 frame_time = 0.2;
 frame = 4;
+extinction_time = 2;
+
 class SkeletonArcherArrow(GameObject):
     LOAD:bool = False;
     UNIQUE_ID:int = 0;
@@ -35,6 +37,7 @@ class SkeletonArcherArrow(GameObject):
         self.owner = owner;
         self.animation_timer = 0.0;
         self.animation_status = 0;
+        self.extinction_timer = 0.0;
         
         self.collider:Collision = CollisionRect(x,y, self.IMGS.w // 2, self.IMGS.h // 2);
 
@@ -106,3 +109,10 @@ class SkeletonArcherArrow(GameObject):
         self.transform.tx = Const.clamp(0, self.transform.tx, GameObject.Cam.map_width-self.IMGS.w//16)  
         self.transform.ty = Const.clamp(0, self.transform.ty, GameObject.Cam.map_height-self.IMGS.h//8)
         return;
+
+    def update_timer(self,time):
+        self.extinction_timer += time;
+        
+        # 시간 지나면 사라짐.
+        if self.extinction_timer > extinction_time:
+            self.owner.remove_projectile(self);

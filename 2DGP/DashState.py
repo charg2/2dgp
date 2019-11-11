@@ -13,8 +13,7 @@ class DashStateForPlayer(StateMachine):
 
     def __init__(self,gobj):
         self.obj = gobj;
-        self.fx = 0;
-        self.fy = 0;
+  
         self.obj.is_dash = True;
 
         self.target_x = KeyInput.g_mouse_x;
@@ -24,43 +23,27 @@ class DashStateForPlayer(StateMachine):
         self.dash_timer = 0;
         self.before_vx, self.before_vy = self.obj.physx.velocity_x, self.obj.physx.velocity_y;
 
-        if self.target_x > (self.obj.transform.tx - GameObject.Cam.camera_offset_x) :
-            self.obj.physx.velocity_x = 5;
-        elif self.target_x < (self.obj.transform.tx - GameObject.Cam.camera_offset_x) :
-            self.obj.physx.velocity_x = -5;
-        else :
-            self.obj.physx.velocity_x = 0;
-            
 
+        self.radian = ( Const.calc_radian(self.obj.transform.tx - GameObject.Cam.camera_offset_x, self.obj.transform.ty - GameObject.Cam.camera_offset_y, self.target_x, self.target_y) );
+        self.obj.physx.velocity_x = 10 * math.sin(self.radian);
+        self.obj.physx.velocity_y = 10 * math.cos(self.radian);
 
-        if self.target_y < (self.obj.transform.ty - GameObject.Cam.camera_offset_y) :
-            self.obj.physx.velocity_y = -5;
-        else:
-            self.obj.physx.velocity_y = 5;
-
-        self.obj.transform.angle = ( Const.calc_degree(self.obj.transform.tx - GameObject.Cam.camera_offset_x, self.obj.transform.ty - GameObject.Cam.camera_offset_y, self.target_x, self.target_y) ) / 180;
-        t = ( Const.calc_degree(self.obj.transform.tx - GameObject.Cam.camera_offset_x, self.obj.transform.ty - GameObject.Cam.camera_offset_y, self.target_x, self.target_y) ) / 180;
-
-        #print("DashState.py 24.");
-        print(self.obj.transform.angle);
-        print("{0} - {1} - {2} - {3} = {4} ".format(self.obj.transform.tx - GameObject.Cam.camera_offset_x, self.obj.transform.ty - GameObject.Cam.camera_offset_y, self.target_x, self.target_y, t));
+        #print("{0} - {1} - {2} - {3} = {4} ".format(self.obj.transform.tx - GameObject.Cam.camera_offset_x, self.obj.transform.ty - GameObject.Cam.camera_offset_y, self.target_x, self.target_y, self.radian));
       
         if  Const.direction_R == self.obj.m_dir :
             self.obj.last_dir = Const.direction_R;
             self.obj.dir = Const.direction_R;
             from Player import Player;
-            self.obj.IMG = Player.IMGSForJump[0];
-            self.fx = self.obj.force_x;
-            self.fy = self.obj.force_x;
+
+
 
 
         if Const.direction_L == self.obj.m_dir :
             self.obj.last_dir = Const.direction_L;
             self.obj.dir = Const.direction_L;
             from Player import Player;
-            self.obj.IMG = Player.IMGSForJump[0];
-            self.fx = -self.obj.force_x;
-            self.fy = -self.obj.force_x;
+
+
         return;
 
 
@@ -70,13 +53,11 @@ class DashStateForPlayer(StateMachine):
         
         self.timer += elapsed_time;
         
-        self.obj.physx.velocity_x *= 1.13;
-        self.obj.physx.velocity_y *= 1.13;
+        self.obj.physx.velocity_x *= 1.3;
+        self.obj.physx.velocity_y *= 1.3;
 
-        #self.obj.physx.velocity_x * math.cos(self.obj.transform.angle);
-        #self.obj.physx.velocity_y * math.sin(self.obj.transform.angle);
 
-        if self.timer > 0.4 :
+        if self.timer > 0.2 :
             print("Dashstate.py 76 ");
             self.obj.add_queue(IdleStateForPlayer(self.obj));
             temp = self.obj.current_state;

@@ -16,7 +16,9 @@ frame_time = 0.2;
 frame = 10;
 damage = 10;
 count = 6;
-
+extinction_time = 5;
+start_time = 1;
+velocity = 15;
 class BelialSword(GameObject):
     LOAD:bool = False;
     UNIQUE_ID:int = 0;
@@ -30,17 +32,13 @@ class BelialSword(GameObject):
             BelialSword.LOAD = True;
 
         self.name = "BelialSword_" + str(BelialSword.UNIQUE_ID);
+        BelialSword.UNIQUE_ID += 1;
 
         self.has_image = True;
-        self.owner = None;
-
-        BelialSword.UNIQUE_ID += 1;
-        
-        self.velocity = 10; 
+        self.velocity = 0; 
         self.owner = owner;
-        self.animation_timer = 0.0;
-        self.animation_status = 0;
         self.extinction_timer = 0.0;
+        self.start_timer = 0.0;
 
         self.collider:Collision = CollisionRect(x,y, self.IMG.w // 2, self.IMG.h // 2);
         self.count = 0;
@@ -49,6 +47,7 @@ class BelialSword(GameObject):
 
     def update(self, time):
         self.update_component();
+        self.update_timer(time);
         self.clampingInWindow();
         self.Physx();
         pass;
@@ -60,13 +59,13 @@ class BelialSword(GameObject):
     def Physx(self):
         radian = self.transform.angle * math.pi;
         
-        self.physx.velocity_x = self.velocity * math.cos(radian);
-        self.physx.velocity_y = self.velocity * math.sin(radian);
+        self.physx.velocity_x = self.velocity * math.sin(radian);
+        self.physx.velocity_y = self.velocity * math.cos(radian);
         
         self.transform.set_position(self.physx.velocity_x, self.physx.velocity_y);
 
     def render(self):
-        BelialSword.IMG.draw(self.transform.tx - GameObject.Cam.camera_offset_x, self.transform.ty - GameObject.Cam.camera_offset_y);    
+        BelialSword.IMG.rotate_draw(self.transform.angle, self.transform.tx - GameObject.Cam.camera_offset_x, self.transform.ty - GameObject.Cam.camera_offset_y);    
         pass;
 
     def render_debug(self): 
@@ -83,17 +82,18 @@ class BelialSword(GameObject):
         elif "Hero" == obj.name:
             obj.current_hp -= damage;
             self.owner.remove_projectile(self);
-            #맵에서 나가도 ㅇㅇ;
-        # 벽이면 사라짐.
-        #print("{0} - 충돌함 ({1},{2})".format(self.name,self.transform.tx, self.transform.ty));
-        # 플레이어면 체력을 깍아 버림.
-
-        #일단 충돌하면 없어지는건 뺴박 캔트.
-        
-
         pass;
     
+    def update_timer(self,time):
+        self.start_timer += time;
+        self.extinction_timer += time;
+        # 시간 지나면 사라짐.
 
+        if self.start_timer > start_time:
+            self.velocity = velocity;
+
+        if self.extinction_timer > extinction_time:
+            self.owner.remove_projectile(self);
 
 
     def clampingInWindow(self):

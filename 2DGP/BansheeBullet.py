@@ -35,7 +35,6 @@ class BansheeBullet(GameObject):
         self.name = "BansheeBullet_" + str(BansheeBullet.UNIQUE_ID);
 
         self.has_image = True;
-        self.owner = None;
 
         BansheeBullet.UNIQUE_ID += 1;
         

@@ -4,9 +4,12 @@ from Belial import *;
 from Graphic import *;
 
 from BulletAttackStateForBelial import *;
+from SwordAttackStateForBelial import *;
 
 
 frame = 10;
+attack_table = { 0: SwordAttackStateForBelial , 1 : BulletAttackStateForBelial }
+
 class IdleStateForBelial(StateMachine):
     LOAD:bool = False;
     IMGSForIdle:List[Image] = [];
@@ -79,7 +82,11 @@ class IdleStateForBelial(StateMachine):
         
         if self.turn_timer > 3.0:
             self.turn_timer = 0;
-            self.belial.add_queue(BulletAttackStateForBelial(self.belial));
+            import random;
+            idx = random.randint(0,1);
+            #attack_table[idx](slef.belial)
+            self.belial.add_queue(attack_table[idx](self.belial));
+            #self.belial.add_queue(SwordAttackStateForBelial(self.belial));
             temp = self.belial.current_state;
             self.belial.current_state.exit();
             self.belial.current_state = self.belial.state_queue.pop();

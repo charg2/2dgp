@@ -115,8 +115,6 @@ class Belial(GameObject):
     def update_component(self):
         self.previous_transform = self.transform;
         #self.collider.cx, self.collider.cy = self.transform.tx, self.transform.ty;
-
-        
         return;
 
     def clampingInWindow(self):

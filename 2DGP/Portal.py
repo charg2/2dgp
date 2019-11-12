@@ -8,6 +8,7 @@ from typing import List;
 
 animate_time = 0.142 # 2초에 애니메이션 1바퀴.
 animation_frame = 4;
+
 class Portal(GameObject):
     IMG:Image = None;
     IMGSForPortal:List[Image] = [];
@@ -22,6 +23,7 @@ class Portal(GameObject):
 
             Portal.IMG = Portal.IMGSForPortal[0];
 
+        #콜라이더 크기를 조정해서 실제로 문으로 들어가듯이 만ㄷㄹ어 보자. 
         self.collider = CollisionRect(x,y-15,self.IMG.w/3.5,self.IMG.h/3.5);
         self.tag = Const.tag_default;
         self.scene_number = sceneNumber;
@@ -35,8 +37,6 @@ class Portal(GameObject):
                            self.transform.tx-GameObject.Cam.camera_offset_x,
                            self.transform.ty-GameObject.Cam.camera_offset_y,
                            );
-        
-
         return;
 
         return;    
@@ -49,10 +49,9 @@ class Portal(GameObject):
         global animate_time;
         global animation_frame;
         if(self.animation_timer >animate_time):
-            self.animation_number = (self.animation_number+1)%animation_frame
-            Portal.IMG = Portal.IMGSForPortal[self.animation_number]
+            self.animation_number = (self.animation_number+1) % animation_frame;
+            Portal.IMG = Portal.IMGSForPortal[self.animation_number];
             self.animation_timer = 0;
-            #print(self.animation_number);
 
     def update_basicComponent(self,time):
         self.animation_timer += time;

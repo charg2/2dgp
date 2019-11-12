@@ -127,6 +127,9 @@
     <Compile Include="StateMachine.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="SwordAttackStateForBelial.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Terrain.py">
       <SubType>Code</SubType>
     </Compile>
@@ -164,6 +167,9 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="room1.map" />
+    <Content Include="room2.map">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="__pycache__\Camera.cpython-37.pyc" />
     <Content Include="__pycache__\ConfigParser.cpython-37.pyc" />
     <Content Include="__pycache__\Const.cpython-37.pyc" />

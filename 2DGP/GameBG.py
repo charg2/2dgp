@@ -21,7 +21,7 @@ class GameBG(GameObject):
         self.cam:GameObject = None;
         self.name = "GameBG";
 
-        GameObject.Cam.SetMapSize(self.map.width, self.map.height - 90);
+        GameObject.Cam.SetMapSize(self.map.width, self.map.height);
 
     def render(self):
         vx = Const.clamp(0, int(self.cam_x) - Const.WIN_WIDTH//2,  self.map.width - Const.WIN_WIDTH);

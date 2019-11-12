@@ -38,6 +38,9 @@
     <Compile Include="BelialLaser.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BelialSword.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="BulletAttackStateForBelial.py" />
     <Compile Include="Camera.py" />
     <Compile Include="Collision.py">

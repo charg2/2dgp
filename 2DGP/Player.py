@@ -191,15 +191,6 @@ class Player(GameObject):
             if Const.DASH_CHARGE_TIME <= self.dash_charge_timer:
                 self.dash_count += 1;
 
-#        if self.attack_trigger :
-#            self.attack_timer += time;
-            
-#        if(self.attack_timer > self.attack_speed):
-#            self.attack_trigger = False;
-#            self.attack_timer = 0;
-##################
-#        if self.skill_trigger :
-#            self.skill_timer += time;
         return;
     
 
@@ -210,7 +201,6 @@ class Player(GameObject):
             temp = self.current_state;
             self.current_state.exit();
             self.current_state = self.state_queue.pop();
-            #print(type(self.current_state));
             del temp;
 
         #self.physx.set_force(self.physx.force_x, self.physx.force_y);
@@ -266,11 +256,6 @@ class Player(GameObject):
             #else:
                 grivity_offset_y = self.physx.acceleration_of_gravity; 
         
-        
-        #v_x = self.physx.velocity_x * self.transform.angle;
-        #v_y = self.physx.velocity_y * self.transform.angle;
-
-        #radian = self.transform.angle * math.pi;
         
         v_x = self.physx.velocity_x #* math.cos(self.transform.angle);
         v_y = self.physx.velocity_y #* math.sin(self.transform.angle);

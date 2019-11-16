@@ -33,14 +33,19 @@ class FrameWork:
         
         GraphicLib.ClearBuf();
 
-        FrameWork.changeScene();        # 씬 변경을 체크
+        FrameWork.change_scene();        # 씬 변경을 체크
         FrameWork.CurScene.Update();    # logic update
         FrameWork.CurScene.Collide();   # collide
         FrameWork.CurScene.Render();    # render
 
         GraphicLib.Present();
 
-    def changeScene():
+    def change_scene():
+        if(Scene.CurSceneNumber !=  Scene.SceneNumber):
+            FrameWork.CurScene = FrameWork.SceneList[Scene.SceneNumber];
+            FrameWork.SceneList[Scene.CurSceneNumber].ExitScene();
+            Scene.CurSceneNumber = Scene.SceneNumber;
+            FrameWork.CurScene.set_cam();
         pass;
 
 

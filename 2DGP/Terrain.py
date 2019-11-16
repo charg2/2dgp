@@ -20,20 +20,7 @@ class Terrain(GameObject):
 
     def render_debug(self): 
         if self.collider :
-            from Graphic import GraphicLib;
-            #GraphicLib.DebugImg1.draw_to_origin(self.collider.cx , self.collider.cy , self.collider.right ,self.collider.top);    
-            #GraphicLib.DebugImg1.clip_composite_draw(self.collider.left , self.collider.bottom , self.collider.right ,self.collider.top, self.transform.tx, self.transform.ty);    
-            GraphicLib.DebugImg1.clip_composite_draw( self.collider.left 
-                                                      ,self.collider.bottom
-                                                     , self.collider.right 
-                                                     , self.collider.top 
-                                                      , 0, ''
-                                                      , self.collider.cx  
-                                                      , self.collider.cy
-                                                      , self.collider.right 
-                                                      , self.collider.bottom );  
-            #print(self.collider.cy )
-            #print(self.collider.cx )
+            draw_rectangle(*self.collider.get_area_offset(GameObject.Cam.camera_offset_x, GameObject.Cam.camera_offset_y));
         return;
     def renderForMinimap(self):
         return;    

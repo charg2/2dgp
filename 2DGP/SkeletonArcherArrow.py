@@ -16,13 +16,13 @@ extinction_time = 2;
 class SkeletonArcherArrow(GameObject):
     LOAD:bool = False;
     UNIQUE_ID:int = 0;
-    IMGS:Image = None;
+    IMG:Image = None;
 
 
     def __init__(self, owner, x, y, angle, sx, sy, state):
         super(SkeletonArcherArrow, self).__init__(x, y, angle, sx, sy, state);
         if SkeletonArcherArrow.LOAD == False:
-            SkeletonArcherArrow.IMGS =pico2d.load_image('assets/Monster/SkeletonArcher/Arrow/Arrow.png');
+            SkeletonArcherArrow.IMG =pico2d.load_image('assets/Monster/SkeletonArcher/Arrow/Arrow.png');
 
             SkeletonArcherArrow.LOAD = True;
 
@@ -39,7 +39,7 @@ class SkeletonArcherArrow(GameObject):
         self.animation_status = 0;
         self.extinction_timer = 0.0;
         
-        self.collider:Collision = CollisionRect(x,y, self.IMGS.w // 2, self.IMGS.h // 2);
+        self.collider:Collision = CollisionRect(x,y, self.IMG.w // 2, self.IMG.h // 2);
 
         pass;
 
@@ -66,16 +66,15 @@ class SkeletonArcherArrow(GameObject):
 
     def render(self):
         if self.transform.angle == 1:
-            SkeletonArcherArrow.IMGS.composite_draw(0, "h",self.transform.tx - GameObject.Cam.camera_offset_x, self.transform.ty - GameObject.Cam.camera_offset_y);    
+            SkeletonArcherArrow.IMG.composite_draw(0, "h",self.transform.tx - GameObject.Cam.camera_offset_x, self.transform.ty - GameObject.Cam.camera_offset_y);    
         else :
-            SkeletonArcherArrow.IMGS.draw(self.transform.tx - GameObject.Cam.camera_offset_x, self.transform.ty - GameObject.Cam.camera_offset_y);    
-            
-        pass;
+            SkeletonArcherArrow.IMG.draw(self.transform.tx - GameObject.Cam.camera_offset_x, self.transform.ty - GameObject.Cam.camera_offset_y);    
 
-    def render_debug(self): 
-        if self.collider :
-            from Graphic import GraphicLib;
-            GraphicLib.DebugImg1.draw(self.previous_transform.tx - GameObject.Cam.camera_offset_x, self.previous_transform.ty - GameObject.Cam.camera_offset_y, SkeletonArcherArrow.IMGS.w, SkeletonArcherArrow.IMGS.h );    
+    def render_debug(self):
+        draw_rectangle(*self.collider.get_area_offset(GameObject.Cam.camera_offset_x, GameObject.Cam.camera_offset_y));
+        #if self.collider :
+            #from Graphic import GraphicLib;
+            #GraphicLib.DebugImg1.draw(self.previous_transform.tx - GameObject.Cam.camera_offset_x, self.previous_transform.ty - GameObject.Cam.camera_offset_y, SkeletonArcherArrow.IMG.w, SkeletonArcherArrow.IMG.h );    
             #GraphicLib.DebugImg1.draw(self.transform.tx, self.transform.ty);    
 
         return;
@@ -106,8 +105,8 @@ class SkeletonArcherArrow(GameObject):
 
 
     def clampingInWindow(self):
-        self.transform.tx = Const.clamp(0, self.transform.tx, GameObject.Cam.map_width-self.IMGS.w//16)  
-        self.transform.ty = Const.clamp(0, self.transform.ty, GameObject.Cam.map_height-self.IMGS.h//8)
+        self.transform.tx = Const.clamp(0, self.transform.tx, GameObject.Cam.map_width-self.IMG.w//16)  
+        self.transform.ty = Const.clamp(0, self.transform.ty, GameObject.Cam.map_height-self.IMG.h//8)
         return;
 
     def update_timer(self,time):

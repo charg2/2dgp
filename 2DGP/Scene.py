@@ -5,8 +5,8 @@ from MyTimer import *;
 from typing import List;
 
 class Scene:
-    SceneNumber = 0;
-    CurSceneNumber = 0;
+    SceneNumber = 1;
+    CurSceneNumber = 1;
     Pause = False;
     Time = 0;
     RenderDebug = False;
@@ -70,6 +70,7 @@ class Scene:
 
     def Collide(self):
         #obj 끼리의 충돌 검사.
+        #monster
         for obj in self.game_object_list_ally:
             if None != obj.collider:
                 if Const.COLLISION_RECT == obj.collider.get_collision_type() :
@@ -82,10 +83,11 @@ class Scene:
                                 if(True == Const.is_collided(aleft,abottom,aright,atop,bleft,bbottom,bright,btop)):
                                     obj.on_collision(mob);
                                     mob.on_collision(obj);
-
-        for obj in self.game_object_list_ally:
-            if None != obj.collider:
-                if Const.COLLISION_RECT == obj.collider.get_collision_type() :
+        
+        # p vs ter
+        #for obj in self.game_object_list_ally:
+        #    if None != obj.collider:
+                #if Const.COLLISION_RECT == obj.collider.get_collision_type() :
                     for ter in self.game_object_list_terrain :
                         if None != ter.collider:
                             if Const.COLLISION_RECT == ter.collider.get_collision_type() :
@@ -95,8 +97,19 @@ class Scene:
                                 if(True == Const.is_collided(aleft,abottom,aright,atop,bleft,bbottom,bright,btop)):
                                     obj.on_collision(ter);
                                     ter.on_collision(obj);
+
+
+                    for obs in self.game_object_list_obstacle :
+                        if None != obs.collider:
+                            if Const.COLLISION_RECT == obs.collider.get_collision_type() :
+                                aleft,abottom,aright,atop = obs.collider.get_area();
+                                bleft,bbottom,bright,btop = obj.collider.get_area();
+
+                                if(True == Const.is_collided(aleft,abottom,aright,atop,bleft,bbottom,bright,btop)):
+                                    obj.on_collision(obs);
+                                    obs.on_collision(obj);
         
-        #monster 
+        #monster vs terrain
         for obj in self.game_object_list_monster:
             if None != obj.collider:
                 if Const.COLLISION_RECT == obj.collider.get_collision_type() :
@@ -215,6 +228,15 @@ class Scene:
     def add_projectile(self, bullet):
         self.game_object_list_monster.append(bullet);
         return;
+
+    def set_cam(self):
+        if self.bg :
+            #GameObject.Cam.SetMapSize(self.bg.IMG.w, self.bg.IMG.h);
+            GameObject.Cam.SetMapSize(self.bg.map.width, self.bg.map.height);
+
+        return;
+
+
 #if __name__ == "__main__":
 #    test = Scene();
 

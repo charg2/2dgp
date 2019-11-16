@@ -14,7 +14,7 @@ class Const:
     SWORD, BOW, GUN = range(3);
     RUN_L, RUN_R, IDLE_R, IDLE_L = range(4);
     COLLISION_RECT , COLLISION_CIRCLE, COLLISION_POINT, COLLISION_LINE = range(4); 
-    TAG_DEFAULT,TAG_TERRAIN, TAG_PLAYER, TAG_MONSTER = range(4);
+    TAG_DEFAULT, TAG_TERRAIN, TAG_PLAYER, TAG_MONSTER = range(4);
     CURSOR_ARROW, CURSOR_TARGET = range(2);
     DASH, JUMP, RUN, IDLE = range(4);
     DASH_CHARGE_TIME = parser.get_int('dash_charge_time');

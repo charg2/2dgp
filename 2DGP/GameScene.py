@@ -10,6 +10,7 @@ from SkeletonArcher import *;
 
 from HPBar import *;
 from Terrain import Terrain as terrain;
+from Portal import Portal as portal;
 
 START_X,START_Y = 300, 120;
 
@@ -34,6 +35,9 @@ class GameScene(Scene):
         #self.AddMonsterObject(Banshee(START_X + 1300, START_Y + 100 ,0,1,1,True));      
         #self.AddMonsterObject(Banshee(START_X + 1500, START_Y + 200 ,0,1,1, True));
         #self.AddMonsterObject(Banshee(START_X + 1500, START_Y + 200 ,0,1,1, True)); 
+        
+        self.AddObstacleObject(portal(START_X + 800, START_Y,0,1,1,True,0));
+        #self.AddAllyObject(portal(START_X + 800, START_Y,0,1,1,True,4));
         
         self.AddUi(HPBar.get_instance());
 

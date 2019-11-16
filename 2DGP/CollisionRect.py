@@ -14,6 +14,9 @@ class CollisionRect(Collision):
     def get_area(self) -> tuple:
         return (self.cx-self.half_width, self.cy- self.half_height, self.cx+self.half_width, self.cy+ self.half_height)
 
+    def get_area_offset(self, cam_offset_x, cam_offset_y) -> tuple:
+        return (self.cx-self.half_width-cam_offset_x, self.cy- self.half_height-cam_offset_y, self.cx+self.half_width-cam_offset_x, self.cy+ self.half_height-cam_offset_y)
+
 
 if __name__ == "__main__":
     x1,x2 ,y1,y2 = 0,0,0,0;

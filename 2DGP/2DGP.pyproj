@@ -57,8 +57,14 @@
     <Compile Include="DeathState.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="EffectCutton.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="FrameWork.py" />
     <Compile Include="GameBG.py" />
+    <Compile Include="GameController.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="GameObject.py" />
     <Compile Include="GameScene.py" />
     <Compile Include="Graphic.py" />

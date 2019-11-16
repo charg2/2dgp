@@ -68,8 +68,7 @@ class Belial(GameObject):
 
     def render_debug(self): 
         if self.collider :
-            from Graphic import GraphicLib;
-            GraphicLib.DebugImg1.draw(self.previous_transform.tx - GameObject.Cam.camera_offset_x, self.previous_transform.ty - GameObject.Cam.camera_offset_y);    
+            draw_rectangle(*self.collider.get_area_offset(GameObject.Cam.camera_offset_x, GameObject.Cam.camera_offset_y));
 
         return;
 

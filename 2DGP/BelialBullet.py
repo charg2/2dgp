@@ -93,7 +93,6 @@ class BelialBullet(GameObject):
     def on_collision(self, obj):
         if "Mouse" == obj.name:
             pass;
-           
         elif "Hero" == obj.name:
             obj.current_hp -= damage;
             self.owner.remove_projectile(self);

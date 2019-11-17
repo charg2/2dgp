@@ -41,8 +41,20 @@
     <Compile Include="BelialSword.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BigHeal.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BossRoomBG.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BossRoomScene.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="BulletAttackStateForBelial.py" />
     <Compile Include="Camera.py" />
+    <Compile Include="Coin.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Collision.py">
       <SubType>Code</SubType>
     </Compile>
@@ -87,14 +99,6 @@
     <Compile Include="LaserAttackStateForBelial.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Lecture11_Character_Controller\boy.py" />
-    <Compile Include="Lecture11_Character_Controller\game_framework.py" />
-    <Compile Include="Lecture11_Character_Controller\grass.py" />
-    <Compile Include="Lecture11_Character_Controller\main_state.py" />
-    <Compile Include="Lecture11_Character_Controller\mygame.py" />
-    <Compile Include="Lecture11_Character_Controller\SleepState.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="main.py" />
     <Compile Include="maptool.py">
       <SubType>Code</SubType>
@@ -108,7 +112,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Player.py" />
+    <Compile Include="PlayerBullet.py" />
     <Compile Include="Portal.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RoomBG.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="RunState.py">
@@ -128,6 +136,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="SkeletonArcherArrow.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SmallHeal.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="StateMachine.py">
@@ -153,7 +164,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\" />
-    <Folder Include="Lecture11_Character_Controller\" />
     <Folder Include="MapTool\" />
     <Folder Include="Server\" />
     <Folder Include="TexturePacker\" />
@@ -163,19 +173,12 @@
     <Content Include="assets\player.png" />
     <Content Include="assets\player.psd" />
     <Content Include="assets\run_animation.png" />
+    <Content Include="boss_room.map" />
     <Content Include="config.ini" />
-    <Content Include="Lecture11_Character_Controller\.gitattributes" />
-    <Content Include="Lecture11_Character_Controller\.gitignore" />
-    <Content Include="Lecture11_Character_Controller\animation_sheet.png" />
-    <Content Include="Lecture11_Character_Controller\grass.png" />
-    <Content Include="Lecture11_Character_Controller\run_animation.png" />
     <Content Include="memo.txt">
       <SubType>Code</SubType>
     </Content>
     <Content Include="room1.map" />
-    <Content Include="room2.map">
-      <SubType>Code</SubType>
-    </Content>
     <Content Include="__pycache__\Camera.cpython-37.pyc" />
     <Content Include="__pycache__\ConfigParser.cpython-37.pyc" />
     <Content Include="__pycache__\Const.cpython-37.pyc" />

@@ -14,7 +14,7 @@ class Portal(GameObject):
     IMGSForPortal:List[Image] = [];
     PORTAL_SOUND = None;
     LOAD = False;
-    def __init__(self, x, y, angle, sx, sy, state, sceneNumber):
+    def __init__(self, x, y, angle, sx, sy, state, sceneNumber): #direction
         super(Portal,self).__init__(x,y,angle,sx,sy,state);
         self.has_image:bool = True;
         if False == Portal.LOAD:
@@ -29,7 +29,7 @@ class Portal(GameObject):
             Portal.LOAD = True;
 
         #콜라이더 크기를 조정해서 실제로 문으로 들어가듯이 만ㄷㄹ어 보자. 
-        self.collider = CollisionRect(x,y,self.IMG.w//2,self.IMG.h//2);
+        self.collider = CollisionRect(x + (self.IMG.w // 3), y, 1,self.IMG.h);
         self.tag = Const.TAG_DEFAULT;
         self.scene_number = sceneNumber;
 
@@ -42,13 +42,14 @@ class Portal(GameObject):
                            self.transform.tx-GameObject.Cam.camera_offset_x,
                            self.transform.ty-GameObject.Cam.camera_offset_y,
                            );
+        self.render_debug();
+
         return;
 
 
     def render_debug(self): 
         if self.collider :
             draw_rectangle(*self.collider.get_area_offset(GameObject.Cam.camera_offset_x, GameObject.Cam.camera_offset_y));
-
         return;
 
         return;    
@@ -77,7 +78,7 @@ class Portal(GameObject):
         tag = obj.tag;
 
         if(tag == Const.TAG_PLAYER):
-            if KeyInput.g_d or KeyInput.g_a or KeyInput.g_down_arrow:
+            if KeyInput.g_d or KeyInput.g_a :
                 from EffectCutton import EffectCutton;
                 from FrameWork import FrameWork as framework;
                 Portal.PORTAL_SOUND.play(1);

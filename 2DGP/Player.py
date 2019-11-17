@@ -145,7 +145,7 @@ class Player(GameObject):
         self.set_acceleration_of_gravity(7);
 
     """
-    method
+    public method
     """
     def update(self, time):
         self.update_component();
@@ -162,10 +162,10 @@ class Player(GameObject):
         self.weapon_render();
         return;
 
+
     def render_debug(self): 
         if self.collider :
-            from Graphic import GraphicLib;
-            GraphicLib.DebugImg1.draw(self.collider.cx - GameObject.Cam.camera_offset_x, self.collider.cy- GameObject.Cam.camera_offset_y);    
+            draw_rectangle(*self.collider.get_area_offset(GameObject.Cam.camera_offset_x, GameObject.Cam.camera_offset_y));
         return;
 
 

@@ -17,7 +17,7 @@ IDLE_L, IDLE_R = range(2);
 class SkeletonArcher(GameObject):
     LOAD:bool = False;
     UNIQUE_ID:int = 0;
-    IMGForL:Image = None;
+    IMGS:Image = None;
     IMGForR:Image = None;
     IMGSForBullet:List[Image] = [];
     FieldOfView:float = 0.0;
@@ -27,7 +27,7 @@ class SkeletonArcher(GameObject):
         self.has_image = True;
         if SkeletonArcher.LOAD == False:
             
-            SkeletonArcher.IMGForL = pico2d.load_image('assets/Monster/SkeletonArcher/Idle/L.png');
+            SkeletonArcher.IMGS = pico2d.load_image('assets/Monster/SkeletonArcher/Idle/L.png');
             SkeletonArcher.IMGForR = pico2d.load_image('assets/Monster/SkeletonArcher/Idle/R.png');
         
             # bullet
@@ -40,7 +40,7 @@ class SkeletonArcher(GameObject):
         self.name = "SkeletonArcher_" + str(SkeletonArcher.UNIQUE_ID); # For Debug
         SkeletonArcher.UNIQUE_ID += 1;
 
-        self.IMG = SkeletonArcher.IMGForL;
+        self.IMG = SkeletonArcher.IMGS;
         self.collider:Collision = CollisionRect(x,y, self.IMG.w // 2, self.IMG.h // 2);
 
         # attack
@@ -108,7 +108,7 @@ class SkeletonArcher(GameObject):
     
     def update_dir(self):
         if ( self.transform.tx - Player.MyPlayer.transform.tx ) > 0 : # 내 오른쪽에 플레이어가;;
-            self.IMG = SkeletonArcher.IMGForL;
+            self.IMG = SkeletonArcher.IMGS;
             self.dir = Const.direction_L;
         else:
             self.IMG = SkeletonArcher.IMGForR;

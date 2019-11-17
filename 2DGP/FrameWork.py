@@ -5,6 +5,7 @@ from KeyIO import *;
 from Scene import Scene as Scene;
 from TitleScene import *;
 from GameScene import *;
+from BossRoomScene import *;
 from Mouse import *;
 from Player import *;
 
@@ -24,6 +25,7 @@ class FrameWork:
         
         FrameWork.SceneList.append(TitleScene()); #타이틀 신 추가.
         FrameWork.SceneList.append(GameScene());
+        FrameWork.SceneList.append(BossRoomScene());
 
         FrameWork.CurScene:Scene = FrameWork.SceneList[1];
 
@@ -46,6 +48,7 @@ class FrameWork:
             FrameWork.SceneList[Scene.CurSceneNumber].ExitScene();
             Scene.CurSceneNumber = Scene.SceneNumber;
             FrameWork.CurScene.set_cam();
+            FrameWork.CurScene.on_change_scene();
         pass;
 
 

@@ -29,8 +29,6 @@ class SkeletonArcherArrow(GameObject):
         self.name = "SkeletonArcherArrow_" + str(SkeletonArcherArrow.UNIQUE_ID);
 
         self.has_image = True;
-        self.owner = None;
-
         SkeletonArcherArrow.UNIQUE_ID += 1;
         
         self.velocity = 7; 

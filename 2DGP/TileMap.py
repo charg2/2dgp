@@ -38,18 +38,16 @@ class TileMap:
         cam_bottom = cam_top + window_height;
         cam_right = left + window_width;
 
-
         # tile_range index
         min_width, max_width    = ( left // Tile.WIDTH ) , ( cam_right // Tile.WIDTH ) +1;
         min_height, max_height  = ( cam_top // Tile.HEIGHT ) , ( cam_bottom // Tile.HEIGHT ) + 1;
 
         #print("{0} - {1} - {2} - {3}".format(min_width, max_width, min_height, max_height ));
-
-
         if max_width > len(self.tiles[0]):
             max_width = len(self.tiles[0]);
 
         if max_height > len(self.tiles):
+            print(max_height ,len(self.tiles));
             max_height = len(self.tiles);
 
         offset_x:int = GameObject.Cam.camera_offset_x % Tile.WIDTH;
@@ -60,6 +58,7 @@ class TileMap:
         for y in range( min_height, max_height ):
             map_x = 0;
             for x in range( min_width, max_width ) :
+                #print("{0}- {1} - {2} - {3}".format(y, x, len(self.tiles) ,len(self.tiles[0])) )
                 self.tiles[y][x].get_tile().draw_to_origin( map_x - offset_x, map_y - offset_y, Tile.WIDTH, Tile.WIDTH);
                 map_x += Tile.WIDTH;
             map_y += Tile.WIDTH;

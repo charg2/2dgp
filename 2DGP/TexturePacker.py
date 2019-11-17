@@ -38,9 +38,9 @@ if __name__=='__main__':
     #print("test");
     #tt.show();
 
-    height = 65;
-    width = 65;
-    for k, piece in enumerate(crop("assets/Monster/Belial/bossBullet(650x65,10x1).png", height, width), 0):
+    height = 224 // 8;
+    width = 28;
+    for k, piece in enumerate(crop('D:\\_git\\2dgp\\2DGP\\assets\\Monster\\Coin\\coin.png', height, width), 0):
         print("frist");        
         img=Image.new('RGBA', (width, height), 255)
         img.paste(piece)
@@ -48,7 +48,7 @@ if __name__=='__main__':
         img.save(path)
         print("done");
 
-    #img = Image.open('logo (2).png');
-    #resize_multiple(img, 5, "logo.png");
+    #img = Image.open('D:\\_git\\2dgp\\2DGP\\assets\\Monster\\Coin\\coin(56x7)8x1.png');
+    #resize_multiple(img, 4, "coin.png");
 
     #crop(img,90, 90 );

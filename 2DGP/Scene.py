@@ -224,7 +224,22 @@ class Scene:
         self.game_object_list_monster.remove(bullet);
         del bullet;
 
-    
+
+    def remove_game_object(self, gobj):
+        tag = gobj.tag;
+        if tag == Const.TAG_MONSTER:
+            self.game_object_list_monster.remove(gobj);
+        elif tag == Const.TAG_TERRAIN:
+            self.game_object_list_terrain.remove(gobj);
+        elif tag == Const.TAG_OPSTACLE:
+            self.game_object_list_obstacle.remove(gobj);  
+        elif tag == Const.TAG_UI:
+            self.game_ui_list.remove(gobj);               
+        elif tag == Const.TAG_PLAYER:
+            self.game_object_list_ally.remove(gobj);      
+            pass;
+
+
     def add_projectile(self, bullet):
         self.game_object_list_monster.append(bullet);
         return;
@@ -236,6 +251,8 @@ class Scene:
 
         return;
 
+    def on_change_scene(self):
+        pass;
 
 #if __name__ == "__main__":
 #    test = Scene();

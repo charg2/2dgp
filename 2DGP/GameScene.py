@@ -11,6 +11,9 @@ from SkeletonArcher import *;
 from HPBar import *;
 from Terrain import Terrain as terrain;
 from Portal import Portal as portal;
+from SmallHeal import SmallHeal as small_heal;
+from BigHeal import BigHeal as big_heal;
+from coin import Coin as coin;
 
 START_X,START_Y = 300, 120;
 
@@ -24,7 +27,10 @@ class GameScene(Scene):
         self.AddAllyObject(Player(START_X, START_Y,0,1,1,True));          
 
         self.AddMonsterObject(Banshee(START_X + 300, START_Y + 400 ,0,1,1,True));          
-        self.AddMonsterObject(Belial(START_X + 800, START_Y + 400 ,0,1,1,True));          
+        self.AddMonsterObject(small_heal(self, START_X + 500, START_Y + 400 ,0,1,1,True));          
+        self.AddMonsterObject(big_heal(self, START_X + 7, START_Y + 200 ,0,1,1,True));          
+        self.AddMonsterObject(coin(self, START_X + 100, START_Y + 200 ,0,1,1,True));          
+        self.AddMonsterObject(coin(self, START_X + 200, START_Y + 240 ,0,1,1,True));          
         #self.AddMonsterObject(Banshee(START_X + 300, START_Y ,0,1,1,True));          
         #self.AddMonsterObject(Banshee(START_X + 500, START_Y + 100 ,0,1,1,True));          
         #self.AddMonsterObject(Banshee(START_X + 1300, START_Y ,0,1,1,True));      
@@ -35,8 +41,7 @@ class GameScene(Scene):
         #self.AddMonsterObject(Banshee(START_X + 1300, START_Y + 100 ,0,1,1,True));      
         #self.AddMonsterObject(Banshee(START_X + 1500, START_Y + 200 ,0,1,1, True));
         #self.AddMonsterObject(Banshee(START_X + 1500, START_Y + 200 ,0,1,1, True)); 
-        
-        self.AddObstacleObject(portal(START_X + 800, START_Y,0,1,1,True,0));
+        self.AddObstacleObject(portal(START_X + 1800, START_Y,0,1,1,True, 2));
         #self.AddAllyObject(portal(START_X + 800, START_Y,0,1,1,True,4));
         
         self.AddUi(HPBar.get_instance());
@@ -53,3 +58,6 @@ class GameScene(Scene):
         self.AddUi(mouse);
         self.AddAllyObject(mouse);          
         return;
+
+    def on_change_scene(self):
+        pass;

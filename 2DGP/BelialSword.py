@@ -18,7 +18,8 @@ damage = 10;
 count = 6;
 extinction_time = 5;
 start_time = 1;
-velocity = 15;
+velocity = 20;
+
 class BelialSword(GameObject):
     LOAD:bool = False;
     UNIQUE_ID:int = 0;
@@ -28,7 +29,6 @@ class BelialSword(GameObject):
         super(BelialSword, self).__init__(x, y, angle, sx, sy, state);
         if BelialSword.LOAD == False:
             BelialSword.IMG = pico2d.load_image('assets/Monster/Belial/Sword/IMG-0.png');
-    
             BelialSword.LOAD = True;
 
         self.name = "BelialSword_" + str(BelialSword.UNIQUE_ID);
@@ -72,13 +72,9 @@ class BelialSword(GameObject):
         if self.collider :
             draw_rectangle(*self.collider.get_area_offset(GameObject.Cam.camera_offset_x, GameObject.Cam.camera_offset_y));
 
-
         return;
     def on_collision(self, obj):
-        if "Mouse" == obj.name:
-            pass;
-           
-        elif "Hero" == obj.name:
+        if "Hero" == obj.name:
             obj.current_hp -= damage;
             self.owner.remove_projectile(self);
         pass;
@@ -87,13 +83,11 @@ class BelialSword(GameObject):
         self.start_timer += time;
         self.extinction_timer += time;
         # 시간 지나면 사라짐.
-
         if self.start_timer > start_time:
             self.velocity = velocity;
 
         if self.extinction_timer > extinction_time:
             self.owner.remove_projectile(self);
-
 
     def clampingInWindow(self):
         self.transform.tx = Const.clamp(0, self.transform.tx, GameObject.Cam.map_width-self.IMG.w//16)  

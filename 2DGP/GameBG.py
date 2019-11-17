@@ -15,6 +15,7 @@ class GameBG(GameObject):
         super(GameBG, self).__init__(x,y,angle,sx,sy,state);
         
         self.has_image = True;
+        #self.map = TileMap("boss_room.map");
         self.map = TileMap("room1.map");
         self.cam_x = 0;
         self.cam_y = 0;

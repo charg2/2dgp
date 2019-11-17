@@ -19,7 +19,6 @@ class PlayerBullet(GameObject):
     UNIQUE_ID:int = 0;
     IMGS:List[Image] = [];
 
-
     def __init__(self, owner, x, y, angle, sx, sy, state):
         super(PlayerBullet, self).__init__(x, y, angle, sx, sy, state);
         if PlayerBullet.LOAD == False:

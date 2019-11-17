@@ -67,6 +67,7 @@ class EffectCutton(GameObject):
         #from FrameWork import FrameWork;
         from Scene import Scene;
         Scene.SceneNumber = self.scene_number;
+        
         return;
 
     def on_collision(self,GObj):# 이후에 콜라이더 구현후, 콜백으로 실행한다.

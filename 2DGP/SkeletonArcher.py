@@ -12,6 +12,7 @@ from Player import Player;
 
 from typing import List;
 
+max_hp = 100;
 attack_speed = 2;
 IDLE_L, IDLE_R = range(2);
 class SkeletonArcher(GameObject):
@@ -52,6 +53,9 @@ class SkeletonArcher(GameObject):
         self.attack_speed:float = 10.0;
         self.dir:int = Const.direction_L; 
         self.tag:int = Const.TAG_MONSTER;
+
+        # status
+        self.current_hp = 100;
 
     def render(self): 
         self.IMG.clip_composite_draw(0,0,
@@ -162,3 +166,8 @@ class SkeletonArcher(GameObject):
             
         pass;
 
+    def calc_hp(self, damage):
+        #if False == self.is_death :
+            self.current_hp -= damage;
+            if self.current_hp < 0:
+                self.current_hp = 0;

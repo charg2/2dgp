@@ -47,7 +47,7 @@ class TileMap:
             max_width = len(self.tiles[0]);
 
         if max_height > len(self.tiles):
-            print(max_height ,len(self.tiles));
+            #print(max_height ,len(self.tiles));
             max_height = len(self.tiles);
 
         offset_x:int = GameObject.Cam.camera_offset_x % Tile.WIDTH;

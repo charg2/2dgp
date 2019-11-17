@@ -80,6 +80,9 @@
     <Compile Include="GameObject.py" />
     <Compile Include="GameScene.py" />
     <Compile Include="Graphic.py" />
+    <Compile Include="Gun.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="HPBar.py">
       <SubType>Code</SubType>
     </Compile>
@@ -159,6 +162,9 @@
     <Compile Include="TitleScene.py" />
     <Compile Include="Transform.py" />
     <Compile Include="Katana.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Wallet.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

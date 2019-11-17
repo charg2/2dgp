@@ -8,12 +8,15 @@ from Belial import *;
 from Banshee import *;
 from SkeletonArcher import *;
 
-from HPBar import *;
 from Terrain import Terrain as terrain;
 from Portal import Portal as portal;
 from SmallHeal import SmallHeal as small_heal;
 from BigHeal import BigHeal as big_heal;
 from coin import Coin as coin;
+
+#UI
+from HPBar import *;
+from Wallet import *;
 
 START_X,START_Y = 300, 120;
 
@@ -45,12 +48,13 @@ class GameScene(Scene):
         #self.AddAllyObject(portal(START_X + 800, START_Y,0,1,1,True,4));
         
         self.AddUi(HPBar.get_instance());
-
+        self.AddUi(Wallet.get_instance());
 
         self.AddMonsterObject(SkeletonArcher(START_X + 100, START_Y + 100 ,0,1,1, True));        
         
         self.AddTerrainObject(terrain(self.bg.map.width //2, 45, self.bg.map.width //2, 45 ));
-        self.AddTerrainObject(terrain(100, 100, 50, 45));
+        self.AddTerrainObject(terrain(0, self.bg.map.height // 4, 180,  self.bg.map.height // 4));
+        #print("height =", self.bg.map.height)
 
         mouse:Mouse = Mouse();
         mouse.set_cursor(Const.CURSOR_TARGET);

@@ -11,6 +11,8 @@ from Player import Player;
 
 from typing import List;
 
+# 상자 오브젝트를 만들고 그거 밑에 깔아서 만듬 
+# 랜덤으로 가지고 있을지 ㅇㅇ;
 
 heal = 10;
 animation_frame = 9;

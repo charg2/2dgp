@@ -74,8 +74,11 @@ class BelialSword(GameObject):
 
         return;
     def on_collision(self, obj):
-        if "Hero" == obj.name:
-            obj.current_hp -= damage;
+        if Const.TAG_PLAYER == obj.tag :
+            obj.calc_hp(damage);
+            self.owner.remove_projectile(self);
+
+        elif Const.TAG_TERRAIN == obj.tag:
             self.owner.remove_projectile(self);
         pass;
     

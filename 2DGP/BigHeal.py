@@ -1,6 +1,3 @@
-
-
-
 from GameObject import *;
 from Graphic import *;
 from math import*;
@@ -13,6 +10,8 @@ from Player import Player;
 from typing import List;
 
 
+# 상자 오브젝트를 만들고 그거 밑에 깔아서 만듬 
+# 랜덤으로 가지고 있을지 ㅇㅇ;
 heal = 25;
 animation_frame = 16;
 frame_time = 0.1;

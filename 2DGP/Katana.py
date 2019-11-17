@@ -14,11 +14,7 @@ class Katana(GameObject):
         print(owner.tag);
         Katana.Imgs.append( pico2d.load_image("assets/Weapon/Katana.png") );
         self.current_img = Katana.Imgs[0];
-
         LOAD = True;
-
-    def set_onwer(self):
-        pass;
 
     def render(self):
         if self.owner.m_dir == Const.direction_R:
@@ -29,6 +25,9 @@ class Katana(GameObject):
 
     def update(self, time):
         #self.transform.angle;
+        pass;
+
+    def handle_io(self):
         pass;
 
 

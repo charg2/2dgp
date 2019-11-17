@@ -18,6 +18,7 @@ from typing import List;
 # 공격 상태에서 쿨ㅇ타임이 아닌 공격을 해야 하는데
 # 그렇게 쿨타임이 길어야 하는지 모르겟으니 그냥 쿨타임 없이 랜덤으로 패턴 공격.
 
+max_hp = 100;
 attack_speed = 3;
 RUN_L, RUN_R, IDLE_R, IDLE_L = range(4);
 frame = 10;
@@ -52,6 +53,9 @@ class Belial(GameObject):
         self.animation_numb = 0;
         self.animation_timer = 0.0;
         self.animation_state = RUN_L;
+
+        # status
+        self.current_hp = 100;
 
         self.current_state = IdleStateForBelial(self);
         self.dir = Const.direction_L; 
@@ -126,3 +130,8 @@ class Belial(GameObject):
         pass;
 
 
+    def calc_hp(self, damage):
+        #if False == self.is_death :
+            self.current_hp -= damage;
+            if self.current_hp < 0:
+                self.current_hp = 0;

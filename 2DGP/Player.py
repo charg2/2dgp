@@ -5,17 +5,24 @@ from FrameWork import *;
 from CollisionRect import*;
 from KeyIO import *;
 from Const import *;
-from Katana import *;
+
 
 from IdleState import IdleStateForPlayer;
 from RunState import RunStateForPlayer;
 from JumpState import JumpStateForPlayer;
 from DashState import DashStateForPlayer;
+from DeathState import DeathStateForPlayer;
+
+
+from Katana import *;
+from Gun import *;
+
 
 from typing import List;
 
 
 RUN_L, RUN_R, IDLE_R, IDLE_L = range(4);
+DASH_CHARGE_TIME  = 1.25;
 class Player(GameObject):
     LOAD:bool = False;
 
@@ -93,7 +100,8 @@ class Player(GameObject):
         self.force_y        :int = 5;
 
         self.transform.angle = 1;
-        self.collider:Collision = CollisionRect(x,y, self.IMG.w // 2, self.IMG.h // 2);
+        self.collider:Collision = CollisionRect(x ,y, self.IMG.w // 3, self.IMG.h // 2);
+        self.has_collider = True;
         GameObject.Cam.transform = self.transform;
        
         self.jump_trigger:bool = True;
@@ -109,37 +117,42 @@ class Player(GameObject):
         self.skill_key_timer:float = 0;
         self.skill_timer    :float = 0;
 
-        self.dash_key_timer :float = 0;
-        self.dash_charge_timer     :float = 0;
-        self.dash_count     :int = 2;
-        self.dash_trigger   :bool = True;
 
-        self.current_hp = 100;
-        self.max_hp = 100;
+        self.dash_key_timer         :float  = 0;
+        self.dash_charge_timer      :float  = 0;
+        self.dash_count             :int    = 2;
+        self.max_dash_count         :int    = 2;
+        self.dash_trigger           :bool   = True;
 
-        self.is_jump:bool = False;
-        self.is_dash:bool = False;
-        self.is_run :bool = False;
-        self.is_down:bool = False;
+
+        self.is_jump    :bool = False;
+        self.is_dash    :bool = False;
+        self.is_run     :bool = False;
+        self.is_down    :bool = False;
+        self.is_death   :bool = False;
 
         ## ability
-        #self.hp:int = 0;
         #self.dash_cnt:int = 0;
+        self.current_hp = 100;
+        self.max_hp = 100;
         self.attack_speed:float = 0.2;
+        self.current_coin:int = 0;
 
         # animation code
-        self.animation_timer:float = 0.0;
-        self.animation_state:int = RUN_R;
-
-        self.m_dir          :int = Const.direction_R;
-        self.dir            :int = RUN_R; 
-        self.last_dir       :int = RUN_R % 2;
-        self.tag            :int = Const.TAG_PLAYER;
+        self.animation_timer :float = 0.0;
+        self.animation_state :int = RUN_R;
+        self.m_dir           :int = Const.direction_R;
+        self.dir             :int = RUN_R; 
+        self.last_dir        :int = RUN_R % 2;
+        self.tag             :int = Const.TAG_PLAYER;
         self.current_state = IdleStateForPlayer(self);
 
-        # equipment
+
+        # weapon
         self.weapons = [];
-        self.current_weapon:Katana = Katana( 30, 30, 0.7, 1, 1, True, self );
+        self.weapons.append(Katana( 30, 30, 0.7, 1, 1, True, self ));
+        self.weapons.append(Gun( 30, 30, 0.7, 1, 1, True, self ));
+        self.current_weapon = self.weapons[1];
 
         self.set_grivity(True);
         self.set_acceleration_of_gravity(7);
@@ -151,9 +164,12 @@ class Player(GameObject):
         self.update_component();
         self.handle_keyIO();
         self.forStateMachine();
+        
+        #print("Terrain.py player.ty {0}".format(self.transform.ty));
 
         self.Physx(time);
         self.update_timer(time);
+        self.current_weapon.update(time);
         self.clampingInWindow();
         return;
 
@@ -174,9 +190,11 @@ class Player(GameObject):
 
     def update_component(self):
         self.previous_transform = self.transform;
-        self.collider.cx, self.collider.cy = self.transform.tx, self.transform.ty;
-        
         GameObject.Cam.transform = self.previous_transform;
+        
+        if True == self.has_collider:
+            self.collider.cx, self.collider.cy = self.transform.tx, self.transform.ty;
+        
         return;
 
     def update_timer(self,time):
@@ -184,12 +202,14 @@ class Player(GameObject):
         self.jump_key_timer += time;
         self.attack_key_timer += time;
         self.skill_key_timer += time;
-        #self.last_dir = (self.dir%2);
 
-        if self.dash_count < Const.MAX_DASH_COUNT :
+        if self.dash_count < self.max_dash_count :
             self.dash_charge_timer += time;
-            if Const.DASH_CHARGE_TIME <= self.dash_charge_timer:
+            if DASH_CHARGE_TIME <= self.dash_charge_timer:
                 self.dash_count += 1;
+                self.dash_charge_timer = 0;
+
+                print("충전함");
 
         return;
     
@@ -218,35 +238,30 @@ class Player(GameObject):
             self.m_dir = Const.direction_R;
         if KeyInput.g_mouse_x < ( self.transform.tx - GameObject.Cam.camera_offset_x): #left
             self.m_dir = Const.direction_L;
-        # 런. # 공격. # 스킬.
-        self.check_action();
-
         
+        # 런. # 공격. # 스킬.
+        if self.is_death == False:
+            self.check_state();
+
         return;
 
     #idle에서 다른 상태로 변화하는걸 감지한다.
   
-    def check_action(self):
-        if ( False == self.is_dash ) and (False == self.is_jump) and (False == self.is_run) :
-        #if ( False == self.is_dash ) and ( False == self.is_jump ) and (False == self.is_run) :
-            if True == KeyInput.g_w  :
-                print("Player.py JumpState");
-                self.add_queue(JumpStateForPlayer(self));
-                self.is_jump = True;
-
-            #if (False == self.is_jump) and ( False == self.is_run ) and ( KeyInput.g_a or KeyInput.g_d ) : 
-            if ( KeyInput.g_a or KeyInput.g_d ) : 
-                print("Player.py RunState");
-                self.add_queue(RunStateForPlayer(self));
-
-        # 대시. # 상태에서 다른 상태이동은 그상태에서 정의 현재 아이들 상태에서만 가능. 
-            #if ( False == self.is_dash ) and ( False == self.is_jump ) and (False == self.is_run) :
-            if 0 < self.dash_count and False == self.is_dash:
-                if True == KeyInput.g_mouse_rdown :
-                    #if  ( False == self.is_dash ) and ((True == self.dash_trigger) and 
-                    print("Player.py DashState");
-                    self.add_queue(DashStateForPlayer(self));
-
+    def check_state(self):
+        if self.current_hp <= 0:
+            self.add_queue(DeathStateForPlayer(self));
+        else:
+            if ( False == self.is_dash ) and (False == self.is_jump) and (False == self.is_run) :
+                if True == KeyInput.g_w : #and False == self.has_grivity() :
+                    self.add_queue(JumpStateForPlayer(self));
+                    self.is_jump = True;
+                if ( KeyInput.g_a or KeyInput.g_d ) :
+                        self.add_queue(RunStateForPlayer(self));
+                # 대시. # 상태에서 다른 상태이동은 그상태에서 정의 현재 아이들 상태에서만 가능. 
+                if 0 < self.dash_count and False == self.is_dash:
+                        if True == KeyInput.g_mouse_rdown :
+                            #if  ( False == self.is_dash ) and ((True == self.dash_trigger) and 
+                            self.add_queue(DashStateForPlayer(self));
 
     def Physx(self,time):
         grivity_offset_y = 0; 
@@ -269,10 +284,34 @@ class Player(GameObject):
         return;
     
     def on_collision(self, obj):
-        tag = obj.tag;
-
-        if Const.TAG_TERRAIN == tag:
-                if self.physx.velocity_y <=0 :
-                    self.physx.set_falling(False);
-                    self.transform = self.previous_transform;
+        if True == self.has_collider:
+            tag = obj.tag;
+            if Const.TAG_TERRAIN == tag:
+                    if self.physx.velocity_y <=0 :
+                        self.physx.set_falling(False);
+                        self.transform = self.previous_transform;
+        
         return;
+
+    #def turnon_invincibility(self):
+    #    del self.collider;
+    #    self.collider = None;
+    #    self.has_collider = False;
+
+    #def turnoff_invincibility(self):
+    #    self.collider = CollisionRect(self.transform.tx, self.transform.ty, self.IMG.w // 2, self.IMG.h // 2);
+    #    self.has_collider = True;
+
+    def calc_hp(self, damage):
+        if False == self.is_death :
+            self.current_hp -= damage;
+            if self.current_hp < 0:
+                self.current_hp = 0;
+
+
+# for weapon
+    def swap_weapon(self):
+        self.current_weapon = (self.current_weapon + 1 )% 2;
+        self.current_weapon = self.weapons[self.current_weapon];
+        pass;
+

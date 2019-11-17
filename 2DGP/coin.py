@@ -13,7 +13,7 @@ from Player import Player;
 from typing import List;
 
 
-heal = 25;
+price = 25;
 animation_frame = 8;
 frame_time = 0.1;
 
@@ -88,8 +88,6 @@ class Coin(GameObject):
         if Const.TAG_PLAYER == obj.tag:
             Coin.COIN_SOUND.play(1);
 
-            obj.current_hp += heal;
-            if obj.max_hp < obj.current_hp :
-                obj.current_hp = obj.max_hp;
+            obj.current_coin += price;
             self.owner.remove_game_object(self);
         return;

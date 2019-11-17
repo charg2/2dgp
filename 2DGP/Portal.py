@@ -29,7 +29,7 @@ class Portal(GameObject):
             Portal.LOAD = True;
 
         #콜라이더 크기를 조정해서 실제로 문으로 들어가듯이 만ㄷㄹ어 보자. 
-        self.collider = CollisionRect(x + (self.IMG.w // 3), y, 1,self.IMG.h);
+        self.collider = CollisionRect(x + (self.IMG.w // 3), y, 0,self.IMG.h);
         self.tag = Const.TAG_DEFAULT;
         self.scene_number = sceneNumber;
 
@@ -71,7 +71,6 @@ class Portal(GameObject):
     def set_scene_number(self,number):
         self.scene_number = number;
         return;
-
 
     # 콜라이더를 매우 좌우 구석 끝에 배치 후 방향에 따라 <- -> 키 누르면 다음맵으로 가게 함.
     def on_collision(self,obj):# 이후에 콜라이더 구현후, 콜백으로 실행한다.

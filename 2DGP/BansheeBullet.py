@@ -78,15 +78,17 @@ class BansheeBullet(GameObject):
     def render_debug(self): 
         if self.collider :
             draw_rectangle(*self.collider.get_area_offset(GameObject.Cam.camera_offset_x, GameObject.Cam.camera_offset_y));
-
         return;
+
+
     def on_collision(self, obj):
-        if "Mouse" == obj.name:
-            pass;
-           
-        elif "Hero" == obj.name:
-            obj.current_hp -= damage;
+        if Const.TAG_PLAYER == obj.tag :
+            obj.calc_hp(damage);
             self.owner.remove_projectile(self);
+
+        elif Const.TAG_TERRAIN == obj.tag:
+            self.owner.remove_projectile(self);
+            pass;
             #맵에서 나가도 ㅇㅇ;
         # 벽이면 사라짐.
         #print("{0} - 충돌함 ({1},{2})".format(self.name,self.transform.tx, self.transform.ty));

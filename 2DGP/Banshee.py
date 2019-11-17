@@ -16,6 +16,7 @@ from typing import List;
 
 # 플레이어에게 접근 하는 패턴만 추가하면 완성.
 
+max_hp = 100;
 attack_speed = 3;
 RUN_L, RUN_R, IDLE_R, IDLE_L = range(4);
 class Banshee(GameObject):
@@ -50,6 +51,9 @@ class Banshee(GameObject):
         self.force_x =6; 
         self.force_y =8;
         self.collider:Collision = CollisionRect(x,y, self.IMG.w // 2, self.IMG.h // 2);
+
+        # status
+        self.current_hp = 100;
 
         # attack
         self.attack_trigger:bool = False;
@@ -172,4 +176,8 @@ class Banshee(GameObject):
 
         pass;
 
-
+    def calc_hp(self, damage):
+        #if False == self.is_death :
+            self.current_hp -= damage;
+            if self.current_hp < 0:
+                self.current_hp = 0;

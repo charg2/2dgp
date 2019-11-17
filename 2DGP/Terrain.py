@@ -20,6 +20,7 @@ class Terrain(GameObject):
 
     def render_debug(self): 
         if self.collider :
+            #draw_rectangle(*self.collider.get_area());
             draw_rectangle(*self.collider.get_area_offset(GameObject.Cam.camera_offset_x, GameObject.Cam.camera_offset_y));
         return;
     def renderForMinimap(self):
@@ -38,5 +39,7 @@ class Terrain(GameObject):
                 #obj.physx.is_ground = True;
                 #pass;
                 obj.transform.ty += obj.physx.acceleration_of_gravity;
-        #print("Terrain.py collision {0} {1}".format(obj.name, obj.transform.tx));
+
+                #print("Terrain.py player.ty {0}".format(obj.transform.ty));
+
         return;

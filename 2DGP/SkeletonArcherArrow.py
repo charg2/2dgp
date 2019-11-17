@@ -7,12 +7,14 @@ from Const import *;
 from CollisionRect import*;
 
 from Player import Player;
+
+
 from typing import List;
 
 frame_time = 0.2;
 frame = 4;
 extinction_time = 2;
-
+damage = 5;
 class SkeletonArcherArrow(GameObject):
     LOAD:bool = False;
     UNIQUE_ID:int = 0;
@@ -76,13 +78,15 @@ class SkeletonArcherArrow(GameObject):
             #GraphicLib.DebugImg1.draw(self.transform.tx, self.transform.ty);    
 
         return;
+
     def on_collision(self, obj):
-        if "Mouse" == obj.name:
-            pass;
-           
-        elif "Hero" == obj.name:
-            obj.current_hp -= 5;
+        if Const.TAG_PLAYER == obj.tag :
+            obj.calc_hp(damage);
             self.owner.remove_projectile(self);
+
+        elif Const.TAG_TERRAIN == obj.tag:
+            self.owner.remove_projectile(self);
+
             #맵에서 나가도 ㅇㅇ;
         # 벽이면 사라짐.
         #print("{0} - 충돌함 ({1},{2})".format(self.name,self.transform.tx, self.transform.ty));

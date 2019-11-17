@@ -21,6 +21,7 @@ class DashStateForPlayer(StateMachine):
 
         self.before_angle = self.obj.transform.angle;
         self.dash_timer = 0;
+        self.obj.dash_count -= 1;
         self.before_vx, self.before_vy = self.obj.physx.velocity_x, self.obj.physx.velocity_y;
 
 

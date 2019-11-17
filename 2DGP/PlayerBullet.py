@@ -6,14 +6,16 @@ from KeyIO import *;
 from Const import *;
 from CollisionRect import*;
 
-from Player import Player;
-from IdleStateForPlayer import *;
+from Gun import *;
+from Player import *;
+
 
 from typing import List;
 
 frame_time = 0.2;
 frame = 4;
 damage = 5;
+animation_timer = 0.25;
 class PlayerBullet(GameObject):
     LOAD:bool = False;
     UNIQUE_ID:int = 0;
@@ -22,10 +24,10 @@ class PlayerBullet(GameObject):
     def __init__(self, owner, x, y, angle, sx, sy, state):
         super(PlayerBullet, self).__init__(x, y, angle, sx, sy, state);
         if PlayerBullet.LOAD == False:
-            PlayerBullet.IMGS.append(pico2d.load_image('assets/Monster/Player/Bullet/banshee_bullet (1).png'));
-            PlayerBullet.IMGS.append(pico2d.load_image('assets/Monster/Player/Bullet/banshee_bullet (2).png'));
-            PlayerBullet.IMGS.append(pico2d.load_image('assets/Monster/Player/Bullet/banshee_bullet (3).png'));
-            PlayerBullet.IMGS.append(pico2d.load_image('assets/Monster/Player/Bullet/banshee_bullet (4).png'));
+            PlayerBullet.IMGS.append(pico2d.load_image('assets/Monster/Banshee/Bullet/banshee_bullet (1).png'));
+            PlayerBullet.IMGS.append(pico2d.load_image('assets/Monster/Banshee/Bullet/banshee_bullet (2).png'));
+            PlayerBullet.IMGS.append(pico2d.load_image('assets/Monster/Banshee/Bullet/banshee_bullet (3).png'));
+            PlayerBullet.IMGS.append(pico2d.load_image('assets/Monster/Banshee/Bullet/banshee_bullet (4).png'));
 
             PlayerBullet.LOAD = True;
 
@@ -33,18 +35,15 @@ class PlayerBullet(GameObject):
 
         self.has_image = True;
         self.owner = None;
-
+        self.img = PlayerBullet.IMGS[0];
         PlayerBullet.UNIQUE_ID += 1;
         
         self.velocity = 10; 
         self.owner = owner;
-        self.animation_timer = 0.0;
+        self.animation_time = 0.0;
         self.animation_status = 0;
         
         self.collider:Collision = CollisionRect(x,y, self.IMGS[0].w // 2, self.IMGS[0].h // 2);
-
-        #self.physx.angle_rate = 0.01;
-
 
         pass;
 
@@ -81,30 +80,28 @@ class PlayerBullet(GameObject):
             #GraphicLib.DebugImg1.draw(self.transform.tx, self.transform.ty);    
 
         return;
+
+
     def on_collision(self, obj):
-        if "Mouse" == obj.name:
-            pass;
-           
-        elif "Hero" == obj.name:
+        if Const.TAG_MONSTER == obj.name:
             obj.current_hp -= damage;
-            self.owner.remove_projectile(self);
-            #맵에서 나가도 ㅇㅇ;
+        #    self.owner.remove_projectile(self);
+        #맵에서 나가도 ㅇㅇ;
         # 벽이면 사라짐.
         #print("{0} - 충돌함 ({1},{2})".format(self.name,self.transform.tx, self.transform.ty));
         # 플레이어면 체력을 깍아 버림.
 
         #일단 충돌하면 없어지는건 뺴박 캔트.
-        
-
         pass;
     
 
     def update_timer(self,time):
-        self.animation_timer += time;
+        self.animation_time += time;
 
-        if self.animation_timer > frame_time:
+        if animation_timer < self.animation_time:
             self.animation_status = ( self.animation_status + 1 ) % frame;
-            self.animation_timer = 0.0; 
+            self.img = PlayerBullet.IMGS[self.animation_status];
+            self.animation_time = 0.0; 
 
 
     def clampingInWindow(self):

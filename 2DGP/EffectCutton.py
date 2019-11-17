@@ -14,7 +14,7 @@ class EffectCutton(GameObject):
         super(EffectCutton,self).__init__(x,y,angle,sx,sy,state);
         self.has_image = True;
         if False == EffectCutton.LOAD:
-            EffectCutton.IMGSForEffect.append(pico2d.load_image('assets/Effect/Cutton/cot2.png'))
+            EffectCutton.IMGSForEffect.append(pico2d.load_image('assets/Effect/Cutton/PointLight00.png'))
             EffectCutton.IMG = EffectCutton.IMGSForEffect[0];
 
             EffectCutton.LOAD = True;
@@ -34,6 +34,7 @@ class EffectCutton(GameObject):
                            EffectCutton.IMG.w,EffectCutton.IMG.h,0,'',
                            self.transform.tx,
                            self.transform.ty,
+                           EffectCutton.IMG.w * 2,EffectCutton.IMG.h * 2
                            );
         return;
 

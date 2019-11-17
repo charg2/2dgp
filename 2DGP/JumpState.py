@@ -11,6 +11,7 @@ class JumpStateForPlayer(StateMachine):
     
     def __init__(self,gobj):
         self.obj = gobj;
+        #gobj.set_grivity(True);
 
         self.Fy = gobj.force_y + 30;
 

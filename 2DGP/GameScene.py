@@ -34,26 +34,22 @@ class GameScene(Scene):
         self.AddMonsterObject(big_heal(self, START_X + 7, START_Y + 200 ,0,1,1,True));          
         self.AddMonsterObject(coin(self, START_X + 100, START_Y + 200 ,0,1,1,True));          
         self.AddMonsterObject(coin(self, START_X + 200, START_Y + 240 ,0,1,1,True));          
-        #self.AddMonsterObject(Banshee(START_X + 300, START_Y ,0,1,1,True));          
-        #self.AddMonsterObject(Banshee(START_X + 500, START_Y + 100 ,0,1,1,True));          
-        #self.AddMonsterObject(Banshee(START_X + 1300, START_Y ,0,1,1,True));      
-        #self.AddMonsterObject(Banshee(START_X + 1500, START_Y ,0,1,1, True));          
-        #self.AddMonsterObject(Banshee(START_X + 1300, START_Y + 400 ,0,1,1,True));          
-        #self.AddMonsterObject(Banshee(START_X + 1300, START_Y ,0,1,1,True));          
-        #self.AddMonsterObject(Banshee(START_X + 1500, START_Y + 100 ,0,1,1,True));          
-        #self.AddMonsterObject(Banshee(START_X + 1300, START_Y + 100 ,0,1,1,True));      
-        #self.AddMonsterObject(Banshee(START_X + 1500, START_Y + 200 ,0,1,1, True));
-        #self.AddMonsterObject(Banshee(START_X + 1500, START_Y + 200 ,0,1,1, True)); 
-        self.AddObstacleObject(portal(START_X + 1800, START_Y,0,1,1,True, 2));
-        #self.AddAllyObject(portal(START_X + 800, START_Y,0,1,1,True,4));
+
+        self.AddObstacleObject(portal(START_X + 2100, START_Y,0,1,1,True, 2));
         
+        #ui
         self.AddUi(HPBar.get_instance());
         self.AddUi(Wallet.get_instance());
 
-        self.AddMonsterObject(SkeletonArcher(START_X + 100, START_Y + 100 ,0,1,1, True));        
+        self.AddMonsterObject(SkeletonArcher(START_X + 100, START_Y + 100 ,0,1,1, True));     
+        
+        from BelialLaser import BelialLaser as bl;
+        self.AddMonsterObject(bl(self, START_X + 1000, START_Y + 600 ,0,1,1, True));        
         
         self.AddTerrainObject(terrain(self.bg.map.width //2, 45, self.bg.map.width //2, 45 ));
-        self.AddTerrainObject(terrain(0, self.bg.map.height // 4, 180,  self.bg.map.height // 4));
+        self.AddTerrainObject(terrain(0, 100 + self.bg.map.height // 4, 180,  self.bg.map.height // 4));
+        self.AddTerrainObject(terrain(800, self.bg.map.height // 4, 180,  100));
+        self.AddTerrainObject(terrain(1200, self.bg.map.height // 4, 180,  100));
         #print("height =", self.bg.map.height)
 
         mouse:Mouse = Mouse();

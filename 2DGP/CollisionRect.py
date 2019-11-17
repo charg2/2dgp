@@ -17,6 +17,14 @@ class CollisionRect(Collision):
     def get_area_offset(self, cam_offset_x, cam_offset_y) -> tuple:
         return (self.cx-self.half_width-cam_offset_x, self.cy- self.half_height-cam_offset_y, self.cx+self.half_width-cam_offset_x, self.cy+ self.half_height-cam_offset_y)
 
+    def set_area(self, width, height) :
+        self.half_width = width //2;
+        self.half_height = height //2;
+
+    def multiply_area(self, width_multiple, height_multiple):
+        self.half_width  = int(self.half_width * width_multiple);
+        self.half_height = int(self.half_height * height_multiple);
+
 
 if __name__ == "__main__":
     x1,x2 ,y1,y2 = 0,0,0,0;

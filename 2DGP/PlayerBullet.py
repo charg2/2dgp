@@ -9,7 +9,6 @@ from CollisionRect import*;
 from Gun import *;
 from Player import *;
 
-
 from typing import List;
 
 frame_time = 0.2;
@@ -68,18 +67,15 @@ class PlayerBullet(GameObject):
         
         self.transform.set_position(self.physx.velocity_x, self.physx.velocity_y);
 
-
     def render(self):
         PlayerBullet.IMGS[self.animation_status].draw(self.transform.tx - GameObject.Cam.camera_offset_x, self.transform.ty - GameObject.Cam.camera_offset_y);    
         pass;
 
     def render_debug(self): 
         if self.collider :
-            from Graphic import GraphicLib;
-            GraphicLib.DebugImg1.draw(self.previous_transform.tx - GameObject.Cam.camera_offset_x, self.previous_transform.ty - GameObject.Cam.camera_offset_y);    
-            #GraphicLib.DebugImg1.draw(self.transform.tx, self.transform.ty);    
-
+            draw_rectangle(*self.collider.get_area_offset(GameObject.Cam.camera_offset_x, GameObject.Cam.camera_offset_y));
         return;
+
 
 
     def on_collision(self, obj):
@@ -102,7 +98,6 @@ class PlayerBullet(GameObject):
             self.animation_status = ( self.animation_status + 1 ) % frame;
             self.img = PlayerBullet.IMGS[self.animation_status];
             self.animation_time = 0.0; 
-
 
     def clampingInWindow(self):
         self.transform.tx = Const.clamp(0, self.transform.tx, GameObject.Cam.map_width-self.IMGS[0].w//16)  

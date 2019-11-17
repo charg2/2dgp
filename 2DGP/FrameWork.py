@@ -27,7 +27,7 @@ class FrameWork:
         FrameWork.SceneList.append(GameScene());
         FrameWork.SceneList.append(BossRoomScene());
 
-        FrameWork.CurScene:Scene = FrameWork.SceneList[1];
+        FrameWork.CurScene:Scene = FrameWork.SceneList[0];
 
     def update():
         delay(0.016);

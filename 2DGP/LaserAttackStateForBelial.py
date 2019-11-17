@@ -12,7 +12,7 @@ body_frame = 7;
 hand_frame = 10;
 laser_frame = 7;
 
-LASER_L, LASER_R = rnage(2);
+LASER_L, LASER_R = range(2);
 
 class LaserAttackStateForBelial(StateMachine):
     LOAD:bool = False;
@@ -27,7 +27,7 @@ class LaserAttackStateForBelial(StateMachine):
         
         self.offset_x, self.offset_y = 100, 100;
         
-        self.timer = 0;
+        self.timer = 0;ddd
         self.animation_state = 0;
         self.animation_hand_state =0;
         self.attack_timer = 0;

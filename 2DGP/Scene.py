@@ -5,8 +5,8 @@ from MyTimer import *;
 from typing import List;
 
 class Scene:
-    SceneNumber = 1;
-    CurSceneNumber = 1;
+    SceneNumber = 0;
+    CurSceneNumber = 0;
     Pause = False;
     Time = 0;
     RenderDebug = False;
@@ -85,9 +85,10 @@ class Scene:
                                     mob.on_collision(obj);
         
         # p vs ter
-        #for obj in self.game_object_list_ally:
-        #    if None != obj.collider:
-                #if Const.COLLISION_RECT == obj.collider.get_collision_type() :
+        for obj in self.game_object_list_ally:
+            if None != obj.collider:
+                if Const.COLLISION_RECT == obj.collider.get_collision_type() :
+
                     for ter in self.game_object_list_terrain :
                         if None != ter.collider:
                             if Const.COLLISION_RECT == ter.collider.get_collision_type() :
@@ -98,6 +99,9 @@ class Scene:
                                     obj.on_collision(ter);
                                     ter.on_collision(obj);
 
+        for obj in self.game_object_list_ally:
+            if None != obj.collider:
+                if Const.COLLISION_RECT == obj.collider.get_collision_type() :
 
                     for obs in self.game_object_list_obstacle :
                         if None != obs.collider:
@@ -108,19 +112,19 @@ class Scene:
                                 if(True == Const.is_collided(aleft,abottom,aright,atop,bleft,bbottom,bright,btop)):
                                     obj.on_collision(obs);
                                     obs.on_collision(obj);
-        
+        # 더 세분화 하자..
         #monster vs terrain
-        for obj in self.game_object_list_monster:
-            if None != obj.collider:
-                if Const.COLLISION_RECT == obj.collider.get_collision_type() :
+        for mob in self.game_object_list_monster:
+            if mob.collider:
+                if Const.COLLISION_RECT == mob.collider.get_collision_type() :
                     for ter in self.game_object_list_terrain :
                         if None != ter.collider:
                             if Const.COLLISION_RECT == ter.collider.get_collision_type() :
                                 aleft,abottom,aright,atop = ter.collider.get_area();
-                                bleft,bbottom,bright,btop = obj.collider.get_area();
+                                bleft,bbottom,bright,btop = mob.collider.get_area();
 
                                 if(True == Const.is_collided(aleft,abottom,aright,atop,bleft,bbottom,bright,btop)):
-                                    obj.on_collision(ter);
+                                    mob.on_collision(ter);
                                     ter.on_collision(obj);
 
     ## bullet check
@@ -220,8 +224,11 @@ class Scene:
                 #lowx lowy   maxx maxy
 
     def remove_projectile(self, bullet):
-        from BansheeBullet import BansheeBullet;
-        self.game_object_list_monster.remove(bullet);
+        try:
+        #if bulliet in self.game_object_list_monster:
+            self.game_object_list_monster.remove(bullet);
+        except ValueError:
+            print("Scene::remove_procjectile(slef) error?");
         del bullet;
 
 

@@ -4,11 +4,12 @@ from Belial import *;
 from Graphic import *;
 
 from BulletAttackStateForBelial import *;
-from SwordAttackStateForBelial import *;
+from SwordAttackStateForBelial  import *;
+from LaserAttackStateForBelial  import *;
 
 
 frame = 10;
-attack_table = { 0: SwordAttackStateForBelial , 1 : BulletAttackStateForBelial }
+attack_table = { 0: SwordAttackStateForBelial , 1 : BulletAttackStateForBelial, 2 : LaserAttackStateForBelial };
 
 class IdleStateForBelial(StateMachine):
     LOAD:bool = False;

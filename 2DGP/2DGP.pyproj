@@ -178,7 +178,6 @@
   <ItemGroup>
     <Content Include="assets\player.png" />
     <Content Include="assets\player.psd" />
-    <Content Include="assets\run_animation.png" />
     <Content Include="boss_room.map" />
     <Content Include="config.ini" />
     <Content Include="memo.txt">

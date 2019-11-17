@@ -27,7 +27,9 @@ class BossRoomScene(Scene):
         #self.AddObstacleObject(portal(START_X + 800, START_Y,0,1,1,True,0));
         self.AddTerrainObject(terrain(self.bg.map.width //2, 45, self.bg.map.width //2, 45 ));
         self.AddTerrainObject(terrain(self.bg.map.width //2, 1800, self.bg.map.width //2, 0 ));
-        self.AddTerrainObject(terrain(100, 100, 50, 45));
+        self.AddTerrainObject(terrain(0, 450+ self.bg.map.height // 4, 180,  (self.bg.map.height // 4) ) );
+
+        #self.AddTerrainObject(terrain(100, 100, 50, 45));
 
         mouse:Mouse = Mouse();
         mouse.set_cursor(Const.CURSOR_TARGET);

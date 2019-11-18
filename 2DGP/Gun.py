@@ -24,12 +24,15 @@ class Gun(GameObject):
         self.attack_time        :float  = 0.0;
         self.attack_key_timer   :float  = 0.3;
 
+        self.radian = 0;
+
     def render(self):
         dir = '';
         if self.owner.m_dir == Const.direction_L:
             dir = "v";
 
-        self.current_img.composite_draw( 2, dir,self.owner.transform.tx -10 - GameObject.Cam.camera_offset_x, self.owner.transform.ty - 20 - GameObject.Cam.camera_offset_y, self.current_img.w, self.current_img.h);
+        #self.current_img.composite_draw( 2, dir,self.owner.transform.tx -10 - GameObject.Cam.camera_offset_x, self.owner.transform.ty - 20 - GameObject.Cam.camera_offset_y, self.current_img.w, self.current_img.h);
+        self.current_img.rotate_draw( -self.radian ,self.owner.transform.tx - GameObject.Cam.camera_offset_x, self.owner.transform.ty - 20 - GameObject.Cam.camera_offset_y, self.current_img.w, self.current_img.h);
 
     def update(self, time):
         #self.transform.angle;
@@ -37,6 +40,7 @@ class Gun(GameObject):
         
         self.update_time(time);
         self.handle_io();
+        self.update_component();
 
     def handle_io(self):
         if self.attack_trigger:
@@ -54,7 +58,12 @@ class Gun(GameObject):
                 self.attack_time = 0;
 
     def shot(self):
-        print("빵야");
+        #target_x = KeyInput.g_mouse_x;
+        #target_y = Const.WIN_HEIGHT - KeyInput.g_mouse_y - 1;
+
+        #radian = ( Const.calc_radian(self.owner.transform.tx - GameObject.Cam.camera_offset_x, self.owner.transform.ty - GameObject.Cam.camera_offset_y, target_x, target_y) );
+
+        #print("빵야 - {0}", radian);
 
         tx = self.owner.transform.tx;
         ty = self.owner.transform.ty;
@@ -63,12 +72,16 @@ class Gun(GameObject):
         from SkeletonArcherArrow import SkeletonArcherArrow as arrow;
 
         if Const.direction_L== self.owner.m_dir:
-            FrameWork.CurScene.add_projectile(pbullet(FrameWork.CurScene, tx - 100, ty, 1,1,1, True)); 
+            FrameWork.CurScene.add_projectile(pbullet(FrameWork.CurScene, tx, ty, self.radian,1,1, True)); 
         else :
-            FrameWork.CurScene.add_projectile(pbullet(FrameWork.CurScene, tx + 100, ty, 0,1,1, True)); 
+            FrameWork.CurScene.add_projectile(pbullet(FrameWork.CurScene, tx, ty, self.radian,1,1, True)); 
         self.attack_trigger = False;
 
 
+    def update_component(self):
+        #target_x = KeyInput.g_mouse_x;
+        target_y = Const.WIN_HEIGHT - KeyInput.g_mouse_y - 1;
+        self.radian = ( Const.calc_radian(self.owner.transform.tx - GameObject.Cam.camera_offset_x, self.owner.transform.ty - GameObject.Cam.camera_offset_y, KeyInput.g_mouse_x, target_y) );
 
 
 

@@ -133,10 +133,10 @@ class Player(GameObject):
 
         ## ability
         #self.dash_cnt:int = 0;
-        self.current_hp = 100;
-        self.max_hp = 100;
-        self.attack_speed:float = 0.2;
-        self.current_coin:int = 0;
+        self.current_hp     :int = 100;
+        self.max_hp         :int = 100;
+        self.attack_speed   :float = 0.2;
+        self.current_coin   :int = 0;
 
         # animation code
         self.animation_timer :float = 0.0;

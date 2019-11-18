@@ -37,21 +37,23 @@ if __name__=='__main__':
     #tt = Image.open('assets/tiles.png');
     #print("test");
     #tt.show();
-    file_path = "C:\\Users\\지환\\Desktop\\던그리드\\OcO-master\\OcO-master\\던그리드\\image\\item\\weapon\\gun\\UZI.png";
+    file_path = "C:\\Users\\지환\\Desktop\\던그리드\\OcO-master\\OcO-master\\던그리드\\image\\UI\\UIdashBar(400x300,1,5).png";
     origin_path = os.path.dirname(file_path);
     destination_path = origin_path + str("\\dest");
 
-    #height = 224 // 8;
-    #width = 28;
-    #for k, piece in enumerate(crop(file_path, height, width), 0):
-    #    print("frist");        
-    #    img=Image.new('RGBA', (width, height), 255)
-    #    img.paste(piece)
-    #    path = os.path.join(origin_path,"IMG-%s.png" % k);
-    #    img.save(path)
-    #    print("done");
+    height = 300 // 5;
+    width = 400;
 
-    img = Image.open(file_path);
-    resize_multiple(img, 3, "coin.png");
+    for k, piece in enumerate(crop(file_path, height, width), 0):
+        print("frist");        
+        img=Image.new('RGBA', (width, height), 255)
+        img.paste(piece)
+        path = os.path.join(origin_path,"IMG-%s.png" % k);
+        img.save(path)
+        print("done");
+
+
+    #img = Image.open(file_path);
+    #resize_multiple(img, 3, "coin.png");
 
     #crop(img,90, 90 );

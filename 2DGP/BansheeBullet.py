@@ -86,9 +86,9 @@ class BansheeBullet(GameObject):
             obj.calc_hp(damage);
             self.owner.remove_projectile(self);
 
-        elif Const.TAG_TERRAIN == obj.tag:
-            self.owner.remove_projectile(self);
-            pass;
+        #elif Const.TAG_TERRAIN == obj.tag:
+        #    self.owner.remove_projectile(self);
+        #    pass;
             #맵에서 나가도 ㅇㅇ;
         # 벽이면 사라짐.
         #print("{0} - 충돌함 ({1},{2})".format(self.name,self.transform.tx, self.transform.ty));

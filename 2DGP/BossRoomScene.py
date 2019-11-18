@@ -12,6 +12,7 @@ from Portal import Portal as portal;
 #UI
 from HPBar import *;
 from Wallet import *;
+from DashBar import *;
 
 START_X,START_Y = 300, 120;
 
@@ -37,6 +38,7 @@ class BossRoomScene(Scene):
         
         self.AddUi(HPBar.get_instance());
         self.AddUi(Wallet.get_instance());
+        self.AddUi(DashBar.get_instance());
         
         self.AddUi(mouse);
         self.AddAllyObject(mouse);          

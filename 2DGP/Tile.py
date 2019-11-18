@@ -20,17 +20,8 @@ class Tile:
             Tile.WIDTH = parser.get_int("TILE_WIDTH");
             Tile.HEIGHT = parser.get_int("TILE_HEIGHT");
 
-            Tile.IMGSForTILE.append(pico2d.load_image('assets/Tile/tile (1).png'));
-            Tile.IMGSForTILE.append(pico2d.load_image('assets/Tile/tile (2).png'));
-            Tile.IMGSForTILE.append(pico2d.load_image('assets/Tile/tile (3).png'));
-            Tile.IMGSForTILE.append(pico2d.load_image('assets/Tile/tile (4).png'));
-            Tile.IMGSForTILE.append(pico2d.load_image('assets/Tile/tile (5).png'));
-            Tile.IMGSForTILE.append(pico2d.load_image('assets/Tile/tile (6).png'));
-            Tile.IMGSForTILE.append(pico2d.load_image('assets/Tile/tile (7).png'));
-            Tile.IMGSForTILE.append(pico2d.load_image('assets/Tile/tile (8).png'));
-            Tile.IMGSForTILE.append(pico2d.load_image('assets/Tile/tile (9).png'));
-            Tile.IMGSForTILE.append(pico2d.load_image('assets/Tile/tile (10).png'));
-            Tile.IMGSForTILE.append(pico2d.load_image('assets/Tile/tile (11).png'));
+            for idx in range(1, 33):
+                Tile.IMGSForTILE.append( pico2d.load_image( 'assets/Tile/tile ({0}).png'.format( str(idx) ) ) );
 
             del parser;
 

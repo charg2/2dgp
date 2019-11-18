@@ -63,6 +63,9 @@
     </Compile>
     <Compile Include="ConfigParser.py" />
     <Compile Include="Const.py" />
+    <Compile Include="DashBar.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DashState.py">
       <SubType>Code</SubType>
     </Compile>

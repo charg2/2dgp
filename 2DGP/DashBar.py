@@ -5,12 +5,12 @@ from Player import *;
 
 
 offset_x, offset_y = 20, 20;
-class HPBar(GameObject):
+class DashBar(GameObject):
     LOAD = False;
 
     Template:Image;
     BG      :Image;
-    HP      :Image;
+    Dash      :Image;
 
     Instance:GameObject = None;
 
@@ -18,25 +18,25 @@ class HPBar(GameObject):
 
     Font:Font = None;
     def __init__(self, owner, x, y, angle, sx, sy, state):
-        super(HPBar, self).__init__(x, y, angle, sx, sy, state);
+        super(DashBar, self).__init__(x, y, angle, sx, sy, state);
         
-        if False == HPBar.LOAD :
-            HPBar.Template  = pico2d.load_image("assets/UI/Template.png");
-            HPBar.BG        = pico2d.load_image("assets/UI/BG.png");
-            HPBar.HP        = pico2d.load_image("assets/UI/HP.png");
+        if False == DashBar.LOAD :
+            DashBar.Template  = pico2d.load_image("assets/UI/Template.png");
+            DashBar.BG        = pico2d.load_image("assets/UI/BG.png");
+            DashBar.Dash        = pico2d.load_image("assets/UI/Dash.png");
 
-            HPBar.Instance = self;
+            DashBar.Instance = self;
             
-            HPBar.Font = pico2d.load_font("assets/Font/font.ttf", 30);
+            DashBar.Font = pico2d.load_font("assets/Font/font.ttf", 30);
 
 
-            HPBar.LOAD =True;
+            DashBar.LOAD =True;
 
             
-        self.name = "HPBar";
+        self.name = "DashBar";
         self.state = True;
         self.has_image = True;
-        self.hp_of_one_percent_length:float = HPBar.HP.w / 100.0;
+        self.hp_of_one_percent_length:float = DashBar.Dash.w / 100.0;
 
 
         pass;
@@ -58,16 +58,16 @@ class HPBar(GameObject):
         hp_str = str(current_hp) + " / " + str(max_hp);
         #hp_str.format(current_hp, max_hp);
 
-        HPBar.BG.draw_to_origin( offset_x , Const.WIN_HEIGHT - HPBar.BG.h - offset_y );
-        HPBar.HP.draw_to_origin( offset_x + 90, Const.WIN_HEIGHT - HPBar.BG.h - 10, hp_width, HPBar.HP.h, );
-        HPBar.Template.draw_to_origin( offset_x , Const.WIN_HEIGHT - HPBar.BG.h - offset_y );
+        DashBar.BG.draw_to_origin( offset_x , Const.WIN_HEIGHT - DashBar.BG.h - offset_y );
+        DashBar.Dash.draw_to_origin( offset_x + 90, Const.WIN_HEIGHT - DashBar.BG.h - 10, hp_width, DashBar.Dash.h, );
+        DashBar.Template.draw_to_origin( offset_x , Const.WIN_HEIGHT - DashBar.BG.h - offset_y );
 
-        HPBar.Font.draw( 135, Const.WIN_HEIGHT - HPBar.BG.h + 8, hp_str,(255,255,255));
+        DashBar.Font.draw( 135, Const.WIN_HEIGHT - DashBar.BG.h + 8, hp_str,(255,255,255));
         pass;
         
     def get_instance():
-        if None == HPBar.Instance:
+        if None == DashBar.Instance:
             from Player import Player;
-            HPBar.Instance = HPBar(Player.MyPlayer, 0,0,0,1,1,True);
+            DashBar.Instance = DashBar(Player.MyPlayer, 0,0,0,1,1,True);
 
-        return HPBar.Instance;
+        return DashBar.Instance;

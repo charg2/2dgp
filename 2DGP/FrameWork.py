@@ -4,15 +4,15 @@ from pico2d import *;
 from KeyIO import *;
 from Scene import Scene as Scene;
 from TitleScene import *;
-from GameScene import *;
-from BossRoomScene import *;
 from Mouse import *;
 from Player import *;
 
 
 from typing import List;
 
-
+from GameScene import *;
+from BossRoomScene import *;
+from FoodShopScene import *;
 
 class FrameWork:
     SceneList:List[Scene] = [];
@@ -25,6 +25,7 @@ class FrameWork:
         
         FrameWork.SceneList.append(TitleScene()); #타이틀 신 추가.
         FrameWork.SceneList.append(GameScene());
+        FrameWork.SceneList.append(FoodShopScene());
         FrameWork.SceneList.append(BossRoomScene());
 
         FrameWork.CurScene:Scene = FrameWork.SceneList[0];

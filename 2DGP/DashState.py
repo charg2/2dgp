@@ -39,8 +39,6 @@ class DashStateForPlayer(StateMachine):
             from Player import Player;
 
 
-
-
         if Const.direction_L == self.obj.m_dir :
             self.obj.last_dir = Const.direction_L;
             self.obj.dir = Const.direction_L;

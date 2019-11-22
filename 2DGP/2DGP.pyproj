@@ -75,6 +75,12 @@
     <Compile Include="EffectCutton.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FoodShopBG.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FoodShopScene.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="FrameWork.py" />
     <Compile Include="GameBG.py" />
     <Compile Include="GameController.py">
@@ -117,6 +123,9 @@
     </Compile>
     <Compile Include="Mouse.py" />
     <Compile Include="MyTimer.py" />
+    <Compile Include="Pannel.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Physx.py">
       <SubType>Code</SubType>
     </Compile>
@@ -186,6 +195,7 @@
     <Content Include="assets\player.psd" />
     <Content Include="boss_room.map" />
     <Content Include="config.ini" />
+    <Content Include="food_shop.map" />
     <Content Include="memo.txt">
       <SubType>Code</SubType>
     </Content>

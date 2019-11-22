@@ -3,8 +3,9 @@ from StateMachine import *;
 from Const import *;
 from Player import *;
 
-from IdleState import*;
+from IdleState import *;
 from JumpState import *;
+from DashState import *;
 
 
 #PIXEL_PER_METER = (20 / 0.1); # 10pixel 30 cm
@@ -46,6 +47,14 @@ class RunStateForPlayer(StateMachine):
         self.setAnimation();
         
         self.obj.physx.set_force(self.Fx, self.obj.physx.force_y); 
+
+        if KeyInput.g_mouse_rdown :
+            self.obj.add_queue(DashStateForPlayer(self.obj));
+            temp = self.obj.current_state;
+            self.obj.current_state.exit();
+            self.obj.current_state = self.obj.state_queue.pop();
+            del temp;
+            return;
 
         if (KeyInput.g_w) :
             self.obj.add_queue(JumpStateForPlayer(self.obj));

@@ -1,3 +1,4 @@
+
 from Scene import Scene;
 from GameBG import GameBG;
 from Const import Const as const;
@@ -22,39 +23,33 @@ from DashBar import *;
 #NPC
 from Horerica import *;
 
+
 START_X,START_Y = 300, 120;
 
-class GameScene(Scene):
+class FoodShopScene(Scene):
     def __init__(self):       
-        super(GameScene,self).__init__();
-        self.bg = (GameBG(const.WIN_WIDTH//2, const.WIN_HEIGHT//2, 0,1,1,True));
+        super(FoodShopScene,self).__init__();
+        from FoodShopBG import FoodShopBG as bg;
+        self.bg = (bg(const.WIN_WIDTH//2, const.WIN_HEIGHT//2, 0,1,1,True));
+        #self.bg = (GameBG(const.WIN_WIDTH//2, const.WIN_HEIGHT//2, 0,1,1,True));
         
         self.AddTerrainObject(self.bg);
-        self.AddAllyObject(Player(START_X,  START_Y + 90,0,1,1,True));          
+        self.AddAllyObject(Player.MyPlayer);          
 
-        self.AddMonsterObject(Banshee(START_X + 300, START_Y + 400 ,0,1,1,True));          
-        self.AddMonsterObject(small_heal(self, START_X + 500, START_Y + 400 ,0,1,1,True));          
-        self.AddMonsterObject(big_heal(self, START_X + 7, START_Y + 200 ,0,1,1,True));          
-        self.AddMonsterObject(coin(self, START_X + 100, START_Y + 200 ,0,1,1,True));          
-        self.AddMonsterObject(coin(self, START_X + 200, START_Y + 240 ,0,1,1,True));          
-
-        self.AddObstacleObject(portal(START_X + 2100, START_Y + 90,0,1,1,True, 2));
+        self.AddObstacleObject(portal(START_X + 2100, START_Y + 90, 0,1,1,True, 3));
         
+        #NPC
+        self.AddMonsterObject(Horerica(START_X + 1100, 180 + 35 ,0,1,1,True));          
+        from Pannel import FoodShop;
+        self.AddTerrainObject(FoodShop(START_X + 800, 200 + 256 ,0,1,1,True));
 
         #UI
         self.AddUi(HPBar.get_instance());
         self.AddUi(Wallet.get_instance());
         self.AddUi(DashBar.get_instance());
 
-        self.AddMonsterObject(SkeletonArcher(START_X + 100, START_Y + 100 ,0,1,1, True));     
-        
-        from BelialLaser import BelialLaser as bl;
-        self.AddMonsterObject(bl(self, START_X + 1000, START_Y + 600 ,0,1,1, True));        
-        
         self.AddTerrainObject(terrain(self.bg.map.width //2, 90, self.bg.map.width //2, 90 ));
         self.AddTerrainObject(terrain(0, 100 + self.bg.map.height // 4, 180,  self.bg.map.height // 4));
-        self.AddTerrainObject(terrain(800, self.bg.map.height // 4, 100,  1));
-        self.AddTerrainObject(terrain(1200, self.bg.map.height // 4, 100,  1));
         #print("height =", self.bg.map.height)
 
         mouse:Mouse = Mouse();

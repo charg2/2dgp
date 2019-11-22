@@ -4,8 +4,9 @@ from PIL import Image
 import os;
 
 
-def crop_wrapper(file_path:str, width:int,height:int, save_path:str):
-    for k, piece in enumerate(crop(file_path, height, width), 0):
+def crop_wrapper(file_path:str, width_count, height_count:int, save_path:str):
+    img = Image.open('assets/tiles.png');
+    for k, piece in enumerate(crop(file_path, img.height // height_count, img.width // width_count), 0):
         img=Image.new('RGBA', (width, height), 255)
         img.paste(piece);
         path = os.path.join(save_path,"IMG-%s.png" % k);
@@ -25,34 +26,32 @@ def resize_multiple(img:Image, multiple:int, save_name:str, in_quality = 100):
     resize_image.save(save_name, quality=in_quality);
 
 
-def bmp_to_png(file_path:str, width:int,height:int, save_path:str, file_type:str):
+def bmp_to_png(file_path:str, width:int, height:int, save_path:str):
     from PIL import Image;
     img = Image.open(file_path);
     new_img = img.resize( (img.width, img.height) );
-    new_img.save( save_path, file_type);
+    new_img.save( save_path, "png");
+
+def bmp_to_png_multiple(file_path:str, width_multiple:int, height_multiple:int):
+    from PIL import Image;
+    img = Image.open(file_path);
+    new_img = img.resize( (int(img.width * width_multiple), int(img.height * height_multiple)) );
+    path = os.path.join(os.path.dirname(file_path),"img.png");
+    new_img.save(path, "png");
 
 
 if __name__=='__main__':
-    #print("test");
     #tt = Image.open('assets/tiles.png');
-    #print("test");
     #tt.show();
-    file_path = "C:\\Users\\지환\\Desktop\\던그리드\\OcO-master\\OcO-master\\던그리드\\image\\npc\\inn(420x140)6x2.png";
-    origin_path = os.path.dirname(file_path);
-    destination_path = origin_path + str("\\dest");
+    #file_path = "C:\\Users\\지환\\Desktop\\던그리드\\OcO-master\\OcO-master\\던그리드\\image\\npc\\inn(420x140)6x2.png";
+    #origin_path = os.path.dirname(file_path);
+    #destination_path = origin_path + str("\\dest");
 
-    height = 140 // 2;
-    width = 420 // 6;
-
-    for k, piece in enumerate(crop(file_path, height, width), 0):
-        print("frist");        
-        img=Image.new('RGBA', (width, height), 255)
-        img.paste(piece)
-        path = os.path.join(origin_path,"IMG-%s.png" % k);
-        img.save(path)
-        print("done");
+    #crop_wrapper(file_path, 6, 2, origin_path);
+    bmp_to_png_multiple("C:\\Users\\지환\\Desktop\\던그리드\\OcO-master\\OcO-master\\던그리드\\image\\UI\\A_DungeonInn(1188x552).bmp", 1, 1);
 
 
+#Image.open("sample1.bmp").save("sample1.png");
     #img = Image.open(file_path);
     #resize_multiple(img, 3, "coin.png");
 

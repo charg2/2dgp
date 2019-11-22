@@ -6,6 +6,14 @@ from Player import *;
 from IdleState import*;
 from JumpState import *;
 
+
+#PIXEL_PER_METER = (20 / 0.1); # 10pixel 30 cm
+#RUN_SPEED_KMPH = 80.0; #km / Hour
+#RUN_SPEED_MPH = (RUN_SPEED_KMPH * 1000.0 / 60.0); #km / Hour
+#RUN_SPEED_MPS = (RUN_SPEED_KMPH / 60.0); #km / Hour
+#RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER); #km / Hour
+FORCE_X = 500; 
+#FORCE_Y = 500;
 class RunStateForPlayer(StateMachine):
     animation_state =0;
     timer = 0;
@@ -21,17 +29,17 @@ class RunStateForPlayer(StateMachine):
             self.obj.dir = Const.direction_R;
             from Player import Player;
             self.obj.IMG = Player.IMGSForIdleR[0];
-            self.Fx= self.obj.force_x;
+            self.Fx= FORCE_X;
             
         if(KeyInput.g_a):#l
             self.obj.last_dir = Const.direction_L;
             self.obj.dir = Const.direction_L;
             from Player import Player
             self.obj.IMG = Player.IMGSForIdleL[0];
-            self.Fx = -self.obj.force_x;
+            self.Fx = -FORCE_X;
 
         self.obj.set_velocity(self.Fx, self.Fy);
-        print("RunState {0}".format(self.Fx))
+        #print("RunState 42 line {0}".format(self.Fx))
         return;
 
     def update(self):

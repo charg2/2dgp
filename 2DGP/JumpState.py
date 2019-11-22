@@ -5,15 +5,19 @@ from RunState import*;
 from Const import *;
 from Player import *;
 
+FORCE_X = 500; 
+FORCE_Y = 2000;
+
 class JumpStateForPlayer(StateMachine):
     animation_state =0;
     timer           = 0;
     
-    def __init__(self,gobj):
-        self.obj = gobj;
+    def __init__(self,player):
+        self.obj = player;
         #gobj.set_grivity(True);
 
-        self.Fy = gobj.force_y + 30;
+        self.Fy = FORCE_Y;
+        #self.Fy = player.force_y + 30;
 
         self.Fx = 0;
         self.obj.is_jump = True;
@@ -47,9 +51,9 @@ class JumpStateForPlayer(StateMachine):
         if True == KeyInput.g_w :
             self.obj.physx.velocity_y *= 0.9;
             if KeyInput.g_d :
-                self.obj.physx.velocity_x = self.obj.force_x;
+                self.obj.physx.velocity_x = FORCE_X;
             elif KeyInput.g_a :
-                self.obj.physx.velocity_x = -self.obj.force_x ;
+                self.obj.physx.velocity_x = -FORCE_X ;
         else:
             self.obj.physx.velocity_y *= 0.05;
             self.obj.physx.is_ground = False;
@@ -67,8 +71,6 @@ class JumpStateForPlayer(StateMachine):
             #self.obj.current_state.exit();
             #self.obj.current_state = self.obj.state_queue.pop();
             #del temp;
-
- 
 
 
         return;

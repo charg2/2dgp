@@ -208,9 +208,6 @@ class Player(GameObject):
             if DASH_CHARGE_TIME <= self.dash_charge_timer:
                 self.dash_count += 1;
                 self.dash_charge_timer = 0;
-
-                print("충전함");
-
         return;
     
 
@@ -263,7 +260,8 @@ class Player(GameObject):
                             #if  ( False == self.is_dash ) and ((True == self.dash_trigger) and 
                             self.add_queue(DashStateForPlayer(self));
 
-    def Physx(self,time):
+    #각 상태별로 velocity 값이 지정되어 이슴.
+    def Physx(self, time):
         grivity_offset_y = 0; 
         if True == self.has_grivity() :
             #if True == self.physx.is_falling:
@@ -272,8 +270,8 @@ class Player(GameObject):
                 grivity_offset_y = self.physx.acceleration_of_gravity; 
         
         
-        v_x = self.physx.velocity_x #* math.cos(self.transform.angle);
-        v_y = self.physx.velocity_y #* math.sin(self.transform.angle);
+        v_x = self.physx.velocity_x * time;#* math.cos(self.transform.angle) ;
+        v_y = self.physx.velocity_y * time;#* math.sin(self.transform.angle) ;
 
         #self.transform.set_position(self.physx.velocity_x, self.physx.velocity_y - grivity_offset_y);
         self.transform.set_position(v_x, v_y - grivity_offset_y);
@@ -292,15 +290,6 @@ class Player(GameObject):
                         self.transform = self.previous_transform;
         
         return;
-
-    #def turnon_invincibility(self):
-    #    del self.collider;
-    #    self.collider = None;
-    #    self.has_collider = False;
-
-    #def turnoff_invincibility(self):
-    #    self.collider = CollisionRect(self.transform.tx, self.transform.ty, self.IMG.w // 2, self.IMG.h // 2);
-    #    self.has_collider = True;
 
     def calc_hp(self, damage):
         if False == self.is_death :

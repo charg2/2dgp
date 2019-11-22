@@ -41,6 +41,10 @@ class Banshee(GameObject):
     
             Banshee.FieldOfView = Const.BANSHEE_FIELD_OF_VIEW;
 
+
+            Banshee.SOUND = load_wav('assets/Monster/Banshee/banshee.wav');
+            Banshee.SOUND.set_volume(50);
+
             Banshee.LOAD = True;
         
         self.name = "Banshee_" + str(Banshee.UNIQUE_ID);
@@ -151,17 +155,11 @@ class Banshee(GameObject):
         pass;
 
     def fire(self):
+        Banshee.SOUND.play(1);
+
         tx = self.transform.tx;
         ty = self.transform.ty;
 
-        #self.bullets.append(BansheeBullet(self, tx, ty, 0,1,1, True)); 
-        #self.bullets.append(BansheeBullet(self, tx, ty, 0.25,1,1, True)); 
-        #self.bullets.append(BansheeBullet(self, tx, ty, 0.5,1,1, True)); 
-        #self.bullets.append(BansheeBullet(self, tx, ty, 0.75,1,1, True)); 
-        #self.bullets.append(BansheeBullet(self, tx, ty, 1,1,1, True)); 
-        #self.bullets.append(BansheeBullet(self, tx, ty, -0.25,1,1, True)); 
-        #self.bullets.append(BansheeBullet(self, tx, ty, -0.5,1,1, True)); 
-        #self.bullets.append(BansheeBullet(self, tx, ty, -0.75,1,1, True)); 
         from FrameWork import FrameWork;
 
         FrameWork.CurScene.add_projectile(BansheeBullet(FrameWork.CurScene, tx, ty, 0,1,1, True)); 
@@ -173,8 +171,6 @@ class Banshee(GameObject):
         FrameWork.CurScene.add_projectile(BansheeBullet(FrameWork.CurScene, tx, ty, -0.5,1,1, True)); 
         FrameWork.CurScene.add_projectile(BansheeBullet(FrameWork.CurScene, tx, ty, -0.75,1,1, True)); 
         
-
-        pass;
 
     def calc_hp(self, damage):
         #if False == self.is_death :

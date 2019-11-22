@@ -86,6 +86,9 @@
     <Compile Include="Gun.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Horerica.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="HPBar.py">
       <SubType>Code</SubType>
     </Compile>

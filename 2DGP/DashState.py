@@ -7,7 +7,7 @@ from Player import *;
 from KeyIO import *;
 
 
-
+FORCE_X, FORCE_Y = 500, 500;
 
 class DashStateForPlayer(StateMachine):
     animation_state =0;
@@ -28,8 +28,8 @@ class DashStateForPlayer(StateMachine):
 
 
         self.radian = ( Const.calc_radian(self.obj.transform.tx - GameObject.Cam.camera_offset_x, self.obj.transform.ty - GameObject.Cam.camera_offset_y, self.target_x, self.target_y) );
-        self.obj.physx.velocity_x = 10 * math.sin(self.radian);
-        self.obj.physx.velocity_y = 10 * math.cos(self.radian);
+        self.obj.physx.velocity_x = FORCE_X * math.sin(self.radian);
+        self.obj.physx.velocity_y = FORCE_Y * math.cos(self.radian);
 
         #print("{0} - {1} - {2} - {3} = {4} ".format(self.obj.transform.tx - GameObject.Cam.camera_offset_x, self.obj.transform.ty - GameObject.Cam.camera_offset_y, self.target_x, self.target_y, self.radian));
       

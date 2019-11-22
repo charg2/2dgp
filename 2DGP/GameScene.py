@@ -19,6 +19,9 @@ from HPBar import *;
 from Wallet import *;
 from DashBar import *;
 
+#NPC
+from Horerica import *;
+
 START_X,START_Y = 300, 120;
 
 class GameScene(Scene):
@@ -27,7 +30,7 @@ class GameScene(Scene):
         self.bg = (GameBG(const.WIN_WIDTH//2, const.WIN_HEIGHT//2, 0,1,1,True));
         
         self.AddTerrainObject(self.bg);
-        self.AddAllyObject(Player(START_X, START_Y,0,1,1,True));          
+        self.AddAllyObject(Player(START_X,  START_Y + 90,0,1,1,True));          
 
         self.AddMonsterObject(Banshee(START_X + 300, START_Y + 400 ,0,1,1,True));          
         self.AddMonsterObject(small_heal(self, START_X + 500, START_Y + 400 ,0,1,1,True));          
@@ -37,7 +40,12 @@ class GameScene(Scene):
 
         self.AddObstacleObject(portal(START_X + 2100, START_Y,0,1,1,True, 2));
         
-        #ui
+
+        #NPC
+        self.AddMonsterObject(Horerica(START_X + 200, 180 + 35 ,0,1,1,True));          
+
+
+        #UI
         self.AddUi(HPBar.get_instance());
         self.AddUi(Wallet.get_instance());
         self.AddUi(DashBar.get_instance());
@@ -47,10 +55,10 @@ class GameScene(Scene):
         from BelialLaser import BelialLaser as bl;
         self.AddMonsterObject(bl(self, START_X + 1000, START_Y + 600 ,0,1,1, True));        
         
-        self.AddTerrainObject(terrain(self.bg.map.width //2, 45, self.bg.map.width //2, 45 ));
+        self.AddTerrainObject(terrain(self.bg.map.width //2, 90, self.bg.map.width //2, 90 ));
         self.AddTerrainObject(terrain(0, 100 + self.bg.map.height // 4, 180,  self.bg.map.height // 4));
-        self.AddTerrainObject(terrain(800, self.bg.map.height // 4, 180,  1));
-        self.AddTerrainObject(terrain(1200, self.bg.map.height // 4, 180,  1));
+        self.AddTerrainObject(terrain(800, self.bg.map.height // 4, 100,  1));
+        self.AddTerrainObject(terrain(1200, self.bg.map.height // 4, 100,  1));
         #print("height =", self.bg.map.height)
 
         mouse:Mouse = Mouse();

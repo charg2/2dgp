@@ -39,6 +39,8 @@ class BigHeal(GameObject):
             BigHeal.IMGS.append(pico2d.load_image('assets/Monster/Heal/BigHeal/IMG-13.png'));
             BigHeal.IMGS.append(pico2d.load_image('assets/Monster/Heal/BigHeal/IMG-14.png'));
             BigHeal.IMGS.append(pico2d.load_image('assets/Monster/Heal/BigHeal/IMG-15.png'));
+            BigHeal.SOUND = load_wav('assets/Monster/Heal/fairy.wav');
+            BigHeal.SOUND.set_volume(50);
             BigHeal.LOAD = True;
         
         self.name = "BigHeal_" + str(BigHeal.UNIQUE_ID); # For Debug
@@ -88,7 +90,10 @@ class BigHeal(GameObject):
 
     def on_collision(self, obj):
         if Const.TAG_PLAYER == obj.tag:
+            BigHeal.SOUND.play(1);
+            
             obj.current_hp += heal;
+
             if obj.max_hp < obj.current_hp :
                 obj.current_hp = obj.max_hp;
             self.owner.remove_game_object(self);

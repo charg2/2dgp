@@ -37,12 +37,12 @@ if __name__=='__main__':
     #tt = Image.open('assets/tiles.png');
     #print("test");
     #tt.show();
-    file_path = "C:\\Users\\지환\\Desktop\\던그리드\\OcO-master\\OcO-master\\던그리드\\image\\UI\\UIdashBar(400x300,1,5).png";
+    file_path = "C:\\Users\\지환\\Desktop\\던그리드\\OcO-master\\OcO-master\\던그리드\\image\\npc\\inn(420x140)6x2.png";
     origin_path = os.path.dirname(file_path);
     destination_path = origin_path + str("\\dest");
 
-    height = 300 // 5;
-    width = 400;
+    height = 140 // 2;
+    width = 420 // 6;
 
     for k, piece in enumerate(crop(file_path, height, width), 0):
         print("frist");        

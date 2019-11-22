@@ -35,6 +35,10 @@ class SmallHeal(GameObject):
             SmallHeal.IMGS.append(pico2d.load_image('assets/Monster/Heal/SmallHeal/IMG-6.png'));
             SmallHeal.IMGS.append(pico2d.load_image('assets/Monster/Heal/SmallHeal/IMG-7.png'));
             SmallHeal.IMGS.append(pico2d.load_image('assets/Monster/Heal/SmallHeal/IMG-8.png'));
+            
+            
+            SmallHeal.SOUND = load_wav('assets/Monster/Heal/fairy.wav');
+            SmallHeal.SOUND.set_volume(50);
             SmallHeal.LOAD = True;
         
         self.name = "SmallHeal_" + str(SmallHeal.UNIQUE_ID); # For Debug
@@ -84,7 +88,10 @@ class SmallHeal(GameObject):
 
     def on_collision(self, obj):
         if Const.TAG_PLAYER == obj.tag:
+            SmallHeal.SOUND.play(1);
+            
             obj.current_hp += heal;
+
             if obj.max_hp < obj.current_hp :
                 obj.current_hp = obj.max_hp;
             self.owner.remove_game_object(self);

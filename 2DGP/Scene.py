@@ -13,13 +13,14 @@ class Scene:
 
     def __init__(self):
         self.bg = None;
-        self.game_object_list_ally      :List[GameObject] = [];
-        self.game_object_list_terrain   :List[GameObject] = [];
-        self.game_object_list_obstacle  :List[GameObject] = [];
-        self.game_object_list_monster   :List[GameObject] = [];
-        self.game_ui_list               :List[GameObject] = [];
-        self.game_object_list_bullet    :List[GameObject] = [];
-        self.render_debug:bool = False;
+        self.game_object_list_ally          :List[GameObject] = [];
+        self.game_object_list_terrain       :List[GameObject] = [];
+        self.game_object_list_obstacle      :List[GameObject] = [];
+        self.game_object_list_monster       :List[GameObject] = [];
+        self.game_ui_list                   :List[GameObject] = [];
+        self.game_object_list_bullet        :List[GameObject] = [];
+        self.game_object_list_player_weapon :List[GameObject] = [];
+        self.render_debug                   :bool = False;
 
         self.start_x, self.start_y = 0, 0;
 
@@ -32,9 +33,12 @@ class Scene:
         #update
         for gobj in self.game_object_list_ally:
             gobj.update(Scene.Time);
-    
+
         for gobj in self.game_object_list_monster:
-                gobj.update(Scene.Time);
+            gobj.update(Scene.Time);
+
+        for gobj in self.game_object_list_player_weapon:
+            gobj.update(Scene.Time);
 
         for terrain in self.game_object_list_terrain:
             terrain.update(Scene.Time); 
@@ -50,7 +54,12 @@ class Scene:
         for gobj in self.game_object_list_ally:
             if gobj.state == False:
                 self.game_object_list_ally.remove(gobj);
-                del gobj; # 가비지 콜렉터 호출로 지워줌.
+                del gobj; 
+
+        for gobj in self.game_object_list_monster:
+            if gobj.state == False:
+                self.game_object_list_monster.remove(gobj);
+                del gobj; 
 
         for terrain in self.game_object_list_terrain:
             if terrain.state == False:
@@ -211,6 +220,10 @@ class Scene:
         self.game_ui_list.append(obj);
         return;
 
+    def add_player_Weapon(self, obj):
+        self.game_object_list_player_weapon.append(obj);
+        return;
+
     def SetPause(state):
         Scene.Pause = state;
         return;
@@ -230,26 +243,16 @@ class Scene:
         except ValueError:
             print("Scene::remove_procjectile(slef) error?");
         del bullet;
-
-
-    def remove_game_object(self, gobj):
-        tag = gobj.tag;
-        if tag == Const.TAG_MONSTER:
-            self.game_object_list_monster.remove(gobj);
-        elif tag == Const.TAG_TERRAIN:
-            self.game_object_list_terrain.remove(gobj);
-        elif tag == Const.TAG_OPSTACLE:
-            self.game_object_list_obstacle.remove(gobj);  
-        elif tag == Const.TAG_UI:
-            self.game_ui_list.remove(gobj);               
-        elif tag == Const.TAG_PLAYER:
-            self.game_object_list_ally.remove(gobj);      
-            pass;
-
+    
+    def add_player_Weapon(self, obj):
+        self.game_object_list_player_weapon.remove(obj);
+        return;
 
     def add_projectile(self, bullet):
         self.game_object_list_monster.append(bullet);
         return;
+
+
 
     def set_cam(self):
         if self.bg :

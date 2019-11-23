@@ -82,11 +82,10 @@ class SkeletonArcherArrow(GameObject):
     def on_collision(self, obj):
         if Const.TAG_PLAYER == obj.tag :
             obj.calc_hp(damage);
-            self.owner.remove_projectile(self);
+            self.state = False;
 
         elif Const.TAG_TERRAIN == obj.tag:
-            self.owner.remove_projectile(self);
-
+            self.state = False;
             #맵에서 나가도 ㅇㅇ;
         # 벽이면 사라짐.
         #print("{0} - 충돌함 ({1},{2})".format(self.name,self.transform.tx, self.transform.ty));
@@ -116,4 +115,5 @@ class SkeletonArcherArrow(GameObject):
         
         # 시간 지나면 사라짐.
         if self.extinction_timer > extinction_time:
-            self.owner.remove_projectile(self);
+            self.state = False;
+

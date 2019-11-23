@@ -36,7 +36,7 @@ class BossRoomScene(Scene):
         mouse.set_cursor(Const.CURSOR_TARGET);
 
         
-        self.AddUi(HPBar.get_instance());
+        self.AddUi(HPBarForPlayer.get_instance());
         self.AddUi(Wallet.get_instance());
         self.AddUi(DashBar.get_instance());
         

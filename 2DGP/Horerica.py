@@ -86,7 +86,7 @@ class Horerica(GameObject):
                     Horerica.OPEN_KEY_F.h,
                     0,'',
                     self.transform.tx-GameObject.Cam.camera_offset_x,
-                    self.transform.ty-GameObject.Cam.camera_offset_y + 70 ,
+                    self.transform.ty-GameObject.Cam.camera_offset_y + 100 ,
                     );
 
 

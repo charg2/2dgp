@@ -76,6 +76,7 @@ class BelialLaser(GameObject):
         if Const.TAG_PLAYER == obj.tag:
             obj.calc_hp(damage);
             self.owner.remove_projectile(self);
+            self.state = False;
         # 플레이어면 체력을 깍아 버림.
     
     def update_timer(self,time):
@@ -89,7 +90,8 @@ class BelialLaser(GameObject):
 
         if self.extinction_timer > extinction_time:
             if (frame-1) == self.animation_status :
-                self.owner.remove_projectile(self);
+                self.state = False;
+
 
     def clampingInWindow(self):
         self.transform.tx = Const.clamp(0, self.transform.tx, GameObject.Cam.map_width-self.img.w//16)  

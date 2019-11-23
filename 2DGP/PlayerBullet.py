@@ -80,7 +80,9 @@ class PlayerBullet(GameObject):
 
     def on_collision(self, obj):
         if Const.TAG_MONSTER == obj.name:
-            obj.current_hp -= damage;
+            print(obj.name);
+            obj.calc_hp(damage);
+
         #    self.owner.remove_projectile(self);
         #맵에서 나가도 ㅇㅇ;
         # 벽이면 사라짐.

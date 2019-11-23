@@ -44,7 +44,7 @@ class FoodShopScene(Scene):
         self.AddTerrainObject(FoodShop(START_X + 800, 200 + 256 ,0,1,1,True));
 
         #UI
-        self.AddUi(HPBar.get_instance());
+        self.AddUi(HPBarForPlayer.get_instance());
         self.AddUi(Wallet.get_instance());
         self.AddUi(DashBar.get_instance());
 

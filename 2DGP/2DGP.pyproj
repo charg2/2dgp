@@ -92,10 +92,16 @@
     <Compile Include="Gun.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="HitComponent.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Horerica.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="HPBar.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="HPBarForMonster.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IdleState.py">
@@ -187,12 +193,10 @@
     <Folder Include="assets\" />
     <Folder Include="MapTool\" />
     <Folder Include="Server\" />
-    <Folder Include="TexturePacker\" />
     <Folder Include="__pycache__\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\player.png" />
-    <Content Include="assets\player.psd" />
     <Content Include="boss_room.map" />
     <Content Include="config.ini" />
     <Content Include="food_shop.map" />

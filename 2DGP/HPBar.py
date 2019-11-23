@@ -4,7 +4,7 @@ from Player import *;
 
 
 offset_x, offset_y = 20, 20;
-class HPBar(GameObject):
+class HPBarForPlayer(GameObject):
     LOAD = False;
 
     Template:Image;
@@ -17,25 +17,25 @@ class HPBar(GameObject):
 
     Font:Font = None;
     def __init__(self, owner, x, y, angle, sx, sy, state):
-        super(HPBar, self).__init__(x, y, angle, sx, sy, state);
+        super(HPBarForPlayer, self).__init__(x, y, angle, sx, sy, state);
         
-        if False == HPBar.LOAD :
-            HPBar.Template  = pico2d.load_image("assets/UI/Template.png");
-            HPBar.BG        = pico2d.load_image("assets/UI/BG.png");
-            HPBar.HP        = pico2d.load_image("assets/UI/HP.png");
+        if False == HPBarForPlayer.LOAD :
+            HPBarForPlayer.Template  = pico2d.load_image("assets/UI/Template.png");
+            HPBarForPlayer.BG        = pico2d.load_image("assets/UI/BG.png");
+            HPBarForPlayer.HP        = pico2d.load_image("assets/UI/HP.png");
 
-            HPBar.Instance = self;
+            HPBarForPlayer.Instance = self;
             
-            HPBar.Font = pico2d.load_font("assets/Font/font.ttf", 30);
+            HPBarForPlayer.Font = pico2d.load_font("assets/Font/font.ttf", 30);
 
 
-            HPBar.LOAD =True;
+            HPBarForPlayer.LOAD =True;
 
             
         self.name = "HPBar";
         self.state = True;
         self.has_image = True;
-        self.hp_of_one_percent_length:float = HPBar.HP.w / 100.0;
+        self.hp_of_one_percent_length:float = HPBarForPlayer.HP.w / 100.0;
 
 
         pass;
@@ -57,16 +57,16 @@ class HPBar(GameObject):
         hp_str = str(current_hp) + " / " + str(max_hp);
         #hp_str.format(current_hp, max_hp);
 
-        HPBar.BG.draw_to_origin( offset_x , Const.WIN_HEIGHT - HPBar.BG.h - offset_y );
-        HPBar.HP.draw_to_origin( offset_x + 90, Const.WIN_HEIGHT - HPBar.BG.h - 10, hp_width, HPBar.HP.h, );
-        HPBar.Template.draw_to_origin( offset_x , Const.WIN_HEIGHT - HPBar.BG.h - offset_y );
+        HPBarForPlayer.BG.draw_to_origin( offset_x , Const.WIN_HEIGHT - HPBarForPlayer.BG.h - offset_y );
+        HPBarForPlayer.HP.draw_to_origin( offset_x + 90, Const.WIN_HEIGHT - HPBarForPlayer.BG.h - 10, hp_width, HPBarForPlayer.HP.h, );
+        HPBarForPlayer.Template.draw_to_origin( offset_x , Const.WIN_HEIGHT - HPBarForPlayer.BG.h - offset_y );
 
-        HPBar.Font.draw( 135, Const.WIN_HEIGHT - HPBar.BG.h + 8, hp_str,(255,255,255));
+        HPBarForPlayer.Font.draw( 135, Const.WIN_HEIGHT - HPBarForPlayer.BG.h + 8, hp_str,(255,255,255));
         pass;
         
     def get_instance():
-        if None == HPBar.Instance:
+        if None == HPBarForPlayer.Instance:
             from Player import Player;
-            HPBar.Instance = HPBar(Player.MyPlayer, 0,0,0,1,1,True);
+            HPBarForPlayer.Instance = HPBarForPlayer(Player.MyPlayer, 0,0,0,1,1,True);
 
-        return HPBar.Instance;
+        return HPBarForPlayer.Instance;

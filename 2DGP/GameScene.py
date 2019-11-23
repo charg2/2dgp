@@ -42,7 +42,7 @@ class GameScene(Scene):
         
 
         #UI
-        self.AddUi(HPBar.get_instance());
+        self.AddUi(HPBarForPlayer.get_instance());
         self.AddUi(Wallet.get_instance());
         self.AddUi(DashBar.get_instance());
 

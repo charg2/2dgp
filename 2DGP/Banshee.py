@@ -12,6 +12,11 @@ from IdleStateForBanshee import *;
 
 from BansheeBullet import *;
 
+#component
+from HitComponent import *;
+#ui
+from HPBarForMonster import *;
+
 from typing import List;
 
 # 플레이어에게 접근 하는 패턴만 추가하면 완성.
@@ -19,6 +24,7 @@ from typing import List;
 max_hp = 100;
 attack_speed = 3;
 RUN_L, RUN_R, IDLE_R, IDLE_L = range(4);
+hit_recovery_time = 0.2;
 class Banshee(GameObject):
     LOAD:bool = False;
     UNIQUE_ID:int = 0;
@@ -26,21 +32,17 @@ class Banshee(GameObject):
     IMGSForIdleR:List[Image] = [];
     IMGSForBullet:List[Image] = [];
     FieldOfView:float = 0.0;
-
+    
     def __init__(self, x, y, angle, sx, sy, state):
         super(Banshee, self).__init__(x, y, angle, sx, sy, state);
         self.has_image = True;
         if Banshee.LOAD == False:
-            
             Banshee.IMGSForIdleR.append(pico2d.load_image('assets/Monster/Banshee/Idle/R (1).png'));
             Banshee.IMGSForIdleR.append(pico2d.load_image('assets/Monster/Banshee/Idle/R (2).png'));
-
-            # 
             Banshee.IMGSForIdleL.append(pico2d.load_image('assets/Monster/Banshee/Idle/L (1).png'));
             Banshee.IMGSForIdleL.append(pico2d.load_image('assets/Monster/Banshee/Idle/L (2).png'));
     
             Banshee.FieldOfView = Const.BANSHEE_FIELD_OF_VIEW;
-
 
             Banshee.SOUND = load_wav('assets/Monster/Banshee/banshee.wav');
             Banshee.SOUND.set_volume(50);
@@ -58,6 +60,7 @@ class Banshee(GameObject):
 
         # status
         self.current_hp = 100;
+        self.max_hp     = 100;
 
         # attack
         self.attack_trigger:bool = False;
@@ -69,33 +72,35 @@ class Banshee(GameObject):
         self.animation_timer = 0.0;
         self.animation_state = RUN_L;
 
+        # hit component
+        self.hit_component = HitComponent(hit_recovery_time);
+        self.hp_ui = HPBarForMonster(self, self.transform.tx, self.transform.ty, 1, 1, 1, True);
+
         self.dir = Const.direction_L; 
         self.last_dir = RUN_L % 2;
         self.current_state = IdleStateForBanshee(self);
         self.tag = Const.TAG_MONSTER;
 
-        #self.bullets:List[BansheeBullet] = [];
 
     def render(self): 
         self.current_state.render();
-        #for bullet in self.bullets:
-        #    bullet.render();
-        #return;
+        #if False == self.hit_comonent.can_hitted:
+            #self.hp_ui.render();
+        self.hp_ui.render();
 
 
     def render_debug(self): 
         if self.collider :
             draw_rectangle(*self.collider.get_area_offset(GameObject.Cam.camera_offset_x, GameObject.Cam.camera_offset_y));
-
         return;
 
     def update(self, time):
-        # 플레이어와의 거리 체크 해서 어느 근처 거리면 다가가기 시작.
-        self.update_component();
+        self.update_component(time);
         self.forStateMachine();
         self.update_timer(time);
         self.clampingInWindow();
         pass;
+
 
     def update_timer(self,time):
         self.basictimer += time;
@@ -114,20 +119,12 @@ class Banshee(GameObject):
                                                  , Player.MyPlayer.transform.ty ) :
             self.attack_trigger = True;
 
-
         if True == self.attack_trigger :
             self.attack_timer += time;
-
             if(self.attack_timer > attack_speed):
                 self.fire();
-
                 self.attack_timer = 0;
-        
-        #for bullet in self.bullets:
-        #    bullet.update(time);
-
         return;
-    
 
     def forStateMachine(self):
         self.current_state.update();
@@ -138,11 +135,12 @@ class Banshee(GameObject):
             self.current_state = self.state_queue.pop();
             del temp;
 
-    def update_component(self):
+    def update_component(self, time):
         self.previous_transform = self.transform;
         self.collider.cx, self.collider.cy = self.transform.tx, self.transform.ty;
+        self.hit_component.update(time);
+        #self.hp_ui.update(time);
 
-        
         return;
 
     def clampingInWindow(self):
@@ -151,8 +149,10 @@ class Banshee(GameObject):
         return;
 
     def on_collision(self, obj):
-        #print("Banshee.py {0}-{1}".format(self.tag, obj.tag));
+        #if Const.TAG_PLAYER_PROJECTILE == obj.tag :
+        #    calc_hp(obj.damage);
         pass;
+
 
     def fire(self):
         Banshee.SOUND.play(1);

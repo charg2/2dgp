@@ -83,8 +83,9 @@ class BansheeBullet(GameObject):
 
     def on_collision(self, obj):
         if Const.TAG_PLAYER == obj.tag :
+            print(obj.name);
             obj.calc_hp(damage);
-            self.owner.remove_projectile(self);
+            self.state = False;
 
         #elif Const.TAG_TERRAIN == obj.tag:
         #    self.owner.remove_projectile(self);
@@ -95,8 +96,6 @@ class BansheeBullet(GameObject):
         # 플레이어면 체력을 깍아 버림.
 
         #일단 충돌하면 없어지는건 뺴박 캔트.
-        
-
         pass;
     
 
@@ -110,7 +109,7 @@ class BansheeBullet(GameObject):
         
         # 시간 지나면 사라짐.
         if self.extinction_timer > extinction_time:
-            self.owner.remove_projectile(self);
+            self.state = False;
 
 
     def clampingInWindow(self):

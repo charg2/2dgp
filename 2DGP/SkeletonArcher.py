@@ -41,7 +41,13 @@ class SkeletonArcher(GameObject):
             SkeletonArcher.IMGSForBullet.append(pico2d.load_image('assets/Monster/SkeletonArcher/Arrow/Arrow.png'));
             
             SkeletonArcher.FieldOfView = Const.BANSHEE_FIELD_OF_VIEW;
-
+            
+            SkeletonArcher.DIE_SOUND = load_wav('assets/Monster/MonsterDie.wav');
+            SkeletonArcher.DIE_SOUND.set_volume(50);
+            SkeletonArcher.BEFORE_SHOT = load_wav('assets/Monster/SkeletonArcher/before_bow_shot.wav');
+            SkeletonArcher.BEFORE_SHOT.set_volume(50);
+            SkeletonArcher.AFTER_SHOT = load_wav('assets/Monster/SkeletonArcher/after_bow_shot.wav');
+            SkeletonArcher.AFTER_SHOT.set_volume(50);
             SkeletonArcher.LOAD = True;
         
         self.name = "SkeletonArcher_" + str(SkeletonArcher.UNIQUE_ID); # For Debug
@@ -92,7 +98,6 @@ class SkeletonArcher(GameObject):
         #self.forStateMachine();
         self.update_timer(time);
         self.update_dir();
-        #self.clampingInWindow();
         pass;
 
     def update_component(self, time):
@@ -111,11 +116,13 @@ class SkeletonArcher(GameObject):
                                                         , Player.MyPlayer.transform.tx
                                                         , Player.MyPlayer.transform.ty ) :
             self.attack_trigger = True;
+            #SkeletonArcher.BEFORE_SHOT.play(1);
 
 
         if True == self.attack_trigger :
             self.attack_timer += time;
             if(self.attack_timer > attack_speed):
+                #SkeletonArcher.AFTER_SHOT.play(1);
                 self.fire();
                 self.attack_timer = 0;
         
@@ -156,6 +163,7 @@ class SkeletonArcher(GameObject):
         pass;
 
     def fire(self):
+        SkeletonArcher.AFTER_SHOT.play(1);
         tx = self.transform.tx;
         ty = self.transform.ty;
 
@@ -178,8 +186,10 @@ class SkeletonArcher(GameObject):
         pass;
 
     def calc_hp(self, damage):
-        #if False == self.is_death :
             self.current_hp -= damage;
-            if self.current_hp < 0:
-                self.current_hp = 0;
-                self.state = False;
+            if self.current_hp <= 0:
+                #if self.hit_component.can_hitted() :
+                #    self.hit_component.hit();
+                    SkeletonArcher.DIE_SOUND.play(1);
+                    self.current_hp = 0;
+                    self.state = False;

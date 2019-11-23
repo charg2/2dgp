@@ -72,6 +72,9 @@
     <Compile Include="DeathState.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Effect.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="EffectCutton.py">
       <SubType>Code</SubType>
     </Compile>
@@ -99,6 +102,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="HPBar.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="HPBarForBelial.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="HPBarForMonster.py">

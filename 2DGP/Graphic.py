@@ -20,8 +20,6 @@ class GraphicLib:
         if GraphicLib.Font is None :
             #print(os.listdir());
             GraphicLib.Font= pico2d.load_font('assets/Font/font.TTF', 60);
-            GraphicLib.DebugImg = pico2d.load_image('assets/Player/Debug/Debug.png');
-            GraphicLib.DebugImg1=  pico2d.load_image('assets/Player/Debug/Debug1.png');
         return;
 
     def present():

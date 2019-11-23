@@ -28,11 +28,13 @@ START_X,START_Y = 300, 120;
 
 class FoodShopScene(Scene):
     def __init__(self):       
+        FoodShopScene.BGM = load_wav('assets/Sound/foodshop.wav');
         super(FoodShopScene,self).__init__();
         from FoodShopBG import FoodShopBG as bg;
         self.bg = (bg(const.WIN_WIDTH//2, const.WIN_HEIGHT//2, 0,1,1,True));
         #self.bg = (GameBG(const.WIN_WIDTH//2, const.WIN_HEIGHT//2, 0,1,1,True));
         
+        FoodShopScene.FOOD_SHOP_BGM = load_wav('assets/Sound/foodshop.wav');
         self.AddTerrainObject(self.bg);
         self.AddAllyObject(Player.MyPlayer);          
 
@@ -50,7 +52,6 @@ class FoodShopScene(Scene):
 
         self.AddTerrainObject(terrain(self.bg.map.width //2, 90, self.bg.map.width //2, 90 ));
         self.AddTerrainObject(terrain(0, 100 + self.bg.map.height // 4, 180,  self.bg.map.height // 4));
-        #print("height =", self.bg.map.height)
 
         mouse:Mouse = Mouse();
         mouse.set_cursor(Const.CURSOR_TARGET);
@@ -60,4 +61,6 @@ class FoodShopScene(Scene):
         return;
 
     def on_change_scene(self):
+        Scene.BACK_GROUND_MUSIC.__del__();
+        FoodShopScene.BGM.repeat_play();
         pass;

@@ -10,6 +10,7 @@ class Scene:
     Pause = False;
     Time = 0;
     RenderDebug = False;
+    BACK_GROUND_MUSIC = None;
 
     def __init__(self):
         self.bg = None;
@@ -20,6 +21,7 @@ class Scene:
         self.game_ui_list                   :List[GameObject] = [];
         self.game_object_list_bullet        :List[GameObject] = [];
         self.game_object_list_player_weapon :List[GameObject] = [];
+        
         self.render_debug                   :bool = False;
 
         self.start_x, self.start_y = 0, 0;

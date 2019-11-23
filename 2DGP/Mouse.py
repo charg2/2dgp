@@ -15,7 +15,7 @@ class Mouse(GameObject):
         self.Arrow = pico2d.load_image("assets/Mouse/Cursor00.png");
         self.Target = pico2d.load_image("assets/Mouse/Cursor01.png");
         self.IMG = self.Arrow;
-        self.collider:Collision = CollisionRect(self.x,self.y, self.IMG.w // 2, self.IMG.h // 2);
+        #self.collider:Collision = CollisionRect(self.x,self.y, self.IMG.w // 2, self.IMG.h // 2);
         Instance = self;
 
     def set_cursor(self, type):
@@ -49,15 +49,15 @@ class Mouse(GameObject):
         self.transform.tx = KeyInput.g_mouse_x;
         self.transform.ty = Const.WIN_HEIGHT - KeyInput.g_mouse_y - 1;
 
-        self.collider.cx, self.collider.cy = self.transform.tx + GameObject.Cam.camera_offset_x, self.transform.ty + GameObject.Cam.camera_offset_y;
+        #self.collider.cx, self.collider.cy = self.transform.tx + GameObject.Cam.camera_offset_x, self.transform.ty + GameObject.Cam.camera_offset_y;
         return;
 
     def render_debug(self): 
-        if self.collider :
-            from Graphic import GraphicLib;
-            GraphicLib.DebugImg1.draw(self.collider.cx - GameObject.Cam.camera_offset_x, self.collider.cy - GameObject.Cam.camera_offset_y, self.IMG.w, self.IMG.h);
-            #GraphicLib.DebugImg1.draw(self.x - GameObject.Cam.camera_offset_x, self.y- GameObject.Cam.camera_offset_y);    
-            #GraphicLib.DebugImg1.draw(self.transform.tx, self.transform.ty);    
+        #if self.collider :
+        #    from Graphic import GraphicLib;
+        #    GraphicLib.DebugImg1.draw(self.collider.cx - GameObject.Cam.camera_offset_x, self.collider.cy - GameObject.Cam.camera_offset_y, self.IMG.w, self.IMG.h);
+        #    #GraphicLib.DebugImg1.draw(self.x - GameObject.Cam.camera_offset_x, self.y- GameObject.Cam.camera_offset_y);    
+        #    #GraphicLib.DebugImg1.draw(self.transform.tx, self.transform.ty);    
 
         return;
 

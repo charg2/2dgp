@@ -20,9 +20,12 @@ from Gun import *;
 
 from typing import List;
 
+# component
+from HitComponent import *;
 
 RUN_L, RUN_R, IDLE_R, IDLE_L = range(4);
 DASH_CHARGE_TIME  = 1.25;
+HIT_RECOVERY_TIME = 0.2;
 class Player(GameObject):
     LOAD:bool = False;
 
@@ -156,12 +159,14 @@ class Player(GameObject):
 
         self.set_grivity(True);
         self.set_acceleration_of_gravity(7);
-
+        
+        #hit component
+        self.hit_component = HitComponent(HIT_RECOVERY_TIME);
     """
     public method
     """
     def update(self, time):
-        self.update_component();
+        self.update_component(time);
         self.handle_keyIO();
         self.forStateMachine();
         
@@ -188,13 +193,14 @@ class Player(GameObject):
     def weapon_render(self):
         self.current_weapon.render();
 
-    def update_component(self):
+    def update_component(self, time):
         self.previous_transform = self.transform;
         GameObject.Cam.transform = self.previous_transform;
         
         if True == self.has_collider:
             self.collider.cx, self.collider.cy = self.transform.tx, self.transform.ty;
-        
+
+        self.hit_component.update(time);
         return;
 
     def update_timer(self,time):
@@ -292,7 +298,8 @@ class Player(GameObject):
         return;
 
     def calc_hp(self, damage):
-        if False == self.is_death :
+        if False == self.is_death and self.hit_component.can_hitted() :
+            self.hit_component.hit();
             self.current_hp -= damage;
             if self.current_hp < 0:
                 self.current_hp = 0;

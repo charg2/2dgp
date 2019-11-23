@@ -7,11 +7,15 @@ from KeyIO import *;
 from Const import *;
 from CollisionRect import*;
 
-from Player import Player;
-
 from IdleStateForBelial import *;
 
+#component
+from HitComponent import *;
+
+from HPBarForBelial import *;
+
 from typing import List;
+
 
 #2~3가지 패턴을 가지고 있음
 # 일정시간 마다 공격을 하며
@@ -22,6 +26,8 @@ max_hp = 100;
 attack_speed = 3;
 RUN_L, RUN_R, IDLE_R, IDLE_L = range(4);
 frame = 10;
+hit_recovery_time = 0.2;
+
 class Belial(GameObject):
     LOAD:bool = False;
     IMGSForIdle:List[Image] = [];
@@ -33,11 +39,14 @@ class Belial(GameObject):
         if Belial.LOAD == False:
             Belial.IMG = pico2d.load_image('assets/Monster/Belial/Idle/boss (1).png');
 
+            Belial.DIE_SOUND = load_wav('assets/Monster/MonsterDie.wav');
+            Belial.DIE_SOUND.set_volume(50);
+
             Belial.FieldOfView = Const.BANSHEE_FIELD_OF_VIEW;
             Belial.LOAD = True;
         
         self.name = "Belial";
-
+        self.hp_ui = HPBarForBelial(self, x, y, angle, sx, sy, state);
         self.force_x =6; 
         self.force_y =8;
 
@@ -56,6 +65,7 @@ class Belial(GameObject):
 
         # status
         self.current_hp = 100;
+        self.max_hp = 100;
 
         self.current_state = IdleStateForBelial(self);
         self.dir = Const.direction_L; 
@@ -64,11 +74,14 @@ class Belial(GameObject):
 
         self.collider:Collision = CollisionRect(x,y, Belial.IMG.w // 2, Belial.IMG.h // 2);
 
-        #self.bullets:List[BelialBullet] = [];
+
+        # hit component
+        self.hit_component = HitComponent(hit_recovery_time);
 
     def render(self): 
         self.current_state.render();
-
+        ## ui hp bar
+        self.hp_ui.render();
 
     def render_debug(self): 
         if self.collider :
@@ -78,7 +91,7 @@ class Belial(GameObject):
 
     def update(self, time):
         # 플레이어와의 거리 체크 해서 어느 근처 거리면 다가가기 시작.
-        self.update_component();
+        self.update_component(time);
         self.forStateMachine();
         self.update_timer(time);
         self.clampingInWindow();
@@ -115,8 +128,9 @@ class Belial(GameObject):
             self.current_state = self.state_queue.pop();
             del temp;
 
-    def update_component(self):
+    def update_component(self, time):
         self.previous_transform = self.transform;
+        self.hit_component.update(time);
         #self.collider.cx, self.collider.cy = self.transform.tx, self.transform.ty;
         return;
 
@@ -134,4 +148,6 @@ class Belial(GameObject):
         #if False == self.is_death :
             self.current_hp -= damage;
             if self.current_hp < 0:
+                Belial.DIE_SOUND.play(1);
                 self.current_hp = 0;
+                self.state = False;

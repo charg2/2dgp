@@ -44,8 +44,11 @@ class Banshee(GameObject):
     
             Banshee.FieldOfView = Const.BANSHEE_FIELD_OF_VIEW;
 
-            Banshee.SOUND = load_wav('assets/Monster/Banshee/banshee.wav');
-            Banshee.SOUND.set_volume(50);
+            Banshee.ATTACK_SOUND = load_wav('assets/Monster/Banshee/banshee.wav');
+            Banshee.ATTACK_SOUND.set_volume(50);
+
+            Banshee.DIE_SOUND = load_wav('assets/Monster/MonsterDie.wav');
+            Banshee.DIE_SOUND.set_volume(50);
 
             Banshee.LOAD = True;
         
@@ -155,7 +158,7 @@ class Banshee(GameObject):
 
 
     def fire(self):
-        Banshee.SOUND.play(1);
+        Banshee.ATTACK_SOUND.play(1);
 
         tx = self.transform.tx;
         ty = self.transform.ty;
@@ -175,5 +178,6 @@ class Banshee(GameObject):
         #if False == self.is_death :
             self.current_hp -= damage;
             if self.current_hp < 0:
+                Banshee.DIE_SOUND.play(1);
                 self.current_hp = 0;
                 self.state = False;

@@ -119,6 +119,6 @@ class Horerica(GameObject):
         return;
     
     def on_collision(self, obj):
-        if Const.TAG_PLYAER == obj.tag:
+        if Const.TAG_PLAYER == obj.tag:
             self.is_collided = True;
             self.render_f_key();

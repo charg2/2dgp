@@ -1,8 +1,6 @@
 
 from GameObject import *;
 from Const import *;
-from Player import *;
-
 
 offset_x, offset_y = 20, 20;
 class HPBarForMonster(GameObject):

@@ -12,8 +12,14 @@ FORCE_X, FORCE_Y = 500, 500;
 class DashStateForPlayer(StateMachine):
     animation_state =0;
     timer = 0;
+    DASH_SOUND = None;
+
 
     def __init__(self,gobj):
+        if None == DashStateForPlayer.DASH_SOUND :
+            DashStateForPlayer.DASH_SOUND = load_wav('assets/Player/Jump/dash.wav');
+
+        DashStateForPlayer.DASH_SOUND.play(1);
         self.obj = gobj;
   
         self.obj.is_dash = True;
@@ -59,7 +65,7 @@ class DashStateForPlayer(StateMachine):
 
 
         if self.timer > 0.2 :
-            print("Dashstate.py 76 ");
+            
             self.obj.add_queue(IdleStateForPlayer(self.obj));
             temp = self.obj.current_state;
             self.obj.current_state.exit();

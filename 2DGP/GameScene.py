@@ -20,13 +20,14 @@ from Wallet import *;
 from DashBar import *;
 
 #NPC
-from Horerica import *;
-
 START_X,START_Y = 300, 120;
 
 class GameScene(Scene):
+    BGM = None;
     def __init__(self):       
         super(GameScene,self).__init__();
+        if None == GameScene.BGM :
+            GameScene.BGM = load_wav('assets/Sound/jailfield.wav');
         self.bg = (GameBG(const.WIN_WIDTH//2, const.WIN_HEIGHT//2, 0,1,1,True));
         
         self.AddTerrainObject(self.bg);
@@ -65,4 +66,7 @@ class GameScene(Scene):
         return;
 
     def on_change_scene(self):
-        pass;
+        #Scene.BGM = GameScene.BGM;
+        GameScene.BGM.repeat_play();
+        Scene.BACK_GROUND_MUSIC = GameScene.BGM;
+

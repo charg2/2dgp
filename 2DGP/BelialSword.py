@@ -76,10 +76,10 @@ class BelialSword(GameObject):
     def on_collision(self, obj):
         if Const.TAG_PLAYER == obj.tag :
             obj.calc_hp(damage);
-            self.owner.remove_projectile(self);
+            self.state = False;
 
         elif Const.TAG_TERRAIN == obj.tag:
-            self.owner.remove_projectile(self);
+            self.state = False;
         pass;
     
     def update_timer(self,time):
@@ -90,7 +90,7 @@ class BelialSword(GameObject):
             self.velocity = velocity;
 
         if self.extinction_timer > extinction_time:
-            self.owner.remove_projectile(self);
+            self.state = False;
 
     def clampingInWindow(self):
         self.transform.tx = Const.clamp(0, self.transform.tx, GameObject.Cam.map_width-self.IMG.w//16)  

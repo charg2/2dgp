@@ -11,8 +11,11 @@ FORCE_Y = 2000;
 class JumpStateForPlayer(StateMachine):
     animation_state =0;
     timer           = 0;
-    
+    JUMP_SOUND      = None;
     def __init__(self,player):
+        if None == JumpStateForPlayer.JUMP_SOUND :
+            JumpStateForPlayer.JUMP_SOUND = load_wav('assets/Player/Jump/jump.wav');
+
         self.obj = player;
         #gobj.set_grivity(True);
 
@@ -35,7 +38,9 @@ class JumpStateForPlayer(StateMachine):
             from Player import Player;
             self.obj.IMG = Player.IMGSForJump[1];
             self.Fx = 0;
-        
+
+        JumpStateForPlayer.JUMP_SOUND.play(1);
+
         self.obj.set_velocity(self.Fx, self.Fy);
         #self.obj.jump_sound.play(1);
         return;

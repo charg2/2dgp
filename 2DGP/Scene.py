@@ -61,6 +61,11 @@ class Scene:
                 self.game_object_list_monster.remove(gobj);
                 del gobj; 
 
+        for gobj in self.game_object_list_player_weapon:
+            if gobj.state == False:
+                self.game_object_list_player_weapon.remove(gobj);
+                del gobj; 
+
         for terrain in self.game_object_list_terrain:
             if terrain.state == False:
                 self.game_object_list_terrain.remove(terrain);
@@ -111,16 +116,28 @@ class Scene:
         for obj in self.game_object_list_ally:
             if None != obj.collider:
                 if Const.COLLISION_RECT == obj.collider.get_collision_type() :
-
                     for obs in self.game_object_list_obstacle :
                         if None != obs.collider:
                             if Const.COLLISION_RECT == obs.collider.get_collision_type() :
                                 aleft,abottom,aright,atop = obs.collider.get_area();
                                 bleft,bbottom,bright,btop = obj.collider.get_area();
-
                                 if(True == Const.is_collided(aleft,abottom,aright,atop,bleft,bbottom,bright,btop)):
                                     obj.on_collision(obs);
                                     obs.on_collision(obj);
+
+
+        for obj in self.game_object_list_player_weapon:
+            if None != obj.collider:
+                if Const.COLLISION_RECT == obj.collider.get_collision_type() :
+                    for mob in self.game_object_list_monster :
+                        if None != mob.collider:
+                            if Const.COLLISION_RECT == mob.collider.get_collision_type() :
+                                aleft,abottom,aright,atop = mob.collider.get_area();
+                                bleft,bbottom,bright,btop = obj.collider.get_area();
+
+                                if(True == Const.is_collided(aleft,abottom,aright,atop,bleft,bbottom,bright,btop)):
+                                    obj.on_collision(mob);
+                                    mob.on_collision(obj);
         # 더 세분화 하자..
         #monster vs terrain
         for mob in self.game_object_list_monster:
@@ -160,6 +177,10 @@ class Scene:
 
         # 몹끼리의 충돌은 없고 p vs m
         for gobj in self.game_object_list_monster:
+            if(gobj.has_image == True and gobj.state):               
+                gobj.render();
+
+        for gobj in self.game_object_list_player_weapon:
             if(gobj.has_image == True and gobj.state):               
                 gobj.render();
 
@@ -216,11 +237,11 @@ class Scene:
         self.game_object_list_obstacle.append(obj);
         return;
 
-    def AddUi(self, obj):
+    def add_ui(self, obj):
         self.game_ui_list.append(obj);
         return;
 
-    def add_player_Weapon(self, obj):
+    def add_player_weapon(self, obj):
         self.game_object_list_player_weapon.append(obj);
         return;
 
@@ -236,29 +257,24 @@ class Scene:
         return self.start_x ,self.start_y;
                 #lowx lowy   maxx maxy
 
-    def remove_projectile(self, bullet):
-        try:
-        #if bulliet in self.game_object_list_monster:
-            self.game_object_list_monster.remove(bullet);
-        except ValueError:
-            print("Scene::remove_procjectile(slef) error?");
-        del bullet;
+    #def remove_projectile(self, bullet):
+    #    try:
+    #    #if bulliet in self.game_object_list_monster:
+    #        self.game_object_list_monster.remove(bullet);
+    #    except ValueError:
+    #        print("Scene::remove_procjectile(slef) error?");
+    #    del bullet;
     
-    def add_player_Weapon(self, obj):
-        self.game_object_list_player_weapon.remove(obj);
-        return;
+
 
     def add_projectile(self, bullet):
         self.game_object_list_monster.append(bullet);
         return;
 
-
-
     def set_cam(self):
         if self.bg :
             #GameObject.Cam.SetMapSize(self.bg.IMG.w, self.bg.IMG.h);
             GameObject.Cam.SetMapSize(self.bg.map.width, self.bg.map.height);
-
         return;
 
     def on_change_scene(self):

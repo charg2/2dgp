@@ -96,7 +96,8 @@ class BigHeal(GameObject):
 
             if obj.max_hp < obj.current_hp :
                 obj.current_hp = obj.max_hp;
-            self.owner.remove_game_object(self);
+            #self.owner.remove_game_object(self);
+            self.state = False;
 
 
 

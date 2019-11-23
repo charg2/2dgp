@@ -81,6 +81,6 @@ class Portal(GameObject):
                 from EffectCutton import EffectCutton;
                 from FrameWork import FrameWork as framework;
                 Portal.PORTAL_SOUND.play(1);
-                framework.CurScene.AddUi(EffectCutton(Const.WIN_WIDTH//2,Const.WIN_HEIGHT//2,0,1,1,True, self.scene_number));
+                framework.CurScene.add_ui(EffectCutton(Const.WIN_WIDTH//2,Const.WIN_HEIGHT//2,0,1,1,True, self.scene_number));
                 pass;
         return;

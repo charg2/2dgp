@@ -79,18 +79,19 @@ class PlayerBullet(GameObject):
 
 
     def on_collision(self, obj):
-        if Const.TAG_MONSTER == obj.name:
-            print(obj.name);
-            obj.calc_hp(damage);
-
+        if Const.TAG_MONSTER == obj.tag:
+            if True == obj.hit_component.can_hitted():
+                obj.hit_component.hit();
+                print(obj.name);
+                obj.calc_hp(damage);
+                self.state = False;
         #    self.owner.remove_projectile(self);
         #맵에서 나가도 ㅇㅇ;
         # 벽이면 사라짐.
         #print("{0} - 충돌함 ({1},{2})".format(self.name,self.transform.tx, self.transform.ty));
         # 플레이어면 체력을 깍아 버림.
 
-        #일단 충돌하면 없어지는건 뺴박 캔트.
-        pass;
+
     
 
     def update_timer(self,time):

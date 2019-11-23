@@ -28,5 +28,5 @@ class TitleBG(GameObject):
         if(True == KeyInput.g_space):
             from EffectCutton import EffectCutton;
             from FrameWork import FrameWork as framework;
-            framework.CurScene.AddUi(EffectCutton(Const.WIN_WIDTH//2,Const.WIN_HEIGHT//2,0,1,1,True, 1));
+            framework.CurScene.add_ui(EffectCutton(Const.WIN_WIDTH//2,Const.WIN_HEIGHT//2,0,1,1,True, 1));
         return;

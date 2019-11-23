@@ -59,8 +59,8 @@ class Banshee(GameObject):
         self.collider:Collision = CollisionRect(x,y, self.IMG.w // 2, self.IMG.h // 2);
 
         # status
-        self.current_hp = 100;
-        self.max_hp     = 100;
+        self.current_hp = 50;
+        self.max_hp     = 50;
 
         # attack
         self.attack_trigger:bool = False;
@@ -84,9 +84,9 @@ class Banshee(GameObject):
 
     def render(self): 
         self.current_state.render();
-        #if False == self.hit_comonent.can_hitted:
-            #self.hp_ui.render();
-        self.hp_ui.render();
+        if False == self.hit_component.can_hitted():
+            self.hp_ui.render();
+        #self.hp_ui.render();
 
 
     def render_debug(self): 
@@ -171,9 +171,9 @@ class Banshee(GameObject):
         FrameWork.CurScene.add_projectile(BansheeBullet(FrameWork.CurScene, tx, ty, -0.5,1,1, True)); 
         FrameWork.CurScene.add_projectile(BansheeBullet(FrameWork.CurScene, tx, ty, -0.75,1,1, True)); 
         
-
     def calc_hp(self, damage):
         #if False == self.is_death :
             self.current_hp -= damage;
             if self.current_hp < 0:
                 self.current_hp = 0;
+                self.state = False;

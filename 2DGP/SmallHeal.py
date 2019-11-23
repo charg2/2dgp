@@ -89,12 +89,10 @@ class SmallHeal(GameObject):
     def on_collision(self, obj):
         if Const.TAG_PLAYER == obj.tag:
             SmallHeal.SOUND.play(1);
-            
             obj.current_hp += heal;
-
             if obj.max_hp < obj.current_hp :
                 obj.current_hp = obj.max_hp;
-            self.owner.remove_game_object(self);
+            self.state = False;
 
 
 

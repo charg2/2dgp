@@ -75,9 +75,7 @@ class BelialLaser(GameObject):
     def on_collision(self, obj):
         if Const.TAG_PLAYER == obj.tag:
             obj.calc_hp(damage);
-            self.owner.remove_projectile(self);
             self.state = False;
-        # 플레이어면 체력을 깍아 버림.
     
     def update_timer(self,time):
         self.animation_timer += time;

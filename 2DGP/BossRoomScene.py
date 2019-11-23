@@ -36,11 +36,11 @@ class BossRoomScene(Scene):
         mouse.set_cursor(Const.CURSOR_TARGET);
 
         
-        self.AddUi(HPBarForPlayer.get_instance());
-        self.AddUi(Wallet.get_instance());
-        self.AddUi(DashBar.get_instance());
+        self.add_ui(HPBarForPlayer.get_instance());
+        self.add_ui(Wallet.get_instance());
+        self.add_ui(DashBar.get_instance());
         
-        self.AddUi(mouse);
+        self.add_ui(mouse);
         self.AddAllyObject(mouse);          
         return;
 

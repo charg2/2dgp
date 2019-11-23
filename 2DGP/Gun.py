@@ -18,8 +18,10 @@ class Gun(GameObject):
         print(owner.tag);
         Gun.IMGS.append( pico2d.load_image("assets/Weapon/UZI.png") );
         self.current_img = Gun.IMGS[0];
-        LOAD = True;
+        Gun.SOUND = load_wav('assets/Weapon/gun.wav');
+        Gun.SOUND.set_volume(50);
 
+        LOAD = True;
         self.attack_trigger     :bool   = True;
         self.attack_time        :float  = 0.0;
         self.attack_key_timer   :float  = 0.3;
@@ -62,19 +64,17 @@ class Gun(GameObject):
         #target_y = Const.WIN_HEIGHT - KeyInput.g_mouse_y - 1;
 
         #radian = ( Const.calc_radian(self.owner.transform.tx - GameObject.Cam.camera_offset_x, self.owner.transform.ty - GameObject.Cam.camera_offset_y, target_x, target_y) );
-
-        #print("빵야 - {0}", radian);
+        Gun.SOUND.play(1);
 
         tx = self.owner.transform.tx;
         ty = self.owner.transform.ty;
 
         from FrameWork import FrameWork;
-        from SkeletonArcherArrow import SkeletonArcherArrow as arrow;
-
-        if Const.direction_L== self.owner.m_dir:
-            FrameWork.CurScene.add_projectile(pbullet(FrameWork.CurScene, tx, ty, self.radian,1,1, True)); 
+        if Const.direction_L == self.owner.m_dir:
+            FrameWork.CurScene.add_player_weapon(pbullet(FrameWork.CurScene, tx, ty, self.radian,1,1, True)); 
         else :
-            FrameWork.CurScene.add_projectile(pbullet(FrameWork.CurScene, tx, ty, self.radian,1,1, True)); 
+            FrameWork.CurScene.add_player_weapon(pbullet(FrameWork.CurScene, tx, ty, self.radian,1,1, True)); 
+        
         self.attack_trigger = False;
 
 

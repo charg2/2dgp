@@ -33,18 +33,18 @@ class GameScene(Scene):
         self.AddAllyObject(Player(START_X,  START_Y + 90,0,1,1,True));          
 
         self.AddMonsterObject(Banshee(START_X + 300, START_Y + 400 ,0,1,1,True));          
-        self.AddMonsterObject(small_heal(self, START_X + 500, START_Y + 400 ,0,1,1,True));          
-        self.AddMonsterObject(big_heal(self, START_X + 7, START_Y + 200 ,0,1,1,True));          
-        self.AddMonsterObject(coin(self, START_X + 100, START_Y + 200 ,0,1,1,True));          
-        self.AddMonsterObject(coin(self, START_X + 200, START_Y + 240 ,0,1,1,True));          
+        self.AddObstacleObject(small_heal(self, START_X + 500, START_Y + 400 ,0,1,1,True));          
+        self.AddObstacleObject(big_heal(self, START_X + 7, START_Y + 200 ,0,1,1,True));          
+        self.AddObstacleObject(coin(self, START_X + 100, START_Y + 200 ,0,1,1,True));          
+        self.AddObstacleObject(coin(self, START_X + 200, START_Y + 240 ,0,1,1,True));          
 
         self.AddObstacleObject(portal(START_X + 2100, START_Y + 90,0,1,1,True, 2));
         
 
         #UI
-        self.AddUi(HPBarForPlayer.get_instance());
-        self.AddUi(Wallet.get_instance());
-        self.AddUi(DashBar.get_instance());
+        self.add_ui(HPBarForPlayer.get_instance());
+        self.add_ui(Wallet.get_instance());
+        self.add_ui(DashBar.get_instance());
 
         self.AddMonsterObject(SkeletonArcher(START_X + 100, START_Y + 100 ,0,1,1, True));     
         
@@ -60,7 +60,7 @@ class GameScene(Scene):
         mouse:Mouse = Mouse();
         mouse.set_cursor(Const.CURSOR_TARGET);
 
-        self.AddUi(mouse);
+        self.add_ui(mouse);
         self.AddAllyObject(mouse);          
         return;
 

@@ -44,9 +44,9 @@ class FoodShopScene(Scene):
         self.AddTerrainObject(FoodShop(START_X + 800, 200 + 256 ,0,1,1,True));
 
         #UI
-        self.AddUi(HPBarForPlayer.get_instance());
-        self.AddUi(Wallet.get_instance());
-        self.AddUi(DashBar.get_instance());
+        self.add_ui(HPBarForPlayer.get_instance());
+        self.add_ui(Wallet.get_instance());
+        self.add_ui(DashBar.get_instance());
 
         self.AddTerrainObject(terrain(self.bg.map.width //2, 90, self.bg.map.width //2, 90 ));
         self.AddTerrainObject(terrain(0, 100 + self.bg.map.height // 4, 180,  self.bg.map.height // 4));
@@ -55,7 +55,7 @@ class FoodShopScene(Scene):
         mouse:Mouse = Mouse();
         mouse.set_cursor(Const.CURSOR_TARGET);
 
-        self.AddUi(mouse);
+        self.add_ui(mouse);
         self.AddAllyObject(mouse);          
         return;
 

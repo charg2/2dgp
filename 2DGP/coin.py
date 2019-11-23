@@ -89,5 +89,5 @@ class Coin(GameObject):
             Coin.COIN_SOUND.play(1);
 
             obj.current_coin += price;
-            self.owner.remove_game_object(self);
+            self.state = False;
         return;

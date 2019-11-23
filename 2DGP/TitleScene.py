@@ -13,8 +13,8 @@ class TitleScene(Scene):
         # 마지막 보여줄 마우스 마지막 배치
         #mouse = Mouse();
 
-        self.AddUi(LOGO(300, 300, 0, 1.5, 1.5, True));
-        self.AddUi(Mouse());
+        self.add_ui(LOGO(300, 300, 0, 1.5, 1.5, True));
+        self.add_ui(Mouse());
         return;
 
     def Initialize(self):

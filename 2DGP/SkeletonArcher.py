@@ -7,13 +7,19 @@ from KeyIO import *;
 from Const import *;
 from CollisionRect import*;
 
+#component
+from HitComponent import *;
+#ui
+from HPBarForMonster import *;
+
 from Player import Player;
 #from IdleStateForSkeletonArcher import *; # 미 적용.
 
 from typing import List;
 
-max_hp = 100;
+max_hp = 50;
 attack_speed = 2;
+hit_recovery_time = 0.2;
 IDLE_L, IDLE_R = range(2);
 class SkeletonArcher(GameObject):
     LOAD:bool = False;
@@ -55,7 +61,12 @@ class SkeletonArcher(GameObject):
         self.tag:int = Const.TAG_MONSTER;
 
         # status
-        self.current_hp = 100;
+        self.current_hp = 50;
+        self.max_hp     = 50;
+
+        # hit component
+        self.hit_component = HitComponent(hit_recovery_time);
+        self.hp_ui = HPBarForMonster(self, self.transform.tx, self.transform.ty, 1, 1, 1, True);
 
     def render(self): 
         self.IMG.clip_composite_draw(0,0,
@@ -65,9 +76,8 @@ class SkeletonArcher(GameObject):
                    self.transform.tx-GameObject.Cam.camera_offset_x,
                    self.transform.ty-GameObject.Cam.camera_offset_y,
                    );
-
-        self.render_debug();
-        return;
+        if False == self.hit_component.can_hitted():
+            self.hp_ui.render();
 
 
     def render_debug(self): 
@@ -78,12 +88,15 @@ class SkeletonArcher(GameObject):
 
     def update(self, time):
         # 플레이어와의 거리 체크 해서 어느 근처 거리면 다가가기 시작.
-        #self.update_component();
+        self.update_component(time);
         #self.forStateMachine();
         self.update_timer(time);
         self.update_dir();
         #self.clampingInWindow();
         pass;
+
+    def update_component(self, time):
+        self.hit_component.update(time);
 
     def update_timer(self,time):
         self.basictimer += time;
@@ -91,7 +104,6 @@ class SkeletonArcher(GameObject):
 
         # 방향 체크.
         # 무조건 플레이어를 바라 봄.
-
 
         # 시야 범위 안에 드는지 체크.
         if SkeletonArcher.FieldOfView >= Const.distance(  self.transform.tx
@@ -158,7 +170,6 @@ class SkeletonArcher(GameObject):
         from FrameWork import FrameWork;
         from SkeletonArcherArrow import SkeletonArcherArrow as arrow;
 
-        
         if Const.direction_L== self.dir:
             FrameWork.CurScene.add_projectile(arrow(FrameWork.CurScene, tx, ty, 1,1,1, True)); 
         else :
@@ -171,3 +182,4 @@ class SkeletonArcher(GameObject):
             self.current_hp -= damage;
             if self.current_hp < 0:
                 self.current_hp = 0;
+                self.state = False;

@@ -87,6 +87,8 @@ class SkeletonDog(GameObject):
         self.behavior_tree = None;
         self.build_behavior_tree();
 
+        self.dir_timer = 0;
+
     def render(self): 
         self.current_state.render();
 
@@ -167,16 +169,21 @@ class SkeletonDog(GameObject):
                 self.state = False;
 
 #------------------------------------------------------------------------
+    from random import randint;
     def wander(self, time):
         calculate_current_position();
         if self.timer < 0:
             self.timer +=1.0;
-            self.dir = random.random() * 2 * math.pi;
+            self.dir = random.randint(-1, 2, 2);
 
+    def move_to_player(self, time):
+        self.speed = self.force_x;
+        self.dir 
+        self.calculate_current_position();
 
     def calculate_current_position(self, time):
-        self.x += self.speed * time;
-        self.y += self.speed * time;
+        self.transform.tx += self.force_x * self.dir * time;
+        #self.y += self.force_y * self.dir * time;
 
     def find_player(self, time):
         if SkeletonDog.FieldOfView >= Const.distance(  self.transform.tx
@@ -185,9 +192,11 @@ class SkeletonDog(GameObject):
                                                          , Player.MyPlayer.transform.ty ) :
             return BehaviorTree.SUCCESS;
         else:
-            self.speed = 0;
+            self.force_y = 0;
             return BehaviorTree.FAIL;
 
+        
+        return BehaviorTree.SUCCESS;
 
     def build_behavior_tree(self):
         chase_node = SequenceNode("Chase");
@@ -201,9 +210,3 @@ class SkeletonDog(GameObject):
         wander_chase_node.add_children(chase_node, wander_node);
 
         self.behavior_tree = BehaviorTree(wander_chase_node);
-
-    def move_to_player(self):
-        self.speed = self.force_x;
-        self.calculate_current_position();
-        
-        return BehaviorTree.SUCCESS;

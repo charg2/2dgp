@@ -42,7 +42,6 @@ class JumpStateForPlayer(StateMachine):
         JumpStateForPlayer.JUMP_SOUND.play(1);
 
         self.obj.set_velocity(self.Fx, self.Fy);
-        #self.obj.jump_sound.play(1);
         return;
 
     # 점프 상승중의 버튼 상태를 조사해 반영함.

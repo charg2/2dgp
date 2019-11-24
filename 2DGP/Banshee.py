@@ -16,11 +16,11 @@ from BansheeBullet import *;
 from HitComponent import *;
 #ui
 from HPBarForMonster import *;
+from coin import *;
 
 from typing import List;
 
 # 플레이어에게 접근 하는 패턴만 추가하면 완성.
-
 max_hp = 100;
 attack_speed = 3;
 RUN_L, RUN_R, IDLE_R, IDLE_L = range(4);
@@ -143,7 +143,6 @@ class Banshee(GameObject):
         self.collider.cx, self.collider.cy = self.transform.tx, self.transform.ty;
         self.hit_component.update(time);
         #self.hp_ui.update(time);
-
         return;
 
     def clampingInWindow(self):
@@ -175,9 +174,14 @@ class Banshee(GameObject):
         FrameWork.CurScene.add_projectile(BansheeBullet(FrameWork.CurScene, tx, ty, -0.75,1,1, True)); 
         
     def calc_hp(self, damage):
-        #if False == self.is_death :
+        if self.hit_component.can_hitted() :
+            self.hit_component.hit();
             self.current_hp -= damage;
             if self.current_hp < 0:
                 Banshee.DIE_SOUND.play(1);
+                self.drop_coin();
                 self.current_hp = 0;
                 self.state = False;
+    
+    def drop_coin(self):
+        pass;

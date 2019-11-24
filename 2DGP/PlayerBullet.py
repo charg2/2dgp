@@ -42,7 +42,7 @@ class PlayerBullet(GameObject):
         self.animation_time = 0.0;
         self.animation_status = 0;
         
-        self.collider:Collision = CollisionRect(x,y, self.IMGS[0].w // 2, self.IMGS[0].h // 2);
+        self.collider:Collision = CollisionRect(x,y, self.IMGS[0].w // 2, self.IMGS[0].h // 3);
 
         pass;
 
@@ -80,11 +80,11 @@ class PlayerBullet(GameObject):
 
     def on_collision(self, obj):
         if Const.TAG_MONSTER == obj.tag:
-            if True == obj.hit_component.can_hitted():
-                obj.hit_component.hit();
-                print(obj.name);
-                obj.calc_hp(damage);
-                self.state = False;
+            obj.calc_hp(damage);
+            self.state = False;
+        if Const.TAG_TERRAIN == obj.tag:
+            self.state = False;
+
         #    self.owner.remove_projectile(self);
         #맵에서 나가도 ㅇㅇ;
         # 벽이면 사라짐.

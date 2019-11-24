@@ -10,16 +10,17 @@ class Const:
 
     direction_L,direction_R = range(2);
 
-
     SWORD, BOW, GUN = range(3);
     RUN_L, RUN_R, IDLE_R, IDLE_L = range(4);
     COLLISION_RECT , COLLISION_CIRCLE, COLLISION_POINT, COLLISION_LINE = range(4); 
-    TAG_DEFAULT, TAG_TERRAIN, TAG_PLAYER, TAG_MONSTER, TAG_OPSTACLE, TAG_UI, TAG_MONSTER_PROJECTILE, TAG_PLAYER_PROJECTILE, TAG_NPC = range(9);
+    TAG_DEFAULT, TAG_TERRAIN, TAG_PLAYER, TAG_MONSTER, TAG_OPSTACLE, TAG_UI, TAG_MONSTER_PROJECTILE, TAG_PLAYER_PROJECTILE, TAG_NPC, TAG_EFFECT = range(10);
     CURSOR_ARROW, CURSOR_TARGET = range(2);
     DASH, JUMP, RUN, IDLE = range(4);
     DASH_CHARGE_TIME = parser.get_int('dash_charge_time');
     MAX_DASH_COUNT = parser.get_int('max_dash_count');
     BANSHEE_FIELD_OF_VIEW = parser.get_float('banshee_filed_of_view');
+    STATIC_ANIMATION, STATIC_SPRITE, DYNAMIC_ANIMATION, DYNAMIC_SPRITE = range(4);
+
 
     #enum
     del parser;

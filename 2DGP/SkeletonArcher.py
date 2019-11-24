@@ -186,10 +186,10 @@ class SkeletonArcher(GameObject):
         pass;
 
     def calc_hp(self, damage):
+        if self.hit_component.can_hitted() :
+            self.hit_component.hit();
             self.current_hp -= damage;
             if self.current_hp <= 0:
-                #if self.hit_component.can_hitted() :
-                #    self.hit_component.hit();
-                    SkeletonArcher.DIE_SOUND.play(1);
-                    self.current_hp = 0;
-                    self.state = False;
+                SkeletonArcher.DIE_SOUND.play(1);
+                self.current_hp = 0;
+                self.state = False;

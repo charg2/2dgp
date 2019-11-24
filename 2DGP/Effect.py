@@ -8,16 +8,60 @@ from Const import *;
 
 from typing import List;
 
-class DashEffect(GameObject) :
-    LOAD = False;
 
-    def __init__(self, owner, x, y, angle, sx, sy, state):
-        self.animation_frame = 0;
-        self.animation_max_frame = 0;
-        self.has_image = True;
-        
-        if Effect.LOAD == False:
-            pass;
+# 제자리에서 animation
+# 제자리에서 멈춘 이미지
+# 움직이면서 animation
+# 움직이면서 멈춘 이미지
+
+STATIC_ANIMATION, STATIC_SPRITE, DYNAMIC_ANIMATION, DYNAMIC_SPRITE = range(4);
+
+class EffectStaticAnimation(GameObject) :
+    def __init__(self, owner, tx, ty, animation ,max_frame, interval_time):
+        super(EffectStaticAnimation, self).__init__(tx, ty, 1, 1, 1, True);
+        self.animation_frame        = 0;
+        self.animation_max_frame    = max_frame;
+        self.interval_time          = interval_time;
+        self.animation_timer        = 0;
+        self.animation              = animation;
+        self.img                    = self.animation[0];
+        self.has_image              = True;
+        self.owner                  = owner;
+        self.tag                    = Const.TAG_EFFECT;
+
+    #frame 끝 +1하면 종료.
+    def update(self, time):
+        self.animation_timer += time;
+
+        if self.animation_timer >= self.interval_time:
+            temp_frame = self.animation_frame + 1 ;
+            if self.max_frame == temp_frame :
+                self.state = True;
+            else:
+                self.animation_frame = temp_frame;
+            
+    def render(self):
+        self.animation[self.animation_frame].composite_draw( 0, "", self.transform.tx - GameObject.Cam.camera_offset_x, self.transform.ty - GameObject.Cam.camera_offset_y, self.img[0].w, self.img[0].h);
+
+class EffectStaticSprite(GameObject) :
+    def __init__(self, owner, tx, ty, sprite, end_time):
+        super(EffectStaticSprite, self).__init__(tx, ty, 1, 1, 1, True);
+        self.has_image  = True;
+        self.tag        = Const.TAG_EFFECT;
+        self.end_time   = end_time;
+        self.end_timer  = 0;
+        self.img        = sprite;
+        self.owner      = owner;
+
+    def update(self, time):
+        self.end_timer += time;
+        if self.end_timer >= self.end_time:
+            #self.end_timer = 0;
+            self.state = False;
+            #print("삭제");
+
+    def render(self):
+        self.img.composite_draw( 0, "", self.transform.tx - GameObject.Cam.camera_offset_x, self.transform.ty - GameObject.Cam.camera_offset_y, self.img.w, self.img.h);
 
 
 

@@ -7,6 +7,7 @@ from Player import Player;
 from Belial import *;
 from Banshee import *;
 from SkeletonArcher import *;
+from SkeletonDog import *;
 
 from Terrain import Terrain as terrain;
 from Portal import Portal as portal;
@@ -28,12 +29,16 @@ class GameScene(Scene):
         super(GameScene,self).__init__();
         if None == GameScene.BGM :
             GameScene.BGM = load_wav('assets/Sound/jailfield.wav');
+            GameScene.BGM.set_volume(50);
         self.bg = (GameBG(const.WIN_WIDTH//2, const.WIN_HEIGHT//2, 0,1,1,True));
         
         self.AddTerrainObject(self.bg);
         self.AddAllyObject(Player(START_X,  START_Y + 90,0,1,1,True));          
 
+
         self.AddMonsterObject(Banshee(START_X + 300, START_Y + 400 ,0,1,1,True));          
+        self.AddMonsterObject(SkeletonDog(START_X + 700, START_Y + 90 ,0,1,1,True));          
+        
         self.AddObstacleObject(small_heal(self, START_X + 500, START_Y + 400 ,0,1,1,True));          
         self.AddObstacleObject(big_heal(self, START_X + 7, START_Y + 200 ,0,1,1,True));          
         self.AddObstacleObject(coin(self, START_X + 100, START_Y + 200 ,0,1,1,True));          
@@ -54,8 +59,8 @@ class GameScene(Scene):
         
         self.AddTerrainObject(terrain(self.bg.map.width //2, 90, self.bg.map.width //2, 90 ));
         self.AddTerrainObject(terrain(0, 100 + self.bg.map.height // 4, 180,  self.bg.map.height // 4));
-        self.AddTerrainObject(terrain(800, self.bg.map.height // 4, 100,  1));
-        self.AddTerrainObject(terrain(1200, self.bg.map.height // 4, 100,  1));
+        self.AddTerrainObject(terrain(900, self.bg.map.height // 4, 90,  0));
+        self.AddTerrainObject(terrain(1170, self.bg.map.height // 4, 90,  0));
         #print("height =", self.bg.map.height)
 
         mouse:Mouse = Mouse();

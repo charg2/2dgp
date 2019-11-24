@@ -18,6 +18,7 @@ class Scene:
         self.game_object_list_terrain       :List[GameObject] = [];
         self.game_object_list_obstacle      :List[GameObject] = [];
         self.game_object_list_monster       :List[GameObject] = [];
+        self.game_object_list_effect        :List[GameObject] = [];
         self.game_ui_list                   :List[GameObject] = [];
         self.game_object_list_bullet        :List[GameObject] = [];
         self.game_object_list_player_weapon :List[GameObject] = [];
@@ -48,6 +49,9 @@ class Scene:
         for obstacle in self.game_object_list_obstacle:
             obstacle.update(Scene.Time);    
 
+        for effect in self.game_object_list_effect:
+            effect.update(Scene.Time);
+
         for ui in self.game_ui_list:
             ui.update(Scene.Time);
 
@@ -77,7 +81,12 @@ class Scene:
             if obstacle.state == False:
                 self.game_object_list_obstacle.remove(obstacle);   
                 del obstacle;
-                
+
+        for effect in self.game_object_list_effect:
+            if effect.state == False:
+                self.game_object_list_effect.remove(effect);
+                del effect;
+
         for gui in self.game_ui_list:
             if gui.state == False:
                 self.game_ui_list.remove(gui);
@@ -155,6 +164,18 @@ class Scene:
                                     mob.on_collision(ter);
                                     ter.on_collision(obj);
 
+        for obj in self.game_object_list_player_weapon:
+            if None != obj.collider:
+                if Const.COLLISION_RECT == obj.collider.get_collision_type() :
+                    for ter in self.game_object_list_terrain :
+                        if None != ter.collider:
+                            if Const.COLLISION_RECT == ter.collider.get_collision_type() :
+                                aleft,abottom,aright,atop = ter.collider.get_area();
+                                bleft,bbottom,bright,btop = obj.collider.get_area();
+                                if(True == Const.is_collided(aleft,abottom,aright,atop,bleft,bbottom,bright,btop)):
+                                    obj.on_collision(ter);
+                                    ter.on_collision(obj);
+
     ## bullet check
     #from Player import Player;
     #player = Player.MyPlayer;
@@ -189,6 +210,10 @@ class Scene:
         for obstacle in self.game_object_list_obstacle:
             if(obstacle.has_image == True and obstacle.state):               
                 obstacle.render();
+
+        for effect in self.game_object_list_effect:
+            if(effect.has_image == True and obstacle.state):               
+                effect.render();
 
         for gui in self.game_ui_list:
             if(gui.has_image == True and gui.state):               
@@ -241,6 +266,10 @@ class Scene:
 
     def add_ui(self, obj):
         self.game_ui_list.append(obj);
+        return;
+
+    def add_effect(self, effect):
+        self.game_object_list_effect.append(effect);
         return;
 
     def add_player_weapon(self, obj):

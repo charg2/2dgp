@@ -6,17 +6,14 @@ from CollisionRect import*;
 from KeyIO import *;
 from Const import *;
 
-
 from IdleState import IdleStateForPlayer;
 from RunState import RunStateForPlayer;
 from JumpState import JumpStateForPlayer;
 from DashState import DashStateForPlayer;
 from DeathState import DeathStateForPlayer;
 
-
 from Katana import *;
 from Gun import *;
-
 
 from typing import List;
 
@@ -25,70 +22,43 @@ from HitComponent import *;
 
 RUN_L, RUN_R, IDLE_R, IDLE_L = range(4);
 DASH_CHARGE_TIME  = 1.25;
-HIT_RECOVERY_TIME = 0.2;
+HIT_RECOVERY_TIME = 0.3;
 class Player(GameObject):
-    LOAD:bool = False;
-
-    IMGSForIdleL:List[Image] = [];
-    IMGSForIdleR:List[Image] = [];
-    IMGSForRunL:List[Image] = [];
-    IMGSForRunR:List[Image] = [];
-
-    IMGSForJump:List[Image] = []; # dash랑 공유
-
-    IMGSForDeathL:List[Image] = [];
-    IMGSForDeathR:List[Image] = [];
-    DebugImg:Image = None;
-    DebugImg1:Image = None;
+    LOAD:bool                   = False;
+    HIT_SOUND:Wav               = None;
+    IMGSForIdleL:List[Image]    = [];
+    IMGSForIdleR:List[Image]    = [];
+    IMGSForRunL:List[Image]     = [];
+    IMGSForRunR:List[Image]     = [];
+    IMGSForJump:List[Image]     = []; # dash랑 공유
+    IMGSForDeathL:List[Image]   = [];
+    IMGSForDeathR:List[Image]   = [];
 
     MyPlayer:GameObject = None;
 
     def __init__(self, x, y, angle, sx, sy, state):
         super(Player, self).__init__(x, y, angle, sx, sy, state);
         self.has_image:bool = True;
+
         if Player.LOAD == False:
             import FrameWork;
-            Player.IMGSForIdleR.append(pico2d.load_image('assets/Player/Idle/R (1).png'));
-            Player.IMGSForIdleR.append(pico2d.load_image('assets/Player/Idle/R (2).png'));
-            Player.IMGSForIdleR.append(pico2d.load_image('assets/Player/Idle/R (3).png'));
-            Player.IMGSForIdleR.append(pico2d.load_image('assets/Player/Idle/R (4).png'));
-            Player.IMGSForIdleR.append(pico2d.load_image('assets/Player/Idle/R (5).png'));
+            for idx in range(1, 5 + 1):
+                Player.IMGSForIdleR.append( pico2d.load_image( 'assets/Player/Idle/R ({0}).png'.format( str(idx) ) ) );
+                Player.IMGSForIdleL.append( pico2d.load_image( 'assets/Player/Idle/L ({0}).png'.format( str(idx) ) ) );
 
-            Player.IMGSForIdleL.append(pico2d.load_image('assets/Player/Idle/L (1).png'));
-            Player.IMGSForIdleL.append(pico2d.load_image('assets/Player/Idle/L (2).png'));
-            Player.IMGSForIdleL.append(pico2d.load_image('assets/Player/Idle/L (3).png'));
-            Player.IMGSForIdleL.append(pico2d.load_image('assets/Player/Idle/L (4).png'));
-            Player.IMGSForIdleL.append(pico2d.load_image('assets/Player/Idle/L (5).png'));
-
-            Player.IMGSForRunR.append(pico2d.load_image('assets/Player/Run/R (1).png'));
-            Player.IMGSForRunR.append(pico2d.load_image('assets/Player/Run/R (2).png'));
-            Player.IMGSForRunR.append(pico2d.load_image('assets/Player/Run/R (3).png'));
-            Player.IMGSForRunR.append(pico2d.load_image('assets/Player/Run/R (4).png'));
-            Player.IMGSForRunR.append(pico2d.load_image('assets/Player/Run/R (5).png'));
-            Player.IMGSForRunR.append(pico2d.load_image('assets/Player/Run/R (6).png'));
-            Player.IMGSForRunR.append(pico2d.load_image('assets/Player/Run/R (7).png'));
-            Player.IMGSForRunR.append(pico2d.load_image('assets/Player/Run/R (8).png'));
-            Player.IMGSForRunR.append(pico2d.load_image('assets/Player/Run/R (9).png'));
-
-            Player.IMGSForRunL.append(pico2d.load_image('assets/Player/Run/L (1).png'));
-            Player.IMGSForRunL.append(pico2d.load_image('assets/Player/Run/L (2).png'));
-            Player.IMGSForRunL.append(pico2d.load_image('assets/Player/Run/L (3).png'));
-            Player.IMGSForRunL.append(pico2d.load_image('assets/Player/Run/L (4).png'));
-            Player.IMGSForRunL.append(pico2d.load_image('assets/Player/Run/L (5).png'));
-            Player.IMGSForRunR.append(pico2d.load_image('assets/Player/Run/L (6).png'));
-            Player.IMGSForRunR.append(pico2d.load_image('assets/Player/Run/L (7).png'));
-            Player.IMGSForRunR.append(pico2d.load_image('assets/Player/Run/L (8).png'));
-            Player.IMGSForRunR.append(pico2d.load_image('assets/Player/Run/L (9).png'));
+            for idx in range(1, 9 + 1):
+                Player.IMGSForRunR.append(pico2d.load_image('assets/Player/Run/R ({0}).png'.format( str(idx) ) ) );
+                Player.IMGSForRunL.append(pico2d.load_image('assets/Player/Run/L ({0}).png'.format( str(idx) ) ) );
 
             Player.IMGSForJump.append(pico2d.load_image('assets/Player/Jump/L (1).png'));
             Player.IMGSForJump.append(pico2d.load_image('assets/Player/Jump/R (1).png'));
 
-            Player.IMGSForDeathL.append(pico2d.load_image('assets/Player/Death/L (1).png'));
-            Player.IMGSForDeathL.append(pico2d.load_image('assets/Player/Death/L (2).png'));
+            for idx in range(1, 2 + 1):
+                Player.IMGSForDeathL.append(pico2d.load_image('assets/Player/Death/L ({0}).png'.format( str(idx) )));
+                Player.IMGSForDeathR.append(pico2d.load_image('assets/Player/Death/R ({0}).png'.format( str(idx) )));
 
-            Player.IMGSForDeathR.append(pico2d.load_image('assets/Player/Death/R (1).png'));
-            Player.IMGSForDeathR.append(pico2d.load_image('assets/Player/Death/R (2).png'));
-
+            Player.HIT_SOUND = pico2d.load_wav('assets/Player/hit.wav');
+            Player.HIT_SOUND.set_volume(50);
             # singletone
             Player.MyPlayer = self;
 
@@ -98,9 +68,9 @@ class Player(GameObject):
         self.name   :str = "Hero";
         self.IMG    :Image = Player.IMGSForIdleR[0];
 
-        self.move_velocity  :int = 10;
-        self.force_x        :int = 10;
-        self.force_y        :int = 5;
+        #self.move_velocity  :int = 10;
+        #self.force_x        :int = 10;
+        #self.force_y        :int = 5;
 
         self.transform.angle = 1;
         self.collider:Collision = CollisionRect(x ,y, self.IMG.w // 3, self.IMG.h // 2);
@@ -120,13 +90,11 @@ class Player(GameObject):
         self.skill_key_timer:float = 0;
         self.skill_timer    :float = 0;
 
-
         self.dash_key_timer         :float  = 0;
         self.dash_charge_timer      :float  = 0;
         self.dash_count             :int    = 2;
         self.max_dash_count         :int    = 2;
         self.dash_trigger           :bool   = True;
-
 
         self.is_jump    :bool = False;
         self.is_dash    :bool = False;
@@ -162,9 +130,7 @@ class Player(GameObject):
         
         #hit component
         self.hit_component = HitComponent(HIT_RECOVERY_TIME);
-    """
-    public method
-    """
+
     def update(self, time):
         self.update_component(time);
         self.handle_keyIO();
@@ -290,6 +256,7 @@ class Player(GameObject):
     def on_collision(self, obj):
         if True == self.has_collider:
             tag = obj.tag;
+
             if Const.TAG_TERRAIN == tag:
                     if self.physx.velocity_y <=0 :
                         self.physx.set_falling(False);
@@ -300,9 +267,11 @@ class Player(GameObject):
     def calc_hp(self, damage):
         if False == self.is_death and self.hit_component.can_hitted() :
             self.hit_component.hit();
+            Player.HIT_SOUND.play(1);
             self.current_hp -= damage;
             if self.current_hp < 0:
                 self.current_hp = 0;
+
 
 
 # for weapon

@@ -168,6 +168,9 @@
     <Compile Include="SkeletonArcherArrow.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="SkeletonDog.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="SmallHeal.py">
       <SubType>Code</SubType>
     </Compile>

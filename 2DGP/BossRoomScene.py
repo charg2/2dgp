@@ -24,9 +24,9 @@ class BossRoomScene(Scene):
         self.AddTerrainObject(self.bg);
         self.AddAllyObject(Player.MyPlayer);          
 
-        self.AddMonsterObject(Belial(START_X + 800, START_Y + 600 ,0,1,1,True));          
+        self.AddMonsterObject(Belial(START_X + 800, START_Y + 690 ,0,1,1,True));          
         #self.AddObstacleObject(portal(START_X + 800, START_Y,0,1,1,True,0));
-        self.AddTerrainObject(terrain(self.bg.map.width //2, 45, self.bg.map.width //2, 45 ));
+        self.AddTerrainObject(terrain(self.bg.map.width //2, 90, self.bg.map.width //2, 90 ));
         self.AddTerrainObject(terrain(self.bg.map.width //2, 1800, self.bg.map.width //2, 0 ));
         self.AddTerrainObject(terrain(0, 450+ self.bg.map.height // 4, 180,  (self.bg.map.height // 4) ) );
 

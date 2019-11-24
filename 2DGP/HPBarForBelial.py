@@ -14,13 +14,13 @@ class HPBarForBelial(GameObject):
         
         if None == HPBarForBelial.BG :
             HPBarForBelial.BG        = pico2d.load_image("assets/Monster/Belial/UI/BG.png");
-            HPBarForBelial.HP        = pico2d.load_image("assets/Monster/Belial/UI/HP.png");
+            HPBarForBelial.HP        = pico2d.load_image("assets/Monster/Belial/UI/HP2.png");
         
         self.name     :str          = "HPBarForBelial";
         self.owner    :GameObject   = owner;
         self.state    :bool         = True;
         self.has_image:bool         = True;
-        self.hp_of_one_percent_length:float = HPBarForBelial.HP.w / 100.0;
+        self.hp_of_one_percent_length:float = Const.WIN_WIDTH / 100.0;
 
     def update(self, time):
         pass;
@@ -32,17 +32,14 @@ class HPBarForBelial(GameObject):
         hp_percent  = (current_hp / max_hp) * 100;
         hp_width:int = int(hp_percent * self.hp_of_one_percent_length);
 
-        tx = self.owner.transform.tx-GameObject.Cam.camera_offset_x;
+        tx = self.owner.transform.tx - GameObject.Cam.camera_offset_x;
         ty = self.owner.collider.bottom - GameObject.Cam.camera_offset_y;
 
-        HPBarForBelial.BG.composite_draw( 0,'', tx, ty,
-                                           HPBarForBelial.BG.w // 4,
-                                           HPBarForBelial.BG.h // 4
+        HPBarForBelial.BG.draw_to_origin(
+                                         0, 0,
+                                           Const.WIN_WIDTH,
+                                           HPBarForBelial.BG.h
                                           );
 
-        HPBarForBelial.HP.composite_draw( 0,'', tx, ty,
-                                          #HPBarForBelial.BG.w,
-                                           hp_width // 4,
-                                           HPBarForBelial.BG.h // 4
-                                          );
+        HPBarForBelial.HP.clip_draw_to_origin( 224, 18, Const.WIN_WIDTH, HPBarForBelial.HP.h , 224, 18, hp_width ,HPBarForBelial.HP.h );
 

@@ -5,9 +5,12 @@ import os;
 
 
 def crop_wrapper(file_path:str, width_count, height_count:int, save_path:str):
-    img = Image.open('assets/tiles.png');
-    for k, piece in enumerate(crop(file_path, img.height // height_count, img.width // width_count), 0):
-        img=Image.new('RGBA', (width, height), 255)
+    src_img = Image.open(file_path);
+    width = src_img.width // width_count;
+    height = src_img.height // height_count;
+    for k, piece in enumerate(crop( file_path, height , width), 0):
+        print(k);
+        img=Image.new('RGBA', (width, height), 255);
         img.paste(piece);
         path = os.path.join(save_path,"IMG-%s.png" % k);
         img.save(path);
@@ -47,8 +50,12 @@ if __name__=='__main__':
     #origin_path = os.path.dirname(file_path);
     #destination_path = origin_path + str("\\dest");
 
-    #crop_wrapper(file_path, 6, 2, origin_path);
-    bmp_to_png_multiple("C:\\Users\\지환\\Desktop\\던그리드\\OcO-master\\OcO-master\\던그리드\\image\\UI\\A_DungeonInn(1188x552).bmp", 1, 1);
+
+    file_path = "D:\\_git\\2dgp\\2DGP\\assets\\Monster\\SkeletonDog\\skelDogMoveDie(700x180,7x2).png";
+    save_path = "D:\\_git\\2dgp\\2DGP\\assets\\Monster\\SkeletonDog\\dest";
+    crop_wrapper(file_path, 7, 2, save_path);
+
+    #bmp_to_png_multiple("D:\\_git\\2dgp\\2DGP\\assets\\Monster\\skelDogMoveDie(700x270,7x3).bmp", 1, 1);
 
 
 #Image.open("sample1.bmp").save("sample1.png");

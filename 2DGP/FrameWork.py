@@ -31,12 +31,12 @@ class FrameWork:
         FrameWork.CurScene:Scene = FrameWork.SceneList[0];
 
     def update():
-        delay(0.016);
         Timer.Update();
         
         GraphicLib.ClearBuf();
 
         FrameWork.change_scene();        # 씬 변경을 체크
+
         FrameWork.CurScene.Update();    # logic update
         FrameWork.CurScene.Collide();   # collide
         FrameWork.CurScene.Render();    # render

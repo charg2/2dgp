@@ -19,7 +19,7 @@ START_X,START_Y = 300, 120;
 class BossRoomScene(Scene):
     def __init__(self):       
         super(BossRoomScene,self).__init__();
-        self.bg = (RoomBG(const.WIN_WIDTH//2, const.WIN_HEIGHT//2, 0,1,1,True, "boss_room.map"));
+        self.bg = (RoomBG(const.WIN_WIDTH//2, const.WIN_HEIGHT//2, 0,1,1,True, "room_boss.map"));
         
         self.AddTerrainObject(self.bg);
         self.AddAllyObject(Player.MyPlayer);          
@@ -35,7 +35,6 @@ class BossRoomScene(Scene):
         mouse:Mouse = Mouse();
         mouse.set_cursor(Const.CURSOR_TARGET);
 
-        
         self.add_ui(HPBarForPlayer.get_instance());
         self.add_ui(Wallet.get_instance());
         self.add_ui(DashBar.get_instance());

@@ -8,10 +8,10 @@ from Const import *;
 
 from typing import List;
 
-
-# 제자리에서 animation
+# 4가지 타입을지원함.
+# 제자리에서 애니메이션
 # 제자리에서 멈춘 이미지
-# 움직이면서 animation
+# 움직이면서 애니메이션
 # 움직이면서 멈춘 이미지
 
 STATIC_ANIMATION, STATIC_SPRITE, DYNAMIC_ANIMATION, DYNAMIC_SPRITE = range(4);
@@ -35,23 +35,24 @@ class EffectStaticAnimation(GameObject) :
 
         if self.animation_timer >= self.interval_time:
             temp_frame = self.animation_frame + 1 ;
-            if self.max_frame == temp_frame :
-                self.state = True;
+            if self.animation_max_frame == temp_frame :
+                self.state = False;
             else:
                 self.animation_frame = temp_frame;
             
     def render(self):
-        self.animation[self.animation_frame].composite_draw( 0, "", self.transform.tx - GameObject.Cam.camera_offset_x, self.transform.ty - GameObject.Cam.camera_offset_y, self.img[0].w, self.img[0].h);
+        self.animation[self.animation_frame].composite_draw( 0, "", self.transform.tx - GameObject.Cam.camera_offset_x, self.transform.ty - GameObject.Cam.camera_offset_y, self.img.w, self.img.h);
 
 class EffectStaticSprite(GameObject) :
-    def __init__(self, owner, tx, ty, sprite, end_time):
+    def __init__(self, owner, tx, ty, sprite, end_time, lambda_func = None):
         super(EffectStaticSprite, self).__init__(tx, ty, 1, 1, 1, True);
-        self.has_image  = True;
-        self.tag        = Const.TAG_EFFECT;
-        self.end_time   = end_time;
-        self.end_timer  = 0;
-        self.img        = sprite;
-        self.owner      = owner;
+        self.has_image      = True;
+        self.tag            = Const.TAG_EFFECT;
+        self.end_time       = end_time;
+        self.end_timer      = 0;
+        self.img            = sprite;
+        self.owner          = owner;
+        self.lambda_func    = lambda_func;
 
     def update(self, time):
         self.end_timer += time;
@@ -59,6 +60,9 @@ class EffectStaticSprite(GameObject) :
             #self.end_timer = 0;
             self.state = False;
             #print("삭제");
+            if None != self.lambda_func :
+                self.lambda_func(self.img);
+                pass;
 
     def render(self):
         self.img.composite_draw( 0, "", self.transform.tx - GameObject.Cam.camera_offset_x, self.transform.ty - GameObject.Cam.camera_offset_y, self.img.w, self.img.h);

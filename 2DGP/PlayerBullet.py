@@ -37,7 +37,7 @@ class PlayerBullet(GameObject):
         self.img = PlayerBullet.IMGS[0];
         PlayerBullet.UNIQUE_ID += 1;
         
-        self.velocity = 17; 
+        self.velocity = 850; 
         self.owner = owner;
         self.animation_time = 0.0;
         self.animation_status = 0;
@@ -50,18 +50,18 @@ class PlayerBullet(GameObject):
         self.update_component();
         self.update_timer(time);
         self.clampingInWindow();
-        self.Physx_bullet();
+        self.Physx_bullet(time);
         pass;
 
     def update_component(self):
         self.previous_transform = self.transform;
         self.collider.cx, self.collider.cy = self.transform.tx, self.transform.ty;
 
-    def Physx_bullet(self):
+    def Physx_bullet(self, time):
         radian = self.transform.angle; # * math.pi;
         
-        self.physx.velocity_x = self.velocity * math.sin(radian);
-        self.physx.velocity_y = self.velocity * math.cos(radian);
+        self.physx.velocity_x = self.velocity * math.sin(radian) * time;
+        self.physx.velocity_y = self.velocity * math.cos(radian) * time;
         
         self.transform.angle += self.physx.angle_rate;
         

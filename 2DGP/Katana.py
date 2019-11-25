@@ -17,8 +17,15 @@ class Katana(GameObject):
         print(owner.tag);
         Katana.Imgs.append( pico2d.load_image("assets/Weapon/Katana.png") );
         self.current_img = Katana.Imgs[0];
+        Katana.SOUND = load_wav('assets/Weapon/katana2.wav');
+        Katana.SOUND.set_volume(50);
         LOAD = True;
-        self.hit_component = HitComponent(HIT_RECOVERY_TIME);
+        
+        self.attack_trigger     :bool   = True;
+        self.attack_time        :float  = 0.0;
+        self.attack_key_timer   :float  = 0.3;
+
+        self.collider = None;
 
     def render(self):
         if self.owner.m_dir == Const.direction_R:
@@ -27,13 +34,29 @@ class Katana(GameObject):
             Katana.Imgs[0].composite_draw( -2, "", self.owner.transform.tx +10 - GameObject.Cam.camera_offset_x, self.owner.transform.ty - 20 - GameObject.Cam.camera_offset_y, 15, 80);
 
     def update(self, time):
-        update_component(time);
+        self.update_time(time);
+        self.handle_io();
+        self.update_component();
+
+    def update_time(self, time):
+        if False == self.attack_trigger :
+            self.attack_time += time;
+
+            if attack_timer <= self.attack_time:
+                self.attack_trigger = True;
+                self.attack_time = 0;
 
     def update_component(self, time):
         self.previous_transform = self.transform;
         self.collider.cx, self.collider.cy = self.transform.tx, self.transform.ty;
-        self.hit_component.update(time);
+
 
     def handle_io(self):
+        if self.attack_trigger:
+            if KeyInput.g_mouse_ldown :
+                self.shot();
+    
+    def shot(self):
+        print("잘르기");
+        Katana.SOUND.play(1);
         pass;
-

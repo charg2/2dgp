@@ -11,9 +11,7 @@ from IdleStateForBelial import *;
 
 #component
 from HitComponent import *;
-
 from HPBarForBelial import *;
-
 from typing import List;
 
 

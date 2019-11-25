@@ -21,7 +21,7 @@ class SkeletonArcherArrow(GameObject):
     IMG:Image = None;
 
 
-    def __init__(self, owner, x, y, angle, sx, sy, state):
+    def __init__(self, owner, x, y, angle, sx, sy, state, dir):
         super(SkeletonArcherArrow, self).__init__(x, y, angle, sx, sy, state);
         if SkeletonArcherArrow.LOAD == False:
             SkeletonArcherArrow.IMG =pico2d.load_image('assets/Monster/SkeletonArcher/Arrow/Arrow.png');
@@ -33,12 +33,10 @@ class SkeletonArcherArrow(GameObject):
         self.has_image = True;
         SkeletonArcherArrow.UNIQUE_ID += 1;
         
-        self.velocity = 7; 
+        self.velocity = 700; 
         self.owner = owner;
-        self.animation_timer = 0.0;
-        self.animation_status = 0;
         self.extinction_timer = 0.0;
-        
+        self.pdir = dir;
         self.collider:Collision = CollisionRect(x,y, self.IMG.w // 2, self.IMG.h // 2);
 
         pass;
@@ -46,26 +44,26 @@ class SkeletonArcherArrow(GameObject):
     def update(self, time):
         self.update_component();
         self.clampingInWindow();
-        self.Physx_bullet();
+        self.Physx_bullet(time);
         pass;
 
     def update_component(self):
         self.previous_transform = self.transform;
         self.collider.cx, self.collider.cy = self.transform.tx, self.transform.ty;
 
-    def Physx_bullet(self):
-        radian = self.transform.angle * math.pi;
+    def Physx_bullet(self,time):
+        radian = self.transform.angle;
         
-        self.physx.velocity_x = self.velocity * math.cos(radian);
-        self.physx.velocity_y = self.velocity * math.sin(radian);
+        self.physx.velocity_x = self.velocity * math.sin(radian) * time;
+        self.physx.velocity_y = self.velocity * math.cos(radian) * time;
         
-        self.transform.angle += self.physx.angle_rate;
+        #self.transform.angle += self.physx.angle_rate;
         
         self.transform.set_position(self.physx.velocity_x, self.physx.velocity_y);
 
 
     def render(self):
-        if self.transform.angle == 1:
+        if self.pdir == 1:
             SkeletonArcherArrow.IMG.composite_draw(0, "h",self.transform.tx - GameObject.Cam.camera_offset_x, self.transform.ty - GameObject.Cam.camera_offset_y);    
         else :
             SkeletonArcherArrow.IMG.draw(self.transform.tx - GameObject.Cam.camera_offset_x, self.transform.ty - GameObject.Cam.camera_offset_y);    
@@ -96,14 +94,6 @@ class SkeletonArcherArrow(GameObject):
 
         pass;
     
-
-    #def update_timer(self,time):
-    #    self.animation_timer += time;
-
-    #    if self.animation_timer > frame_time:
-    #        self.animation_status = ( self.animation_status + 1 ) % frame;
-    #        self.animation_timer = 0.0; 
-
 
     def clampingInWindow(self):
         self.transform.tx = Const.clamp(0, self.transform.tx, GameObject.Cam.map_width-self.IMG.w//16)  

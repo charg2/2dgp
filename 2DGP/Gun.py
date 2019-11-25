@@ -4,24 +4,26 @@ from Player import *;
 from KeyIO import *;
 
 from PlayerBullet import PlayerBullet as pbullet;
-
+from Effect import *;
 attack_timer = 0.4;
 
 class Gun(GameObject):
     LOAD:bool = False;
     IMGS:list = [];
-
+    SHOT_EFFECT =[];
     def __init__(self, x, y, angle, sx, sy, state, owner):
         import pico2d;
         super(Gun, self).__init__(x, y, angle, sx, sy, state);
-        self.owner = owner;
-        print(owner.tag);
-        Gun.IMGS.append( pico2d.load_image("assets/Weapon/UZI.png") );
-        self.current_img = Gun.IMGS[0];
-        Gun.SOUND = load_wav('assets/Weapon/gun.wav');
-        Gun.SOUND.set_volume(50);
-
+        if False == Gun.LOAD:
+            Gun.IMGS.append( pico2d.load_image("assets/Weapon/UZI.png") );
+            Gun.SOUND = load_wav('assets/Weapon/gun.wav');
+            Gun.SOUND.set_volume(50);
+            for idx in range(0, 2 + 1):
+                Gun.SHOT_EFFECT.append(pico2d.load_image('assets/Weapon/ShotEffect/shot{0}.png'.format( str(idx) ) ) );
         LOAD = True;
+        
+        self.owner = owner;
+        self.current_img = Gun.IMGS[0];
         self.attack_trigger     :bool   = True;
         self.attack_time        :float  = 0.0;
         self.attack_key_timer   :float  = 0.3;
@@ -72,8 +74,11 @@ class Gun(GameObject):
         from FrameWork import FrameWork;
         if Const.direction_L == self.owner.m_dir:
             FrameWork.CurScene.add_player_weapon(pbullet(FrameWork.CurScene, tx, ty, self.radian,1,1, True)); 
+            FrameWork.CurScene.add_ui(EffectStaticAnimation(self, tx - 20, ty, Gun.SHOT_EFFECT, len(Gun.SHOT_EFFECT), 0.1));
+
         else :
             FrameWork.CurScene.add_player_weapon(pbullet(FrameWork.CurScene, tx, ty, self.radian,1,1, True)); 
+            FrameWork.CurScene.add_ui(EffectStaticAnimation(self, tx + 20, ty, Gun.SHOT_EFFECT, len(Gun.SHOT_EFFECT), 0.1));
         
         self.attack_trigger = False;
 

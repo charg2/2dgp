@@ -6,7 +6,7 @@ from Graphic import *;
 
 class IdleStateForPlayer(StateMachine):
     def __init__(self, player):
-        print("idle");
+        #print("idle");
         self.player = player;
         self.player.animation_state = self.player.dir+ 2;
         self.Fx ,self.Fy = 0,0;
@@ -17,8 +17,8 @@ class IdleStateForPlayer(StateMachine):
         self.player.set_velocity(self.Fx, self.Fy);
         return;
 
-    def update(self):
-        self.timer += Timer.get_elapsed_time();
+    def update(self, time):
+        self.timer += time;
         self.player.physx.set_force(0,0);
         #self.player.physx.set_velocity(0,0);
         if self.timer>0.225:

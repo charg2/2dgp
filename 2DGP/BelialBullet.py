@@ -26,16 +26,8 @@ class BelialBullet(GameObject):
     def __init__(self, owner, x, y, angle, sx, sy, state):
         super(BelialBullet, self).__init__(x, y, angle, sx, sy, state);
         if BelialBullet.LOAD == False:
-            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/IMG-0.png'));
-            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/IMG-1.png'));
-            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/IMG-2.png'));
-            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/IMG-3.png'));
-            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/IMG-4.png'));
-            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/IMG-5.png'));
-            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/IMG-6.png'));
-            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/IMG-7.png'));
-            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/IMG-8.png'));
-            BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/IMG-9.png'));
+            for idx in range(0, 9 + 1):
+                BelialBullet.IMGS.append(pico2d.load_image('assets/Monster/Belial/Bullet/IMG-{0}.png'.format( str(idx) ) ) );
 
             BelialBullet.LOAD = True;
 
@@ -46,7 +38,7 @@ class BelialBullet(GameObject):
 
         BelialBullet.UNIQUE_ID += 1;
         
-        self.velocity = 10; 
+        self.velocity = 800; 
         self.owner = owner;
         self.animation_timer = 0.0;
         self.animation_status = 0;
@@ -62,18 +54,18 @@ class BelialBullet(GameObject):
         self.update_component();
         self.update_timer(time);
         self.clampingInWindow();
-        self.Physx_bullet();
+        self.Physx_bullet(time);
         pass;
 
     def update_component(self):
         self.previous_transform = self.transform;
         self.collider.cx, self.collider.cy = self.transform.tx, self.transform.ty;
 
-    def Physx_bullet(self):
+    def Physx_bullet(self, time):
         radian = self.transform.angle * math.pi;
         
-        self.physx.velocity_x = self.velocity * math.cos(radian);
-        self.physx.velocity_y = self.velocity * math.sin(radian);
+        self.physx.velocity_x = self.velocity * math.cos(radian) * time;
+        self.physx.velocity_y = self.velocity * math.sin(radian) * time;
         
         self.transform.angle += self.physx.angle_rate;
         

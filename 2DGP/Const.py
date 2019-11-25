@@ -21,6 +21,7 @@ class Const:
     BANSHEE_FIELD_OF_VIEW = parser.get_float('banshee_filed_of_view');
     STATIC_ANIMATION, STATIC_SPRITE, DYNAMIC_ANIMATION, DYNAMIC_SPRITE = range(4);
 
+    FPS:float = 1000.0 / 60.0;
 
     #enum
     del parser;
@@ -51,7 +52,6 @@ class Const:
         import math;
         radian = math.atan2( to_tx - from_tx, to_ty - from_ty);
         return radian;
-
 
 
 if __name__ == "__main__":

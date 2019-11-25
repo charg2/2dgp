@@ -38,7 +38,7 @@ class BansheeBullet(GameObject):
 
         BansheeBullet.UNIQUE_ID += 1;
         
-        self.velocity = 10; 
+        self.velocity = 700; 
         self.owner = owner;
         self.animation_timer = 0.0;
         self.animation_status = 0;
@@ -54,18 +54,18 @@ class BansheeBullet(GameObject):
         self.update_component();
         self.update_timer(time);
         self.clampingInWindow();
-        self.Physx_bullet();
+        self.Physx_bullet(time);
         pass;
 
     def update_component(self):
         self.previous_transform = self.transform;
         self.collider.cx, self.collider.cy = self.transform.tx, self.transform.ty;
 
-    def Physx_bullet(self):
+    def Physx_bullet(self, time):
         radian = self.transform.angle * math.pi;
         
-        self.physx.velocity_x = self.velocity * math.cos(radian);
-        self.physx.velocity_y = self.velocity * math.sin(radian);
+        self.physx.velocity_x = self.velocity * math.cos(radian) * time;
+        self.physx.velocity_y = self.velocity * math.sin(radian) * time;
         
         #self.transform.angle += self.physx.angle_rate; # 직각탄이라 가속도는 필요 없음.
         

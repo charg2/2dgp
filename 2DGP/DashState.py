@@ -22,7 +22,6 @@ class DashStateForPlayer(StateMachine):
             DashStateForPlayer.DASH_SOUND = load_wav('assets/Player/Jump/dash.wav');
             DashStateForPlayer.EFFECT_SPRITE_L = pico2d.load_image("assets/Player/DashEffect/L (1).png");
             DashStateForPlayer.EFFECT_SPRITE_R = pico2d.load_image("assets/Player/DashEffect/R (1).png");
-            #DashStateForPlayer.EFFECT = EffectStaticSprite(self, );
 
         DashStateForPlayer.DASH_SOUND.play(1);
         self.obj = gobj;
@@ -58,22 +57,30 @@ class DashStateForPlayer(StateMachine):
         return;
 
 
-    def update(self):
+    def update(self, time):
         self.setAnimation();
-        elapsed_time = Timer.get_elapsed_time();     
         
-        self.timer          += elapsed_time;
-        self.effect_timer   += elapsed_time;
+        self.timer          += time;
+        self.effect_timer   += time;
+        self.dash_timer     += time;
 
-        self.obj.physx.velocity_x *= 1.3;
-        self.obj.physx.velocity_y *= 1.3;
+        if self.dash_timer >= 0.016:
+            self.dash_timer = 0;
+            self.obj.physx.velocity_x *= 1.3;
+            self.obj.physx.velocity_y *= 1.3;
 
         if self.effect_timer >= self.effect_time :
             from FrameWork import FrameWork;
             self.effect_timer = 0;
-            FrameWork.CurScene.add_effect( EffectStaticSprite(self, self.obj.transform.tx, self.obj.transform.ty, self.effect_img, 0.2 ) ); 
+            FrameWork.CurScene.add_effect( EffectStaticSprite( self
+                                                              , self.obj.transform.tx
+                                                              , self.obj.transform.ty
+                                                              , self.effect_img
+                                                              , 0.2 
+                                                              , lambda img: img.opacify(50)
+                                                               ) ); 
 
-        if self.timer > 0.2 :
+        if self.timer > 0.21 :
             self.obj.add_queue(IdleStateForPlayer(self.obj));
             temp = self.obj.current_state;
             self.obj.current_state.exit();

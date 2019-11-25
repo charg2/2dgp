@@ -26,17 +26,18 @@ class TileMap:
             for x in range(len(self.tiles[y])):
                 #print("x:{0} y:{1}".format(x, y));
                 self.tiles[y][x].get_tile().draw_to_origin( x * 90, y * 90);
-    
+
                 
     # 좌표계는 윈도우를 따름.
     # IO 연산을 줄이기 위해 최소 그려야 하는 타일만 그림.
     def clip_render_to_origin(self, left:int, bottom:int, window_width:int, window_height:int):
         from GameObject import GameObject;
+        from Player import Player;
 
         # LT/RB를 구해서
-        cam_top = bottom + GameObject.Cam.camera_offset_y ;
-        cam_bottom = cam_top + window_height;
-        cam_right = left + window_width;
+        cam_top     = bottom + GameObject.Cam.camera_offset_y ;
+        cam_bottom  = cam_top + window_height;
+        cam_right   = left + window_width;
 
         # tile_range index
         min_width, max_width    = ( left // Tile.WIDTH ) , ( cam_right // Tile.WIDTH ) +1;
@@ -50,16 +51,24 @@ class TileMap:
             #print(max_height ,len(self.tiles));
             max_height = len(self.tiles);
 
-        offset_x:int = GameObject.Cam.camera_offset_x % Tile.WIDTH;
-        offset_y:int = GameObject.Cam.camera_offset_y % Tile.HEIGHT;
+        #offset_y:int = (Player.MyPlayer.transform.ty );
+        offset_x:int = ( GameObject.Cam.camera_offset_x ) % Tile.WIDTH;
+        offset_y:int = ( GameObject.Cam.camera_offset_y ) % Tile.HEIGHT;
         
+        #print(GameObject.Cam.camera_offset_x);
+        #print(GameObject.Cam.camera_offset_y);
+
         map_x:int = 0;
         map_y:int = 0;
         for y in range( min_height, max_height ):
             map_x = 0;
             for x in range( min_width, max_width ) :
                 #print("{0}- {1} - {2} - {3}".format(y, x, len(self.tiles) ,len(self.tiles[0])) )
-                self.tiles[y][x].get_tile().draw_to_origin( map_x - offset_x, map_y - offset_y, Tile.WIDTH, Tile.WIDTH);
+                self.tiles[y][x].get_tile().draw_to_origin(  map_x - offset_x
+                                                           , map_y - offset_y
+                                                           , Tile.WIDTH
+                                                           , Tile.HEIGHT);
+                               
                 map_x += Tile.WIDTH;
             map_y += Tile.WIDTH;
 

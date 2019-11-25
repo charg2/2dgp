@@ -51,12 +51,12 @@ if __name__=='__main__':
     #destination_path = origin_path + str("\\dest");
 
 
-    file_path = "D:\\_git\\2dgp\\2DGP\\assets\\Player\\dashManRight(320x95,4x1).png";
-    save_path = "D:\\_git\\2dgp\\2DGP\\assets\\Player";
+    file_path = "D:\\_git\\2dgp\\2DGP\\assets\\Weapon\\FireCircusBegin2.png";
+    save_path = "D:\\_git\\2dgp\\2DGP\\assets\\Weapon\\";
 
-    crop_wrapper(file_path, 4, 1, save_path);
+    #crop_wrapper(file_path, 5, 1, save_path);
 
-    #bmp_to_png_multiple("D:\\_git\\2dgp\\2DGP\\assets\\Monster\\skelDogMoveDie(700x270,7x3).bmp", 1, 1);
+    bmp_to_png_multiple(file_path, 4, 4);
 
 
 #Image.open("sample1.bmp").save("sample1.png");

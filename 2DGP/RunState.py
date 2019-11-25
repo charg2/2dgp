@@ -43,7 +43,7 @@ class RunStateForPlayer(StateMachine):
         #print("RunState 42 line {0}".format(self.Fx))
         return;
 
-    def update(self):
+    def update(self, time):
         self.setAnimation();
         
         self.obj.physx.set_force(self.Fx, self.obj.physx.force_y); 

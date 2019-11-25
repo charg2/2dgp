@@ -23,12 +23,24 @@ class Timer:
     def get_elapsed_time():
         return Timer.delta_time;
 
+    def polling(timer):
+        accumulated_time = 0;
+
+        while True :
+            Timer.update();
+            accumulated_time += Timer.get_elapsed_time();
+            if accumulated_time >= timer:
+                return;
+
+
+
     @staticmethod
     def get_game_time():
         return Timer.game_time;
 
     Initialize          = staticmethod(init);
     Update              = staticmethod(update);
+    Polling             = staticmethod(polling);
     GetElapsedTime      = staticmethod(get_elapsed_time);
    
 

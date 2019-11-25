@@ -15,7 +15,7 @@ class FoodShopBG(GameObject):
         super(FoodShopBG, self).__init__(x,y,angle,sx,sy,state);
         
         self.has_image = True;
-        self.map = TileMap("food_shop.map");
+        self.map = TileMap("room_food_shop.map");
         self.cam_x = 0;
         self.cam_y = 0;
         self.cam:GameObject = None;

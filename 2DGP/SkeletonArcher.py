@@ -167,21 +167,19 @@ class SkeletonArcher(GameObject):
         tx = self.transform.tx;
         ty = self.transform.ty;
 
-        #self.bullets.append(BansheeBullet(self, tx, ty, 0,1,1, True)); 
-        #self.bullets.append(BansheeBullet(self, tx, ty, 0.25,1,1, True)); 
-        #self.bullets.append(BansheeBullet(self, tx, ty, 0.5,1,1, True)); 
-        #self.bullets.append(BansheeBullet(self, tx, ty, 0.75,1,1, True)); 
-        #self.bullets.append(BansheeBullet(self, tx, ty, 1,1,1, True)); 
-        #self.bullets.append(BansheeBullet(self, tx, ty, -0.25,1,1, True)); 
-        #self.bullets.append(BansheeBullet(self, tx, ty, -0.5,1,1, True)); 
-        #self.bullets.append(BansheeBullet(self, tx, ty, -0.75,1,1, True)); 
         from FrameWork import FrameWork;
         from SkeletonArcherArrow import SkeletonArcherArrow as arrow;
+        from Player import Player as player;
+        px, py = player.MyPlayer.transform.tx, player.MyPlayer.transform.ty;
 
+        radian = Const.calc_radian( self.transform.tx  
+                                     , self.transform.ty 
+                                     , px 
+                                     , py );
         if Const.direction_L== self.dir:
-            FrameWork.CurScene.add_projectile(arrow(FrameWork.CurScene, tx, ty, 1,1,1, True)); 
-        else :
-            FrameWork.CurScene.add_projectile(arrow(FrameWork.CurScene, tx, ty, 0,1,1, True)); 
+            FrameWork.CurScene.add_projectile(arrow(FrameWork.CurScene, tx, ty, radian,1,1, True, 1)); 
+        else :                                                                                  
+            FrameWork.CurScene.add_projectile(arrow(FrameWork.CurScene, tx, ty, radian,1,1, True, 0)); 
             
         pass;
 
@@ -191,5 +189,12 @@ class SkeletonArcher(GameObject):
             self.current_hp -= damage;
             if self.current_hp <= 0:
                 SkeletonArcher.DIE_SOUND.play(1);
+                self.drop_coin();
                 self.current_hp = 0;
                 self.state = False;
+
+    def drop_coin(self):
+        from FrameWork import FrameWork;
+        from coin import Coin as coin;
+        FrameWork.CurScene.AddObstacleObject(coin(self, self.transform.tx, self.transform.ty, 0,1,1,True));          
+

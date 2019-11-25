@@ -7,7 +7,7 @@ class StateMachine:
         self.obj = gobj;
         return;
 
-    def update(self):
+    def update(self, time):
         pass;
     
     def render(self):

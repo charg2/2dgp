@@ -132,16 +132,16 @@ class Player(GameObject):
         self.hit_component = HitComponent(HIT_RECOVERY_TIME);
 
     def update(self, time):
-        self.update_component(time);
         self.handle_keyIO();
-        self.forStateMachine();
-        
-        #print("Terrain.py player.ty {0}".format(self.transform.ty));
-
+        self.forStateMachine(time);
         self.Physx(time);
+        self.update_component(time);
         self.update_timer(time);
         self.current_weapon.update(time);
         self.clampingInWindow();
+
+        self.physx.is_ground = False;
+
         return;
 
     def render(self): 
@@ -162,9 +162,10 @@ class Player(GameObject):
     def update_component(self, time):
         self.previous_transform = self.transform;
         GameObject.Cam.transform = self.previous_transform;
+        #GameObject.Cam.transform = self.transform;
         
-        if True == self.has_collider:
-            self.collider.cx, self.collider.cy = self.transform.tx, self.transform.ty;
+        #if True == self.has_collider:
+        self.collider.cx, self.collider.cy = self.transform.tx, self.transform.ty;
 
         self.hit_component.update(time);
         return;
@@ -183,8 +184,8 @@ class Player(GameObject):
         return;
     
 
-    def forStateMachine(self):
-        self.current_state.update();
+    def forStateMachine(self, time):
+        self.current_state.update(time);
 
         if len(self.state_queue) > 0:
             temp = self.current_state;
@@ -235,7 +236,8 @@ class Player(GameObject):
     #각 상태별로 velocity 값이 지정되어 이슴.
     def Physx(self, time):
         grivity_offset_y = 0; 
-        if True == self.has_grivity() :
+        #if True == self.has_grivity() :
+        if False == self.physx.is_ground :
             #if True == self.physx.is_falling:
             #    grivity_offset_y = self.physx.acceleration_of_gravity * 1.1; 
             #else:
@@ -261,7 +263,7 @@ class Player(GameObject):
                     if self.physx.velocity_y <=0 :
                         self.physx.set_falling(False);
                         self.transform = self.previous_transform;
-        
+            
         return;
 
     def calc_hp(self, damage):
@@ -271,7 +273,6 @@ class Player(GameObject):
             self.current_hp -= damage;
             if self.current_hp < 0:
                 self.current_hp = 0;
-
 
 
 # for weapon

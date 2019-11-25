@@ -19,8 +19,8 @@ from coin import Coin as coin;
 from HPBar import *;
 from Wallet import *;
 from DashBar import *;
+from MessageBox import *;
 
-#NPC
 START_X,START_Y = 300, 120;
 
 class GameScene(Scene):
@@ -46,9 +46,9 @@ class GameScene(Scene):
 
         self.AddObstacleObject(portal(START_X + 2100, START_Y + 90,0,1,1,True, 2));
         
-
         #UI
         self.add_ui(HPBarForPlayer.get_instance());
+        self.add_ui(MessageBox(100, 100, 1,1,1,True, "TESET용 문서"));
         self.add_ui(Wallet.get_instance());
         self.add_ui(DashBar.get_instance());
 
@@ -59,9 +59,8 @@ class GameScene(Scene):
         
         self.AddTerrainObject(terrain(self.bg.map.width //2, 90, self.bg.map.width //2, 90 ));
         self.AddTerrainObject(terrain(0, 100 + self.bg.map.height // 4, 180,  self.bg.map.height // 4));
-        self.AddTerrainObject(terrain(900, self.bg.map.height // 4, 90,  0));
+        self.AddTerrainObject(terrain(90 * 8 - 45, 90*5, 135,  0));
         self.AddTerrainObject(terrain(1170, self.bg.map.height // 4, 90,  0));
-        #print("height =", self.bg.map.height)
 
         mouse:Mouse = Mouse();
         mouse.set_cursor(Const.CURSOR_TARGET);

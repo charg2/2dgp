@@ -5,6 +5,9 @@ from RunState import*;
 from Const import *;
 from Player import *;
 
+from Effect import *;
+
+
 FORCE_X = 500; 
 FORCE_Y = 2000;
 
@@ -12,9 +15,12 @@ class JumpStateForPlayer(StateMachine):
     animation_state =0;
     timer           = 0;
     JUMP_SOUND      = None;
+    EFFECT_ANIMAION = [];
     def __init__(self,player):
         if None == JumpStateForPlayer.JUMP_SOUND :
             JumpStateForPlayer.JUMP_SOUND = load_wav('assets/Player/Jump/jump.wav');
+            for idx in range(0, 4 + 1):
+                JumpStateForPlayer.EFFECT_ANIMAION.append( pico2d.load_image( 'assets/Player/JumpEffect/IMG-{0}.png'.format( str(idx) ) ) );
 
         self.obj = player;
         #gobj.set_grivity(True);
@@ -42,10 +48,19 @@ class JumpStateForPlayer(StateMachine):
         JumpStateForPlayer.JUMP_SOUND.play(1);
 
         self.obj.set_velocity(self.Fx, self.Fy);
+
+        from FrameWork import FrameWork;
+        FrameWork.CurScene.add_effect( EffectStaticAnimation(  self
+                                                             , self.obj.transform.tx
+                                                             , self.obj.transform.ty
+                                                             , JumpStateForPlayer.EFFECT_ANIMAION
+                                                             , len(JumpStateForPlayer.EFFECT_ANIMAION)
+                                                             , 0.125
+                                                             ) ); 
         return;
 
     # 점프 상승중의 버튼 상태를 조사해 반영함.
-    def update(self):
+    def update(self, time):
         
         if True == self.obj.physx.is_ground :
             self.obj.is_dash = False;
@@ -95,14 +110,12 @@ class JumpStateForPlayer(StateMachine):
                            self.obj.transform.ty-GameObject.Cam.camera_offset_y,
                            );
 
- 
-
     def exit(self):
         self.obj.jump_trigger = False;
         self.obj.is_jump = False;
         self.obj.physx.is_falling = True;
 
-        print("jump_exit");
+        #print("jump_exit");
         return;
 
 

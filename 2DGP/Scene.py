@@ -212,7 +212,7 @@ class Scene:
                 obstacle.render();
 
         for effect in self.game_object_list_effect:
-            if(effect.has_image == True and obstacle.state):               
+            if(effect.has_image == True and effect.state):               
                 effect.render();
 
         for gui in self.game_ui_list:
@@ -310,6 +310,19 @@ class Scene:
 
     def on_change_scene(self):
         pass;
+
+    def set_pause(self, state):
+        Scene.Pause = state;
+        return;
+
+    
+    def game_control(self):
+        if(Scene.Pause == True) : 
+            Scene.Time = 0;
+        else : 
+            Scene.Time = Timer.ReturnElapsedTime();
+        return;
+
 
 #if __name__ == "__main__":
 #    test = Scene();

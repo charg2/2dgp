@@ -40,8 +40,8 @@ class DeathStateForPlayer(StateMachine):
         self.player.set_velocity(0, 0);
         return;
 
-    def update(self):
-        self.timer += Timer.get_elapsed_time();
+    def update(self, time):
+        self.timer += time;
         #self.player.physx.set_force(0,0);
 
         if self.timer > animation_timer:

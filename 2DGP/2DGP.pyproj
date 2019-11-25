@@ -133,6 +133,9 @@
     <Compile Include="MapTool\maptool_main.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="MessageBox.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Mouse.py" />
     <Compile Include="MyTimer.py" />
     <Compile Include="Pannel.py">
@@ -206,9 +209,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\player.png" />
-    <Content Include="boss_room.map" />
+    <Content Include="room_boss.map" />
     <Content Include="config.ini" />
-    <Content Include="food_shop.map" />
+    <Content Include="room_food_shop.map" />
     <Content Include="memo.txt">
       <SubType>Code</SubType>
     </Content>

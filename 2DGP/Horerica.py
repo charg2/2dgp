@@ -25,19 +25,10 @@ class Horerica(GameObject):
 
         self.has_image = True;
         if Horerica.IMG == None:
-            Horerica.IMGS_R.append( pico2d.load_image('assets/NPC/Horerica/IMG-0.png') );
-            Horerica.IMGS_R.append( pico2d.load_image('assets/NPC/Horerica/IMG-1.png') );
-            Horerica.IMGS_R.append( pico2d.load_image('assets/NPC/Horerica/IMG-2.png') );
-            Horerica.IMGS_R.append( pico2d.load_image('assets/NPC/Horerica/IMG-3.png') );
-            Horerica.IMGS_R.append( pico2d.load_image('assets/NPC/Horerica/IMG-4.png') );
-            Horerica.IMGS_R.append( pico2d.load_image('assets/NPC/Horerica/IMG-5.png') );
-
-            Horerica.IMGS_L.append( pico2d.load_image('assets/NPC/Horerica/IMG-6.png') );
-            Horerica.IMGS_L.append( pico2d.load_image('assets/NPC/Horerica/IMG-7.png') );
-            Horerica.IMGS_L.append( pico2d.load_image('assets/NPC/Horerica/IMG-8.png') );
-            Horerica.IMGS_L.append( pico2d.load_image('assets/NPC/Horerica/IMG-9.png') );
-            Horerica.IMGS_L.append( pico2d.load_image('assets/NPC/Horerica/IMG-10.png') );
-            Horerica.IMGS_L.append( pico2d.load_image('assets/NPC/Horerica/IMG-11.png') );
+            for idx in range(0, 5 + 1):
+                Horerica.IMGS_R.append( pico2d.load_image('assets/NPC/Horerica/IMG-{0}.png'.format( str(idx) ) ) );
+            for idx in range(6, 11 + 1):
+                Horerica.IMGS_L.append( pico2d.load_image('assets/NPC/Horerica/IMG-{0}.png'.format( str(idx) ) ) );
 
             Horerica.MESSAGE_BG = pico2d.load_image('assets/UI/MessageBox.png');
             Horerica.OPEN_KEY_F = pico2d.load_image('assets/NPC/F.png');
@@ -61,8 +52,8 @@ class Horerica(GameObject):
 
     def render(self): 
         self.imgs[self.animation_numb].clip_composite_draw(0,0,
-                   self.IMGS_L[0].w,
-                   self.IMGS_L[0].h,
+                   Horerica.IMG.w,
+                   Horerica.IMG.h,
                    0,'', 
                    self.transform.tx-GameObject.Cam.camera_offset_x,
                    self.transform.ty-GameObject.Cam.camera_offset_y,
@@ -72,6 +63,7 @@ class Horerica(GameObject):
         self.render_f_key();
         return;
 
+    # 신 ui에다가 집어넣고 출력 아니면 삭제.
     def render_f_key(self): 
         if self.is_collided :
             Horerica.MESSAGE_BG.draw_to_origin(0,0,
@@ -116,9 +108,15 @@ class Horerica(GameObject):
         if(self.animation_timer >0.1):
             self.animation_numb = ( self.animation_numb+1 ) % 6;
             self.animation_timer = 0;
+
         return;
     
+
     def on_collision(self, obj):
         if Const.TAG_PLAYER == obj.tag:
             self.is_collided = True;
             self.render_f_key();
+
+            #from FrameWork import FrameWork;
+            #FrameWork.CurScene.set_pause(True);
+            #FrameWork.CurScene.game_control();

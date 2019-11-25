@@ -3,7 +3,6 @@ from KeyIO import *;
 from MyTimer import *;
 from Const import *;
 
-
 FrameWork.Initialize();
 KeyInput.Initialize();
 

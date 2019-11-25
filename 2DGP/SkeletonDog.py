@@ -8,6 +8,7 @@ from CollisionRect import*;
 from BehaviorTree import *;
 from Player import Player;
 #from IdleStateForSkeletonDog import *; Behavior Tree 로 해보장
+import random;
 
 #component
 from HitComponent import *;
@@ -20,6 +21,9 @@ from typing import List;
 # 플레이어에게 접근 하는 패턴만 추가하면 완성.
 attack_speed = 3;
 RUN_L, RUN_R, IDLE_R, IDLE_L = range(4);
+RUN, IDLE = range(2);
+DAMAGE = 7;
+
 hit_recovery_time = 0.2;
 class SkeletonDog(GameObject):
     LOAD        :bool = False;
@@ -36,14 +40,14 @@ class SkeletonDog(GameObject):
         if SkeletonDog.LOAD == False:
             for idx in range(1, 5 + 1):
                 SkeletonDog.IMGSForIdleR.append( pico2d.load_image( 'assets/Monster/SkeletonDog/Idle/R ({0}).png'.format( str(idx) ) ) );
-            for idx in range(1, 5 + 1):
-                SkeletonDog.IMGSForIdleR.append( pico2d.load_image( 'assets/Monster/SkeletonDog/Idle/L ({0}).png'.format( str(idx) ) ) );
+                SkeletonDog.IMGSForIdleL.append( pico2d.load_image( 'assets/Monster/SkeletonDog/Idle/L ({0}).png'.format( str(idx) ) ) );
+
             for idx in range(1, 7 + 1):
                 SkeletonDog.IMGSForRunR.append( pico2d.load_image( 'assets/Monster/SkeletonDog/Move/R ({0}).png'.format( str(idx) ) ) );
-            for idx in range(1, 7 + 1):
                 SkeletonDog.IMGSForRunL.append( pico2d.load_image( 'assets/Monster/SkeletonDog/Move/L ({0}).png'.format( str(idx) ) ) );
 
             SkeletonDog.FieldOfView = Const.BANSHEE_FIELD_OF_VIEW;
+            #SkeletonDog.FieldOfView = 100;
 
             SkeletonDog.DIE_SOUND = load_wav('assets/Monster/MonsterDie.wav');
             SkeletonDog.DIE_SOUND.set_volume(50);
@@ -59,6 +63,7 @@ class SkeletonDog(GameObject):
         self.force_y =800;
         self.collider:Collision = CollisionRect(x,y, self.IMG.w // 2, self.IMG.h // 2);
 
+
         # status
         self.current_hp = 50;
         self.max_hp     = 50;
@@ -71,7 +76,7 @@ class SkeletonDog(GameObject):
         # animation
         self.animation_numb = 0;
         self.animation_timer = 0.0;
-        self.animation_state = RUN_L;
+        self.animation_state = IDLE;
 
         # hit component
         self.hit_component = HitComponent(hit_recovery_time);
@@ -89,64 +94,66 @@ class SkeletonDog(GameObject):
 
         self.dir_timer = 0;
 
-    def render(self): 
-        self.current_state.render();
 
+    def render(self): 
+        if IDLE == self.animation_state : self.animate_idle();
+        else : self.animate_run();
         if False == self.hit_component.can_hitted():
             self.hp_ui.render();
+
+    def animate_run(self):
+        if 1 == self.dir :
+            SkeletonDog.IMGSForRunR[self.animation_numb].clip_composite_draw(0,0,
+               self.IMG.w,
+               self.IMG.h,
+               0,'', 
+               self.transform.tx-GameObject.Cam.camera_offset_x,
+               self.transform.ty-GameObject.Cam.camera_offset_y,
+               );
+        else :
+            SkeletonDog.IMGSForRunL[self.animation_numb].clip_composite_draw(0,0,
+               self.IMG.w,
+               self.IMG.h,
+               0,'', 
+               self.transform.tx-GameObject.Cam.camera_offset_x,
+               self.transform.ty-GameObject.Cam.camera_offset_y,
+               );
+
+    def animate_idle(self):
+        if 1 == self.dir :
+            SkeletonDog.IMGSForIdleR[self.animation_numb].clip_composite_draw(0,0,
+               self.IMG.w,
+               self.IMG.h,
+               0,'', 
+               self.transform.tx-GameObject.Cam.camera_offset_x,
+               self.transform.ty-GameObject.Cam.camera_offset_y,
+               );
+        else :
+            SkeletonDog.IMGSForIdleL[self.animation_numb].clip_composite_draw(0,0,
+               self.IMG.w,
+               self.IMG.h,
+               0,'', 
+               self.transform.tx-GameObject.Cam.camera_offset_x,
+               self.transform.ty-GameObject.Cam.camera_offset_y,
+               );
+
 
     def render_debug(self): 
         if self.collider :
             draw_rectangle(*self.collider.get_area_offset(GameObject.Cam.camera_offset_x, GameObject.Cam.camera_offset_y));
 
     def update(self, time):
-        self.update_component(time);
-        self.forStateMachine();
         self.behavior_tree.run(time);
-        self.update_timer(time);
+        self.update_component(time);
         self.clampingInWindow();
         pass;
 
-
-    def update_timer(self,time):
-        self.basictimer += time;
-        self.animation_timer += time;
-        self.attack_key_timer += time;
-        self.last_dir = (self.dir%2);
-
-        if(self.animation_timer >0.1):
-            self.animation_numb = self.animation_numb+1;
-            self.animation_timer = 0;
-
-        # 시야 범위 안에 드는지 체크.
-        if SkeletonDog.FieldOfView >= Const.distance(  self.transform.tx
-                                                 , self.transform.ty
-                                                 , Player.MyPlayer.transform.tx
-                                                 , Player.MyPlayer.transform.ty ) :
-            self.attack_trigger = True;
-
-        if True == self.attack_trigger :
-            self.attack_timer += time;
-            if(self.attack_timer > attack_speed):
-                self.fire();
-                self.attack_timer = 0;
-        return;
-
-    def forStateMachine(self):
-        self.current_state.update();
-
-        if len(self.state_queue) > 0:
-            temp = self.current_state;
-            self.current_state.exit();
-            self.current_state = self.state_queue.pop();
-            del temp;
 
     def update_component(self, time):
         self.previous_transform = self.transform;
         self.collider.cx, self.collider.cy = self.transform.tx, self.transform.ty;
         self.hit_component.update(time);
         #self.hp_ui.update(time);
-
         return;
 
     def clampingInWindow(self):
@@ -155,48 +162,72 @@ class SkeletonDog(GameObject):
         return;
 
     def on_collision(self, obj):
-        #if Const.TAG_PLAYER_PROJECTILE == obj.tag :
-        #    calc_hp(obj.damage);
-        pass;
-
+        if Const.TAG_PLAYER == obj.tag :
+            obj.calc_hp(DAMAGE);
         
     def calc_hp(self, damage):
-        #if False == self.is_death :
+        if self.hit_component.can_hitted() :
+            self.hit_component.hit();
             self.current_hp -= damage;
-            if self.current_hp < 0:
+            if self.current_hp <= 0:
                 SkeletonDog.DIE_SOUND.play(1);
                 self.current_hp = 0;
                 self.state = False;
 
 #------------------------------------------------------------------------
-    from random import randint;
     def wander(self, time):
-        calculate_current_position();
-        if self.timer < 0:
-            self.timer +=1.0;
-            self.dir = random.randint(-1, 2, 2);
+        self.animation_state = IDLE;
+        self.animation_timer += time;
+        self.dir_timer += time;
+
+        if(self.animation_timer >0.1):
+            self.animation_numb = (self.animation_numb +1  ) % 5;
+            self.animation_timer = 0;
+
+        if self.dir_timer >= 1.0:
+            self.dir_timer = 0;
+            self.dir = random.randint(-1, 2);
+
+        self.calculate_current_position(time);
+
 
     def move_to_player(self, time):
+        self.animation_state = RUN;
+        self.animation_timer += time;
+
+        if(self.animation_timer >0.1):
+            self.animation_numb = (self.animation_numb +1  ) % 5;
+            self.animation_timer = 0;
+
         self.speed = self.force_x;
-        self.dir 
-        self.calculate_current_position();
+
+        self.calculate_current_position(time);
+
 
     def calculate_current_position(self, time):
         self.transform.tx += self.force_x * self.dir * time;
         #self.y += self.force_y * self.dir * time;
 
+
     def find_player(self, time):
+        self.dir_timer += time;
         if SkeletonDog.FieldOfView >= Const.distance(  self.transform.tx
                                                          , self.transform.ty
                                                          , Player.MyPlayer.transform.tx
                                                          , Player.MyPlayer.transform.ty ) :
+
+            if self.dir_timer >= 1.2:
+                self.dir_timer = 0;
+                if self.transform.tx < Player.MyPlayer.transform.tx : # 더 오른쪽에 있으면????
+                    self.dir = 1;
+                if self.transform.tx > Player.MyPlayer.transform.tx : 
+                    self.dir = -1;
+
             return BehaviorTree.SUCCESS;
         else:
             self.force_y = 0;
             return BehaviorTree.FAIL;
 
-        
-        return BehaviorTree.SUCCESS;
 
     def build_behavior_tree(self):
         chase_node = SequenceNode("Chase");

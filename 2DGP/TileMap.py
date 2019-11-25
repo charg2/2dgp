@@ -35,11 +35,8 @@ class TileMap:
         from GameObject import GameObject;
         from Player import Player;
 
-        px = ( Player.MyPlayer.transform.tx );
-        py = ( Player.MyPlayer.transform.ty );
-
-        p_top     = py + (Const.WIN_HEIGHT   // 2);
-        p_bottom  = py - (Const.WIN_HEIGHT // 2);
+        p_top     = bottom + Const.WIN_HEIGHT ;
+        p_bottom  = bottom ;
 
         p_left    =     left;
         p_right   =     left + window_width;
@@ -68,9 +65,9 @@ class TileMap:
         #    max_width -= min_width;
         #    min_width = 0;
             
-        if min_height <= 0:
-            max_width -= min_height ;
-            min_height = 0;
+        #if min_height <= 0:
+        #    max_width -= min_height ;
+        #    min_height = 0;
 
 
         #offset_x:int = p_right % Tile.WIDTH;

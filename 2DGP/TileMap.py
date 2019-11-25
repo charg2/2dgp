@@ -81,7 +81,7 @@ class TileMap:
         #    offset_y = 0;
 
 
-        print(min_width, max_width, min_height, max_height );
+        #print(min_width, max_width, min_height, max_height );
 
         map_x:int = 0;
         map_y:int = 0;

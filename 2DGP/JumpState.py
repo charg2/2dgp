@@ -9,7 +9,7 @@ from Effect import *;
 
 
 FORCE_X = 500; 
-FORCE_Y = 2000;
+FORCE_Y = 3000;
 
 class JumpStateForPlayer(StateMachine):
     animation_state =0;

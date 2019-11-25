@@ -93,7 +93,6 @@ class TileMap:
                                                            , map_y - offset_y
                                                            , Tile.WIDTH
                                                            , Tile.HEIGHT);
-                               
                 map_x += Tile.WIDTH;
             map_y += Tile.WIDTH;
 

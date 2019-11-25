@@ -48,7 +48,7 @@ class GameScene(Scene):
         
         #UI
         self.add_ui(HPBarForPlayer.get_instance());
-        self.add_ui(MessageBox(100, 100, 1,1,1,True, "TESET용 문서"));
+
         self.add_ui(Wallet.get_instance());
         self.add_ui(DashBar.get_instance());
 

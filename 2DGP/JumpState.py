@@ -61,35 +61,37 @@ class JumpStateForPlayer(StateMachine):
 
     # 점프 상승중의 버튼 상태를 조사해 반영함.
     def update(self, time):
-        
+        self.jump_timer += time;
         if True == self.obj.physx.is_ground :
             self.obj.is_dash = False;
             self.obj.is_down = False;
             #self.obj.is_jump = False;
 
-        if True == KeyInput.g_w :
-            self.obj.physx.velocity_y *= 0.9;
-            if KeyInput.g_d :
-                self.obj.physx.velocity_x = FORCE_X;
-            elif KeyInput.g_a :
-                self.obj.physx.velocity_x = -FORCE_X ;
-        else:
-            self.obj.physx.velocity_y *= 0.05;
-            self.obj.physx.is_ground = False;
-            self.obj.is_jump = False;
-            self.obj.add_queue(IdleStateForPlayer(self.obj));
-            temp = self.obj.current_state;
-            self.obj.current_state.exit();
-            self.obj.current_state = self.obj.state_queue.pop();
-            del temp;
+        if self.jump_timer >= 0.016:
+            self.jump_timer = 0;
+            if True == KeyInput.g_w :
+                self.obj.physx.velocity_y *= 0.9;
+                if KeyInput.g_d :
+                    self.obj.physx.velocity_x = FORCE_X;
+                elif KeyInput.g_a :
+                    self.obj.physx.velocity_x = -FORCE_X ;
+            else:
+                self.obj.physx.velocity_y *= 0.05;
+                self.obj.physx.is_ground = False;
+                self.obj.is_jump = False;
+                self.obj.add_queue(IdleStateForPlayer(self.obj));
+                temp = self.obj.current_state;
+                self.obj.current_state.exit();
+                self.obj.current_state = self.obj.state_queue.pop();
+                del temp;
 
-        #dash state 로 이동
-        #if dash_key :
-            #self.obj.add_queue(DashStateForPlayer(self.obj));
-            #temp = self.obj.current_state;
-            #self.obj.current_state.exit();
-            #self.obj.current_state = self.obj.state_queue.pop();
-            #del temp;
+            #dash state 로 이동
+            #if dash_key :
+                #self.obj.add_queue(DashStateForPlayer(self.obj));
+                #temp = self.obj.current_state;
+                #self.obj.current_state.exit();
+                #self.obj.current_state = self.obj.state_queue.pop();
+                #del temp;
 
 
         return;

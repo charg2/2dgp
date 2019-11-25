@@ -35,15 +35,26 @@ class TileMap:
         from GameObject import GameObject;
         from Player import Player;
 
-        # LT/RB를 구해서
-        cam_top     = bottom + GameObject.Cam.camera_offset_y ;
-        cam_top     = bottom + GameObject.Cam.camera_offset_y ;
-        cam_bottom  = cam_top + window_height;
-        cam_right   = left + window_width;
+        px = ( Player.MyPlayer.transform.tx );
+        py = ( Player.MyPlayer.transform.ty );
+
+        p_top     = py + (Const.WIN_HEIGHT   // 2);
+        p_bottom  = py - (Const.WIN_HEIGHT // 2);
+
+        p_left    =     left;
+        p_right   =     left + window_width;
+
+
+
+        ## LT/RB를 구해서
+        #cam_top     = bottom + GameObject.Cam.camera_offset_y ;
+        #cam_top     = bottom + GameObject.Cam.camera_offset_y ;
+        #cam_bottom  = cam_top + window_height;
+        #cam_right   = left + window_width;
 
         # tile_range index
-        min_width, max_width    = ( left // Tile.WIDTH ) , ( cam_right // Tile.WIDTH ) +1;
-        min_height, max_height  = ( cam_top // Tile.HEIGHT ) , ( cam_bottom // Tile.HEIGHT ) + 1;
+        min_width, max_width    = int( p_left // Tile.WIDTH ) , int( p_right // Tile.WIDTH ) +1;
+        min_height, max_height  = int( p_bottom // Tile.HEIGHT ) , int( p_top // Tile.HEIGHT ) + 1;
 
         #print("{0} - {1} - {2} - {3}".format(min_width, max_width, min_height, max_height ));
         if max_width > len(self.tiles[0]):
@@ -53,10 +64,28 @@ class TileMap:
             #print(max_height ,len(self.tiles));
             max_height = len(self.tiles);
 
-        #offset_y:int = (Player.MyPlayer.transform.ty );
+        #if min_width <= 0:
+        #    max_width -= min_width;
+        #    min_width = 0;
+            
+        if min_height <= 0:
+            max_width -= min_height ;
+            min_height = 0;
+
+
+        #offset_x:int = p_right % Tile.WIDTH;
         offset_x:int = ( GameObject.Cam.camera_offset_x ) % Tile.WIDTH;
-        offset_y:int = ( GameObject.Cam.camera_offset_y ) % Tile.HEIGHT;
+        offset_y:int = p_top % Tile.HEIGHT;
         
+        #if p_left  < (Const.WIN_WIDTH // 2):
+        #    offset_x = 0;
+    
+        #if p_bottom < (Const.WIN_HEIGHT // 2):
+        #    offset_y = 0;
+
+
+        print(min_width, max_width, min_height, max_height );
+
         map_x:int = 0;
         map_y:int = 0;
         for y in range( min_height, max_height ):

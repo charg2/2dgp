@@ -8,7 +8,7 @@ class GraphicLib:
     Font:Font = None;
     DebugImg:Image; 
     DebugImg1:Image;
-    DebugMode:bool = False;
+    DebugMode:bool = True;
 
     def init():
         #os.chdir("assets"); # asset folder

@@ -138,7 +138,7 @@
     </Compile>
     <Compile Include="Mouse.py" />
     <Compile Include="MyTimer.py" />
-    <Compile Include="Pannel.py">
+    <Compile Include="FoodShop.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Physx.py">

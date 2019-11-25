@@ -15,8 +15,10 @@ class Mouse(GameObject):
         self.Arrow = pico2d.load_image("assets/Mouse/Cursor00.png");
         self.Target = pico2d.load_image("assets/Mouse/Cursor01.png");
         self.IMG = self.Arrow;
-        #self.collider:Collision = CollisionRect(self.x,self.y, self.IMG.w // 2, self.IMG.h // 2);
+        self.collider:Collision = CollisionRect(self.x,self.y, self.IMG.w // 2, self.IMG.h // 2);
         Instance = self;
+        self.tag = Const.TAG_MOUSE;
+
 
     def set_cursor(self, type):
         if type == 0: self.IMG = self.Arrow;

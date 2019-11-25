@@ -31,6 +31,7 @@ class GameBG(GameObject):
         GameObject.Cam.SetCamOffset(vx, vy);
 
         self.map.clip_render_to_origin(vx, vy, Const.WIN_WIDTH, Const.WIN_HEIGHT);
+        #self.map.render();#(vx, vy, Const.WIN_WIDTH, Const.WIN_HEIGHT);
         return;
 
 

@@ -30,7 +30,7 @@ class JumpStateForPlayer(StateMachine):
 
         self.Fx = 0;
         self.obj.is_jump = True;
-
+        self.jump_timer = 0;
         if Const.direction_R == self.obj.m_dir :
             self.obj.last_dir = Const.direction_R;
             self.obj.dir = Const.direction_R;
@@ -96,14 +96,7 @@ class JumpStateForPlayer(StateMachine):
 
         return;
     
-    #def check_jump_timer(self) :
-    #    if self.obj.physx.velocity_y < -self.jump_velocity:
-    #        self.obj.add_queue(IdleStateForPlayer(self.obj));
-    #        temp = self.obj.current_state;
-    #        self.obj.current_state.exit();
-    #        self.obj.current_state = self.obj.state_queue.pop();
-    #        del temp;
-    #    return;
+
 
     def render(self):
         self.obj.IMGSForJump[self.obj.m_dir].clip_composite_draw(0,0,

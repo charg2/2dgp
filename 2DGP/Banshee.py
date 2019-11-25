@@ -24,7 +24,7 @@ from typing import List;
 max_hp = 100;
 attack_speed = 3;
 RUN_L, RUN_R, IDLE_R, IDLE_L = range(4);
-hit_recovery_time = 0.2;
+HIT_RECOVERY_TIME = 0.2;
 class Banshee(GameObject):
     LOAD:bool = False;
     UNIQUE_ID:int = 0;
@@ -75,14 +75,15 @@ class Banshee(GameObject):
         self.animation_timer = 0.0;
         self.animation_state = RUN_L;
 
+        self.tag = Const.TAG_MONSTER;
+
         # hit component
-        self.hit_component = HitComponent(hit_recovery_time);
+        self.hit_component = HitComponent(self, HIT_RECOVERY_TIME);
         self.hp_ui = HPBarForMonster(self, self.transform.tx, self.transform.ty, 1, 1, 1, True);
 
         self.dir = Const.direction_L; 
         self.last_dir = RUN_L % 2;
         self.current_state = IdleStateForBanshee(self);
-        self.tag = Const.TAG_MONSTER;
 
 
     def render(self): 
@@ -182,6 +183,6 @@ class Banshee(GameObject):
                 self.drop_coin();
                 self.current_hp = 0;
                 self.state = False;
-    
+
     def drop_coin(self):
         pass;

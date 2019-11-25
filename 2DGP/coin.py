@@ -1,6 +1,3 @@
-
-
-
 from GameObject import *;
 from Graphic import *;
 from math import*;
@@ -74,6 +71,12 @@ class Coin(GameObject):
 
     def update(self, time):
         self.update_animation(time);
+        pass;
+
+    def update_component(self):
+        pass;
+
+    def Physx(self, time):
         pass;
 
     def update_animation(self,time):

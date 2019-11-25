@@ -41,9 +41,10 @@ class FoodShopScene(Scene):
         self.AddObstacleObject(portal(START_X + 2100, START_Y + 90, 0,1,1,True, 3));
         
         #NPC
-        self.AddMonsterObject(Horerica(START_X + 1100, 180 + 35 ,0,1,1,True));          
-        from Pannel import FoodShop;
-        self.AddTerrainObject(FoodShop(START_X + 800, 200 + 256 ,0,1,1,True));
+        from FoodShop import FoodShop;
+        FoodShopScene.SHOP = FoodShop(START_X + 800, 200 + 256 ,0,1,1,True);
+        self.AddTerrainObject(FoodShopScene.SHOP);
+        self.AddMonsterObject(Horerica(START_X + 1100, 180 + 35 ,0,1,1,True, FoodShopScene.SHOP));          
 
         #UI
         self.add_ui(HPBarForPlayer.get_instance());

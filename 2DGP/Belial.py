@@ -74,7 +74,7 @@ class Belial(GameObject):
 
 
         # hit component
-        self.hit_component = HitComponent(hit_recovery_time);
+        self.hit_component = HitComponent(self, hit_recovery_time);
 
     def render(self): 
         self.current_state.render();

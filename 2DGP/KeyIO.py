@@ -14,6 +14,7 @@ class KeyInput:
     g_w:bool = False;
     g_s:bool = False;
     g_d:bool = False;
+    g_f:bool = False;
 
     g_mouse_rdown:bool = False;
     g_mouse_ldown:bool = False;
@@ -34,6 +35,7 @@ class KeyInput:
         KeyInput.g_w = False;
         KeyInput.g_s = False;
         KeyInput.g_d = False;
+        KeyInput.g_f = False;
 
         KeyInput.g_mouse_rdown = False;
         KeyInput.g_mouse_ldown = False;
@@ -76,6 +78,8 @@ class KeyInput:
                         KeyInput.g_s = True;
                     if event.key  == SDLK_d:
                         KeyInput.g_d = True;
+                    if event.key  == SDLK_f:
+                        KeyInput.g_f = True;
 
                         
 
@@ -113,6 +117,8 @@ class KeyInput:
                         KeyInput.g_w = False;
                     if event.key  == SDLK_d:
                         KeyInput.g_d = False;
+                    if event.key  == SDLK_f:
+                        KeyInput.g_f = False;
 
                 if event.type == SDL_MOUSEBUTTONUP:
                     if event.button == SDL_BUTTON_RIGHT:

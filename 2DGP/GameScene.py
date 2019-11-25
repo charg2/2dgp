@@ -60,7 +60,7 @@ class GameScene(Scene):
         self.AddTerrainObject(terrain(self.bg.map.width //2, 90, self.bg.map.width //2, 90 ));
         self.AddTerrainObject(terrain(0, 100 + self.bg.map.height // 4, 180,  self.bg.map.height // 4));
         self.AddTerrainObject(terrain(90 * 8 - 45, 90*5, 135,  0));
-        self.AddTerrainObject(terrain(1170, self.bg.map.height // 4, 90,  0));
+        self.AddTerrainObject(terrain(90 * 11 - 45, 90*7, 135,  0));
 
         mouse:Mouse = Mouse();
         mouse.set_cursor(Const.CURSOR_TARGET);

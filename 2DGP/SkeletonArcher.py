@@ -19,7 +19,7 @@ from typing import List;
 
 max_hp = 50;
 attack_speed = 2;
-hit_recovery_time = 0.2;
+HIT_RECOVERY_TIME = 0.2;
 IDLE_L, IDLE_R = range(2);
 class SkeletonArcher(GameObject):
     LOAD:bool = False;
@@ -48,6 +48,7 @@ class SkeletonArcher(GameObject):
             SkeletonArcher.BEFORE_SHOT.set_volume(50);
             SkeletonArcher.AFTER_SHOT = load_wav('assets/Monster/SkeletonArcher/after_bow_shot.wav');
             SkeletonArcher.AFTER_SHOT.set_volume(50);
+
             SkeletonArcher.LOAD = True;
         
         self.name = "SkeletonArcher_" + str(SkeletonArcher.UNIQUE_ID); # For Debug
@@ -71,7 +72,7 @@ class SkeletonArcher(GameObject):
         self.max_hp     = 50;
 
         # hit component
-        self.hit_component = HitComponent(hit_recovery_time);
+        self.hit_component = HitComponent(self, HIT_RECOVERY_TIME);
         self.hp_ui = HPBarForMonster(self, self.transform.tx, self.transform.ty, 1, 1, 1, True);
 
     def render(self): 

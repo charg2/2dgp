@@ -78,9 +78,6 @@ class SkeletonDog(GameObject):
         self.animation_timer = 0.0;
         self.animation_state = IDLE;
 
-        # hit component
-        self.hit_component = HitComponent(hit_recovery_time);
-        self.hp_ui = HPBarForMonster(self, self.transform.tx, self.transform.ty, 1, 1, 1, True);
         
         self.dir = Const.direction_L; 
         self.last_dir = RUN_L % 2;
@@ -93,6 +90,9 @@ class SkeletonDog(GameObject):
         self.build_behavior_tree();
 
         self.dir_timer = 0;
+        # hit component
+        self.hit_component = HitComponent(self, hit_recovery_time);
+        self.hp_ui = HPBarForMonster(self, self.transform.tx, self.transform.ty, 1, 1, 1, True);
 
 
     def render(self): 

@@ -129,7 +129,7 @@ class Player(GameObject):
         self.set_acceleration_of_gravity(7);
         
         #hit component
-        self.hit_component = HitComponent(HIT_RECOVERY_TIME);
+        self.hit_component = HitComponent(self, HIT_RECOVERY_TIME);
 
     def update(self, time):
         self.handle_keyIO();

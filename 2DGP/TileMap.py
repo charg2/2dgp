@@ -30,11 +30,13 @@ class TileMap:
                 
     # 좌표계는 윈도우를 따름.
     # IO 연산을 줄이기 위해 최소 그려야 하는 타일만 그림.
+    #def clip_render_to_origin(self, left:int, bottom:int, window_width:int, window_height:int):
     def clip_render_to_origin(self, left:int, bottom:int, window_width:int, window_height:int):
         from GameObject import GameObject;
         from Player import Player;
 
         # LT/RB를 구해서
+        cam_top     = bottom + GameObject.Cam.camera_offset_y ;
         cam_top     = bottom + GameObject.Cam.camera_offset_y ;
         cam_bottom  = cam_top + window_height;
         cam_right   = left + window_width;
@@ -55,9 +57,6 @@ class TileMap:
         offset_x:int = ( GameObject.Cam.camera_offset_x ) % Tile.WIDTH;
         offset_y:int = ( GameObject.Cam.camera_offset_y ) % Tile.HEIGHT;
         
-        #print(GameObject.Cam.camera_offset_x);
-        #print(GameObject.Cam.camera_offset_y);
-
         map_x:int = 0;
         map_y:int = 0;
         for y in range( min_height, max_height ):

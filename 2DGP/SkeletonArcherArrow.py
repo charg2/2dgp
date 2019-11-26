@@ -13,7 +13,7 @@ from typing import List;
 
 frame_time = 0.2;
 frame = 4;
-extinction_time = 2;
+EXTINCTION_TIME = 1.3;
 damage = 5;
 class SkeletonArcherArrow(GameObject):
     LOAD:bool = False;
@@ -43,6 +43,7 @@ class SkeletonArcherArrow(GameObject):
 
     def update(self, time):
         self.update_component();
+        self.update_timer(time);
         self.clampingInWindow();
         self.Physx_bullet(time);
         pass;
@@ -61,6 +62,12 @@ class SkeletonArcherArrow(GameObject):
         
         self.transform.set_position(self.physx.velocity_x, self.physx.velocity_y);
 
+    def update_timer(self,time):
+        self.extinction_timer += time;
+
+        # 시간 지나면 사라짐.
+        if self.extinction_timer > EXTINCTION_TIME:
+            self.state = False;
 
     def render(self):
         if self.pdir == 1:

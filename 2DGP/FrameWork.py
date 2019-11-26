@@ -16,10 +16,10 @@ from FoodShopScene import *;
 
 class FrameWork:
     SceneList:List[Scene] = [];
-    #MyPlayer:Player = None;
 
     def init():
         GraphicLib.Initialize();
+        Timer.Initialize();
       
         FrameWork.GameState:bool = True;
         
@@ -32,7 +32,7 @@ class FrameWork:
 
     def update():
         Timer.Update();
-        
+
         GraphicLib.ClearBuf();
 
         FrameWork.change_scene();        # 씬 변경을 체크

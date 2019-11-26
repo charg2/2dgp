@@ -4,16 +4,12 @@ from Const import Const as const;
 import os;
 
 class GraphicLib:
-    LOAD:bool = False;
     Font:Font = None;
-    DebugImg:Image; 
-    DebugImg1:Image;
     DebugMode:bool = True;
 
     def init():
         #os.chdir("assets"); # asset folder
-
-        pico2d.open_canvas(const.WIN_WIDTH, const.WIN_HEIGHT, True);
+        pico2d.open_canvas(const.WIN_WIDTH, const.WIN_HEIGHT, True, False);
         pico2d.hide_lattice();
         pico2d.hide_cursor();
 

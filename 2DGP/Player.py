@@ -23,6 +23,7 @@ from HitComponent import *;
 RUN_L, RUN_R, IDLE_R, IDLE_L = range(4);
 DASH_CHARGE_TIME  = 1.25;
 HIT_RECOVERY_TIME = 0.3;
+ALPHA_VALUE = 70;
 class Player(GameObject):
     LOAD:bool                   = False;
     HIT_SOUND:Wav               = None;
@@ -33,6 +34,14 @@ class Player(GameObject):
     IMGSForJump:List[Image]     = []; # dash랑 공유
     IMGSForDeathL:List[Image]   = [];
     IMGSForDeathR:List[Image]   = [];
+
+    IMGSForIdleLAlpha:List[Image]    = [];
+    IMGSForIdleRAlpha:List[Image]    = [];
+    IMGSForRunLAlpha:List[Image]     = [];
+    IMGSForRunRAlpha:List[Image]     = [];
+    IMGSForJumpAlpha:List[Image]     = [];
+    IMGSForDeathLAlpha:List[Image]   = [];
+    IMGSForDeathRAlpha:List[Image]   = [];
 
     MyPlayer:GameObject = None;
 
@@ -45,17 +54,40 @@ class Player(GameObject):
             for idx in range(1, 5 + 1):
                 Player.IMGSForIdleR.append( pico2d.load_image( 'assets/Player/Idle/R ({0}).png'.format( str(idx) ) ) );
                 Player.IMGSForIdleL.append( pico2d.load_image( 'assets/Player/Idle/L ({0}).png'.format( str(idx) ) ) );
+                Player.IMGSForIdleRAlpha.append( pico2d.load_image( 'assets/Player/Idle/R ({0}).png'.format( str(idx) ) ) );
+                Player.IMGSForIdleLAlpha.append( pico2d.load_image( 'assets/Player/Idle/L ({0}).png'.format( str(idx) ) ) );
 
             for idx in range(1, 9 + 1):
                 Player.IMGSForRunR.append(pico2d.load_image('assets/Player/Run/R ({0}).png'.format( str(idx) ) ) );
                 Player.IMGSForRunL.append(pico2d.load_image('assets/Player/Run/L ({0}).png'.format( str(idx) ) ) );
+                Player.IMGSForRunRAlpha.append(pico2d.load_image('assets/Player/Run/R ({0}).png'.format( str(idx) ) ) );
+                Player.IMGSForRunLAlpha.append(pico2d.load_image('assets/Player/Run/L ({0}).png'.format( str(idx) ) ) );
 
             Player.IMGSForJump.append(pico2d.load_image('assets/Player/Jump/L (1).png'));
             Player.IMGSForJump.append(pico2d.load_image('assets/Player/Jump/R (1).png'));
+            Player.IMGSForJumpAlpha.append(pico2d.load_image('assets/Player/Jump/L (1).png'));
+            Player.IMGSForJumpAlpha.append(pico2d.load_image('assets/Player/Jump/R (1).png'));
 
             for idx in range(1, 2 + 1):
                 Player.IMGSForDeathL.append(pico2d.load_image('assets/Player/Death/L ({0}).png'.format( str(idx) )));
                 Player.IMGSForDeathR.append(pico2d.load_image('assets/Player/Death/R ({0}).png'.format( str(idx) )));
+                Player.IMGSForDeathLAlpha.append( pico2d.load_image('assets/Player/Death/L ({0}).png'.format( str(idx) )));
+                Player.IMGSForDeathRAlpha.append(pico2d.load_image('assets/Player/Death/R ({0}).png'.format( str(idx) )));
+
+            for img in Player.IMGSForIdleRAlpha:
+                img.opacify(ALPHA_VALUE);
+            for img in Player.IMGSForIdleLAlpha:
+                img.opacify(ALPHA_VALUE);
+            for img in Player.IMGSForRunRAlpha:
+                img.opacify(ALPHA_VALUE);
+            for img in Player.IMGSForRunLAlpha:
+                img.opacify(ALPHA_VALUE);
+            for img in Player.IMGSForJumpAlpha:
+                img.opacify(ALPHA_VALUE);
+            for img in Player.IMGSForDeathLAlpha:
+                img.opacify(ALPHA_VALUE);
+            for img in Player.IMGSForDeathRAlpha:
+                img.opacify(ALPHA_VALUE);
 
             Player.HIT_SOUND = pico2d.load_wav('assets/Player/hit.wav');
             Player.HIT_SOUND.set_volume(50);

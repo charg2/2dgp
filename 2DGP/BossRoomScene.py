@@ -44,6 +44,7 @@ class BossRoomScene(Scene):
         return;
 
     def on_change_scene(self):
-        Player.MyPlayer.transform.tx = START_X;
-        Player.MyPlayer.transform.ty = START_Y;
+        Player.MyPlayer.transform.tx, Player.MyPlayer.transform.ty = 400, 220; 
+        Scene.BACK_GROUND_MUSIC.__del__();
+        GameScene.BGM.repeat_play();
         pass;

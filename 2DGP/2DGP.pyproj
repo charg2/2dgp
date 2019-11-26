@@ -78,6 +78,9 @@
     <Compile Include="EffectCutton.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Event.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="FoodShopBG.py">
       <SubType>Code</SubType>
     </Compile>

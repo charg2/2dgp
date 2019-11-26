@@ -3,7 +3,6 @@ from StateMachine import *;
 from Player import *;
 from Graphic import *;
 
-
 class IdleStateForPlayer(StateMachine):
     def __init__(self, player):
         #print("idle");
@@ -25,7 +24,6 @@ class IdleStateForPlayer(StateMachine):
             self.animation_state= (self.animation_state+1)%4;
             self.timer=0;
         
-                
         # 공중에 있는 상태이면 
         return;
     
@@ -37,23 +35,43 @@ class IdleStateForPlayer(StateMachine):
         return;
     def renderForRight(self):
         from Player import Player;
-        Player.IMGSForIdleR[self.animation_state].clip_composite_draw(0,0,
-                           Player.IMGSForIdleR[self.animation_state].w,
-                           Player.IMGSForIdleR[self.animation_state].h,
-                           0,'',
-                           self.player.transform.tx-GameObject.Cam.camera_offset_x,
-                           self.player.transform.ty-GameObject.Cam.camera_offset_y,
-                           );
+        if self.player.hit_component.can_hitted() :
+            Player.IMGSForIdleR[self.animation_state].clip_composite_draw(0,0,
+                               Player.IMGSForIdleR[self.animation_state].w,
+                               Player.IMGSForIdleR[self.animation_state].h,
+                               0,'',
+                               self.player.transform.tx-GameObject.Cam.camera_offset_x,
+                               self.player.transform.ty-GameObject.Cam.camera_offset_y,
+                               );
+        else :
+            Player.IMGSForIdleRAlpha[self.animation_state].clip_composite_draw(0,0,
+                               Player.IMGSForIdleR[self.animation_state].w,
+                               Player.IMGSForIdleR[self.animation_state].h,
+                               0,'',
+                               self.player.transform.tx-GameObject.Cam.camera_offset_x,
+                               self.player.transform.ty-GameObject.Cam.camera_offset_y,
+                               );
 
     def renderForLeft(self):
-        from Player import Player
-        Player.IMGSForIdleL[self.animation_state].clip_composite_draw(0,0,
+        from Player import Player;
+        if self.player.hit_component.can_hitted() :
+            Player.IMGSForIdleL[self.animation_state].clip_composite_draw(0,0,
                            Player.IMGSForIdleL[self.animation_state].w,
                            Player.IMGSForIdleL[self.animation_state].h,
                            0,'',
                            self.player.transform.tx-GameObject.Cam.camera_offset_x,
                            self.player.transform.ty-GameObject.Cam.camera_offset_y,
                            );
+        else :
+            Player.IMGSForIdleLAlpha[self.animation_state].clip_composite_draw(0,0,
+                           Player.IMGSForIdleL[self.animation_state].w,
+                           Player.IMGSForIdleL[self.animation_state].h,
+                           0,'',
+                           self.player.transform.tx-GameObject.Cam.camera_offset_x,
+                           self.player.transform.ty-GameObject.Cam.camera_offset_y,
+                           );
+
+
     def exit(self):
         
         pass;

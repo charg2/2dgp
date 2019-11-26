@@ -38,7 +38,7 @@ class FoodShopScene(Scene):
         self.AddTerrainObject(self.bg);
         self.AddAllyObject(Player.MyPlayer);          
 
-        self.AddObstacleObject(portal(START_X + 2100, START_Y + 90, 0,1,1,True, 3));
+        self.AddObstacleObject(portal(START_X + 2100, START_Y + 160, 0,1,1,True, 3));
         
         #NPC
         from FoodShop import FoodShop;
@@ -62,6 +62,7 @@ class FoodShopScene(Scene):
         return;
 
     def on_change_scene(self):
+        Player.MyPlayer.transform.tx, Player.MyPlayer.transform.ty = 400, 220; 
         Scene.BACK_GROUND_MUSIC.__del__();
         FoodShopScene.BGM.repeat_play();
         pass;

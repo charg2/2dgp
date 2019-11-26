@@ -17,7 +17,7 @@ from Player import Player;
 
 from typing import List;
 
-max_hp = 50;
+MAX_HP = 25;
 attack_speed = 2;
 HIT_RECOVERY_TIME = 0.2;
 IDLE_L, IDLE_R = range(2);
@@ -68,8 +68,8 @@ class SkeletonArcher(GameObject):
         self.tag:int = Const.TAG_MONSTER;
 
         # status
-        self.current_hp = 50;
-        self.max_hp     = 50;
+        self.current_hp = MAX_HP;
+        self.max_hp     = MAX_HP;
 
         # hit component
         self.hit_component = HitComponent(self, HIT_RECOVERY_TIME);

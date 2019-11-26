@@ -12,6 +12,7 @@ class DeathStateForPlayer(StateMachine):
     LOAD = False;
     IMGSForL= [];
     IMGSForR= [];
+    BGM = None;
     def __init__(self, player):
         if False == DeathStateForPlayer.LOAD :
             DeathStateForPlayer.IMGSForL.append(pico2d.load_image('assets/Player/Death/L (1).png'));
@@ -19,12 +20,14 @@ class DeathStateForPlayer(StateMachine):
 
             DeathStateForPlayer.IMGSForR.append(pico2d.load_image('assets/Player/Death/R (1).png'));
             DeathStateForPlayer.IMGSForR.append(pico2d.load_image('assets/Player/Death/R (2).png'));
-            DeathStateForPlayer.LOAD = True;
+            DeathStateForPlayer.BGM = pico2d.load_wav('assets/Player/Death/dead_bgm.wav');
+            DeathStateForPlayer.BGM.set_volume(50);
 
+            DeathStateForPlayer.LOAD = True;
         self.player = player;
         self.Fx ,self.Fy = 0,0;
         player.is_death = True;
-
+        DeathStateForPlayer.BGM.play(1); 
         self.timer = 0;
         #현재 마우스 방향을얻어서 그방향으로만 죽은 모션 하고 끝.
         self.img = None;

@@ -39,7 +39,6 @@ class GameScene(Scene):
         
         self.AddTerrainObject(self.bg);
         self.AddAllyObject(Player(START_X,  START_Y + 90,0,1,1,True));          
-
         
         self.AddAllyObject(ConditionVariable( monster_empty, create_portal, self, self, 1));          
 
@@ -48,8 +47,8 @@ class GameScene(Scene):
         
         self.AddObstacleObject(small_heal(self, START_X + 500, START_Y + 400 ,0,1,1,True));          
         self.AddObstacleObject(big_heal(self, START_X + 7, START_Y + 200 ,0,1,1,True));          
-        self.AddObstacleObject(coin(self, START_X + 100, START_Y + 200 ,0,1,1,True));          
-        self.AddObstacleObject(coin(self, START_X + 200, START_Y + 240 ,0,1,1,True));          
+        #self.AddObstacleObject(coin(self, START_X + 100, START_Y + 200 ,0,1,1,True));          
+        #self.AddObstacleObject(coin(self, START_X + 200, START_Y + 240 ,0,1,1,True));          
         #self.AddObstacleObject(portal(90 * 25 - 45, START_Y + 90,0,1,1,True, 2));
         
         #UI

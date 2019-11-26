@@ -64,5 +64,7 @@ class FoodShopScene(Scene):
     def on_change_scene(self):
         Player.MyPlayer.transform.tx, Player.MyPlayer.transform.ty = 400, 220; 
         Scene.BACK_GROUND_MUSIC.__del__();
+
         FoodShopScene.BGM.repeat_play();
+        Scene.BACK_GROUND_MUSIC = FoodShopScene.BGM;
         pass;

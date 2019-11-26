@@ -21,7 +21,7 @@ from coin import *;
 from typing import List;
 
 # 플레이어에게 접근 하는 패턴만 추가하면 완성.
-max_hp = 100;
+MAX_HP = 25;
 attack_speed = 3;
 RUN_L, RUN_R, IDLE_R, IDLE_L = range(4);
 HIT_RECOVERY_TIME = 0.2;
@@ -62,8 +62,8 @@ class Banshee(GameObject):
         self.collider:Collision = CollisionRect(x,y, self.IMG.w // 2, self.IMG.h // 2);
 
         # status
-        self.current_hp = 50;
-        self.max_hp     = 50;
+        self.current_hp = MAX_HP;
+        self.max_hp     = MAX_HP;
 
         # attack
         self.attack_trigger:bool = False;

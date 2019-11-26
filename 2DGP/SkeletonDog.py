@@ -23,7 +23,7 @@ attack_speed = 3;
 RUN_L, RUN_R, IDLE_R, IDLE_L = range(4);
 RUN, IDLE = range(2);
 DAMAGE = 7;
-
+MAX_HP = 30;
 hit_recovery_time = 0.2;
 class SkeletonDog(GameObject):
     LOAD        :bool = False;
@@ -65,8 +65,8 @@ class SkeletonDog(GameObject):
 
 
         # status
-        self.current_hp = 50;
-        self.max_hp     = 50;
+        self.current_hp = MAX_HP;
+        self.max_hp     = MAX_HP;
 
         # attack
         self.attack_trigger:bool = False;

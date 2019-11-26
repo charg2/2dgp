@@ -17,10 +17,14 @@ from DashBar import *;
 START_X,START_Y = 300, 120;
 
 class BossRoomScene(Scene):
+    BGM = None;
     def __init__(self):       
         super(BossRoomScene,self).__init__();
         self.bg = (RoomBG(const.WIN_WIDTH//2, const.WIN_HEIGHT//2, 0,1,1,True, "room_boss.map"));
-        
+        if None == BossRoomScene.BGM :
+            BossRoomScene.BGM = load_wav('assets/Sound/boss.wav');
+            BossRoomScene.BGM.set_volume(50);
+
         self.AddTerrainObject(self.bg);
         self.AddAllyObject(Player.MyPlayer);          
 
@@ -46,5 +50,5 @@ class BossRoomScene(Scene):
     def on_change_scene(self):
         Player.MyPlayer.transform.tx, Player.MyPlayer.transform.ty = 400, 220; 
         Scene.BACK_GROUND_MUSIC.__del__();
-        GameScene.BGM.repeat_play();
+        BossRoomScene.BGM.repeat_play();
         pass;

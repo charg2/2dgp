@@ -35,6 +35,12 @@ class BossRoomScene(Scene):
         self.AddTerrainObject(terrain(0, 450+ self.bg.map.height // 4, 180,  (self.bg.map.height // 4) ) );
 
         #self.AddTerrainObject(terrain(100, 100, 50, 45));
+        from BelialLaser import BelialLaser as bl;
+        self.AddMonsterObject(bl(self, START_X + 1000, START_Y + 400 ,0,1,1, True));        
+
+
+        from Event import ConditionEvent;
+        self.AddAllyObject(ConditionEvent( monster_empty, create_portal, self, run_game_clear_event, 1));        
 
         mouse:Mouse = Mouse();
         mouse.set_cursor(Const.CURSOR_TARGET);
@@ -52,3 +58,20 @@ class BossRoomScene(Scene):
         Scene.BACK_GROUND_MUSIC.__del__();
         BossRoomScene.BGM.repeat_play();
         pass;
+
+def monster_empty(scene):
+    if len(scene.game_object_list_monster) == 0 :
+        return True;
+    else :
+        return False;
+
+def run_game_clear_event(scene):
+    print("Game Clear!!");
+    scene.AddObstacleObject(portal(90 * 31 - 45, START_Y + 760,0,1,1,True, 2)); # 일단 포털을 넣어놨지만 
+    from Effect import EffectStaticAnimation;
+    from Effect import EffectStaticSprite;
+
+
+    # 문구 Effect Static Animation 등.. 사용하고
+    # 사운드 바꿔주고
+    # 게임을 종료시킴 or end Scene 만들자.

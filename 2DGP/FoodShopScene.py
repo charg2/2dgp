@@ -13,7 +13,6 @@ from Terrain import Terrain as terrain;
 from Portal import Portal as portal;
 from SmallHeal import SmallHeal as small_heal;
 from BigHeal import BigHeal as big_heal;
-from coin import Coin as coin;
 
 #UI
 from HPBar import *;
@@ -25,6 +24,10 @@ from Horerica import *;
 
 
 START_X,START_Y = 300, 120;
+
+# Scene을 하나 더 둠.
+# 플레이어도 없고다 없는 깔끔한 곳으로 갓다가 나오면 다시 일로 이동 ㅇㅇ;
+# 그래서 STAGE를 이동할때마다 음식 리스트를 갱신함.
 
 class FoodShopScene(Scene):
     def __init__(self):       

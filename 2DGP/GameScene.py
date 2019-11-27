@@ -40,7 +40,7 @@ class GameScene(Scene):
         self.AddTerrainObject(self.bg);
         self.AddAllyObject(Player(START_X,  START_Y + 90,0,1,1,True));          
         
-        self.AddAllyObject(ConditionVariable( monster_empty, create_portal, self, self, 1));          
+        self.AddAllyObject(ConditionEvent( monster_empty, create_portal, self, self, 1));          
 
         self.AddMonsterObject(Banshee(START_X + 300, START_Y + 400 ,0,1,1,True));          
         self.AddMonsterObject(SkeletonDog(START_X + 700, START_Y + 90 ,0,1,1,True));          
@@ -59,9 +59,7 @@ class GameScene(Scene):
 
         self.AddMonsterObject(SkeletonArcher(START_X + 100, START_Y + 100 ,0,1,1, True));     
         
-        from BelialLaser import BelialLaser as bl;
-        self.AddMonsterObject(bl(self, START_X + 1000, START_Y + 600 ,0,1,1, True));        
-        
+
         self.AddTerrainObject(terrain(self.bg.map.width //2, 90, self.bg.map.width //2, 90 ));
         self.AddTerrainObject(terrain(0, 100 + self.bg.map.height // 4, 180,  self.bg.map.height // 4));
         self.AddTerrainObject(terrain(90 * 8 - 45, 90*5, 135,  0));

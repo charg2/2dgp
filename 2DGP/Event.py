@@ -36,9 +36,9 @@ class TimerEvent(GameObject):
             self.event_func();
         pass;
 
-class ConditionVariable(GameObject):
+class ConditionEvent(GameObject):
     def __init__(self, condition_func, event_func, condition_arg = None, event_arg = None, repeat = 1):
-        super(ConditionVariable, self).__init__(0, 0, 0, 0, 0, True);
+        super(ConditionEvent, self).__init__(0, 0, 0, 0, 0, True);
         self.has_image = False;
         self.collider:Collision = None;
 

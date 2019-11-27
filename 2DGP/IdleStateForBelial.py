@@ -27,7 +27,7 @@ class IdleStateForBelial(StateMachine):
         self.animation_state = 0;
 
         self.attack_trigger:bool = False;
-
+        self.idx = 0;
         if IdleStateForBelial.LOAD == False:
             
             IdleStateForBelial.IMGSForIdle.append(pico2d.load_image('assets/Monster/Belial/Idle/boss (1).png'));
@@ -84,9 +84,10 @@ class IdleStateForBelial(StateMachine):
         if self.turn_timer > 3.0:
             self.turn_timer = 0;
             import random;
-            idx = random.randint(0,1);
+            #self.idx = random.randint(0,1);
+            self.idx = (self.idx + 1) % 2;
             #attack_table[idx](slef.belial)
-            self.belial.add_queue(attack_table[idx](self.belial));
+            self.belial.add_queue(attack_table[self.idx](self.belial));
             #self.belial.add_queue(SwordAttackStateForBelial(self.belial));
             temp = self.belial.current_state;
             self.belial.current_state.exit();

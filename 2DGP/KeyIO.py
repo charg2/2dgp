@@ -49,9 +49,25 @@ class KeyInput:
 
     def update():
         KeyInput.polling();
+        pass;
 
     def polling():
-        KeyInput.events = get_events();
+        sdl_event = SDL_Event()
+        events = [];
+        while SDL_PollEvent(ctypes.byref(sdl_event)):
+            event = Event(sdl_event.type)
+            if event.type in (SDL_QUIT, SDL_KEYDOWN, SDL_KEYUP, SDL_MOUSEMOTION, SDL_MOUSEBUTTONDOWN, SDL_MOUSEBUTTONUP):
+                events.append(event)
+                if event.type == SDL_KEYDOWN or event.type == SDL_KEYUP:
+                    if not sdl_event.key.repeat:
+                        event.key = sdl_event.key.keysym.sym
+                elif event.type == SDL_MOUSEMOTION:
+                    event.x, event.y = sdl_event.motion.x, sdl_event.motion.y
+                elif event.type == SDL_MOUSEBUTTONDOWN or event.type == SDL_MOUSEBUTTONUP:
+                    event.button, event.x, event.y = sdl_event.button.button, sdl_event.button.x, sdl_event.button.y
+
+
+        KeyInput.events = events;
         for event in KeyInput.events :
             if event.type in (SDL_QUIT, SDL_KEYDOWN, SDL_KEYUP, SDL_MOUSEMOTION, SDL_MOUSEBUTTONDOWN, SDL_MOUSEBUTTONUP):
                 if event.type == SDL_KEYDOWN:#key down 처리

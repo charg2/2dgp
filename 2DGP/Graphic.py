@@ -9,7 +9,7 @@ class GraphicLib:
 
     def init():
         #os.chdir("assets"); # asset folder
-        pico2d.open_canvas(const.WIN_WIDTH, const.WIN_HEIGHT, True, False);
+        pico2d.open_canvas(const.WIN_WIDTH, const.WIN_HEIGHT, sync = True);
         pico2d.hide_lattice();
         pico2d.hide_cursor();
 

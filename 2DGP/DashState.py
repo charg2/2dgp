@@ -62,12 +62,13 @@ class DashStateForPlayer(StateMachine):
         
         self.timer          += time;
         self.effect_timer   += time;
-        self.dash_timer     += time;
+        #self.dash_timer     += time;
 
-        if self.dash_timer >= 0.016:
-            self.dash_timer = 0;
-            self.obj.physx.velocity_x *= 1.3;
-            self.obj.physx.velocity_y *= 1.3;
+        #if self.dash_timer >= 0.016:
+            #self.dash_timer = 0;
+
+        self.obj.physx.velocity_x *= 1.2;
+        self.obj.physx.velocity_y *= 1.2;
 
         if self.effect_timer >= self.effect_time :
             from FrameWork import FrameWork;

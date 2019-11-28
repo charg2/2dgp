@@ -18,11 +18,13 @@ START_X,START_Y = 300, 120;
 
 class BossRoomScene(Scene):
     BGM = None;
+    CLEAR_IMG = None;
     def __init__(self):       
         super(BossRoomScene,self).__init__();
         self.bg = (RoomBG(const.WIN_WIDTH//2, const.WIN_HEIGHT//2, 0,1,1,True, "room_boss.map"));
         if None == BossRoomScene.BGM :
             BossRoomScene.BGM = load_wav('assets/Sound/boss.wav');
+            BossRoomScene.CLEAR_IMG = pico2d.load_image('assets/clear.png');
             BossRoomScene.BGM.set_volume(50);
 
         self.AddTerrainObject(self.bg);
@@ -40,7 +42,7 @@ class BossRoomScene(Scene):
 
 
         from Event import ConditionEvent;
-        self.AddAllyObject(ConditionEvent( monster_empty, create_portal, self, run_game_clear_event, 1));        
+        self.AddAllyObject(ConditionEvent( monster_empty, run_game_clear_event, self, self, 1));        
 
         mouse:Mouse = Mouse();
         mouse.set_cursor(Const.CURSOR_TARGET);
@@ -67,9 +69,9 @@ def monster_empty(scene):
 
 def run_game_clear_event(scene):
     print("Game Clear!!");
-    scene.AddObstacleObject(portal(90 * 31 - 45, START_Y + 760,0,1,1,True, 2)); # 일단 포털을 넣어놨지만 
     from Effect import EffectStaticAnimation;
     from Effect import EffectStaticSprite;
+    scene.AddObstacleObject(EffectStaticSprite(scene, 200, 200, BossRoomScene.CLEAR_IMG, 10, lambda : print("real clear"))); # 일단 포털을 넣어놨지만 
 
 
     # 문구 Effect Static Animation 등.. 사용하고

@@ -67,15 +67,17 @@ class JumpStateForPlayer(StateMachine):
             self.obj.is_down = False;
             #self.obj.is_jump = False;
 
-        if self.jump_timer >= 0.016:
-            self.jump_timer = 0;
-            if True == KeyInput.g_w :
+        if True == KeyInput.g_w :
                 self.obj.physx.velocity_y *= 0.9;
                 if KeyInput.g_d :
                     self.obj.physx.velocity_x = FORCE_X;
                 elif KeyInput.g_a :
                     self.obj.physx.velocity_x = -FORCE_X ;
-            else:
+
+        #if self.jump_timer >= 0.016:
+        else:
+                #self.jump_timer = 0;
+            #else:
                 self.obj.physx.velocity_y *= 0.05;
                 self.obj.physx.is_ground = False;
                 self.obj.is_jump = False;
@@ -88,7 +90,7 @@ class JumpStateForPlayer(StateMachine):
             #dash state 로 이동
             #if dash_key :
                 #self.obj.add_queue(DashStateForPlayer(self.obj));
-                #temp = self.obj.current_state;
+                #temp = self.obj.current_state;aaaaa
                 #self.obj.current_state.exit();
                 #self.obj.current_state = self.obj.state_queue.pop();
                 #del temp;

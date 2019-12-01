@@ -29,15 +29,15 @@ START_X,START_Y = 300, 120;
 # 플레이어도 없고다 없는 깔끔한 곳으로 갓다가 나오면 다시 일로 이동 ㅇㅇ;
 # 그래서 STAGE를 이동할때마다 음식 리스트를 갱신함.
 
-class FoodShopScene(Scene):
+class FoodRoomScene(Scene):
     def __init__(self):       
-        FoodShopScene.BGM = load_wav('assets/Sound/foodshop.wav');
-        super(FoodShopScene,self).__init__();
-        from FoodShopBG import FoodShopBG as bg;
+        FoodRoomScene.BGM = load_wav('assets/Sound/foodshop.wav');
+        super(FoodRoomScene,self).__init__();
+        from FoodRoomBG import FoodRoomBG as bg;
         self.bg = (bg(const.WIN_WIDTH//2, const.WIN_HEIGHT//2, 0,1,1,True));
         #self.bg = (GameBG(const.WIN_WIDTH//2, const.WIN_HEIGHT//2, 0,1,1,True));
         
-        FoodShopScene.FOOD_SHOP_BGM = load_wav('assets/Sound/foodshop.wav');
+        FoodRoomScene.FOOD_SHOP_BGM = load_wav('assets/Sound/foodshop.wav');
         self.AddTerrainObject(self.bg);
         self.AddAllyObject(Player.MyPlayer);          
 
@@ -45,9 +45,9 @@ class FoodShopScene(Scene):
         
         #NPC
         from FoodShop import FoodShop;
-        FoodShopScene.SHOP = FoodShop(START_X + 800, 200 + 256 ,0,1,1,True);
-        self.AddTerrainObject(FoodShopScene.SHOP);
-        self.AddMonsterObject(Horerica(START_X + 1100, 180 + 35 ,0,1,1,True, FoodShopScene.SHOP));          
+        FoodRoomScene.SHOP = FoodShop(START_X + 800, 200 + 256 ,0,1,1,True);
+        self.AddTerrainObject(FoodRoomScene.SHOP);
+        self.AddMonsterObject(Horerica(START_X + 1100, 180 + 35 ,0,1,1,True, FoodRoomScene.SHOP));          
 
         #UI
         self.add_ui(HPBarForPlayer.get_instance());
@@ -68,6 +68,6 @@ class FoodShopScene(Scene):
         Player.MyPlayer.transform.tx, Player.MyPlayer.transform.ty = 400, 220; 
         Scene.BACK_GROUND_MUSIC.__del__();
 
-        FoodShopScene.BGM.repeat_play();
-        Scene.BACK_GROUND_MUSIC = FoodShopScene.BGM;
+        FoodRoomScene.BGM.repeat_play();
+        Scene.BACK_GROUND_MUSIC = FoodRoomScene.BGM;
         pass;

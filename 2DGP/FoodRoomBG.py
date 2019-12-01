@@ -10,9 +10,9 @@ import Scene;
 
 
 #타일 맵.
-class FoodShopBG(GameObject):
+class FoodRoomBG(GameObject):
     def __init__(self, x ,y, angle, sx, sy, state):
-        super(FoodShopBG, self).__init__(x,y,angle,sx,sy,state);
+        super(FoodRoomBG, self).__init__(x,y,angle,sx,sy,state);
         
         self.has_image = True;
         self.map = TileMap("room_food_shop.map");

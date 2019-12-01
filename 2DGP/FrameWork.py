@@ -12,7 +12,7 @@ from typing import List;
 
 from GameScene import *;
 from BossRoomScene import *;
-from FoodShopScene import *;
+from FoodRoomScene import *;
 
 class FrameWork:
     SceneList:List[Scene] = [];
@@ -25,7 +25,7 @@ class FrameWork:
         
         FrameWork.SceneList.append(TitleScene()); #타이틀 신 추가.
         FrameWork.SceneList.append(GameScene());
-        FrameWork.SceneList.append(FoodShopScene());
+        FrameWork.SceneList.append(FoodRoomScene());
         FrameWork.SceneList.append(BossRoomScene());
 
         FrameWork.CurScene:Scene = FrameWork.SceneList[0];

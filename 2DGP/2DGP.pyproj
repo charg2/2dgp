@@ -81,10 +81,10 @@
     <Compile Include="Event.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="FoodShopBG.py">
+    <Compile Include="FoodRoomBG.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="FoodShopScene.py">
+    <Compile Include="FoodRoomScene.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="FrameWork.py" />

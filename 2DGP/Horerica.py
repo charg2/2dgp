@@ -14,7 +14,7 @@ from Player import Player;
 from typing import List;
 from MessageBox import *;
 
-MENT = "오늘은 어떤 요리를 드시러 오셨나요?";
+MENT = "오늘은 어떤 요리를 드시러 오셨나요? ";
 
 class Horerica(GameObject):
     IMGS_L:Image        = [];
@@ -156,9 +156,16 @@ class Horerica(GameObject):
             if self.is_collided == True:
                 if KeyInput.g_f:
                     self.f_key_down = True;
-                    self.message_box = MessageBox(0, 0,  MENT, lambda shop : shop.open(), self.shop);
+                    ment_list = [MENT];
+                    #ment_list.append(MENT);
+                    self.message_box = MessageBox(0, 0,  ment_list, lambda shop : shop.open(), self.shop);
+                    #self.message_box = MessageBox(0, 0,  MENT, lambda shop : shop.open(), self.shop);
                     from FrameWork import FrameWork;
                     FrameWork.CurScene.add_ui(self.message_box);
+
+def add_io_check_event():
+    from FrameWork import FrameWork;
+    FrameWork.CurScene.add_ui(self.message_box);
 
 
 

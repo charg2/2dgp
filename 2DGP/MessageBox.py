@@ -65,6 +65,7 @@ class MessageBox(GameObject):
                     180,
                     );
 
+
         i = 1;
         for buffer in self.buffer_list:
             if 0 < len(buffer) :

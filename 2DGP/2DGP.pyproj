@@ -5,7 +5,7 @@
     <ProjectGuid>2a51586f-7735-4317-894d-21267dcd5f8c</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>main.py</StartupFile>
+    <StartupFile>MapTool\Capture.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -87,6 +87,9 @@
     <Compile Include="FoodRoomScene.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FoodShopScene.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="FrameWork.py" />
     <Compile Include="GameBG.py" />
     <Compile Include="GameController.py">
@@ -131,6 +134,9 @@
     </Compile>
     <Compile Include="main.py" />
     <Compile Include="maptool.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MapTool\Capture.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MapTool\maptool_main.py">

@@ -156,7 +156,7 @@ class Horerica(GameObject):
             if self.is_collided == True:
                 if KeyInput.g_f:
                     self.f_key_down = True;
-                    ment_list = [MENT];
+                    ment_list = [MENT, MENT];
                     #ment_list.append(MENT);
                     self.message_box = MessageBox(0, 0,  ment_list, lambda shop : shop.open(), self.shop);
                     #self.message_box = MessageBox(0, 0,  MENT, lambda shop : shop.open(), self.shop);

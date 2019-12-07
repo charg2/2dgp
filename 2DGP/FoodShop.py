@@ -9,14 +9,17 @@ from CollisionRect import*;
 from typing import List;
 
 class FoodShop(GameObject):
-    IMG:Image = None;
-    SHOP_UI_BG:Image = None;
+    IMG:Image           = None;
+    SHOP_UI_BG:Image    = None;
+    Instance:GameObject = None;
+
     def __init__(self, x, y, angle, sx, sy, state):
         super(FoodShop, self).__init__(x, y, angle, sx, sy, state);
         if None == FoodShop.IMG :
             FoodShop.IMG = pico2d.load_image('assets/UI/A_DungeonInn(1188x552).png');
             FoodShop.SHOP_UI_BG = pico2d.load_image('assets/UI/UIrestaurant2(1920x1080).png');
-        
+            Instance = self;
+            
         self.name = "FoodShop";
         self.state = True;
         self.has_image = True;
@@ -59,9 +62,19 @@ class FoodShop(GameObject):
         if self.is_opend == False :
             self.is_opend = True;
             # c충돌 목록 추가.
+
+            # foodshop scene로감.
+
         return ;
 
     def close(self):
         if self.is_opend == True :
             self.is_opend = False;
         return ;
+
+
+    def get_instance():
+        if None == FoodShop.Instance :
+            FoodShop.Instance = FoodShop(START_X + 800, 200 + 256 ,0,1,1,True);
+
+        return FoodShop.Instance;

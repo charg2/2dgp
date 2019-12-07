@@ -5,14 +5,9 @@ from Const import Const as const;
 from Mouse import Mouse;
 from Player import Player;
 
-from Belial import *;
-from Banshee import *;
-from SkeletonArcher import *;
 
 from Terrain import Terrain as terrain;
 from Portal import Portal as portal;
-from SmallHeal import SmallHeal as small_heal;
-from BigHeal import BigHeal as big_heal;
 
 #UI
 from HPBar import *;
@@ -39,7 +34,7 @@ class FoodShopScene(Scene):
         
         FoodShopScene.FOOD_SHOP_BGM = load_wav('assets/Sound/foodshop.wav');
         self.AddTerrainObject(self.bg);
-        self.AddAllyObject(Player.MyPlayer);          
+        #self.AddAllyObject(Player.MyPlayer);          
 
         self.AddObstacleObject(portal(START_X + 2100, START_Y + 160, 0,1,1,True, 3));
         

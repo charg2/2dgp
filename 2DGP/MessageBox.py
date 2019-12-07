@@ -8,6 +8,7 @@ class MessageBox(GameObject):
     BG      = None;
     SOUND   = None;
     Font    = None;
+
     def __init__(self, x, y, script_list:list, lambda_func = None, lambda_argument = None):
         super(MessageBox, self).__init__(x, y, 1, 1, 1, True);
         if None  == MessageBox.BG:
@@ -19,44 +20,48 @@ class MessageBox(GameObject):
         self.has_image      = True;
         self.name           = "MSG_BOX";
 
-        self.script_list    = script_list;
+        self.buffer_list        = []; #
+        self.script_list        = script_list;
+
         self.vertical_max_idx   = len(script_list);
-        self.buffer_list    = [];
-
-        for i in range(self.vertical_max_idx ):
-            self.buffer_list[i].append("");
-
+        self.horizon_max_idx    = 0;
         self.vertical_idx = 0;
         self.horizon_idx = 0;
 
+
+        # 줄수를 미리 만들어 놓음.
+        for i in range( self.vertical_max_idx ):
+            self.buffer_list.append("");
+
         self.timer = 0;
-        self.time = 0.4;
+        self.time = 0.1;
         
-        self.horizon_max_idx = 0;
         
         self.is_complete = False;
         
         self.lambda_func     = lambda_func;
         self.lambda_argument = lambda_argument;
+        
 
     def update(self, time):
         if False == self.is_complete :
             self.timer += time;
-
             if self.time <= self.timer :  
+                self.timer = 0;
                 for v in range(self.vertical_idx, self.vertical_max_idx):
+                    self.horizon_max_idx = len(self.script_list[v]);
                     for h in range(self.horizon_idx, self.horizon_max_idx):
-                        self.buffer_list[v][h] += script_list[v][h];
+                        self.buffer_list[v] += self.script_list[v][h];
                         MessageBox.SOUND.play(1);
                         self.horizon_idx += 1;
                         return;
                     self.horizon_idx = 0;
-                self.horizon_idx = 0;
-                
+                    self.vertical_idx += 1;
 
             if self.vertical_idx == self.vertical_max_idx:
                 self.is_complete = True;
-                self.lambda_func(self.lambda_argument);
+                #self.lambda_func(self.lambda_argument);
+
                 self.state  = False;
                 
     def render(self):

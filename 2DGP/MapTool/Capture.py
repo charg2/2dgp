@@ -1,8 +1,8 @@
-from PIL import ImageGrab;
+#from PIL import ImageGrab;
 
-img=ImageGrab.grab();
+#img=ImageGrab.grab();
 
-savea_file_name = "{0}".format("",'.png');
+#savea_file_name = "{0}".format("",'.png');
 
-img.save(saveas);
+#img.save(saveas);
 

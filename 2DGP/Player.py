@@ -157,6 +157,9 @@ class Player(GameObject):
         self.weapons.append(Gun( 30, 30, 0.7, 1, 1, True, self ));
         self.current_weapon = self.weapons[1];
 
+        self.attack_speed_offset     = 0.0;
+        self.max_attack_speed_offset = 0.3;
+
         self.set_grivity(True);
         self.set_acceleration_of_gravity(7);
         

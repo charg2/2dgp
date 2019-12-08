@@ -27,7 +27,7 @@ class Gun(GameObject):
         self.attack_trigger     :bool   = True;
         self.attack_time        :float  = 0.0;
         self.attack_key_timer   :float  = 0.3;
-
+        self.attack_timer        = 0.4;
         self.radian = 0;
 
     def render(self):
@@ -57,7 +57,7 @@ class Gun(GameObject):
         if False == self.attack_trigger :
             self.attack_time += time;
 
-            if attack_timer <= self.attack_time:
+            if (self.attack_timer - self.owner.attack_speed_offset) <= self.attack_time:
                 self.attack_trigger = True;
                 self.attack_time = 0;
 

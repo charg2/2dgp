@@ -25,6 +25,7 @@ class FoodShopBG(GameObject):
         #GameObject.Cam.SetMapSize(self.map.width, self.map.height);
 
     def render(self):
+        GameObject.Cam.SetCamOffset(0, 0);
         self.SHOP_BG.draw_to_origin(0,0, Const.WIN_WIDTH, Const.WIN_HEIGHT);
         return;
 

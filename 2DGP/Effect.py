@@ -17,7 +17,7 @@ from typing import List;
 STATIC_ANIMATION, STATIC_SPRITE, DYNAMIC_ANIMATION, DYNAMIC_SPRITE = range(4);
 
 class EffectStaticAnimation(GameObject) :
-    def __init__(self, owner, tx, ty, animation ,max_frame, interval_time):
+    def __init__(self, owner, tx, ty, animation ,max_frame, interval_time, is_immortal = False):
         super(EffectStaticAnimation, self).__init__(tx, ty, 1, 1, 1, True);
         self.animation_frame        = 0;
         self.animation_max_frame    = max_frame;
@@ -28,20 +28,26 @@ class EffectStaticAnimation(GameObject) :
         self.has_image              = True;
         self.owner                  = owner;
         self.tag                    = Const.TAG_EFFECT;
+        self.is_immortal            = is_immortal;
 
     #frame 끝 +1하면 종료.
     def update(self, time):
         self.animation_timer += time;
 
         if self.animation_timer >= self.interval_time:
+            self.animation_timer = 0;
             temp_frame = self.animation_frame + 1 ;
             if self.animation_max_frame == temp_frame :
-                self.state = False;
+                if False == self.is_immortal :
+                    self.state = False;
+                else :
+                    self.animation_frame = temp_frame % self.animation_max_frame;
             else:
                 self.animation_frame = temp_frame;
             
     def render(self):
         self.animation[self.animation_frame].composite_draw( 0, "", self.transform.tx - GameObject.Cam.camera_offset_x, self.transform.ty - GameObject.Cam.camera_offset_y, self.img.w, self.img.h);
+        #print("{0}".format(self.animation_frame));
 
 class EffectStaticSprite(GameObject) :
     def __init__(self, owner, tx, ty, sprite, end_time, lambda_func = None):

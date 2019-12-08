@@ -145,6 +145,9 @@
     <Compile Include="MapTool\maptool_main.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Menu.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="MessageBox.py">
       <SubType>Code</SubType>
     </Compile>

@@ -204,12 +204,12 @@ def go_to_foodshop():
 
 
 def check_fkey_input() -> bool:
-    print("check");
+    #print("check");
     if KeyInput.g_f:
-        print("f");
+        #print("f");
         return True;
     else : 
-        print("notf");
+        #print("notf");
         return False;
 
 def go_to_foodroom_scene():

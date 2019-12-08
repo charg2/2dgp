@@ -30,7 +30,8 @@ class FrameWork:
         FrameWork.SceneList.append(FoodShopScene());
         FrameWork.SceneList.append(BossRoomScene());
 
-        FrameWork.CurScene:Scene = FrameWork.SceneList[0];
+        #FrameWork.CurScene:Scene = FrameWork.SceneList[0];
+        FrameWork.CurScene:Scene = FrameWork.SceneList[2];
 
     def update():
         Timer.Update();
@@ -50,7 +51,9 @@ class FrameWork:
             FrameWork.CurScene = FrameWork.SceneList[Scene.SceneNumber];
             FrameWork.SceneList[Scene.CurSceneNumber].ExitScene();
             Scene.CurSceneNumber = Scene.SceneNumber;
+            
             FrameWork.CurScene.set_cam();
+            
             FrameWork.CurScene.on_change_scene();
         pass;
 

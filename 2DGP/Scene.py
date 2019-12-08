@@ -317,6 +317,8 @@ class Scene:
         if self.bg :
             #GameObject.Cam.SetMapSize(self.bg.IMG.w, self.bg.IMG.h);
             GameObject.Cam.SetMapSize(self.bg.map.width, self.bg.map.height);
+        #else 
+        #    GameObject.Cam.SetMapSize(0, 0);
         return;
 
     def on_change_scene(self):

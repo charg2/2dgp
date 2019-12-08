@@ -47,7 +47,7 @@ class DashBar(GameObject):
         DashBar.Bars[max_dash_gage].draw_to_origin( 20 , Const.WIN_HEIGHT - 150);
         
         for i in range(current_dash_gage):
-            DashBar.DashGage.draw_to_origin( 30 + 60 * i, Const.WIN_HEIGHT - 125, DashBar.DashGage.w, DashBar.DashGage.h);
+            DashBar.DashGage.draw_to_origin( 30 + 55 * i, Const.WIN_HEIGHT - 125, DashBar.DashGage.w, DashBar.DashGage.h);
 
     def get_instance():
         if None == DashBar.Instance:

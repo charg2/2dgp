@@ -51,12 +51,13 @@ if __name__=='__main__':
     #destination_path = origin_path + str("\\dest");
 
 
-    file_path = "D:\\_git\\2dgp\\2DGP\\assets\\Weapon\\FireCircusBegin2.png";
-    save_path = "D:\\_git\\2dgp\\2DGP\\assets\\Weapon\\";
+    file_path = "D:\\_git\\2dgp\\2DGP\\assets\\Food\\Table (3).png";
+    save_path = "D:\\_git\\2dgp\\2DGP\\assets\\Food\\";
+    #save_path = "D:\\_git\\2dgp\\2DGP\\assets\\Weapon\\";
 
     #crop_wrapper(file_path, 5, 1, save_path);
 
-    bmp_to_png_multiple(file_path, 4, 4);
+    bmp_to_png_multiple(file_path, 4, 4.5);
 
 
 #Image.open("sample1.bmp").save("sample1.png");

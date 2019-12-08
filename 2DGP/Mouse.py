@@ -37,6 +37,7 @@ class Mouse(GameObject):
     
     def render(self):
         self.IMG.draw(self.transform.tx , self.transform.ty , self.IMG.w, self.IMG.h);
+        draw_rectangle(*self.collider.get_area());
         pass;
 
     #충동한 객체의 태그 or name을 얻어서 어떤객체인지 파악.
@@ -51,7 +52,7 @@ class Mouse(GameObject):
         self.transform.tx = KeyInput.g_mouse_x;
         self.transform.ty = Const.WIN_HEIGHT - KeyInput.g_mouse_y - 1;
 
-        #self.collider.cx, self.collider.cy = self.transform.tx + GameObject.Cam.camera_offset_x, self.transform.ty + GameObject.Cam.camera_offset_y;
+        self.collider.cx, self.collider.cy = self.transform.tx + GameObject.Cam.camera_offset_x, self.transform.ty + GameObject.Cam.camera_offset_y;
         return;
 
     def render_debug(self): 

@@ -48,13 +48,14 @@ class RunStateForPlayer(StateMachine):
         
         self.obj.physx.set_force(self.Fx, self.obj.physx.force_y); 
 
-        if KeyInput.g_mouse_rdown :
-            self.obj.add_queue(DashStateForPlayer(self.obj));
-            temp = self.obj.current_state;
-            self.obj.current_state.exit();
-            self.obj.current_state = self.obj.state_queue.pop();
-            del temp;
-            return;
+        if 0 < self.obj.dash_count :
+            if KeyInput.g_mouse_rdown :
+                self.obj.add_queue(DashStateForPlayer(self.obj));
+                temp = self.obj.current_state;
+                self.obj.current_state.exit();
+                self.obj.current_state = self.obj.state_queue.pop();
+                del temp;
+                return;
 
         if (KeyInput.g_w) :
             self.obj.add_queue(JumpStateForPlayer(self.obj));

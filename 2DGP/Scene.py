@@ -22,7 +22,8 @@ class Scene:
         self.game_ui_list                   :List[GameObject] = [];
         self.game_object_list_bullet        :List[GameObject] = [];
         self.game_object_list_player_weapon :List[GameObject] = [];
-        
+        self.game_event_list                :List[GameObject] = [];
+
         self.render_debug                   :bool = False;
 
         self.start_x, self.start_y = 0, 0;
@@ -55,6 +56,8 @@ class Scene:
         for ui in self.game_ui_list:
             ui.update(Scene.Time);
 
+        for event in self.game_event_list:
+            event.update(Scene.Time);
 
         #remove
         for gobj in self.game_object_list_ally:
@@ -92,6 +95,10 @@ class Scene:
                 self.game_ui_list.remove(gui);
                 del gui;
         
+        for event in self.game_event_list:
+            if event.state == False:
+                self.game_event_list.remove(event);
+                del event;
 
     def Collide(self):
         #obj 끼리의 충돌 검사.
@@ -270,6 +277,10 @@ class Scene:
 
     def add_effect(self, effect):
         self.game_object_list_effect.append(effect);
+        return;
+
+    def add_event(self, event):
+        self.game_event_list.append(event);
         return;
 
     def add_player_weapon(self, obj):

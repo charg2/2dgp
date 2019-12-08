@@ -62,7 +62,7 @@ class MessageBox(GameObject):
                 self.is_complete = True;
                 #self.lambda_func(self.lambda_argument);
 
-                self.state  = False;
+                #self.state  = False;
                 
     def render(self):
         MessageBox.BG.draw_to_origin(0,0,
@@ -71,10 +71,10 @@ class MessageBox(GameObject):
                     );
 
 
-        i = 1;
+        i = 0;
         for buffer in self.buffer_list:
             if 0 < len(buffer) :
-                MessageBox.Font.draw( 50, 100 * i, buffer , (255,255,255));
+                MessageBox.Font.draw( 50, 100 -( i * 30 ) , buffer , (255,255,255));
             i += 1;
 
     def is_end(self) -> bool:

@@ -7,6 +7,7 @@ from Player import *;
 
 from Effect import *;
 
+from DashState import *;
 
 FORCE_X = 500; 
 FORCE_Y = 3000;
@@ -88,12 +89,13 @@ class JumpStateForPlayer(StateMachine):
                 del temp;
 
             #dash state 로 이동
-            #if dash_key :
-                #self.obj.add_queue(DashStateForPlayer(self.obj));
-                #temp = self.obj.current_state;aaaaa
-                #self.obj.current_state.exit();
-                #self.obj.current_state = self.obj.state_queue.pop();
-                #del temp;
+                if 0 < self.obj.dash_count :
+                    if KeyInput.g_mouse_rdown :
+                        self.obj.add_queue(DashStateForPlayer(self.obj));
+                        temp = self.obj.current_state;#aaaaa
+                        self.obj.current_state.exit();
+                        self.obj.current_state = self.obj.state_queue.pop();
+                        del temp;
 
 
         return;

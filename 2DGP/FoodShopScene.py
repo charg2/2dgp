@@ -17,6 +17,8 @@ from DashBar import *;
 #NPC
 from Horerica import *;
 
+from Event import *;
+
 
 START_X,START_Y = 300, 120;
 
@@ -29,11 +31,12 @@ class FoodShopScene(Scene):
         FoodShopScene.BGM = load_wav('assets/Sound/foodshop.wav');
         super(FoodShopScene,self).__init__();
         from FoodShopBG import FoodShopBG as bg;
-        self.bg = (bg(const.WIN_WIDTH//2, const.WIN_HEIGHT//2, 0,1,1,True));
+        #self.bg = (bg(const.WIN_WIDTH//2, const.WIN_HEIGHT//2, 0,1,1,True));
         #self.bg = (GameBG(const.WIN_WIDTH//2, const.WIN_HEIGHT//2, 0,1,1,True));
         
         FoodShopScene.FOOD_SHOP_BGM = load_wav('assets/Sound/foodshop.wav');
-        self.AddTerrainObject(self.bg);
+        #self.AddTerrainObject(self.bg);
+        self.add_ui((bg(const.WIN_WIDTH//2, const.WIN_HEIGHT//2, 0,1,1,True)));
         #self.AddAllyObject(Player.MyPlayer);          
 
         self.AddObstacleObject(portal(START_X + 2100, START_Y + 160, 0,1,1,True, 3));
@@ -49,8 +52,9 @@ class FoodShopScene(Scene):
         self.add_ui(Wallet.get_instance());
         self.add_ui(DashBar.get_instance());
 
-        self.AddTerrainObject(terrain(self.bg.map.width //2, 90, self.bg.map.width //2, 90 ));
-        self.AddTerrainObject(terrain(0, 100 + self.bg.map.height // 4, 180,  self.bg.map.height // 4));
+        #EVENT
+        # x를 누르면 전 신으로 돌아감.
+        #self.add_event(ConditionEvent(check_fkey_input, go_to_foodroom_scene,None, None, 100));
 
         mouse:Mouse = Mouse();
         mouse.set_cursor(Const.CURSOR_TARGET);
@@ -66,3 +70,17 @@ class FoodShopScene(Scene):
         FoodShopScene.BGM.repeat_play();
         Scene.BACK_GROUND_MUSIC = FoodShopScene.BGM;
         pass;
+
+
+def check_fkey_input() -> bool:
+    print("check");
+    if KeyInput.g_f:
+        print("f");
+        return True;
+    else : 
+        print("notf");
+        return False;
+
+def go_to_foodroom_scene():
+    from FrameWork import FrameWork;
+    FrameWork.CurScene = FrameWork.SceneList[2];

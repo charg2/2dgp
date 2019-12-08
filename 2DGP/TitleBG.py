@@ -25,7 +25,7 @@ class TitleBG(GameObject):
 
 
     def update(self, Time):
-        if(True == KeyInput.g_space):
+        if KeyInput.g_space :
             from EffectCutton import EffectCutton;
             from FrameWork import FrameWork as framework;
             framework.CurScene.add_ui(EffectCutton(Const.WIN_WIDTH//2,Const.WIN_HEIGHT//2,0,1,1,True, 1));

@@ -41,7 +41,6 @@ class EffectCutton(GameObject):
 
         return;    
     def update(self,Time):
-
         self.update_component(Time);
         self.update_animation();
         return;
@@ -50,7 +49,8 @@ class EffectCutton(GameObject):
         global increase, decrease;
         if(self.animation_number == increase):
             self.alpha_val +=  self.animation_timer;
-            if(self.alpha_val >=1) : self.animation_number = decrease;
+            if(self.alpha_val >=1) : 
+                self.animation_number = decrease;
         else:
             self.alpha_val -=  self.animation_timer;
             self.animation_timer = 0;

@@ -44,8 +44,8 @@ class FoodShop(GameObject):
         return;
 
     def update(self, time):
-        if self.is_opend : # 상점 열린 상황
-            pass;
+        #if self.is_opend : # 상점 열린 상황
+        #    pass;
         pass;
 
     def render_debug(self): 
@@ -59,17 +59,23 @@ class FoodShop(GameObject):
         pass;
 
     def open(self):
-        if self.is_opend == False :
-            self.is_opend = True;
+        print("open");
+        #if self.is_opend == False :
+            #self.is_opend = True;
             # c충돌 목록 추가.
 
-            # foodshop scene로감.
+            #from EffectCutton import EffectCutton;
+            #from FrameWork import FrameWork as framework;
+            #framework.CurScene.add_ui(EffectCutton(Const.WIN_WIDTH//2,Const.WIN_HEIGHT//2,0,1,1,True, 2));
+            
+            ## foodshop scene로감.
+            
 
-        return ;
 
     def close(self):
-        if self.is_opend == True :
-            self.is_opend = False;
+        print("close");
+    #    if self.is_opend == True :
+    #        self.is_opend = False;
         return ;
 
 

@@ -14,7 +14,9 @@ from Player import Player;
 from typing import List;
 from MessageBox import *;
 
-MENT = "오늘은 어떤 요리를 드시러 오셨나요? ";
+MENT1 = "오늘은 어떤 요리를 드시러 오셨나요? ";
+MENT2 = "상점 F "
+MENT3 = "나가기 P";
 
 class Horerica(GameObject):
     IMGS_L:Image        = [];
@@ -63,8 +65,6 @@ class Horerica(GameObject):
         # f키가 눌렸으면 메시지 박스 
         # 아니면 걍지나감.
 
-        # 메시지 박스 온일떄 멈춰야 함.
-        # 메시지 박스가 끝나고 상점에 들갈지 아닐지 정할수 있음.
 
         
 
@@ -102,31 +102,42 @@ class Horerica(GameObject):
         return;
 
     def update(self, time):
-        if self.is_collided == False and self.message_box != None :
-            self.message_box.state = False;
-            self.message_box = None;
-
         if False == self.is_collided :
-            self.shop.close();
-        if None != self.message_box and self.message_box.state == False : # 심층 조건이아니면 
-            self.message_box.state = False;
-            self.message_box = None;
+            #self.shop.close();
+            if self.message_box != None :
+                self.message_box.state = False;
+                self.message_box = None;
+
+        if None != self.message_box :
+            self.message_box.update(time);
+            if self.message_box.state == False : # 심층 조건이아니면 
+                self.message_box.state = False;
+                self.message_box = None;
+            elif self.message_box.is_complete :
+                if KeyInput.g_z :
+                    from FrameWork import FrameWork;
+                    FrameWork.CurScene = FrameWork.SceneList[3];
+                    FrameWork.CurScene.add_event(ConditionEvent(check_fkey_input, go_to_foodroom_scene,None, None, 100));
+                if KeyInput.g_x:
+                    #print("x");
+                    pass;
 
         self.check_fkey();
         self.update_animation(time);
         self.update_dir();
 
-        self.is_collided = False;
-        if None != self.message_box : # 심층 조건이아니면 
-            self.message_box.update(time);
 
-    def update_pause(self):
-        from FrameWork import FrameWork;
-        if True == self.f_key_down: # pause
-            FrameWork.CurScene.set_pause(True);
-        else: 
-            FrameWork.CurScene.set_pause(False);
-        FrameWork.CurScene.game_control();
+
+
+        self.is_collided = False;
+
+    #def update_pause(self):
+    #    from FrameWork import FrameWork;
+    #    if True == self.f_key_down: # pause
+    #        FrameWork.CurScene.set_pause(True);
+    #    else: 
+    #        FrameWork.CurScene.set_pause(False);
+    #    FrameWork.CurScene.game_control();
 
 
     def update_dir(self):
@@ -156,16 +167,51 @@ class Horerica(GameObject):
             if self.is_collided == True:
                 if KeyInput.g_f:
                     self.f_key_down = True;
-                    ment_list = [MENT, MENT];
+                    ment_list = [MENT1, MENT2, MENT3];
                     #ment_list.append(MENT);
-                    self.message_box = MessageBox(0, 0,  ment_list, lambda shop : shop.open(), self.shop);
-                    #self.message_box = MessageBox(0, 0,  MENT, lambda shop : shop.open(), self.shop);
+                    #self.message_box = MessageBox(0, 0,  ment_list, lambda shop : shop.open(), self.shop);
+                    self.message_box = MessageBox(0, 0,  ment_list, add_io_check_event());
                     from FrameWork import FrameWork;
                     FrameWork.CurScene.add_ui(self.message_box);
 
+
 def add_io_check_event():
+    # f 가 눌리면 상점 오픈
+    if KeyInput.g_z or KeyInput.g_x:
+        return True;
+        #from FoodShop import FoodShop as foodshop;
+    #    #print("여을게");
+    #    #foodshop.get_instance().open();
+    ## p가 눌리면 이벤트 삭제
+    #elif KeyInput.g_x:
+    #    from FoodShop import FoodShop as foodshop;
+    #    print("닫을게");
+    #    #foodshop.get_instance().close();
+    #    pass;
+
+
+# 시간 이벤트로 메시지 박스가 끝나고 1ㅊ
+from Event import ConditionEvent as c_event;
+from Event import TimerEvent as t_event;
+#from FrameWork import FrameWork;
+
+def go_to_foodshop():
+    #FrameWork.CurScene.add_event(c_event(, tx, ty, radian,1,1, True, 1)); 
+    from EffectCutton import EffectCutton;
+    from FrameWork import FrameWork as framework;
+    framework.CurScene.add_ui(EffectCutton(Const.WIN_WIDTH//2,Const.WIN_HEIGHT//2,0,1,1,True, 3));
+    pass;
+
+
+def check_fkey_input() -> bool:
+    print("check");
+    if KeyInput.g_f:
+        print("f");
+        return True;
+    else : 
+        print("notf");
+        return False;
+
+def go_to_foodroom_scene():
     from FrameWork import FrameWork;
-    FrameWork.CurScene.add_ui(self.message_box);
-
-
-
+    FrameWork.CurScene = FrameWork.SceneList[2];

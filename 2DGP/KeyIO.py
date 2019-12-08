@@ -9,12 +9,14 @@ class KeyInput:
     g_space:bool = False;
     
     g_p:bool = False;
-    
     g_a:bool = False;
     g_w:bool = False;
     g_s:bool = False;
     g_d:bool = False;
     g_f:bool = False;
+
+    g_z:bool = False;
+    g_x:bool = False;
 
     g_mouse_rdown:bool = False;
     g_mouse_ldown:bool = False;
@@ -29,13 +31,15 @@ class KeyInput:
         KeyInput.g_up_arrow = False;
 
         KeyInput.g_p = False;
-        KeyInput.g_s = False;
         
         KeyInput.g_a = False;
         KeyInput.g_w = False;
         KeyInput.g_s = False;
         KeyInput.g_d = False;
         KeyInput.g_f = False;
+
+        KeyInput.g_z:bool = False;
+        KeyInput.g_x:bool = False;
 
         KeyInput.g_mouse_rdown = False;
         KeyInput.g_mouse_ldown = False;
@@ -97,6 +101,11 @@ class KeyInput:
                     if event.key  == SDLK_f:
                         KeyInput.g_f = True;
 
+                    if event.key  == SDLK_z:
+                        KeyInput.g_z = True;
+                    if event.key  == SDLK_x:
+                        KeyInput.g_x = True;
+
                         
 
                     if event.key  == SDLK_ESCAPE:
@@ -135,6 +144,11 @@ class KeyInput:
                         KeyInput.g_d = False;
                     if event.key  == SDLK_f:
                         KeyInput.g_f = False;
+                    
+                    if event.key  == SDLK_z:
+                        KeyInput.g_z = False;
+                    if event.key  == SDLK_x:
+                        KeyInput.g_x = False;
 
                 if event.type == SDL_MOUSEBUTTONUP:
                     if event.button == SDL_BUTTON_RIGHT:

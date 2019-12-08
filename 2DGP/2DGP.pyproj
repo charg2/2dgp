@@ -87,6 +87,9 @@
     <Compile Include="FoodRoomScene.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FoodShopBG.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="FoodShopScene.py">
       <SubType>Code</SubType>
     </Compile>

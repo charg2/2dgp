@@ -42,9 +42,9 @@ class GameScene(Scene):
         
         self.add_event(ConditionEvent( monster_empty, create_portal, self, self, 1));          
 
-        #self.AddMonsterObject(Banshee(START_X + 300, START_Y + 400 ,0,1,1,True));          
-        #self.AddMonsterObject(SkeletonDog(START_X + 700, START_Y + 90 ,0,1,1,True));          
-        #self.AddMonsterObject(SkeletonArcher(START_X + 100, START_Y + 100 ,0,1,1, True));     
+        self.AddMonsterObject(Banshee(START_X + 300, START_Y + 400 ,0,1,1,True));          
+        self.AddMonsterObject(SkeletonDog(START_X + 700, START_Y + 90 ,0,1,1,True));          
+        self.AddMonsterObject(SkeletonArcher(START_X + 100, START_Y + 100 ,0,1,1, True));     
         
         self.AddObstacleObject(small_heal(self, START_X + 500, START_Y + 400 ,0,1,1,True));          
         self.AddObstacleObject(big_heal(self, START_X + 7, START_Y + 200 ,0,1,1,True));          

@@ -101,6 +101,7 @@ class Menu(GameObject):
             if self.is_overapped:
                 self.img.draw_to_origin(660, 300);
             draw_rectangle(*self.collider.get_area());
+            Menu.BG.draw_to_origin(self.transform.tx - 180, self.transform.ty - 50, 360, 110);
 
             Menu.SMALL_FONT.draw(self.transform.tx - 150, self.transform.ty, self.food_info, (255, 255, 255));
         #else :

@@ -71,8 +71,11 @@ def run_game_clear_event(scene):
     print("Game Clear!!");
     from Effect import EffectStaticAnimation;
     from Effect import EffectStaticSprite;
-    scene.AddObstacleObject(EffectStaticSprite(scene, 200, 200, BossRoomScene.CLEAR_IMG, 10, lambda : print("real clear"))); # 일단 포털을 넣어놨지만 
+    #scene.AddObstacleObject(EffectStaticSprite(scene, 200, 200, BossRoomScene.CLEAR_IMG, 10, lambda : print("real clear"))); # 일단 포털을 넣어놨지만 
+    scene.AddObstacleObject(EffectStaticSprite(scene, 200, 200, BossRoomScene.CLEAR_IMG, 10, pl )); # 일단 포털을 넣어놨지만 
 
+def pl(img):
+    print("real clear")
 
     # 문구 Effect Static Animation 등.. 사용하고
     # 사운드 바꿔주고

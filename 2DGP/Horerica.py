@@ -15,7 +15,7 @@ from typing import List;
 from MessageBox import *;
 
 MENT1 = "오늘은 어떤 요리를 드시러 오셨나요? ";
-MENT2 = "상점 F "
+MENT2 = "상점 Z "
 MENT3 = "나가기 P";
 
 class Horerica(GameObject):
@@ -116,7 +116,7 @@ class Horerica(GameObject):
             elif self.message_box.is_complete :
                 if KeyInput.g_z :
                     from FrameWork import FrameWork;
-                    FrameWork.CurScene = FrameWork.SceneList[3];
+                    FrameWork.CurScene = FrameWork.SceneList[4];
                     FrameWork.CurScene.add_event(ConditionEvent(check_fkey_input, go_to_foodroom_scene,None, None, 100));
                 if KeyInput.g_x:
                     #print("x");
@@ -199,7 +199,7 @@ def go_to_foodshop():
     #FrameWork.CurScene.add_event(c_event(, tx, ty, radian,1,1, True, 1)); 
     from EffectCutton import EffectCutton;
     from FrameWork import FrameWork as framework;
-    framework.CurScene.add_ui(EffectCutton(Const.WIN_WIDTH//2,Const.WIN_HEIGHT//2,0,1,1,True, 3));
+    framework.CurScene.add_ui(EffectCutton(Const.WIN_WIDTH//2,Const.WIN_HEIGHT//2,0,1,1,True, 4));
     pass;
 
 

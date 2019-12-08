@@ -23,7 +23,7 @@ from HitComponent import *;
 RUN_L, RUN_R, IDLE_R, IDLE_L = range(4);
 DASH_CHARGE_TIME  = 1.25;
 HIT_RECOVERY_TIME = 0.3;
-ALPHA_VALUE = 70;
+ALPHA_VALUE = 0.9;
 class Player(GameObject):
     LOAD:bool                   = False;
     HIT_SOUND:Wav               = None;

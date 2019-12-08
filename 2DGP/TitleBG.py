@@ -17,6 +17,7 @@ class TitleBG(GameObject):
         self.name = "TitleBG";
         self.collider:Collision = None;        
         self.colliderForObstacle:Collision = None;
+        self.trigger = False;
 
     def render(self):
         #left x 최소 bottom y 최소
@@ -25,8 +26,10 @@ class TitleBG(GameObject):
 
 
     def update(self, Time):
-        if KeyInput.g_space :
-            from EffectCutton import EffectCutton;
-            from FrameWork import FrameWork as framework;
-            framework.CurScene.add_ui(EffectCutton(Const.WIN_WIDTH//2,Const.WIN_HEIGHT//2,0,1,1,True, 1));
+        if self.trigger == False:
+            if KeyInput.g_space :
+                from EffectCutton import EffectCutton;
+                from FrameWork import FrameWork as framework;
+                framework.CurScene.add_ui(EffectCutton(Const.WIN_WIDTH//2,Const.WIN_HEIGHT//2,0,1,1,True, 1));
+                self.trigger = True;
         return;

@@ -66,7 +66,7 @@ class EffectStaticSprite(GameObject) :
             #self.end_timer = 0;
             self.state = False;
             #print("삭제");
-            if None != self.lambda_func :
+            if None != self.lambda_func : #and self.state :
                 self.lambda_func(self.img);
                 pass;
 

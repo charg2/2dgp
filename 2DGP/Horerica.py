@@ -61,12 +61,8 @@ class Horerica(GameObject):
 
 
         # 접근시 F키를 보여줌.
-
         # f키가 눌렸으면 메시지 박스 
         # 아니면 걍지나감.
-
-
-        
 
     def render(self): 
         self.imgs[self.animation_numb].clip_composite_draw(0,0,

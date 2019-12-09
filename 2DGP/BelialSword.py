@@ -18,7 +18,7 @@ damage = 10;
 count = 6;
 extinction_time = 5;
 start_time = 1;
-velocity = 20;
+velocity = 1800;
 
 class BelialSword(GameObject):
     LOAD:bool = False;
@@ -49,18 +49,18 @@ class BelialSword(GameObject):
         self.update_component();
         self.update_timer(time);
         self.clampingInWindow();
-        self.Physx();
+        self.Physx(time);
         pass;
 
     def update_component(self):
         self.previous_transform = self.transform;
         self.collider.cx, self.collider.cy = self.transform.tx, self.transform.ty;
 
-    def Physx(self):
+    def Physx(self, time):
         radian = self.transform.angle * math.pi;
         
-        self.physx.velocity_x = self.velocity * math.sin(radian);
-        self.physx.velocity_y = self.velocity * math.cos(radian);
+        self.physx.velocity_x = velocity * math.sin(radian) * time;
+        self.physx.velocity_y = velocity * math.cos(radian) * time;
         
         self.transform.set_position(self.physx.velocity_x, self.physx.velocity_y);
 

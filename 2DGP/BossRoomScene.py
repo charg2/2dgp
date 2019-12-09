@@ -28,19 +28,18 @@ class BossRoomScene(Scene):
 
             BossRoomScene.BGM.set_volume(50);
 
-        self.AddTerrainObject(self.bg);
+        self.add_terrain(self.bg);
         self.AddAllyObject(Player.MyPlayer);          
 
-        self.AddMonsterObject(Belial(START_X + 800, START_Y + 690 ,0,1,1,True));          
+        self.add_monster(Belial(START_X + 800, START_Y + 690 ,0,1,1,True));          
         #self.AddObstacleObject(portal(START_X + 800, START_Y,0,1,1,True,0));
-        self.AddTerrainObject(terrain(self.bg.map.width //2, 90, self.bg.map.width //2, 90 ));
-        self.AddTerrainObject(terrain(self.bg.map.width //2, 1800, self.bg.map.width //2, 0 ));
-        self.AddTerrainObject(terrain(0, 450+ self.bg.map.height // 4, 180,  (self.bg.map.height // 4) ) );
+        self.add_terrain(terrain(self.bg.map.width //2, 90, self.bg.map.width //2, 90 ));
+        self.add_terrain(terrain(self.bg.map.width //2, 1800, self.bg.map.width //2, 0 ));
+        self.add_terrain(terrain(0, 450+ self.bg.map.height // 4, 180,  (self.bg.map.height // 4) ) );
 
         #self.AddTerrainObject(terrain(100, 100, 50, 45));
         from BelialLaser import BelialLaser as bl;
-        self.AddMonsterObject(bl(self, START_X + 1000, START_Y + 400 ,0,1,1, True));        
-
+        self.add_monster(bl(self, START_X + 1000, START_Y + 400 ,0,1,1, True));        
 
         from Event import ConditionEvent;
         self.AddAllyObject(ConditionEvent( monster_empty, run_game_clear_event, self, self, 1));        

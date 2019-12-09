@@ -38,7 +38,7 @@ class FoodRoomScene(Scene):
         #self.bg = (GameBG(const.WIN_WIDTH//2, const.WIN_HEIGHT//2, 0,1,1,True));
         
         FoodRoomScene.FOOD_SHOP_BGM = load_wav('assets/Sound/foodshop.wav');
-        self.AddTerrainObject(self.bg);
+        self.add_terrain(self.bg);
         self.AddAllyObject(Player.MyPlayer);          
 
         self.AddObstacleObject(portal(START_X + 2100, START_Y + 160, 0,1,1,True, 3));
@@ -46,18 +46,18 @@ class FoodRoomScene(Scene):
         #NPC
         from FoodShop import FoodShop;
         FoodRoomScene.SHOP = FoodShop(START_X + 800, 200 + 256 ,0,1,1,True);
-        self.AddTerrainObject(FoodRoomScene.SHOP);
-        self.AddMonsterObject(Horerica(START_X + 1100, 180 + 35 ,0,1,1,True, FoodRoomScene.SHOP));          
+        self.add_terrain(FoodRoomScene.SHOP);
+        self.add_monster(Horerica(START_X + 1100, 180 + 35 ,0,1,1,True, FoodRoomScene.SHOP));          
 
         #UI
         self.add_ui(HPBarForPlayer.get_instance());
         self.add_ui(Wallet.get_instance());
         self.add_ui(DashBar.get_instance());
 
-        self.AddTerrainObject(terrain(self.bg.map.width //2, 90, self.bg.map.width //2, 90 ));
+        self.add_terrain(terrain(self.bg.map.width //2, 90, self.bg.map.width //2, 90 ));
         
         #LEFT
-        self.AddTerrainObject(terrain(180, 100 + self.bg.map.height // 4, 0,  self.bg.map.height // 4, Const.LEFT));
+        self.add_terrain(terrain(180, 100 + self.bg.map.height // 4, 0,  self.bg.map.height // 4, Const.LEFT));
 
         mouse:Mouse = Mouse();
         mouse.set_cursor(Const.CURSOR_TARGET);

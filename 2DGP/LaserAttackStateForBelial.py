@@ -2,8 +2,7 @@ from StateMachine import *;
 
 from Belial import *;
 from Graphic import *;
-from BelialLaser import *;
-
+from BelialLaser import BelialLaser as bl;
 
 #손의 x좌표는 바뀌지 않고 y좌표만 플레이어를 따라가서 레이저를 쏨. 일정시간 동안. LR 은 랜덤인듯
 attack_speed = 0.15;
@@ -16,7 +15,7 @@ LASER_L, LASER_R = range(2);
 
 class LaserAttackStateForBelial(StateMachine):
     LOAD:bool = False;
-    IMGSForLaserAttackL         :List[Image] = [];
+    IMGSForLaserAttack          :List[Image] = [];
     IMGSForLaserAttackHandL     :List[Image] = [];
     IMGSForLaserAttackHandR     :List[Image] = [];
     IMGSForLaserL               :List[Image] = [];
@@ -27,14 +26,14 @@ class LaserAttackStateForBelial(StateMachine):
         
         self.offset_x, self.offset_y = 100, 100;
         
-        self.timer = 0;ddd
+        self.timer = 0;
         self.animation_state = 0;
         self.animation_hand_state =0;
         self.attack_timer = 0;
         self.attack_count = 0;
         
         from random import randint;
-        self.type = randint(2);
+        self.type = randint(0,2);
 
         if LaserAttackStateForBelial.LOAD == False:
             
@@ -68,21 +67,21 @@ class LaserAttackStateForBelial(StateMachine):
             LaserAttackStateForBelial.IMGSForLaserAttackHandR.append(pico2d.load_image('assets/Monster/Belial/Attack/HandR/IMG-28.png'));
             LaserAttackStateForBelial.IMGSForLaserAttackHandR.append(pico2d.load_image('assets/Monster/Belial/Attack/HandR/IMG-29.png'));
 
-            LaserAttackStateForBelial.IMGSForLaserL.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserL/IMG-0.png'));
-            LaserAttackStateForBelial.IMGSForLaserL.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserL/IMG-1.png'));
-            LaserAttackStateForBelial.IMGSForLaserL.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserL/IMG-2.png'));
-            LaserAttackStateForBelial.IMGSForLaserL.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserL/IMG-3.png'));
-            LaserAttackStateForBelial.IMGSForLaserL.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserL/IMG-4.png'));
-            LaserAttackStateForBelial.IMGSForLaserL.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserL/IMG-5.png'));
-            LaserAttackStateForBelial.IMGSForLaserL.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserL/IMG-6.png'));
+            #LaserAttackStateForBelial.IMGSForLaserL.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserL/IMG-0.png'));
+            #LaserAttackStateForBelial.IMGSForLaserL.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserL/IMG-1.png'));
+            #LaserAttackStateForBelial.IMGSForLaserL.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserL/IMG-2.png'));
+            #LaserAttackStateForBelial.IMGSForLaserL.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserL/IMG-3.png'));
+            #LaserAttackStateForBelial.IMGSForLaserL.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserL/IMG-4.png'));
+            #LaserAttackStateForBelial.IMGSForLaserL.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserL/IMG-5.png'));
+            #LaserAttackStateForBelial.IMGSForLaserL.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserL/IMG-6.png'));
 
-            LaserAttackStateForBelial.IMGSForLaserR.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserR/IMG-0.png'));
-            LaserAttackStateForBelial.IMGSForLaserR.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserR/IMG-1.png'));
-            LaserAttackStateForBelial.IMGSForLaserR.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserR/IMG-2.png'));
-            LaserAttackStateForBelial.IMGSForLaserR.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserR/IMG-3.png'));
-            LaserAttackStateForBelial.IMGSForLaserR.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserR/IMG-4.png'));
-            LaserAttackStateForBelial.IMGSForLaserR.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserR/IMG-5.png'));
-            LaserAttackStateForBelial.IMGSForLaserR.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserR/IMG-6.png'));
+            #LaserAttackStateForBelial.IMGSForLaserR.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserR/IMG-0.png'));
+            #LaserAttackStateForBelial.IMGSForLaserR.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserR/IMG-1.png'));
+            #LaserAttackStateForBelial.IMGSForLaserR.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserR/IMG-2.png'));
+            #LaserAttackStateForBelial.IMGSForLaserR.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserR/IMG-3.png'));
+            #LaserAttackStateForBelial.IMGSForLaserR.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserR/IMG-4.png'));
+            #LaserAttackStateForBelial.IMGSForLaserR.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserR/IMG-5.png'));
+            #LaserAttackStateForBelial.IMGSForLaserR.append(pico2d.load_image('assets/Monster/Belial/Attack/LaserR/IMG-6.png'));
             
             LaserAttackStateForBelial.LOAD = True;
 
@@ -163,6 +162,29 @@ class LaserAttackStateForBelial(StateMachine):
 
     def exit(self):
         pass;
+
+
+    def fire(self):
+        tx = self.belial.transform.tx + self.offset_shoh_x;
+        ty = self.belial.transform.ty + 200;
+        #angle = 0.0;
+        
+        px = Player.MyPlayer.transform.tx;
+        py = Player.MyPlayer.transform.ty + 100;
+        angle = Const.calc_radian( tx, ty, px, py) / math.pi;
+
+
+        # x는 고정 두개 랜덤으로 
+        # y는 플에이어의 위치를 따라감.
+
+
+        self.offset_shoh_x += 100;
+        from FrameWork import FrameWork;
+        FrameWork.CurScene.add_projectile(bl(self, START_X + 1000, py ,0,1,1, True));        
+        #self.AddMonsterObject(bl(self, START_X + 1000, START_Y + 400 ,0,1,1, True));        
+        pass;
+
+
 
 
 

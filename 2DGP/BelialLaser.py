@@ -43,15 +43,17 @@ class BelialLaser(GameObject):
             
             BelialLaser.LOAD = True;
 
-        self.name = "BelialLaser_" + str(BelialLaser.UNIQUE_ID);
-        self.img = BelialLaser.IMGSForLaserR[0];
-        self.has_image = True;
-        self.owner = None;
-        self.dir = 1;# 램덤? 플레이어 방향으로 생가가소?
+        self.name       = "BelialLaser_" + str(BelialLaser.UNIQUE_ID);
+        self.img        = BelialLaser.IMGSForLaserR[0];
+        self.has_image  = True;
+        self.owner      = owner;
+
+        from random import randint;
+        self.dir       = randint(0,1);
+        #self.dir = 1;# 램덤? 플레이어 방향으로 생가가소?
 
         BelialLaser.UNIQUE_ID += 1;
         
-        self.owner = owner;
         self.animation_timer = 0.0;
         self.animation_status = 0;
         self.extinction_timer = 0.0;

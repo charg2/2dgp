@@ -20,7 +20,7 @@ from typing import List;
 # 공격 상태에서 쿨ㅇ타임이 아닌 공격을 해야 하는데
 # 그렇게 쿨타임이 길어야 하는지 모르겟으니 그냥 쿨타임 없이 랜덤으로 패턴 공격.
 
-MAX_HP = 30;
+MAX_HP = 400;
 attack_speed = 3;
 RUN_L, RUN_R, IDLE_R, IDLE_L = range(4);
 frame = 10;

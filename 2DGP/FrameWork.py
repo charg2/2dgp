@@ -31,7 +31,7 @@ class FrameWork:
         FrameWork.SceneList.append(FoodShopScene());
 
         #FrameWork.CurScene:Scene = FrameWork.SceneList[0];
-        FrameWork.CurScene:Scene = FrameWork.SceneList[0];
+        FrameWork.CurScene:Scene = FrameWork.SceneList[3];
 
     def update():
         Timer.Update();

@@ -84,8 +84,9 @@ class IdleStateForBelial(StateMachine):
         if self.turn_timer > 3.0:
             self.turn_timer = 0;
             import random;
-            #self.idx = random.randint(0,1);
-            self.idx = (self.idx + 1) % 2;
+            self.idx = random.randint(0,1);
+            #self.idx = random.randint(0,2);
+            #self.idx = (self.idx + 1) % 2;
             #attack_table[idx](slef.belial)
             self.belial.add_queue(attack_table[self.idx](self.belial));
             #self.belial.add_queue(SwordAttackStateForBelial(self.belial));

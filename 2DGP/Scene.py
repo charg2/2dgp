@@ -259,11 +259,11 @@ class Scene:
         self.game_object_list_ally.append(obj);
         return;
     
-    def AddMonsterObject(self, mob ):
+    def add_monster(self, mob ):
         self.game_object_list_monster.append(mob);
         return;
 
-    def AddTerrainObject(self, obj):
+    def add_terrain(self, obj):
         self.game_object_list_terrain.append(obj);
         return;
 

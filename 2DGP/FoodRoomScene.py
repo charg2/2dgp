@@ -55,7 +55,9 @@ class FoodRoomScene(Scene):
         self.add_ui(DashBar.get_instance());
 
         self.AddTerrainObject(terrain(self.bg.map.width //2, 90, self.bg.map.width //2, 90 ));
-        self.AddTerrainObject(terrain(0, 100 + self.bg.map.height // 4, 180,  self.bg.map.height // 4));
+        
+        #LEFT
+        self.AddTerrainObject(terrain(180, 100 + self.bg.map.height // 4, 0,  self.bg.map.height // 4, Const.LEFT));
 
         mouse:Mouse = Mouse();
         mouse.set_cursor(Const.CURSOR_TARGET);

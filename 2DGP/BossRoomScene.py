@@ -23,8 +23,9 @@ class BossRoomScene(Scene):
         super(BossRoomScene,self).__init__();
         self.bg = (RoomBG(const.WIN_WIDTH//2, const.WIN_HEIGHT//2, 0,1,1,True, "room_boss.map"));
         if None == BossRoomScene.BGM :
-            BossRoomScene.BGM = load_wav('assets/Sound/boss.wav');
-            BossRoomScene.CLEAR_IMG = pico2d.load_image('assets/clear.png');
+            BossRoomScene.CLEAR_IMG = pico2d.load_image('assets/UI/end2.png');
+            BossRoomScene.BGM       = load_wav('assets/Sound/boss.wav');
+
             BossRoomScene.BGM.set_volume(50);
 
         self.AddTerrainObject(self.bg);
@@ -70,9 +71,9 @@ def monster_empty(scene):
 def run_game_clear_event(scene):
     print("Game Clear!!");
     from Effect import EffectStaticAnimation;
-    from Effect import EffectStaticSprite;
+    from Effect import EffectStaticSprite2;
     #scene.AddObstacleObject(EffectStaticSprite(scene, 200, 200, BossRoomScene.CLEAR_IMG, 10, lambda : print("real clear"))); # 일단 포털을 넣어놨지만 
-    scene.AddObstacleObject(EffectStaticSprite(scene, 200, 200, BossRoomScene.CLEAR_IMG, 10, pl )); # 일단 포털을 넣어놨지만 
+    scene.AddObstacleObject(EffectStaticSprite2(scene, 0, Const.WIN_HEIGHT // 2, BossRoomScene.CLEAR_IMG, 10, pl )); # 일단 포털을 넣어놨지만 
 
 def pl(img):
     print("real clear")

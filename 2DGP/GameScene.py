@@ -45,7 +45,10 @@ class GameScene(Scene):
         self.AddMonsterObject(Banshee(START_X + 300, START_Y + 400 ,0,1,1,True));          
         self.AddMonsterObject(SkeletonDog(START_X + 700, START_Y + 90 ,0,1,1,True));          
         self.AddMonsterObject(SkeletonArcher(START_X + 100, START_Y + 100 ,0,1,1, True));     
-        
+        self.AddMonsterObject(SkeletonArcher(START_X + 290, 450 + 50 ,0,1,1, True));     
+        self.AddMonsterObject(Banshee(START_X + 300, START_Y + 400 ,0,1,1,True));          
+        self.AddMonsterObject(SkeletonDog(START_X + 700, START_Y + 90 ,0,1,1,True));          
+
         self.AddObstacleObject(small_heal(self, START_X + 500, START_Y + 400 ,0,1,1,True));          
         self.AddObstacleObject(big_heal(self, START_X + 7, START_Y + 200 ,0,1,1,True));          
         #self.AddObstacleObject(coin(self, START_X + 100, START_Y + 200 ,0,1,1,True));          
@@ -60,10 +63,26 @@ class GameScene(Scene):
 
         
 
-        self.AddTerrainObject(terrain(self.bg.map.width //2, 90, self.bg.map.width //2, 90 ));
-        self.AddTerrainObject(terrain(0, 100 + self.bg.map.height // 4, 180,  self.bg.map.height // 4));
+        ## BOTTOM 
+        self.AddTerrainObject(terrain(self.bg.map.width //2, 90, self.bg.map.width //2, 90, Const.BOTTOM ));
+        # TOP
+        self.AddTerrainObject(terrain(self.bg.map.width //2, 1350, self.bg.map.width //2, 0, Const.TOP ));
+        # LEFT 벽
+        self.AddTerrainObject(terrain(180, 100 + self.bg.map.height // 4, 0,  self.bg.map.height // 4, Const.LEFT));
+        # RIGHT 벽
+        self.AddTerrainObject(terrain(3300, 100 + self.bg.map.height // 4, 0,  self.bg.map.height // 4, Const.RIGHT));
+        
+
         self.AddTerrainObject(terrain(90 * 8 - 45, 90*5, 135,  0));
-        self.AddTerrainObject(terrain(90 * 11 - 45, 90*7, 135,  0));
+
+        self.AddTerrainObject(terrain(90 * 11 - 45, 90*7, 135,  0)); # 2번
+
+        #기둥
+        self.AddTerrainObject(terrain(90 * 16 - 45, 90*6, 135,  0)); # 바닥 기둥 번
+        self.AddTerrainObject(terrain(90 * 17, 90*3, 0,  90 * 2 + 45 , Const.LEFT)); # 바닥 기둥 번
+        self.AddTerrainObject(terrain(90 * 14, 90*3, 0,  90 * 2 + 45 , Const.RIGHT)); # 바닥 기둥 번
+
+
         self.AddTerrainObject(terrain(90 * 18 - 45, 90*9, 90 * 4 - 45,  0));
         self.AddTerrainObject(terrain(90 * 25 - 45, 90*9, 90 * 1 - 45,  0));
         self.AddTerrainObject(terrain(90 * 30 - 45, 90*9, 90 * 2 - 45,  0));

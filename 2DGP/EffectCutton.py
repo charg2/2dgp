@@ -59,7 +59,7 @@ class EffectCutton(GameObject):
         else:
             self.alpha_val -=  self.animation_timer;
             self.animation_timer = 0;
-            if(self.alpha_val <= 0.15):
+            if(self.alpha_val <= 0.85):
                 self.state = False;                      
                 self.on_scene_change();
 

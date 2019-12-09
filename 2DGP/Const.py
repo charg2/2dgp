@@ -21,6 +21,7 @@ class Const:
     BANSHEE_FIELD_OF_VIEW = parser.get_float('banshee_filed_of_view');
     STATIC_ANIMATION, STATIC_SPRITE, DYNAMIC_ANIMATION, DYNAMIC_SPRITE = range(4);
 
+    LEFT, TOP, RIGHT, BOTTOM = range(4);
     FPS:float = 1000.0 / 60.0;
 
     #enum

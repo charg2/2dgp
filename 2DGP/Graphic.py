@@ -5,7 +5,7 @@ import os;
 
 class GraphicLib:
     Font:Font = None;
-    DebugMode:bool = False;
+    DebugMode:bool = True;
 
     def init():
         #os.chdir("assets"); # asset folder

@@ -24,7 +24,7 @@ class SkeletonArcherArrow(GameObject):
     def __init__(self, owner, x, y, angle, sx, sy, state, dir):
         super(SkeletonArcherArrow, self).__init__(x, y, angle, sx, sy, state);
         if SkeletonArcherArrow.LOAD == False:
-            SkeletonArcherArrow.IMG =pico2d.load_image('assets/Monster/SkeletonArcher/Arrow/Arrow.png');
+            SkeletonArcherArrow.IMG =pico2d.load_image('assets/Monster/SkeletonArcher/Arrow/Arrow2.png');
 
             SkeletonArcherArrow.LOAD = True;
 
@@ -70,10 +70,10 @@ class SkeletonArcherArrow(GameObject):
             self.state = False;
 
     def render(self):
-        if self.pdir == 1:
-            SkeletonArcherArrow.IMG.composite_draw(0, "h",self.transform.tx - GameObject.Cam.camera_offset_x, self.transform.ty - GameObject.Cam.camera_offset_y);    
-        else :
-            SkeletonArcherArrow.IMG.draw(self.transform.tx - GameObject.Cam.camera_offset_x, self.transform.ty - GameObject.Cam.camera_offset_y);    
+        #if self.pdir == 1:
+            #SkeletonArcherArrow.IMG.composite_draw(0, "h",self.transform.tx - GameObject.Cam.camera_offset_x, self.transform.ty - GameObject.Cam.camera_offset_y);    
+        #else :
+            SkeletonArcherArrow.IMG.rotate_draw(-self.transform.angle, self.transform.tx - GameObject.Cam.camera_offset_x, self.transform.ty - GameObject.Cam.camera_offset_y);    
 
     def render_debug(self):
         draw_rectangle(*self.collider.get_area_offset(GameObject.Cam.camera_offset_x, GameObject.Cam.camera_offset_y));

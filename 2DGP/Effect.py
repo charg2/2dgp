@@ -73,6 +73,30 @@ class EffectStaticSprite(GameObject) :
     def render(self):
         self.img.composite_draw( 0, "", self.transform.tx - GameObject.Cam.camera_offset_x, self.transform.ty - GameObject.Cam.camera_offset_y, self.img.w, self.img.h);
 
+class EffectStaticSprite2(GameObject) :
+    def __init__(self, owner, tx, ty, sprite, end_time, lambda_func = None):
+        super(EffectStaticSprite2, self).__init__(tx, ty, 1, 1, 1, True);
+        self.has_image      = True;
+        self.tag            = Const.TAG_EFFECT;
+        self.end_time       = end_time;
+        self.end_timer      = 0;
+        self.img            = sprite;
+        self.owner          = owner;
+        self.lambda_func    = lambda_func;
+
+    def update(self, time):
+        self.end_timer += time;
+        if self.end_timer >= self.end_time:
+            #self.end_timer = 0;
+            self.state = False;
+            #print("삭제");
+            if None != self.lambda_func : #and self.state :
+                self.lambda_func(self.img);
+                pass;
+
+    def render(self):
+        self.img.draw_to_origin( self.transform.tx, self.transform.ty, self.img.w, self.img.h);
+
 
 
     

@@ -16,7 +16,7 @@ from MessageBox import *;
 
 MENT1 = "오늘은 어떤 요리를 드시러 오셨나요? ";
 MENT2 = "상점 Z "
-MENT3 = "나가기 P";
+#MENT3 = "나가기 P";
 
 class Horerica(GameObject):
     IMGS_L:Image        = [];
@@ -53,11 +53,11 @@ class Horerica(GameObject):
         self.collider:Collision = CollisionRect(x, y, Horerica.IMGS_L[0].w // 2, Horerica.IMGS_L[0].h // 2);
 
         # attack
-        self.is_collided = False;
-        self.f_key_down = False;
-        self.message_box = None;
-        self.shop_trigger:bool = False;
-        self.is_collided:bool = False;
+        self.is_collided        = False;
+        self.f_key_down         = False;
+        self.shop_trigger:bool  = False;
+        self.is_collided:bool   = False;
+        self.message_box        = None;
 
 
         # 접근시 F키를 보여줌.
@@ -163,9 +163,7 @@ class Horerica(GameObject):
             if self.is_collided == True:
                 if KeyInput.g_f:
                     self.f_key_down = True;
-                    ment_list = [MENT1, MENT2, MENT3];
-                    #ment_list.append(MENT);
-                    #self.message_box = MessageBox(0, 0,  ment_list, lambda shop : shop.open(), self.shop);
+                    ment_list = [MENT1, MENT2];
                     self.message_box = MessageBox(0, 0,  ment_list, add_io_check_event());
                     from FrameWork import FrameWork;
                     FrameWork.CurScene.add_ui(self.message_box);

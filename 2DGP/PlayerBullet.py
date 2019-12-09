@@ -12,7 +12,7 @@ from Player import *;
 from typing import List;
 
 frame_time = 0.2;
-frame = 4;
+frame = 6;
 damage = 5;
 animation_timer = 0.25;
 class PlayerBullet(GameObject):
@@ -23,10 +23,17 @@ class PlayerBullet(GameObject):
     def __init__(self, owner, x, y, angle, sx, sy, state):
         super(PlayerBullet, self).__init__(x, y, angle, sx, sy, state);
         if PlayerBullet.LOAD == False:
-            PlayerBullet.IMGS.append(pico2d.load_image('assets/Monster/Banshee/Bullet/banshee_bullet (1).png'));
-            PlayerBullet.IMGS.append(pico2d.load_image('assets/Monster/Banshee/Bullet/banshee_bullet (2).png'));
-            PlayerBullet.IMGS.append(pico2d.load_image('assets/Monster/Banshee/Bullet/banshee_bullet (3).png'));
-            PlayerBullet.IMGS.append(pico2d.load_image('assets/Monster/Banshee/Bullet/banshee_bullet (4).png'));
+            #PlayerBullet.IMGS.append(pico2d.load_image('assets/Monster/Banshee/Bullet/banshee_bullet (1).png'));
+            #PlayerBullet.IMGS.append(pico2d.load_image('assets/Monster/Banshee/Bullet/banshee_bullet (2).png'));
+            #PlayerBullet.IMGS.append(pico2d.load_image('assets/Monster/Banshee/Bullet/banshee_bullet (3).png'));
+            #PlayerBullet.IMGS.append(pico2d.load_image('assets/Monster/Banshee/Bullet/banshee_bullet (4).png'));
+            
+            PlayerBullet.IMGS.append(pico2d.load_image('assets/Weapon/Bullet/Bullet02.png'));
+            PlayerBullet.IMGS.append(pico2d.load_image('assets/Weapon/Bullet/Bullet03.png'));
+            PlayerBullet.IMGS.append(pico2d.load_image('assets/Weapon/Bullet/Bullet07.png'));
+            PlayerBullet.IMGS.append(pico2d.load_image('assets/Weapon/Bullet/Bullet08.png'));
+            PlayerBullet.IMGS.append(pico2d.load_image('assets/Weapon/Bullet/Bullet09.png'));
+            PlayerBullet.IMGS.append(pico2d.load_image('assets/Weapon/Bullet/Bullet10.png'));
 
             PlayerBullet.LOAD = True;
 
@@ -68,7 +75,8 @@ class PlayerBullet(GameObject):
         self.transform.set_position(self.physx.velocity_x, self.physx.velocity_y);
 
     def render(self):
-        PlayerBullet.IMGS[self.animation_status].draw(self.transform.tx - GameObject.Cam.camera_offset_x, self.transform.ty - GameObject.Cam.camera_offset_y);    
+        #PlayerBullet.IMGS[self.animation_status].draw(self.transform.tx - GameObject.Cam.camera_offset_x, self.transform.ty - GameObject.Cam.camera_offset_y);    
+        PlayerBullet.IMGS[self.animation_status].rotate_draw(-self.transform.angle,self.transform.tx - GameObject.Cam.camera_offset_x, self.transform.ty - GameObject.Cam.camera_offset_y, self.img.w * 1.5, self.img.h * 1.5);    
         pass;
 
     def render_debug(self): 
@@ -95,12 +103,13 @@ class PlayerBullet(GameObject):
     
 
     def update_timer(self,time):
-        self.animation_time += time;
+        if frame-1 != self.animation_status:
+            self.animation_time += time;
 
-        if animation_timer < self.animation_time:
-            self.animation_status = ( self.animation_status + 1 ) % frame;
-            self.img = PlayerBullet.IMGS[self.animation_status];
-            self.animation_time = 0.0; 
+            if animation_timer < self.animation_time:
+                self.animation_status = ( self.animation_status + 1 ) % frame;
+                self.img = PlayerBullet.IMGS[self.animation_status];
+                self.animation_time = 0.0; 
 
     def clampingInWindow(self):
         self.transform.tx = Const.clamp(0, self.transform.tx, GameObject.Cam.map_width-self.IMGS[0].w//16)  

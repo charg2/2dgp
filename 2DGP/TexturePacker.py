@@ -51,8 +51,8 @@ if __name__=='__main__':
     #destination_path = origin_path + str("\\dest");
 
 
-    file_path = "D:\\_git\\2dgp\\2DGP\\assets\\Food\\Table (3).png";
-    save_path = "D:\\_git\\2dgp\\2DGP\\assets\\Food\\";
+    file_path = "D:/_git/2dgp/2DGP/assets/Food/Table (3).png";
+    save_path = "D:/_git/2dgp/2DGP/assets/Food/";
     #save_path = "D:\\_git\\2dgp\\2DGP\\assets\\Weapon\\";
 
     #crop_wrapper(file_path, 5, 1, save_path);

@@ -5,7 +5,7 @@
     <ProjectGuid>2a51586f-7735-4317-894d-21267dcd5f8c</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>TexturePacker.py</StartupFile>
+    <StartupFile>main.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>

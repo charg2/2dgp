@@ -47,7 +47,7 @@ class FrameWork:
         GraphicLib.Present();
 
     def change_scene():
-        if(Scene.CurSceneNumber !=  Scene.SceneNumber):
+        if Scene.CurSceneNumber !=  Scene.SceneNumber:
             FrameWork.CurScene = FrameWork.SceneList[Scene.SceneNumber];
             FrameWork.SceneList[Scene.CurSceneNumber].ExitScene();
             Scene.CurSceneNumber = Scene.SceneNumber;

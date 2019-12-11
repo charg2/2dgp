@@ -255,7 +255,7 @@ class Scene:
             Scene.Time = Timer.GetElapsedTime();
         return;
 
-    def AddAllyObject(self, obj):
+    def add_ally_object(self, obj):
         self.game_object_list_ally.append(obj);
         return;
     
@@ -267,7 +267,7 @@ class Scene:
         self.game_object_list_terrain.append(obj);
         return;
 
-    def AddObstacleObject(self, obj):
+    def add_obstacle(self, obj):
         self.game_object_list_obstacle.append(obj);
         return;
 

@@ -43,6 +43,7 @@ class Player(GameObject):
     IMGSForDeathLAlpha:List[Image]   = [];
     IMGSForDeathRAlpha:List[Image]   = [];
 
+    HIT_FX = None;
     MyPlayer:GameObject = None;
 
     def __init__(self, x, y, angle, sx, sy, state):
@@ -91,6 +92,8 @@ class Player(GameObject):
 
             Player.HIT_SOUND = pico2d.load_wav('assets/Player/hit.wav');
             Player.HIT_SOUND.set_volume(50);
+            Player.HIT_FX = pico2d.load_image('assets/UI/HitFx2.png');
+
             # singletone
             Player.MyPlayer = self;
 
@@ -298,13 +301,14 @@ class Player(GameObject):
                     if self.physx.velocity_y <=0 :
                         self.physx.set_falling(False);
                         self.transform = self.previous_transform;
-            
         return;
 
     def calc_hp(self, damage):
         if False == self.is_death and self.hit_component.can_hitted() :
             self.hit_component.hit();
             Player.HIT_SOUND.play(1);
+            from FrameWork import FrameWork;
+            FrameWork.CurScene.add_ui(EffectStaticSprite2(self, 0, 0, Player.HIT_FX, 0.4)); 
             self.current_hp -= damage;
             if self.current_hp < 0:
                 self.current_hp = 0;

@@ -143,6 +143,7 @@ class SkeletonDog(GameObject):
             draw_rectangle(*self.collider.get_area_offset(GameObject.Cam.camera_offset_x, GameObject.Cam.camera_offset_y));
 
     def update(self, time):
+        self.force_x = 600; 
         self.behavior_tree.run(time);
         self.update_component(time);
         self.clampingInWindow();
@@ -164,6 +165,9 @@ class SkeletonDog(GameObject):
     def on_collision(self, obj):
         if Const.TAG_PLAYER == obj.tag :
             obj.calc_hp(DAMAGE);
+
+        if Const.TAG_TERRAIN == obj.tag :
+            self.force_x = 0;
         
     def calc_hp(self, damage):
         if self.hit_component.can_hitted() :

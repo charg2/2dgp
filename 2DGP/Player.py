@@ -313,6 +313,10 @@ class Player(GameObject):
             if self.current_hp < 0:
                 self.current_hp = 0;
 
+    def reset(self):
+        self.__init__();
+        pass;
+
 
 # for weapon
     def swap_weapon(self):

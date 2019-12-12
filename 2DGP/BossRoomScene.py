@@ -36,11 +36,15 @@ class BossRoomScene(Scene):
         #self.AddObstacleObject(portal(START_X + 800, START_Y,0,1,1,True,0));
         self.add_terrain(terrain(self.bg.map.width //2, 90, self.bg.map.width //2, 90 ));
         # 바닥
-        self.add_terrain(terrain(self.bg.map.width //2, 1800, self.bg.map.width //2, 0 ));
+        self.add_terrain(terrain(self.bg.map.width //2, 1890, self.bg.map.width //2, 100, Const.TOP ));
 
         # 옆인듯
         #self.add_terrain(terrain(0, 450+ self.bg.map.height // 4, 180,  (self.bg.map.height // 4), Const.LEFT ) );
-
+            # LEFT 벽
+        self.add_terrain(terrain(180, 450 + self.bg.map.height // 4, 0,  self.bg.map.height // 4, Const.LEFT));
+        self.add_terrain(terrain(90, 90*5, 90,  0, Const.TOP));
+        #RIGHT
+        self.add_terrain(terrain(1800, 450 + self.bg.map.height // 4, 0,  self.bg.map.height // 4, Const.RIGHT));
         #self.AddTerrainObject(terrain(100, 100, 50, 45));
         from BelialLaser import BelialLaser as bl;
         self.add_monster(bl(self, START_X + 1000, START_Y + 400 ,0,1,1, True));        
@@ -76,10 +80,11 @@ def run_game_clear_event(scene):
     from Effect import EffectStaticAnimation;
     from Effect import EffectStaticSprite2;
     #scene.AddObstacleObject(EffectStaticSprite(scene, 200, 200, BossRoomScene.CLEAR_IMG, 10, lambda : print("real clear"))); # 일단 포털을 넣어놨지만 
-    scene.add_obstacle(EffectStaticSprite2(scene, 0, Const.WIN_HEIGHT // 2, BossRoomScene.CLEAR_IMG, 10, pl )); # 일단 포털을 넣어놨지만 
+    scene.add_obstacle(EffectStaticSprite2(scene, 0, Const.WIN_HEIGHT // 2, BossRoomScene.CLEAR_IMG, 10, go_to_endingscene )); # 일단 포털을 넣어놨지만 
 
-def pl(img):
-    print("real clear")
+def go_to_endingscene(img):
+    print("endiing scene 가는중.")
+
 
     # 문구 Effect Static Animation 등.. 사용하고
     # 사운드 바꿔주고

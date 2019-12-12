@@ -68,24 +68,24 @@ class GameScene(Scene):
         # TOP
         self.add_terrain(terrain(self.bg.map.width //2, 1350, self.bg.map.width //2, 0, Const.TOP ));
         # LEFT 벽
-        self.add_terrain(terrain(180, 100 + self.bg.map.height // 4, 0,  self.bg.map.height // 4, Const.LEFT));
+        self.add_terrain(terrain(180, 450 + self.bg.map.height // 4, 0,  self.bg.map.height // 4, Const.LEFT));
+        self.add_terrain(terrain(90, 90*5, 90,  0, Const.TOP));
         # RIGHT 벽
         self.add_terrain(terrain(3300, 100 + self.bg.map.height // 4, 0,  self.bg.map.height // 4, Const.RIGHT));
         
 
         self.add_terrain(terrain(90 * 8 - 45, 90*5, 135,  0));
-
         self.add_terrain(terrain(90 * 11 - 45, 90*7, 135,  0)); # 2번
 
-        #기둥
-        self.add_terrain(terrain(90 * 16 - 45, 90*6, 135,  0)); # 바닥 기둥 번
-        self.add_terrain(terrain(90 * 17, 90*3, 0,  90 * 2 + 45 , Const.LEFT)); # 바닥 기둥 번
-        self.add_terrain(terrain(90 * 14, 90*3, 0,  90 * 2 + 45 , Const.RIGHT)); # 바닥 기둥 번
+        ##기둥
+        #self.add_terrain(terrain(90 * 16 - 45, 90*6, 135,  0)); # 바닥 기둥 번
+        #self.add_terrain(terrain(90 * 17, 90*3, 0,  90 * 2 + 45 , Const.LEFT)); # 바닥 기둥 번
+        #self.add_terrain(terrain(90 * 14, 90*3, 0,  90 * 2 + 45 , Const.RIGHT)); # 바닥 기둥 번
 
 
         self.add_terrain(terrain(90 * 18 - 45, 90*9, 90 * 4 - 45,  0));
         self.add_terrain(terrain(90 * 25 - 45, 90*9, 90 * 1 - 45,  0));
-        self.add_terrain(terrain(90 * 30 - 45, 90*9, 90 * 2 - 45,  0));
+        self.add_terrain(terrain(90 * 30, 90*9, 90 * 2,  0));
 
         mouse:Mouse = Mouse();
         mouse.set_cursor(Const.CURSOR_TARGET);

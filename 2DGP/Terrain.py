@@ -25,6 +25,7 @@ class Terrain(GameObject):
             #draw_rectangle(*self.collider.get_area());
             draw_rectangle(*self.collider.get_area_offset(GameObject.Cam.camera_offset_x, GameObject.Cam.camera_offset_y));
         return;
+
     def renderForMinimap(self):
         return;    
 
@@ -58,13 +59,14 @@ class Terrain(GameObject):
 
         if Const.TAG_MONSTER == obj.tag :
                 if BOTTOM == self.type:
-                    obj.transform.ty = self.collider.top + (obj.IMGSForRunL[0].h // 2);
+                    obj.transform.ty = self.collider.top + obj.collider.half_height;
                 elif TOP == self.type:
-                    obj.transform.ty = self.collider.bottom - (obj.IMGSForRunL[0].h // 2);
+                    obj.transform.ty = self.collider.bottom - obj.collider.half_height;
                 elif LEFT == self.type:
-                    obj.transform.tx = self.collider.right + (obj.IMGSForRunL[0].w // 2);
+                    obj.transform.tx = self.collider.right + obj.collider.half_width;
+                    #obj.physx.velocity_x = 0;
                 else : #right
-                    obj.transform.tx = self.collider.left - (obj.IMGSForRunL[0].w // 2);
+                    obj.transform.tx = self.collider.left - obj.collider.half_width;
 
 
                 #obj.transform.ty += obj.physx.acceleration_of_gravity;

@@ -154,7 +154,6 @@ class SkeletonDog(GameObject):
         self.previous_transform = self.transform;
         self.collider.cx, self.collider.cy = self.transform.tx, self.transform.ty;
         self.hit_component.update(time);
-        #self.hp_ui.update(time);
         return;
 
     def clampingInWindow(self):
@@ -166,8 +165,10 @@ class SkeletonDog(GameObject):
         if Const.TAG_PLAYER == obj.tag :
             obj.calc_hp(DAMAGE);
 
-        if Const.TAG_TERRAIN == obj.tag :
-            self.force_x = 0;
+        #if Const.TAG_TERRAIN == obj.tag :
+        #    if obj.type == Const.LEFT or  obj.type == Const.RIGHT :
+        #        print("충");
+        #        self.force_x = 0;
         
     def calc_hp(self, damage):
         if self.hit_component.can_hitted() :

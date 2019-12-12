@@ -35,6 +35,12 @@ def bmp_to_png(file_path:str, width:int, height:int, save_path:str):
     new_img = img.resize( (img.width, img.height) );
     new_img.save( save_path, "png");
 
+def resize_png(file_path:str, width:int, height:int, save_path:str):
+    from PIL import Image;
+    img = Image.open(file_path);
+    new_img = img.resize( (width, height) );
+    new_img.save( save_path, "png");
+
 def bmp_to_png_multiple(file_path:str, width_multiple:int, height_multiple:int):
     from PIL import Image;
     img = Image.open(file_path);
@@ -51,13 +57,17 @@ if __name__=='__main__':
     #destination_path = origin_path + str("\\dest");
 
 
-    file_path = "D:/_git/2dgp/2DGP/assets/Food/Table (3).png";
-    save_path = "D:/_git/2dgp/2DGP/assets/Food/";
+    file_path = "D:/_git/2dgp/2DGP/assets/UI/complete.png";
+    save_path = "C:/";
+    #save_path = "D:/_git/2dgp/2DGP/assets/";
     #save_path = "D:\\_git\\2dgp\\2DGP\\assets\\Weapon\\";
 
     #crop_wrapper(file_path, 5, 1, save_path);
 
-    bmp_to_png_multiple(file_path, 4, 4.5);
+    #리사이즈 png 
+
+    resize_png(file_path, 1280, 200, save_path);
+    #bmp_to_png_multiple(file_path, 4, 4.5);
 
 
 #Image.open("sample1.bmp").save("sample1.png");

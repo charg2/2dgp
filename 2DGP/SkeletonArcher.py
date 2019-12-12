@@ -197,5 +197,5 @@ class SkeletonArcher(GameObject):
     def drop_coin(self):
         from FrameWork import FrameWork;
         from coin import Coin as coin;
-        FrameWork.CurScene.AddObstacleObject(coin(self, self.transform.tx, self.transform.ty, 0,1,1,True));          
+        FrameWork.CurScene.add_obstacle(coin(self, self.transform.tx, self.transform.ty, 0,1,1,True));          
 

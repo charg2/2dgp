@@ -39,9 +39,9 @@ class FoodRoomScene(Scene):
         
         FoodRoomScene.FOOD_SHOP_BGM = load_wav('assets/Sound/foodshop.wav');
         self.add_terrain(self.bg);
-        self.AddAllyObject(Player.MyPlayer);          
+        self.add_ally_object(Player.MyPlayer);          
 
-        self.AddObstacleObject(portal(START_X + 2100, START_Y + 160, 0,1,1,True, 3));
+        self.add_obstacle(portal(START_X + 2100, START_Y + 160, 0,1,1,True, 3));
         
         #NPC
         from FoodShop import FoodShop;
@@ -63,7 +63,7 @@ class FoodRoomScene(Scene):
         mouse.set_cursor(Const.CURSOR_TARGET);
 
         self.add_ui(mouse);
-        self.AddAllyObject(mouse);          
+        self.add_ally_object(mouse);          
         return;
 
     def on_change_scene(self):

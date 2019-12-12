@@ -23,26 +23,30 @@ class BossRoomScene(Scene):
         super(BossRoomScene,self).__init__();
         self.bg = (RoomBG(const.WIN_WIDTH//2, const.WIN_HEIGHT//2, 0,1,1,True, "room_boss.map"));
         if None == BossRoomScene.BGM :
-            BossRoomScene.CLEAR_IMG = pico2d.load_image('assets/UI/end2.png');
+            #BossRoomScene.CLEAR_IMG = pico2d.load_image('assets/UI/end2.png');
+            BossRoomScene.CLEAR_IMG = pico2d.load_image('assets/UI/complete2.png');
             BossRoomScene.BGM       = load_wav('assets/Sound/boss.wav');
 
             BossRoomScene.BGM.set_volume(50);
 
         self.add_terrain(self.bg);
-        self.AddAllyObject(Player.MyPlayer);          
+        self.add_ally_object(Player.MyPlayer);          
 
         self.add_monster(Belial(START_X + 800, START_Y + 690 ,0,1,1,True));          
         #self.AddObstacleObject(portal(START_X + 800, START_Y,0,1,1,True,0));
         self.add_terrain(terrain(self.bg.map.width //2, 90, self.bg.map.width //2, 90 ));
+        # 바닥
         self.add_terrain(terrain(self.bg.map.width //2, 1800, self.bg.map.width //2, 0 ));
-        self.add_terrain(terrain(0, 450+ self.bg.map.height // 4, 180,  (self.bg.map.height // 4) ) );
+
+        # 옆인듯
+        #self.add_terrain(terrain(0, 450+ self.bg.map.height // 4, 180,  (self.bg.map.height // 4), Const.LEFT ) );
 
         #self.AddTerrainObject(terrain(100, 100, 50, 45));
         from BelialLaser import BelialLaser as bl;
         self.add_monster(bl(self, START_X + 1000, START_Y + 400 ,0,1,1, True));        
 
         from Event import ConditionEvent;
-        self.AddAllyObject(ConditionEvent( monster_empty, run_game_clear_event, self, self, 1));        
+        self.add_ally_object(ConditionEvent( monster_empty, run_game_clear_event, self, self, 1));        
 
         mouse:Mouse = Mouse();
         mouse.set_cursor(Const.CURSOR_TARGET);
@@ -52,7 +56,7 @@ class BossRoomScene(Scene):
         self.add_ui(DashBar.get_instance());
         
         self.add_ui(mouse);
-        self.AddAllyObject(mouse);          
+        self.add_ally_object(mouse);          
         return;
 
     def on_change_scene(self):
@@ -72,7 +76,7 @@ def run_game_clear_event(scene):
     from Effect import EffectStaticAnimation;
     from Effect import EffectStaticSprite2;
     #scene.AddObstacleObject(EffectStaticSprite(scene, 200, 200, BossRoomScene.CLEAR_IMG, 10, lambda : print("real clear"))); # 일단 포털을 넣어놨지만 
-    scene.AddObstacleObject(EffectStaticSprite2(scene, 0, Const.WIN_HEIGHT // 2, BossRoomScene.CLEAR_IMG, 10, pl )); # 일단 포털을 넣어놨지만 
+    scene.add_obstacle(EffectStaticSprite2(scene, 0, Const.WIN_HEIGHT // 2, BossRoomScene.CLEAR_IMG, 10, pl )); # 일단 포털을 넣어놨지만 
 
 def pl(img):
     print("real clear")

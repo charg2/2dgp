@@ -38,7 +38,7 @@ class GameScene(Scene):
         self.bg = (GameBG(const.WIN_WIDTH//2, const.WIN_HEIGHT//2, 0,1,1,True));
         
         self.add_terrain(self.bg);
-        self.AddAllyObject(Player(START_X,  START_Y + 90,0,1,1,True));          
+        self.add_ally_object(Player(START_X,  START_Y + 90,0,1,1,True));          
         
         self.add_event(ConditionEvent( monster_empty, create_portal, self, self, 1));          
 
@@ -49,8 +49,8 @@ class GameScene(Scene):
         self.add_monster(Banshee(START_X + 300, START_Y + 400 ,0,1,1,True));          
         self.add_monster(SkeletonDog(START_X + 700, START_Y + 90 ,0,1,1,True));          
 
-        self.AddObstacleObject(small_heal(self, START_X + 500, START_Y + 400 ,0,1,1,True));          
-        self.AddObstacleObject(big_heal(self, START_X + 7, START_Y + 200 ,0,1,1,True));          
+        self.add_obstacle(small_heal(self, START_X + 500, START_Y + 400 ,0,1,1,True));          
+        self.add_obstacle(big_heal(self, START_X + 7, START_Y + 200 ,0,1,1,True));          
         #self.AddObstacleObject(coin(self, START_X + 100, START_Y + 200 ,0,1,1,True));          
         #self.AddObstacleObject(coin(self, START_X + 200, START_Y + 240 ,0,1,1,True));          
         #self.AddObstacleObject(portal(90 * 25 - 45, START_Y + 90,0,1,1,True, 2));
@@ -91,7 +91,7 @@ class GameScene(Scene):
         mouse.set_cursor(Const.CURSOR_TARGET);
 
         self.add_ui(mouse);
-        self.AddAllyObject(mouse);          
+        self.add_ally_object(mouse);          
         return;
 
     def on_change_scene(self):
@@ -110,4 +110,4 @@ def monster_empty(scene):
 
 def create_portal(scene):
     print("portal on");
-    scene.AddObstacleObject(portal(90 * 31 - 45, START_Y + 760,0,1,1,True, 2));
+    scene.add_obstacle(portal(90 * 31 - 45, START_Y + 760,0,1,1,True, 2));

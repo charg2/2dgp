@@ -55,7 +55,7 @@ class FoodShopScene(Scene):
  
  #selfAddMonsterObject.AddAllyObject(Player.MyPlayer);          
 
-        self.AddObstacleObject(portal(START_X + 2100, START_Y + 160, 0,1,1,True, 4));
+        self.add_obstacle(portal(START_X + 2100, START_Y + 160, 0,1,1,True, 4));
         
         #NPC
         #from FoodShop import FoodShop;
@@ -82,7 +82,7 @@ class FoodShopScene(Scene):
         mouse.set_cursor(Const.CURSOR_TARGET);
 
         self.add_ui(mouse);
-        self.AddAllyObject(mouse);          
+        self.add_ally_object(mouse);          
         return;
 
     def on_change_scene(self):

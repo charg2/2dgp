@@ -37,7 +37,6 @@ class EndingScene(Scene):
             EndingScene.BGM = load_wav('assets/Sound/jailfield.wav');
             EndingScene.BGM.set_volume(50);
 
-        EndingScene.BGM.play();
         self.bg = (EndingBG(const.WIN_WIDTH//2, const.WIN_HEIGHT//2, 0,1,1,True));
         
         self.add_terrain(self.bg);
@@ -49,6 +48,7 @@ class EndingScene(Scene):
         self.add_ui(DashBar.get_instance());
 
         
+        EndingScene.BGM.play();# 노래 틀어줌.
 
         mouse:Mouse = Mouse();
         mouse.set_cursor(Const.CURSOR_TARGET);

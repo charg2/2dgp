@@ -18,6 +18,8 @@ from FoodShopScene import *;
 class FrameWork:
     SceneList:List[Scene] = [];
 
+
+
     def init():
         GraphicLib.Initialize();
         Timer.Initialize();

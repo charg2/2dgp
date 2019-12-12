@@ -11,6 +11,8 @@ class HitComponent:
             HitComponent.HIT_PLAYER_SOUND = pico2d.load_wav('assets/Player/hitPlayer.wav');
             HitComponent.HIT_MONSTER_SOUND.set_volume(50);
             HitComponent.HIT_PLAYER_SOUND .set_volume(50);
+            HitComponent.Font = pico2d.load_font('assets/Font/font.TTF', 20);
+
         self.hit_timer          :float  = 0;
         self.hit_recovery_time  :float  = time;
         self.is_hitted          :bool   = False;

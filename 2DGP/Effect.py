@@ -97,6 +97,27 @@ class EffectStaticSprite2(GameObject) :
     def render(self):
         self.img.draw_to_origin( self.transform.tx, self.transform.ty, self.img.w, self.img.h);
 
+class EffectStaticFont(GameObject) :
+    def __init__(self, owner, tx, ty, font, end_time, ment, color):
+        super(EffectStaticFont, self).__init__(tx, ty, 1, 1, 1, True);
+        self.has_image      = True;
+        self.tag            = Const.TAG_EFFECT;
+        self.end_time       = end_time;
+        self.end_timer      = 0;
+        self.font           = font;
+        self.owner          = owner;
+        self.ment           = ment;
+        self.color          = color;
+
+    def update(self, time):
+        self.end_timer += time;
+        if self.end_timer >= self.end_time:
+            self.state = False;
+
+    def render(self):
+        self.font.draw( self.transform.tx, self.transform.ty, self.ment, self.color);
+
+
 
 
     

@@ -96,6 +96,7 @@ class GameScene(Scene):
 
     def on_change_scene(self):
         #Scene.BGM = GameScene.BGM;
+        Scene.BACK_GROUND_MUSIC.__del__();
         GameScene.BGM.repeat_play();
         Scene.BACK_GROUND_MUSIC = GameScene.BGM;
 

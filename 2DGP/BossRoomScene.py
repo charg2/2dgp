@@ -24,8 +24,9 @@ class BossRoomScene(Scene):
         self.bg = (RoomBG(const.WIN_WIDTH//2, const.WIN_HEIGHT//2, 0,1,1,True, "room_boss.map"));
         if None == BossRoomScene.BGM :
             #BossRoomScene.CLEAR_IMG = pico2d.load_image('assets/UI/end2.png');
-            BossRoomScene.CLEAR_IMG = pico2d.load_image('assets/UI/complete2.png');
-            BossRoomScene.BGM       = load_wav('assets/Sound/boss.wav');
+            BossRoomScene.CLEAR_IMG     = pico2d.load_image('assets/UI/complete2.png');
+            BossRoomScene.BGM           = load_wav('assets/Sound/boss.wav');
+            BossRoomScene.Font          = pico2d.load_font('assets/Font/font.TTF', 50);
 
             BossRoomScene.BGM.set_volume(50);
 
@@ -34,18 +35,23 @@ class BossRoomScene(Scene):
 
         self.add_monster(Belial(START_X + 800, START_Y + 690 ,0,1,1,True));          
         #self.AddObstacleObject(portal(START_X + 800, START_Y,0,1,1,True,0));
-        self.add_terrain(terrain(self.bg.map.width //2, 90, self.bg.map.width //2, 90 ));
         # 바닥
-        self.add_terrain(terrain(self.bg.map.width //2, 1890, self.bg.map.width //2, 100, Const.TOP ));
-
-        # 옆인듯
-        #self.add_terrain(terrain(0, 450+ self.bg.map.height // 4, 180,  (self.bg.map.height // 4), Const.LEFT ) );
-            # LEFT 벽
-        self.add_terrain(terrain(180, 450 + self.bg.map.height // 4, 0,  self.bg.map.height // 4, Const.LEFT));
-        self.add_terrain(terrain(90, 90*5, 90,  0, Const.TOP));
+        self.add_terrain(terrain(self.bg.map.width //2, 90, self.bg.map.width //2, 90 ));
+        #TOP
+        self.add_terrain(terrain(self.bg.map.width //2, 1980, self.bg.map.width //2, 90, Const.TOP ));
+        # LEFT 벽
+        self.add_terrain(terrain(90, self.bg.map.height // 2, 90,  self.bg.map.height // 2, Const.LEFT));
         #RIGHT
-        self.add_terrain(terrain(1800, 450 + self.bg.map.height // 4, 0,  self.bg.map.height // 4, Const.RIGHT));
-        #self.AddTerrainObject(terrain(100, 100, 50, 45));
+        self.add_terrain(terrain(self.bg.map.width - 90, self.bg.map.height // 2, 90,  self.bg.map.height // 2, Const.RIGHT));
+
+
+
+        
+        self.add_terrain(terrain(90 * 3, 90*9, 90 ,  0));
+        self.add_terrain(terrain(90 * 24, 90*9, 90 ,  0));
+
+
+
         from BelialLaser import BelialLaser as bl;
         self.add_monster(bl(self, START_X + 1000, START_Y + 400 ,0,1,1, True));        
 
@@ -70,20 +76,20 @@ class BossRoomScene(Scene):
         pass;
 
 def monster_empty(scene):
-    if len(scene.game_object_list_monster) == 0 :
-        return True;
-    else :
-        return False;
+    for obj in scene.game_object_list_monster:
+        if obj.name == "Belial":
+            return False;
+
+    return True;
 
 def run_game_clear_event(scene):
     print("Game Clear!!");
-    from Effect import EffectStaticAnimation;
+    from Effect import EffectStaticFont;
     from Effect import EffectStaticSprite2;
     #scene.AddObstacleObject(EffectStaticSprite(scene, 200, 200, BossRoomScene.CLEAR_IMG, 10, lambda : print("real clear"))); # 일단 포털을 넣어놨지만 
-    scene.add_obstacle(EffectStaticSprite2(scene, 0, Const.WIN_HEIGHT // 2, BossRoomScene.CLEAR_IMG, 10, go_to_endingscene )); # 일단 포털을 넣어놨지만 
+    scene.add_obstacle(EffectStaticSprite2(scene, 0, Const.WIN_HEIGHT // 2, BossRoomScene.CLEAR_IMG, 1000 )); # 일단 포털을 넣어놨지만 
+    scene.add_obstacle(EffectStaticFont(scene, Const.WIN_HEIGHT // 2, Const.WIN_HEIGHT // 4, BossRoomScene.Font, 1000, "종료는 ESC", (255, 0, 0) )); # 일단 포털을 넣어놨지만 
 
-def go_to_endingscene(img):
-    print("endiing scene 가는중.")
 
 
     # 문구 Effect Static Animation 등.. 사용하고

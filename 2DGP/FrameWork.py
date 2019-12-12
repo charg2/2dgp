@@ -15,8 +15,12 @@ from BossRoomScene import *;
 from FoodRoomScene import *;
 from FoodShopScene import *;
 
+
+
+
 class FrameWork:
     SceneList:List[Scene] = [];
+
 
     def init():
         GraphicLib.Initialize();

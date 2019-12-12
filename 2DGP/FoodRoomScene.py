@@ -41,7 +41,7 @@ class FoodRoomScene(Scene):
         self.add_terrain(self.bg);
         self.add_ally_object(Player.MyPlayer);          
 
-        self.add_obstacle(portal(START_X + 2100, START_Y + 160, 0,1,1,True, 3));
+        self.add_obstacle(portal(START_X + 2100, START_Y + 100, 0,1,1,True, 3));
         
         #NPC
         from FoodShop import FoodShop;

@@ -66,7 +66,6 @@ class BigHeal(GameObject):
                    self.IMG.h * 3,
                    );
 
-        self.render_debug();
         return;
 
 

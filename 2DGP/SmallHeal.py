@@ -64,7 +64,6 @@ class SmallHeal(GameObject):
                    self.IMG.h * 2,
                    );
 
-        self.render_debug();
         return;
 
 

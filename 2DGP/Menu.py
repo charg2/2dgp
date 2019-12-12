@@ -36,7 +36,7 @@ def increase_attack_speed():
 #MAX = 12;
 MAX = 10;
 MENT_LIST  = [ "스테이크", "빵", "달걀 후라이", "버섯 구이", "마라 스프", "버섯 스프", "떡볶이", "초코 쿠키", "쿠기", "핫 스윙 치킨 오믈렛", "버거킹", "백숙"  ];
-PRICE_LIST = [ 500, 50, 30, 40, 300, 200, 100, 30, 28, 500, 600, 500  ];
+PRICE_LIST = [ 50, 5, 3, 4, 30, 20, 10, 3, 2, 50, 40, 50 ];
 EFFECT_LIST = [  add_max_hp, increase_dash_count, increase_attack_speed
                , add_max_hp, increase_dash_count, increase_attack_speed
                , add_max_hp, increase_dash_count, increase_attack_speed
@@ -88,10 +88,13 @@ class Menu(GameObject):
         if self.is_overapped:
             if False == self.is_sold:
                 if KeyInput.g_mouse_rdown:
-                    self.is_sold = True;
-                    Menu.SOUND.play(1);
-                    self.effect();
-                    add_hp();
+                    from Player import Player;
+                    if Player.MyPlayer.current_coin >= self.price:
+                        self.is_sold = True;
+                        Menu.SOUND.play(1);
+                        self.effect();
+                        add_hp();
+                        Player.MyPlayer.current_coin -= self.price;
 
         self.is_overapped = False;
         pass;
@@ -100,7 +103,7 @@ class Menu(GameObject):
         if False == self.is_sold :
             if self.is_overapped:
                 self.img.draw_to_origin(660, 300);
-            draw_rectangle(*self.collider.get_area());
+            #draw_rectangle(*self.collider.get_area());
             Menu.BG.draw_to_origin(self.transform.tx - 180, self.transform.ty - 50, 360, 110);
 
             Menu.SMALL_FONT.draw(self.transform.tx - 150, self.transform.ty, self.food_info, (255, 255, 255));

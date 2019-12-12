@@ -37,7 +37,7 @@ class Mouse(GameObject):
     
     def render(self):
         self.IMG.draw(self.transform.tx , self.transform.ty , self.IMG.w, self.IMG.h);
-        draw_rectangle(*self.collider.get_area());
+        #draw_rectangle(*self.collider.get_area());
         pass;
 
     #충동한 객체의 태그 or name을 얻어서 어떤객체인지 파악.

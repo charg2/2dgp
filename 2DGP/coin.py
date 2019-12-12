@@ -59,7 +59,7 @@ class Coin(GameObject):
                    self.IMG.h,
                    );
 
-        self.render_debug();
+        #self.render_debug();
         return;
 
 

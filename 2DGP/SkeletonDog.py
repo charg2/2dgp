@@ -177,6 +177,7 @@ class SkeletonDog(GameObject):
             if self.current_hp <= 0:
                 SkeletonDog.DIE_SOUND.play(1);
                 self.current_hp = 0;
+                self.drop_coin();
                 self.state = False;
 
 #------------------------------------------------------------------------
@@ -246,3 +247,9 @@ class SkeletonDog(GameObject):
         wander_chase_node.add_children(chase_node, wander_node);
 
         self.behavior_tree = BehaviorTree(wander_chase_node);
+
+    def drop_coin(self):
+        from FrameWork import FrameWork;
+        from coin import Coin as coin;
+        FrameWork.CurScene.add_obstacle(coin(self, self.transform.tx, self.transform.ty, 0,1,1,True));          
+

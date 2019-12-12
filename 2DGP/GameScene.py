@@ -50,7 +50,7 @@ class GameScene(Scene):
         self.add_monster(SkeletonDog(START_X + 700, START_Y + 90 ,0,1,1,True));          
 
         self.add_obstacle(small_heal(self, START_X + 500, START_Y + 400 ,0,1,1,True));          
-        self.add_obstacle(big_heal(self, START_X + 7, START_Y + 200 ,0,1,1,True));          
+        self.add_obstacle(big_heal(self, 90 * 15, START_Y + 200 ,0,1,1,True));          
         #self.AddObstacleObject(coin(self, START_X + 100, START_Y + 200 ,0,1,1,True));          
         #self.AddObstacleObject(coin(self, START_X + 200, START_Y + 240 ,0,1,1,True));          
         #self.AddObstacleObject(portal(90 * 25 - 45, START_Y + 90,0,1,1,True, 2));
